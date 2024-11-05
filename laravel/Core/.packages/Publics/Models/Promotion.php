@@ -4,14 +4,12 @@ namespace Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Models\Traits\Base;
 
-class Support extends Model
+class Promotion extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
-
 
     /**
      * The attributes that should be cast to native types.
@@ -22,22 +20,12 @@ class Support extends Model
         'deleted_at' => 'timestamp',
     ];
 
-    /**
-     * Relationships
-     */
-
-    public function users()
+    public function registerStatus()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 11);
     }
-
-    public function supportTypes()
+    public function reportStatus()
     {
-        return $this->belongsToMany(SupportType::class);
-    }
-
-    public function Promotion()
-    {
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 8);
     }
 }

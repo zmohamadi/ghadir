@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\PromotionNotice;
+use App\Models\Promotion;
 
-class PromotionNoticeFactory extends Factory
+class PromotionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = PromotionNotice::class;
+    protected $model = Promotion::class;
 
     /**
      * Define the model's default state.

@@ -86,7 +86,7 @@ export default function Form({id}){
                         
                         <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
 
-                        <Textarea dir="ltr" label="address" refItem={[component, "address"]}  />
+                        <Textarea label="address" refItem={[component, "address"]}  />
                         <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
 
                         <Radio className="col-span-4" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}

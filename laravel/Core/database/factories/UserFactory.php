@@ -57,7 +57,7 @@ class UserFactory extends Factory
             'status' => $this->faker->word(),
             'gender' => $this->faker->word(),
             'level' => $this->faker->word(),
-            'promotionNotices' => $this->faker->word(),
+            'Promotions' => $this->faker->word(),
             'audienceTypes' => $this->faker->word(),
         ];
     }

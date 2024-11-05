@@ -21,6 +21,19 @@ $lang = [
    'photo'=>'عکس',
    'promoter'=>'مبلغ',
    'star'=>'امتیاز',
+   'commitments'=>'تعهدات',
+   'description'=>'توضیحات',
+   'year'=>'سال',
+   'register_status'=>'وضعیت ثبت نام',
+   'report_status'=>'وضعیت گزارش دهی',
+   'report'=>'گزارش',
+   'promotion'=>'تبلیغ',
+   'tribune'=>'منبر',
+   'course'=>'دوره',
+   'has_course'=>'دوره دارد ؟ ',
+   'has_tribune'=>'منبر دارد ؟',
+   'has'=>'دارد',
+   'ritual'=>'شعائر',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

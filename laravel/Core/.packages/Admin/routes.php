@@ -2,15 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Route::resource("keywords","Base\KeywordController");
-// Route::get("getCurrentSemester", "Base\YearSemesterController@getCurrentSemester");
-// Route::resource("yearSemesters","Base\YearSemesterController");
-// Route::resource("systems","Base\SystemController");
-// Route::get("baseTools/list", "Base\ToolsController@list");
-// Route::resource("baseTools","Base\ToolsController");
-// Route::resource("questionTypes","Base\QuestionTypeController");
 
-
+Route::get("promotions/get-needles", "PromotionController@getNeedles");
+Route::resource("promotions", "PromotionController");
 
 Route::get("users/change-status/get-needles", "Person\UserController@changeRoleGetNeedles");
 Route::post("users/change-status/{id}", "Person\UserController@changeRole");
@@ -18,7 +12,8 @@ Route::put("users/change-password", "Person\UserController@changePassword");
 
 // Route::put("users/edit-email/{id}", "Person\UserController@editEmail");
 // Route::get("users/{id}", "Person\UserController@showInfo");
-Route::get("users/get-needles", "Person\UserController@getNeedles");
+// Route::get("users/get-needles", "Person\UserController@getNeedles");
+
 
 Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
 Route::resource("promoters", "Person\PromoterController");

@@ -28,7 +28,7 @@ class PromotionReportFactory extends Factory
             'ritualReports' => $this->faker->word(),
             'tribunes' => $this->faker->word(),
             'courses' => $this->faker->word(),
-            'promotionNotice' => $this->faker->word(),
+            'Promotion' => $this->faker->word(),
         ];
     }
 }

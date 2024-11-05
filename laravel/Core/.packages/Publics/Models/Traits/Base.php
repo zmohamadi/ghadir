@@ -7,6 +7,14 @@ trait Base
 {
     use SoftDeletes;
     
+    public function creator()
+    {
+        return $this->belongsTo(\Models\User::class, 'creator_id');
+    }
+    public function editor()
+    {
+        return $this->belongsTo(\Models\User::class, 'editor_id');
+    }
     public function activeStatus()
     {
         return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', '1');

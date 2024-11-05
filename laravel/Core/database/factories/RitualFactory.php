@@ -25,7 +25,7 @@ class RitualFactory extends Factory
             'description' => $this->faker->text(),
             'status_id' => $this->faker->numberBetween(-10000, 10000),
             'deleted_at' => $this->faker->dateTime(),
-            'promotionNotices' => $this->faker->word(),
+            'Promotions' => $this->faker->word(),
             'ritualReports' => $this->faker->word(),
         ];
     }

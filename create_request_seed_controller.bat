@@ -3,7 +3,7 @@ setlocal EnableDelayedExpansion
 cd Core
 
 rem تعریف آرایه‌ای از نام‌های مدل‌ها
-set MODELS=User UserPromotion CulturalUser PromotionNotice Level Note City Province Role Status Support Blog SupportType Ticket TicketSubject Ritual PromotionReport RitualReport Tribune Course Education AudienceType
+set MODELS=User UserPromotion CulturalUser Promotion Level Note City Province Role Status Support Blog SupportType Ticket TicketSubject Ritual PromotionReport RitualReport Tribune Course Education AudienceType
 
 rem حلقه برای ایجاد Request، Seeder و Controller برای هر مدل
 for %%M in (%MODELS%) do (

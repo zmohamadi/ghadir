@@ -27,7 +27,7 @@ class SupportFactory extends Factory
             'deleted_at' => $this->faker->dateTime(),
             'users' => $this->faker->word(),
             'supportTypes' => $this->faker->word(),
-            'promotionNotice' => $this->faker->word(),
+            'Promotion' => $this->faker->word(),
         ];
     }
 }

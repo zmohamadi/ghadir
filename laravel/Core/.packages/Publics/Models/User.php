@@ -108,11 +108,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Level::class);
     }
 
-    public function promotionNotices()
-    {
-        return $this->belongsToMany(PromotionNotice::class);
-    }
-
     public function audienceTypes()
     {
         return $this->belongsToMany(AudienceType::class);
