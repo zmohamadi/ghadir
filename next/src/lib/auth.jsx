@@ -12,9 +12,9 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
     let userUrl = "/api/user", loginUrl = "/login", logoutUrl = "/logout";
-    if(guard == "admin"){
+    // if(guard == "admin"){
         userUrl = laraAdmin+"/user", loginUrl = laraAdmin+"/login", logoutUrl = laraAdmin+"/logout";
-    }
+    // }
 
     const { data: user, error, mutate } = useSWR(userUrl, () =>
         axios

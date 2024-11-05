@@ -25,7 +25,7 @@ export default function Panel({children}){
                 <Script id='tail.select' src={laraDomain + '/admin/Midone-v3/packages/tail.select.1.0.2/tail.select.min.js'} strategy='afterInteractive' />
                 <Script id='jquery' src={laraDomain + '/admin/js/jquery-3.3.1.min.js'} strategy='afterInteractive' />
             </head>
-            <body className="p-0" suppressHydrationWarning={true}>
+            <body className="p-0 " suppressHydrationWarning={true}>
                 {/* <WebVitals /> */}
                 <StoreProvider store={store}>
                     <App key={"app"}>

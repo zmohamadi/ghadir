@@ -1,7 +1,26 @@
 <?php
 
 $lang = [
-   
+   'not_citizen'=>'اتباع',
+   'im_citizen'=>'ایرانی',
+   'codemeli'=>'کدملی',
+   'khadamat_code'=>'کد مرکز خدمات',
+   'tablighat_office_code'=>'کد دفتر تبلیغات',
+   'tablighat_organization_code'=>'کد سازمان تبلیغات',
+   'ovghaf_code'=>'کد اوقاف',
+   'bank_account_number'=>'شماره حساب بانکی',
+   'postal_code'=>'کدپستی',
+   'province'=>'استان',
+   'city'=>'شهر',
+   'village'=>'روستا',
+   'address'=>'آدرس',
+   'level'=>'سطح',
+   'education'=>'تحصیلات',
+   'citizen'=>'تابعیت',
+   'city_sh'=>'شهرستان',
+   'photo'=>'عکس',
+   'promoter'=>'مبلغ',
+   'star'=>'امتیاز',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

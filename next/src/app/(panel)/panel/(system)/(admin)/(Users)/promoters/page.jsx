@@ -33,8 +33,7 @@ export default function List(){
                 label: "name", 
                 jsx: (item) => <span>{item?.firstname + " " + item?.lastname}</span>,
             },
-            { label: "mobile", field: "mobile" },
-            { label: "codemeli", field: "codemeli" },
+            {label: "mobile", field: "mobile" },
             {label: "gender", sort:false, field: "gender.title_"+local},
             {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
            
@@ -44,8 +43,8 @@ export default function List(){
                 jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} />
-                        <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
+                        {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
+                        {/* <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} /> */}
                         <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/promoters"+"/"+item?.id)} />
                     </div>
                 </>

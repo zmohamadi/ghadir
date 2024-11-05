@@ -10,7 +10,8 @@ import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
-export default function Form({id,link="/users",roleFilter="",roleTitle="",titleFrame=""}){
+export default function Form({id}){
+    const link = "/personnels";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function Form({id,link="/users",roleFilter="",roleTitle="",titleF
     if(id != 0 && id != undefined) url = laraAdmin+link+"/"+id, method = "edit";
 
     useEffect(() => {
-        getNeedles(laraAdmin+'/users/get-needles', setNeedles);
+        // getNeedles(laraAdmin+'/users/get-needles', setNeedles);
         get(url, component, "info");
     }, []);
 
@@ -37,16 +38,11 @@ export default function Form({id,link="/users",roleFilter="",roleTitle="",titleF
     return(
         
             <>
-                <Frame title={Lang(["public."+titleFrame])}>
+                <Frame title={Lang(["public.personnel"])}>
                     <Box>
                         <Input label="name" refItem={[component, "firstname"]} required="true" />
                         <Input label="family" refItem={[component, "lastname"]} required="true" />
-                        <Input dir="ltr" label="codemeli" refItem={[component, "codemeli"]} />
                         <Input dir="ltr" label="mobile" refItem={[component, "mobile"]} required="true" />
-                        <Radio type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
-                            data={needles?.gender} titleKey={"title_"+local} required="true" key={"gender_id"+component?.state?.info?.gender_id}
-                        />
-                        <CheckBox className="col-span-6" label="status" name={Lang('public.active')} refItem={[component, "status_id"]} />
                         <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir} required="true" />
                     </Box>
                 </Frame>

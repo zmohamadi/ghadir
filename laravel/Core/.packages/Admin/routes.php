@@ -22,7 +22,7 @@ Route::get("users/get-needles", "Person\UserController@getNeedles");
 
 Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
 Route::resource("promoters", "Person\PromoterController");
-// Route::resource("personnels", "Person\PersonnelController");
+Route::resource("personnels", "Person\PersonnelController");
 // Route::resource("users", "Person\UserController");
 // Route::resource("roles", "Person\RoleController");
 

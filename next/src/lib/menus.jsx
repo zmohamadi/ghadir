@@ -7,38 +7,15 @@ export const getMenus = (user) => {
         { title: "dashboard", icon: "Home", href: "/dashboard" },
         { title: "promoters", icon: "PenTool", href: "/promoters" },
         { title: "personnels", icon: "Aperture", href: "/personnels" },
-        // {
-        //     title: "users", icon: "Shield", open: false, 
-        //     childs: [
-        //         { title: "promoters", icon: "PenTool", href: "/promoters" },
-        //         { title: "personnels", icon: "Aperture", href: "/personnels" },
-        //         // { title: "roles", icon: "Framer", href: "/roles" },
-        //         // { title: "access", icon: "Settings", href: "/access" },
-        //     ]
-        // },
+        
         { title: "promotions", icon: "Book", href: "/promotions" },
-        { title: "reports", icon: "Package", href: "/promotion_reports" },
         { title: "supports", icon: "Aperture", href: "/supports" },
-        // {
-        //     title: "promotions", icon: "Pocket", open: false, 
-        //     childs: [
-        //         { title: "promotions", icon: "Book", href: "/promotions" },
-        //         { title: "reports", icon: "Package", href: "/promotion_reports" },
-        //         { title: "supports", icon: "Aperture", href: "/supports" },
-        //     ]
-        // },
-        // { title: "blog", icon: "Book", href: "/blog" },
-        // { title: "comments", icon: "BookOpen", href: "/comments" },
-        // { title: "tickets", icon: "Book", href: "/tickets" },
-        // {
-        //     title: "blog", icon: "PenTool", open: false, 
-        //     childs: [
-        //         { title: "blog", icon: "Book", href: "/blog" },
-        //         { title: "comments", icon: "BookOpen", href: "/comments" },
-        //         { title: "tickets", icon: "Book", href: "/tickets" },
-
-        //     ]
-        // },
+        { title: "reports", icon: "Package", href: "/promotion_reports" },
+        
+        { title: "blog", icon: "Book", href: "/blog" },
+        { title: "comments", icon: "BookOpen", href: "/comments" },
+        { title: "tickets", icon: "Book", href: "/tickets" },
+        
     ];
     const promoter = [
         {

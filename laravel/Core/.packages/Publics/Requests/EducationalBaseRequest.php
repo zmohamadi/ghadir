@@ -5,7 +5,7 @@ namespace Publics\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EducationalBaseRequest extends FormRequest
+class EducationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

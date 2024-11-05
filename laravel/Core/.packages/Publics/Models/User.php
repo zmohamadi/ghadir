@@ -85,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function education()
     {
-        return $this->belongsTo(EducationalBase::class);
+        return $this->belongsTo(Education::class);
     }
 
     public function cityUser()
@@ -96,11 +96,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(\Models\Person\Role::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
     }
 
     public function gender()

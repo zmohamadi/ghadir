@@ -5,9 +5,9 @@ namespace Admin\Controllers;
 use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
 
-class EducationalBaseController extends BaseAbstract
+class EducationController extends BaseAbstract
 {
-     protected $model = 'Models\EducationalBase';
+     protected $model = 'Models\Education';
     protected $request = 'Publics\Requests\EducationalBaseRequest';
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor"];

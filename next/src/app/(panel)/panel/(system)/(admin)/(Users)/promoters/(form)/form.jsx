@@ -7,19 +7,20 @@ import { useAuth } from "@/lib/auth";
 import { Loading } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
-import { Select } from "@/Theme/Midone/Forms/Select";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
-export default function Form({id,link="/promoters",roleFilter="",roleTitle="",titleFrame=""}){
+export default function Form({id}){
+    const link = "/promoters";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
     const router = useRouter();
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    let [provinceId, setProvinceId] = useState();
-    let [cityId, setCityId] = useState();
+    let [provinceId, setProvinceId] = useState(null);
 
+    const {user} = useAuth();
+    
     let uploadUrl = laraAdmin+"/upload/.-media-users";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-users";
     let uploadDir = 'media/users/';
@@ -34,61 +35,77 @@ export default function Form({id,link="/promoters",roleFilter="",roleTitle="",ti
 
     useEffect(()=>{
         
-        setProvinceId(component?.state.info["province_id"]);
-        setCityId(component?.state.info["city_id"]);
+        if(component?.state.info["city_id"]) setProvinceId(component?.state.info?.city_user?.province_id);
        
     }, [component?.state?.info]);
 
     const filterCity = (e)=>{
-        setProvinceId(0);
-        setCityId(0);
+        setProvinceId(e.value);
     };
 
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();
-    
+    const data = component?.state?.info;
+// console.log(user?.role_id);
+// console.log(provinceId);
+
     return(
         
             <>
-                <Frame title={Lang(["public."+titleFrame])}>
+                <Frame title={Lang(["public.promoter"])}>
                     <Box>
-                   
+                        <Input  className="col-span-4" label="name" refItem={[component, "firstname"]} required="true" />
+                        <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
+                        <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
+                        <SelectTail defaultValue={data?.is_not_citizen==true ? 1: 0} key={"is_not_citizen"+2} className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
+                        >
+                            <option value="0">{Lang('public.im_citizen')}</option>
+                            <option value="1">{Lang('public.not_citizen')}</option>
+                        </SelectTail>
+                        <Input dir="ltr" className="col-span-4" label="codemeli" refItem={[component, "codemeli"]} />
+                        <Input className="col-span-4" dir="ltr" label="khadamat_code" refItem={[component, "khadamat_code"]}  />
+                        <Input className="col-span-4" dir="ltr" label="tablighat_office_code" refItem={[component, "tablighat_office_code"]} />
+                        <Input className="col-span-4" dir="ltr" label="tablighat_organization_code" refItem={[component, "tablighat_organization_code"]} />
+                        <Input className="col-span-4" dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]}  />
+                        <Input className="col-span-4" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
+                        <SelectTail className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
                         
-                            
-                        <Input label="name" refItem={[component, "firstname"]} required="true" />
-                        <Input label="family" refItem={[component, "lastname"]} required="true" />
-                        <Input dir="ltr" label="codemeli" refItem={[component, "codemeli"]} />
-                        <Input dir="ltr" label="mobile" refItem={[component, "mobile"]} required="true" />
-                        <Input dir="ltr" label="khadamat_code" refItem={[component, "khadamat_code"]} required="true" />
-                        <Input dir="ltr" label="tablighat_office_code" refItem={[component, "tablighat_office_code"]} required="true" />
-                        <Input dir="ltr" label="tablighat_organization_code" refItem={[component, "tablighat_organization_code"]} required="true" />
-                        <Input dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]} required="true" />
-                        <Input dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
-                        <Input dir="ltr" label="postal_code" refItem={[component, "postal_code"]} required="true" />
-                        <SelectTail className="col-span-4" label="province" refItem={[component, "province_id"]} required="true" 
+                        <SelectTail defaultValue={data?.city_id ? data?.city_user?.province_id: provinceId} className="col-span-4" label="province" refItem={[component, "province_id"]} 
                             key={"province"+needles?.province?.length}
                             data={needles?.province} titleKey={"name_fa"}
-                            onChange={(e)=>filterCity(e)}
+                            onChange={(e) => filterCity(e)}
                         />
-                        <SelectTail className="col-span-4" label="city" refItem={[component, "city_id"]} required="true" 
-                            key={"city"+needles?.city?.length}
-                            data={needles?.city} titleKey={"name_fa"}
-                            onChange={(e)=>filterVillage(e)}
+                        <SelectTail  className="col-span-3" label="city_sh" refItem={[component, "city_id"]} 
+                            key={"city" + provinceId}
+                            data={provinceId>0 ?  needles?.city?.filter(item => item.province_id == provinceId) :  needles?.city} 
+                            titleKey={"name_fa"}
                         />
-                        {/* <SelectTail className="col-span-4" label="village" refItem={[component, "city_id"]} required="true" 
-                            key={"city"+needles?.city?.length}
-                            data={needles?.city} titleKey={"name_fa"}
-                            onChange={(e)=>filterVillage(e)}
-                        /> */}
-                        <Textarea dir="ltr" label="address" refItem={[component, "address"]} required="true" />
-                        <SelectTail label="level" data={needles?.level}  refItem={[component, "level_id"]} required="true" />
-                        <Radio className="col-span-4" type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
-                            data={needles?.gender} titleKey={"title_"+local} required="true" key={"gender_id"+component?.state?.info?.gender_id}
+                        <Input className="col-span-3" label="city" refItem={[component, "city"]}  />
+                        <Input className="col-span-3" label="village" refItem={[component, "village"]}  />
+
+                        
+                        <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
+
+                        <Textarea dir="ltr" label="address" refItem={[component, "address"]}  />
+                        <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
+
+                        <Radio className="col-span-4" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
+                            data={needles?.gender} titleKey={"title_"+local}  key={"gender_id"+data?.gender_id}
                         />
-                        <CheckBox className="col-span-4" label="status" name={Lang('public.active')} refItem={[component, "status_id"]} />
-                        <CheckBox className="col-span-4" label="citizen" name={Lang('public.not_citizen')} refItem={[component, "is_not_citizen"]} />
-                        <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir} required="true" />
-                    </Box>
+                        
+                        {
+                            user?.role_id==1 && <>
+                                {/* <SelectTail label="star" data={needles?.level}  refItem={[component, "level_id"]} /> */}
+
+                                <Radio className="col-span-4" type="col" label="star" id="level_id" refItem={[component, `level_id`]}
+                                data={needles?.level}  key={"level_id"+data?.level?.length}
+                                /> 
+                                <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} type="col" label="status" id="status_id" refItem={[component, `status_id`]}
+                                data={needles?.status?.filter(item => item.group_id === 1)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                /> 
+                            </>
+                        }
+                    </Box>    
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />
