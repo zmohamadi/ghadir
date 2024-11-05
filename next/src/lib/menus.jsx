@@ -1,72 +1,64 @@
 'use client'
-// import { useAuth } from "@/lib/auth";
-// const { user } = useAuth({ guard: "admin" });
 
 export const getMenus = (user) => {
-    // نقش های استاد دانشجو و استادیار منوی محدود دارند
-    // const access = ![1, 2, 3].includes(user?.role_id); 
-    const access = true; 
+    const access = user?.role_id==1 ? true : false; 
 
-    const commonMenus = [
+    const admin = [
         { title: "dashboard", icon: "Home", href: "/dashboard" },
-        // { title: "myCourses", icon: "Book", href: "/myCourses" },
-        // { title: "myCalendar", icon: "Calendar", href: "/myCalendar" }
-    ];
-
-    const adminMenus = [
+        { title: "promoters", icon: "PenTool", href: "/promoters" },
+        { title: "personnels", icon: "Aperture", href: "/personnels" },
         // {
-        //     title: "base_management", icon: "Server", open: false, 
+        //     title: "users", icon: "Shield", open: false, 
         //     childs: [
-        //         { title: "cities", icon: "Aperture", href: "/cities" },
-        //         { title: "provinces", icon: "Feather", href: "/provinces" },
-        //         // { title: "tools", icon: "Tag", href: "/baseTools" },
+        //         { title: "promoters", icon: "PenTool", href: "/promoters" },
+        //         { title: "personnels", icon: "Aperture", href: "/personnels" },
+        //         // { title: "roles", icon: "Framer", href: "/roles" },
+        //         // { title: "access", icon: "Settings", href: "/access" },
         //     ]
         // },
+        { title: "promotions", icon: "Book", href: "/promotions" },
+        { title: "reports", icon: "Package", href: "/promotion_reports" },
+        { title: "supports", icon: "Aperture", href: "/supports" },
+        // {
+        //     title: "promotions", icon: "Pocket", open: false, 
+        //     childs: [
+        //         { title: "promotions", icon: "Book", href: "/promotions" },
+        //         { title: "reports", icon: "Package", href: "/promotion_reports" },
+        //         { title: "supports", icon: "Aperture", href: "/supports" },
+        //     ]
+        // },
+        // { title: "blog", icon: "Book", href: "/blog" },
+        // { title: "comments", icon: "BookOpen", href: "/comments" },
+        // { title: "tickets", icon: "Book", href: "/tickets" },
+        // {
+        //     title: "blog", icon: "PenTool", open: false, 
+        //     childs: [
+        //         { title: "blog", icon: "Book", href: "/blog" },
+        //         { title: "comments", icon: "BookOpen", href: "/comments" },
+        //         { title: "tickets", icon: "Book", href: "/tickets" },
+
+        //     ]
+        // },
+    ];
+    const promoter = [
         {
-            title: "promotions", icon: "Pocket", open: false, 
+            title: "dashboard", icon: "Pocket", open: false, 
             childs: [
                 { title: "promotions", icon: "Book", href: "/promotions" },
-                { title: "promotion_reports", icon: "Package", href: "/promotion_reports" },
-                { title: "supports", icon: "Aperture", href: "/supports" },
+                { title: "register_promotions", icon: "Package", href: "/register_promotions" },
             ]
         },
-        {
-            title: "users", icon: "Shield", open: false, 
-            childs: [
-                { title: "users", icon: "List", href: "/users" },
-                { title: "cultural_users", icon: "PenTool", href: "/cultural_users" },
-                { title: "personnels", icon: "Aperture", href: "/personnels" },
-                { title: "roles", icon: "Framer", href: "/roles" },
-                { title: "access", icon: "Settings", href: "/access" },
-            ]
-        },
-        {
-            title: "blog", icon: "PenTool", open: false, 
-            childs: [
-                { title: "blog", icon: "Book", href: "/blog" },
-                { title: "comments", icon: "BookOpen", href: "/comments" },
-            ]
-        },
-        {
-            title: "tickets", icon: "PenTool", open: false, 
-            childs: [
-                { title: "tickets", icon: "Book", href: "/blog" },
-                { title: "ticket_subjects", icon: "BookOpen", href: "/ticket_subjects" },
-            ]
-        },
-       
-        // {
-        //     title: "reports", icon: "Monitor", open: false, 
-        //     childs: [
-        //         { title: "reports", icon: "Monitor", href: "/reports" },
-        //     ]
-        // }
+        { title: "myPromotions", icon: "Book", href: "/myPromotions" },
+        { title: "myReports", icon: "Book", href: "/myReports" },
+        { title: "mySupports", icon: "Book", href: "/mySupports" },
+        { title: "blog", icon: "Book", href: "/blog" },
+        { title: "tickets", icon: "Book", href: "/myTickets" },
+      
     ];
-    const commonMenus2 = [
-        // { title: "edit_profile", icon: "User", href: "/editProfile" },
+    const commonMenus = [
         { title: "profile", icon: "User", href: "/viewProfile" },
         { title: "change_password", icon: "Lock", href: "/changePassword" },
     ];
 
-    return access ? [...commonMenus, ...adminMenus,...commonMenus2] :  [...commonMenus,...commonMenus2];
+    return access ? [...admin,...commonMenus] :  [...promoter,...commonMenus];
 };

@@ -8,7 +8,7 @@ use Models\Traits\Base;
 
 class Tribune extends Model
 {
-    use HasFactor,Basey;
+    use HasFactory,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
     /**

@@ -13,7 +13,7 @@ export default function ViewProfile(){
     let component = useFormRefs();
     const { user } = useAuth({guard: "admin"});
     const id = user?.id;
-    let url = `${laraAdmin}/users/show-info/${id}`;
+    let url = `${laraAdmin}/users/${id}`;
 
     const getItem = ()=>{ get(url, component, "info"); }
     const saveItem = ()=>{

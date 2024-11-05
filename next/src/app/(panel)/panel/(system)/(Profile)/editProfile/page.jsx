@@ -1,10 +1,10 @@
 "use client";
 import { useAuth } from "@/lib/auth";
 
-import EditPersonnel from '@/app/(lms-panel)/panel/(system)/(Users)/personnels/(form)/[id]/edit/page';
-import EditTeacher from '@/app/(lms-panel)/panel/(system)/(Users)/teachers/(form)/[id]/edit/page';
-import EditStudent from '@/app/(lms-panel)/panel/(system)/(Users)/students/(form)/[id]/edit/page';
-import EditAssistant from '@/app/(lms-panel)/panel/(system)/(Users)/assistants/(form)/[id]/edit/page';
+import EditPersonnel from '@/app/(panel)/panel/(system)/(admin)/(Users)/personnels/(form)/[id]/edit/page';
+import EditTeacher from '@/app/(panel)/panel/(system)/(admin)/(Users)/teachers/(form)/[id]/edit/page';
+import EditStudent from '@/app/(panel)/panel/(system)/(admin)/(Users)/students/(form)/[id]/edit/page';
+import EditAssistant from '@/app/(panel)/panel/(system)/(admin)/(Users)/assistants/(form)/[id]/edit/page';
 
 export default function EditProfile(){
     const {user} = useAuth({guard: "admin"});

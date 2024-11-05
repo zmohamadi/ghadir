@@ -33,6 +33,53 @@ CREATE TABLE `audience_types` (
 
 /*Data for the table `audience_types` */
 
+/*Table structure for table `base_cities` */
+
+DROP TABLE IF EXISTS `base_cities`;
+
+CREATE TABLE `base_cities` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `province_id` int(11) DEFAULT NULL COMMENT 'شناسه استان',
+  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `base_cities` */
+
+insert  into `base_cities`(`id`,`name_fa`,`name_en`,`name_ar`,`province_id`,`icon`,`description_fa`,`description_en`,`description_ar`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(7,'قم',NULL,NULL,1,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL);
+
+/*Table structure for table `base_genders` */
+
+DROP TABLE IF EXISTS `base_genders`;
+
+CREATE TABLE `base_genders` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title_fa` varchar(100) DEFAULT NULL,
+  `title_en` varchar(100) DEFAULT NULL,
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال ',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `base_genders` */
+
+insert  into `base_genders`(`id`,`title_fa`,`title_en`,`status_id`,`created_at`,`updated_at`,`deleted_at`) values 
+(1,'آقا','male',1,'2024-07-06 20:22:35','2024-07-06 20:22:35',NULL),
+(2,'خانم','femail',1,'2024-07-06 20:22:35','2024-07-06 20:22:35',NULL);
+
 /*Table structure for table `base_languages` */
 
 DROP TABLE IF EXISTS `base_languages`;
@@ -56,6 +103,88 @@ insert  into `base_languages`(`id`,`title`,`symbol`,`dir`,`icon`,`status_id`,`de
 (1,'فارسی','fa','rtl','fa.png',1,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35'),
 (2,'English','en','ltr','en.png',0,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35'),
 (3,'عربی','ar','rtl','ar.png',0,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35');
+
+/*Table structure for table `base_provinces` */
+
+DROP TABLE IF EXISTS `base_provinces`;
+
+CREATE TABLE `base_provinces` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `country_id` int(11) DEFAULT NULL COMMENT 'شناسه کشور',
+  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `base_provinces` */
+
+insert  into `base_provinces`(`id`,`name_fa`,`name_en`,`name_ar`,`country_id`,`icon`,`description_fa`,`description_en`,`description_ar`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'قم',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL);
+
+/*Table structure for table `base_statuses` */
+
+DROP TABLE IF EXISTS `base_statuses`;
+
+CREATE TABLE `base_statuses` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title_fa` varchar(200) DEFAULT NULL COMMENT 'عنوان به زبان فارسی',
+  `title_en` varchar(200) DEFAULT NULL COMMENT 'عنوان به زبان عربی',
+  `group_id` int(11) DEFAULT NULL COMMENT 'شناسه گروه وضعیت',
+  `code` varchar(3) DEFAULT NULL COMMENT 'کد وضعیت',
+  `color` varchar(20) DEFAULT NULL COMMENT 'رنگ',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `base_statuses` */
+
+insert  into `base_statuses`(`id`,`title_fa`,`title_en`,`group_id`,`code`,`color`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'وضعیت فعالی','active status',NULL,NULL,NULL,1,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35'),
+(2,'فعال','active',1,'1','theme-10',1,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35'),
+(3,'غیر فعال','inactive',1,'0','theme-24',1,NULL,'2024-07-06 20:22:35','2024-07-06 20:22:35'),
+(4,'وضعیت پست پیامگاه','Message post status',NULL,NULL,NULL,1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(5,'نیاز به بررسی','Need to check',4,'0','theme-23',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(6,'عمومی','General',4,'1','theme-17',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(7,'خصوصی','private',4,'2','theme-10',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(8,'رد','rejection',4,'3','theme-24',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(9,'نوع عملکرد پست','Post function type',NULL,NULL,NULL,1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(10,'لایک','like',9,'1','theme-24',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10'),
+(11,'لایک نکردن','Dislike',9,'0','theme-10',1,NULL,'2024-07-18 12:55:10','2024-07-18 12:55:10');
+
+/*Table structure for table `base_villages` */
+
+DROP TABLE IF EXISTS `base_villages`;
+
+CREATE TABLE `base_villages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `city_id` int(11) DEFAULT NULL COMMENT 'شناسه کشور',
+  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `base_villages` */
 
 /*Table structure for table `blogs` */
 
@@ -177,22 +306,6 @@ CREATE TABLE `educational_bases` (
 
 /*Data for the table `educational_bases` */
 
-/*Table structure for table `genders` */
-
-DROP TABLE IF EXISTS `genders`;
-
-CREATE TABLE `genders` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `status_id` int(11) NOT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `genders` */
-
 /*Table structure for table `levels` */
 
 DROP TABLE IF EXISTS `levels`;
@@ -207,9 +320,12 @@ CREATE TABLE `levels` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `levels` */
+
+insert  into `levels`(`id`,`name`,`description`,`status_id`,`users`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'سطح 1','',1,'',NULL,NULL,NULL);
 
 /*Table structure for table `migrations` */
 
@@ -375,23 +491,6 @@ CREATE TABLE `rituals` (
 
 /*Data for the table `rituals` */
 
-/*Table structure for table `roles` */
-
-DROP TABLE IF EXISTS `roles`;
-
-CREATE TABLE `roles` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `status_id` int(11) NOT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `roles` */
-
 /*Table structure for table `support_types` */
 
 DROP TABLE IF EXISTS `support_types`;
@@ -497,6 +596,27 @@ CREATE TABLE `user_promotions` (
 
 /*Data for the table `user_promotions` */
 
+/*Table structure for table `user_roles` */
+
+DROP TABLE IF EXISTS `user_roles`;
+
+CREATE TABLE `user_roles` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `user_roles` */
+
+insert  into `user_roles`(`id`,`name`,`description`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'مدیریت','',1,NULL,NULL,NULL),
+(2,'مبلغ','',1,NULL,NULL,NULL);
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -505,12 +625,13 @@ CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mobile` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `role_id` int(11) DEFAULT NULL,
   `attribute_name` varchar(255) NOT NULL,
-  `family` varchar(255) NOT NULL,
   `gender_id` int(11) NOT NULL,
   `is_not_citizen` tinyint(1) NOT NULL,
-  `melicode` varchar(255) NOT NULL,
+  `codemeli` varchar(255) NOT NULL,
   `khadamat_code` varchar(255) NOT NULL,
   `tablighat_office_code` varchar(255) NOT NULL,
   `tablighat_organization_code` varchar(255) NOT NULL,
@@ -533,8 +654,8 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`mobile`,`password`,`name`,`attribute_name`,`family`,`gender_id`,`is_not_citizen`,`melicode`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`level_id`,`last_login`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'09191964745','$2y$12$onogYslcq05.1lR6PICdH.0V526DqEd11807W0KzgMZBSDPVhqD.a','مهدی','','وثوقی',0,0,'','','','','','',0,'','','','','',0,0,'0000-00-00 00:00:00',NULL,NULL,NULL);
+insert  into `users`(`id`,`mobile`,`password`,`firstname`,`lastname`,`role_id`,`attribute_name`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`level_id`,`last_login`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'09191964745','$2y$12$onogYslcq05.1lR6PICdH.0V526DqEd11807W0KzgMZBSDPVhqD.a','مهدی','وثوقی',1,'',1,0,'09191964745','','','','','',0,'','','','','',1,0,'0000-00-00 00:00:00',NULL,NULL,'2024-11-04 16:12:08');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

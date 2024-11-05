@@ -16,13 +16,12 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens,HasFactory,Base;
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
     protected $hidden  = ['created_at', 'updated_at', 'deleted_at','password'];
+    protected $dates   = ['deleted_at'];
+    protected $table   = 'users';
+    const PERSONNEL = 1;
+    const PROMOTER = 2;
 
     /**
      * The attributes that should be cast to native types.
@@ -91,12 +90,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function cityUser()
     {
-        return $this->belongsTo(City::class, 'city_id');
+        return $this->belongsTo(\Models\Base\City::class, 'city_id');
     }
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(\Models\Person\Role::class);
     }
 
     public function status()
@@ -106,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function gender()
     {
-        return $this->belongsTo(Gender::class);
+        return $this->belongsTo(\Models\Base\Gender::class);
     }
 
     public function level()

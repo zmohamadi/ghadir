@@ -11,8 +11,19 @@ use Illuminate\Support\Facades\Route;
 // Route::resource("questionTypes","Base\QuestionTypeController");
 
 
-// Route::resource("users", "Person\UserController");
+
+Route::get("users/change-status/get-needles", "Person\UserController@changeRoleGetNeedles");
+Route::post("users/change-status/{id}", "Person\UserController@changeRole");
+Route::put("users/change-password", "Person\UserController@changePassword");
+
+// Route::put("users/edit-email/{id}", "Person\UserController@editEmail");
+// Route::get("users/{id}", "Person\UserController@showInfo");
+Route::get("users/get-needles", "Person\UserController@getNeedles");
+
+Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
+Route::resource("promoters", "Person\PromoterController");
 // Route::resource("personnels", "Person\PersonnelController");
+// Route::resource("users", "Person\UserController");
 // Route::resource("roles", "Person\RoleController");
 
 
