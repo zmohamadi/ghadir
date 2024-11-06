@@ -34,6 +34,11 @@ $lang = [
    'has_tribune'=>'منبر دارد ؟',
    'has'=>'دارد',
    'ritual'=>'شعائر',
+   'type'=>'نوع',
+   'occasion'=>'مناسبت',
+   'pack_items'=>'اقلام بسته',
+   'amount'=>'مبلغ',
+   'support'=>'حمایت',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

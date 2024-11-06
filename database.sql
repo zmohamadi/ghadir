@@ -491,15 +491,20 @@ DROP TABLE IF EXISTS `support_types`;
 
 CREATE TABLE `support_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `status_id` int(1) NOT NULL DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `support_types` */
+
+insert  into `support_types`(`id`,`title`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'بسته فرهنگی',1,NULL,NULL,NULL),
+(2,'حمایت مالی',1,NULL,NULL,NULL),
+(3,'سایر',1,NULL,NULL,NULL);
 
 /*Table structure for table `supports` */
 
@@ -507,16 +512,26 @@ DROP TABLE IF EXISTS `supports`;
 
 CREATE TABLE `supports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `content` text NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `pack_items` varchar(255) DEFAULT NULL COMMENT 'اقلام بسته / اگر بسته باشد',
+  `amount` varchar(255) DEFAULT NULL COMMENT 'مبلغ / اگر مالی باشد',
+  `type_id` int(11) DEFAULT NULL COMMENT 'نوع حمایت',
+  `description` text DEFAULT NULL,
+  `creator_id` int(11) DEFAULT NULL,
+  `editor_id` int(11) DEFAULT NULL,
+  `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `supports` */
+
+insert  into `supports`(`id`,`pack_items`,`amount`,`type_id`,`description`,`creator_id`,`editor_id`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'کتاب',NULL,1,'توضیحات من',NULL,NULL,1,'2024-11-06 06:18:12','2024-11-06 06:15:16','2024-11-06 06:18:12'),
+(2,'کتاب',NULL,1,'توضیحات من',NULL,NULL,1,NULL,'2024-11-06 06:15:22','2024-11-06 06:15:22'),
+(3,'کتاب',NULL,1,'توضیحات من',NULL,NULL,1,NULL,'2024-11-06 06:15:36','2024-11-06 06:15:36'),
+(4,NULL,'2000000',2,'حمایت مالی',NULL,NULL,1,NULL,'2024-11-06 06:18:35','2024-11-06 06:18:35');
 
 /*Table structure for table `ticket_subjects` */
 

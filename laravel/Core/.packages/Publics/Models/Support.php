@@ -9,7 +9,7 @@ use Models\Traits\Base;
 
 class Support extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
 
@@ -31,12 +31,12 @@ class Support extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function supportTypes()
+    public function type()
     {
-        return $this->belongsToMany(SupportType::class);
+        return $this->belongsTo(SupportType::class,'type_id');
     }
 
-    public function Promotion()
+    public function promotions()
     {
         return $this->belongsToMany(Promotion::class);
     }

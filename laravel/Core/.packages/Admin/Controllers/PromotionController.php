@@ -7,7 +7,7 @@ use Admin\Controllers\Public\BaseAbstract;
 
 class PromotionController extends BaseAbstract
 {
-     protected $model = 'Models\Promotion';
+    protected $model = 'Models\Promotion';
     protected $request = 'Publics\Requests\PromotionRequest';
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor","registerStatus","reportStatus"];

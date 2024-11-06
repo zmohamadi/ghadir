@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 
+Route::get("supports/get-needles", "SupportController@getNeedles");
+Route::resource("supports", "SupportController");
+
 Route::get("promotions/get-needles", "PromotionController@getNeedles");
 Route::resource("promotions", "PromotionController");
 
