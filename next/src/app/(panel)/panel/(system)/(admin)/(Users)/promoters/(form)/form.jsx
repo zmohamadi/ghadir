@@ -4,10 +4,11 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
-import { Loading } from "@/Theme/Midone/Utils";
+import { Loading, Repeat } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
+import { CulturalUsers } from "./CulturalUsers";
 
 export default function Form({id}){
     const link = "/promoters";
@@ -46,8 +47,9 @@ export default function Form({id}){
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();
     const data = component?.state?.info;
-// console.log(user?.role_id);
-// console.log(provinceId);
+
+    const otherProps = (component?.state?.info?.cultural_user?.length)? { count_data: component.state.info.cultural_user.length } : {};
+
 
     return(
         
@@ -105,7 +107,9 @@ export default function Form({id}){
                                 /> 
                             </>
                         }
-                    </Box>    
+                    </Box>
+                    <Repeat needles={needles} {...otherProps} child={CulturalUsers} parent={component} />
+
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />

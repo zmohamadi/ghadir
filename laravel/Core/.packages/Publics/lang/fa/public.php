@@ -39,6 +39,7 @@ $lang = [
    'pack_items'=>'اقلام بسته',
    'amount'=>'مبلغ',
    'support'=>'حمایت',
+   'job_position'=>'موقعیت شغلی',
 ];
 
 $menus = include(__DIR__.'/./menus.php');
