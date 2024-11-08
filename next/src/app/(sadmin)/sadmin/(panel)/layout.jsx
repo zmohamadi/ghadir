@@ -5,7 +5,7 @@ import { utility } from "@/lib/utility";
 import { MobileMenu, TopBar, Menu, Wrapper } from "@/Theme/Midone/Base";
 import { useEffect, useState } from "react";
 // import { menus } from "../../sadminMenus";
-import {menu} from "@/lib/menu-list";
+import {menu} from "@/lib/menus";
 
 
 export default function Panel({children}){
