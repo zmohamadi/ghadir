@@ -10,11 +10,11 @@ export const getMenus = (user) => {
         
         { title: "promotions", icon: "Book", href: "/promotions" },
         { title: "supports", icon: "Aperture", href: "/supports" },
-        { title: "reports", icon: "Package", href: "/promotion_reports" },
+        // { title: "reports", icon: "Package", href: "/promotion_reports" },
         
-        { title: "blog", icon: "Book", href: "/blog" },
-        { title: "comments", icon: "BookOpen", href: "/comments" },
-        { title: "tickets", icon: "Book", href: "/tickets" },
+        // { title: "blog", icon: "Book", href: "/blog" },
+        // { title: "comments", icon: "BookOpen", href: "/comments" },
+        // { title: "tickets", icon: "Book", href: "/tickets" },
         
     ];
     const promoter = [

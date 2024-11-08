@@ -18,4 +18,9 @@ class Promoter extends User
     {
         return $this->hasMany(CulturalUser::class);
     }
+    public function supports()
+    {
+        return $this->belongsToMany(Support::class,"support_users","support_id","promoter_id");
+    }
+
 }

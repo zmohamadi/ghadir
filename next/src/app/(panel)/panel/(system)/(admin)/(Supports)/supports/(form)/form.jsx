@@ -47,14 +47,14 @@ export default function Form({id}){
     const back = ()=>router.back();
     const data = component?.state?.info;
 // console.log(user?.role_id);
-// console.log(provinceId);
+// console.log(needles);
 
     return(
         
             <>
                 <Frame title={Lang(["public.support"])}>
                     <Box>
-                        <SelectTail className="col-span-12" multiple={true} label="occasion" refItem={[component, "promotions"]} 
+                        <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
                             key={"occasion" + needles?.promotion?.lenght} required="true"
                             data={needles?.promotion} 
                         />
@@ -62,8 +62,17 @@ export default function Form({id}){
                             key={"type" + needles?.supporttype?.lenght} required="true"
                             data={needles?.supporttype} 
                         />
-                        
                         <Input label="amount" refItem={[component, "amount"]}  />
+
+                        <SelectTail multiple={true} label="included" refItem={[component, "promoters"]} 
+                            key={"type" + needles?.promoter?.lenght}
+                        >
+                            {
+                                needles?.promoter?.map((item ,index)=>{
+                                    return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname}</option>
+                                })
+                            }
+                        </SelectTail>
                         <Textarea label="pack_items"  refItem={[component, "pack_items"]}  />
                         <Textarea label="description" required="true" refItem={[component, "description"]}  />
 

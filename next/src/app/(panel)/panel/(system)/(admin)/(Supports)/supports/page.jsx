@@ -20,6 +20,7 @@ export default function List(){
         columns: [
            
             {label: "type", field: "type.title" },
+            {label: "promotion", field: "promotion.title" },
             {label: "amount", field: "amount" },
             {label: "pack_items", field: "pack_items" },
             {label: "", sort:false, 

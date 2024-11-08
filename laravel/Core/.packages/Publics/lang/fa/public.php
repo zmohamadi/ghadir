@@ -40,6 +40,7 @@ $lang = [
    'amount'=>'مبلغ',
    'support'=>'حمایت',
    'job_position'=>'موقعیت شغلی',
+   'included'=>'شامل',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

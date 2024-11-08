@@ -26,18 +26,20 @@ class Support extends Model
      * Relationships
      */
 
-    public function users()
+    
+    public function promoters()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(\Models\Person\Promoter::class,"support_users","promoter_id","support_id");
     }
+
 
     public function type()
     {
         return $this->belongsTo(SupportType::class,'type_id');
     }
 
-    public function promotions()
+    public function promotion()
     {
-        return $this->belongsToMany(Promotion::class);
+        return $this->belongsTo(Promotion::class,"promotion_id");
     }
 }
