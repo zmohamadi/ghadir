@@ -43,11 +43,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserPromotion::class);
     }
 
-    public function culturalUser()
-    {
-        return $this->hasOne(CulturalUser::class);
-    }
-
     public function createNotes()
     {
         return $this->hasMany(Note::class, 'created_by');

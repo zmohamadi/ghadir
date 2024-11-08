@@ -48,7 +48,7 @@ export default function Form({id}){
     const back = ()=>router.back();
     const data = component?.state?.info;
 
-    const otherProps = (component?.state?.info?.cultural_user?.length)? { count_data: component.state.info.cultural_user.length } : {};
+    const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
 
 
     return(

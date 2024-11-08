@@ -13,4 +13,9 @@ class Promoter extends User
                 $q->where($this->table.'.role_id',2);
             });
     }
+
+    public function culturalUsers()
+    {
+        return $this->hasMany(CulturalUser::class);
+    }
 }
