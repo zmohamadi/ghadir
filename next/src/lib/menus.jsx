@@ -30,8 +30,8 @@ export const getMenus = (user) => {
       
     ];
     const commonMenus = [
-        // { title: "profile", icon: "User", href: "/viewProfile" },
-        // { title: "change_password", icon: "Lock", href: "/changePassword" },
+        { title: "profile", icon: "User", href: "/profile" },
+        { title: "change_password", icon: "Lock", href: "/change-password" },
     ];
 
     return access ? [...admin,...commonMenus] :  [...promoter,...commonMenus];

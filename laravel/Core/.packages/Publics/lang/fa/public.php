@@ -41,6 +41,8 @@ $lang = [
    'support'=>'حمایت',
    'job_position'=>'موقعیت شغلی',
    'included'=>'شامل',
+   'change'=>'تغییر',
+   'new_password_confirmation'=>'تایید رمزعبور',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

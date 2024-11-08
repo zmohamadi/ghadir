@@ -70,7 +70,7 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                                         {Lang('public.home')} 
                                 </Link>
                                 {/* <Link href={prefix+"/editProfile"}  */}
-                                <Link href={prefix+"/viewProfile"} 
+                                <Link href={prefix+"/editProfile"} 
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'>
                                         <Icon.User className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                         {Lang('public.profile')} 

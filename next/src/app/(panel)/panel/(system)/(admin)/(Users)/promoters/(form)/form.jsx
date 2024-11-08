@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Form({id}){
     const link = "/promoters";
@@ -19,20 +19,30 @@ export default function Form({id}){
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
     let [provinceId, setProvinceId] = useState(null);
-
+    const pathname = usePathname();
     const {user} = useAuth();
     
     let uploadUrl = laraAdmin+"/upload/.-media-users";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-users";
     let uploadDir = 'media/users/';
     
-    let url = laraAdmin+link, method = "new";
-    if(id != 0 && id != undefined) url = laraAdmin+link+"/"+id, method = "edit";
+    // اگر روت پروفایل باشد، از user.id استفاده می‌شود
+    let finalId = pathname.includes("profile") ? user?.id : id;
+    let url = laraAdmin + link;
+    let method = "new";
+    let nextUrl = link;
+
+    
+    if (finalId !== 0 && finalId !== undefined) {
+        url = `${laraAdmin + link}/${finalId}`;
+        method = "edit";
+        nextUrl = "/";
+    }
 
     useEffect(() => {
         getNeedles(laraAdmin+'/promoters/get-needles', setNeedles);
         get(url, component, "info");
-    }, []);
+    }, [url]);
 
     useEffect(()=>{
         
@@ -44,7 +54,7 @@ export default function Form({id}){
         setProvinceId(e.value);
     };
 
-    const saveItem = ()=>save(url, component, method, link);
+    const saveItem = ()=>save(url, component, method, nextUrl);
     const back = ()=>router.back();
     const data = component?.state?.info;
 
