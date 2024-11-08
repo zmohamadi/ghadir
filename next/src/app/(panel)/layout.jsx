@@ -14,7 +14,7 @@ export default function Panel({children}){
     return <>        
         <html lang="en" suppressHydrationWarning = {true}>
             <head>
-                <title >ستاد مبلغین</title>
+                <title >پیام‌رسان غدیر</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="description" content="admin theme" />

@@ -39,7 +39,7 @@ export default function Dashboard() {
         <div className="container mx-auto bg-white p-4">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold text-gray-800">ستاد مبلغین</h1>
+                <h1 className="text-3xl font-bold text-gray-800">پیام‌رسان غدیر</h1>
                 <button
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
                     onClick={() => window.location.href = '/panel'}
@@ -88,7 +88,7 @@ export default function Dashboard() {
             </div> */}
             {/* Footer */}
             <footer className="bg-gray-800 text-white text-center py-4  mt-10 mb-10 pt-5">
-                <p className="text-sm">© 2024 ستاد مبلغین(ghadiriam.ir). تمام حقوق محفوظ است.</p>
+                <p className="text-sm">© 2024 پیام‌رسان غدیر(ghadiriam.com). تمام حقوق محفوظ است.</p>
                 <p className="text-sm">طراحی شده توسط تیم توسعه ghadiriam.ir</p>
             </footer>
         </div>
