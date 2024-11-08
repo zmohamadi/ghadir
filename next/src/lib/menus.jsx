@@ -18,23 +18,20 @@ export const getMenus = (user) => {
         
     ];
     const promoter = [
-        {
-            title: "dashboard", icon: "Pocket", open: false, 
-            childs: [
-                { title: "promotions", icon: "Book", href: "/promotions" },
-                { title: "register_promotions", icon: "Package", href: "/register_promotions" },
-            ]
-        },
+       
+        { title: "dashboard", icon: "Pocket", href: "/promotions" },
+        { title: "promotions", icon: "Book", href: "/promotions" },
+        { title: "register_promotions", icon: "Package", href: "/register_promotions" },
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
         { title: "myReports", icon: "Book", href: "/myReports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },
-        { title: "blog", icon: "Book", href: "/blog" },
-        { title: "tickets", icon: "Book", href: "/myTickets" },
+        // { title: "blog", icon: "Book", href: "/blog" },
+        // { title: "tickets", icon: "Book", href: "/myTickets" },
       
     ];
     const commonMenus = [
-        { title: "profile", icon: "User", href: "/viewProfile" },
-        { title: "change_password", icon: "Lock", href: "/changePassword" },
+        // { title: "profile", icon: "User", href: "/viewProfile" },
+        // { title: "change_password", icon: "Lock", href: "/changePassword" },
     ];
 
     return access ? [...admin,...commonMenus] :  [...promoter,...commonMenus];
