@@ -43,6 +43,7 @@ $lang = [
    'included'=>'شامل',
    'change'=>'تغییر',
    'new_password_confirmation'=>'تایید رمزعبور',
+   'note'=>'یادداشت',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

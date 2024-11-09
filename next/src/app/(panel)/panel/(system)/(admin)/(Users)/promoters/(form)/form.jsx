@@ -9,6 +9,7 @@ import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
 import { useRouter, usePathname } from 'next/navigation';
+import { Notes } from "./Notes";
 
 export default function Form({id}){
     const link = "/promoters";
@@ -59,6 +60,7 @@ export default function Form({id}){
     const data = component?.state?.info;
 
     const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
+    const otherProps2 = (component?.state?.info?.notes?.length)? { count_data: component.state.info.notes.length } : {};
 
 
     return(
@@ -118,7 +120,14 @@ export default function Form({id}){
                             </>
                         }
                     </Box>
+                    {
+                        user?.role_id==1 && <>
+                            <Repeat {...otherProps2} child={Notes} parent={component} />
+                        </>
+                    }
                     <Repeat needles={needles} {...otherProps} child={CulturalUsers} parent={component} />
+                    <Repeat needles={needles} {...otherProps} child={CulturalUsers} parent={component} />
+                    
 
                 </Frame>
                 <ButtonContainer>

@@ -23,4 +23,8 @@ class Promoter extends User
         return $this->belongsToMany(Support::class,"support_users","support_id","promoter_id");
     }
 
+    public function notes()
+    {
+        return $this->hasMany(\Models\Note::class, 'promoter_id');
+    }
 }

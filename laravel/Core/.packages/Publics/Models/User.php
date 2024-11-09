@@ -45,13 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function createNotes()
     {
-        return $this->hasMany(Note::class, 'created_by');
+        return $this->hasMany(Note::class, 'creator_id');
     }
 
-    public function abouteNotes()
-    {
-        return $this->hasMany(Note::class, 'about_user_id');
-    }
 
     public function promotionReports()
     {

@@ -10,6 +10,7 @@ class Note extends Model
 {
     use HasFactory,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
+    protected $table   = 'user_notes';
 
     /**
      * The attributes that should be cast to native types.
