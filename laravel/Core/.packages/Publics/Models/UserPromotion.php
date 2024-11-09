@@ -19,4 +19,9 @@ class UserPromotion extends Model
     protected $casts = [
         'deleted_at' => 'timestamp',
     ];
+
+    public function positions()
+    {
+        return $this->blongsTo(\Models\PromotionPosition::class);
+    }
 }

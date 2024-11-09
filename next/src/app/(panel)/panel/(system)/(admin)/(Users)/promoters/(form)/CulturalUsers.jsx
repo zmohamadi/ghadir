@@ -9,9 +9,8 @@ export function CulturalUsers({ index, parent, addIcon, closeIcon,needles }) {
     // console.log(culturalUser?.gender_id);
 
 
-    return (
-        <Box shadow={false} title={Lang('public.cultural_users')}>
-            <div className="col-span-12 flex justify-end items-end">
+    return (<>
+    <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
             <Input label="name" refItem={[parent, `c_name_${index}`]} defaultValue={culturalUser?.name}  />
@@ -26,6 +25,6 @@ export function CulturalUsers({ index, parent, addIcon, closeIcon,needles }) {
             <div className="col-span-12 flex justify-start items-start">
                 {addIcon}
             </div>
-        </Box>
+    </>
     );
 }

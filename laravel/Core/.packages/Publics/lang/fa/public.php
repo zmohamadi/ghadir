@@ -44,6 +44,11 @@ $lang = [
    'change'=>'تغییر',
    'new_password_confirmation'=>'تایید رمزعبور',
    'note'=>'یادداشت',
+   'notes'=>'یادداشت ها',
+   'promotion_info'=>'اطلاعات تبلیغی',
+   'personal_info'=>'اطلاعات فردی',
+   'place_name'=>'مکان',
+   'promotion_position'=>'جایگاه تبلیغی'
 ];
 
 $menus = include(__DIR__.'/./menus.php');

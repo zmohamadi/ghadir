@@ -9,7 +9,7 @@ use Models\Traits\Base;
 
 class PromotionPosition extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
     /**
@@ -25,8 +25,8 @@ class PromotionPosition extends Model
      * Relationships
      */
 
-    public function userPromotions()
+    public function promoters()
     {
-        return $this->hasMany(UserPromotion::class);
+        return $this->hasMany(\Models\Person\Promoter::class,"promoter_id");
     }
 }

@@ -10,8 +10,8 @@ export function Notes({ index, parent, addIcon, closeIcon,needles }) {
 
 
     return (
-        <Box shadow={false} title={Lang('public.note')}>
-            <div className="col-span-12 flex justify-end items-end">
+        <>
+         <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
                 <Textarea className="col-span-12" label="description" refItem={[parent, `note_${index}`]} defaultValue={note?.content}  />
@@ -19,6 +19,6 @@ export function Notes({ index, parent, addIcon, closeIcon,needles }) {
             <div className="col-span-12 flex justify-start items-start">
                 {addIcon}
             </div>
-        </Box>
+        </>
     );
 }
