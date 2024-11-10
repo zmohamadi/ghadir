@@ -15,7 +15,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon,needles }) {
             </div>
                 <SelectTail label="province" refItem={[parent,`pos_province_${index}`]} 
                     key={"province"+needles?.province?.length}
-                    data={needles?.province} titleKey={"name_fa"} defaultValue={info?.position_id}
+                    data={needles?.province} titleKey={"name_fa"} 
                 />
                 <SelectTail label="city_sh" refItem={[parent,`pos_city_id_${index}`]} 
                     key={"province"+needles?.city?.length}

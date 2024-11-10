@@ -20,8 +20,12 @@ class UserPromotion extends Model
         'deleted_at' => 'timestamp',
     ];
 
-    public function positions()
+    public function position()
     {
         return $this->blongsTo(\Models\PromotionPosition::class);
+    }
+    public function city()
+    {
+        return $this->belongsTo(\Models\Base\City::class, 'city_id');
     }
 }

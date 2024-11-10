@@ -11,7 +11,8 @@ class PromoterController extends BaseAbstract
     protected $model = 'Models\Person\Promoter';
     protected $request = "Publics\Requests\PromoterRequest";
     protected $with = ["role", "gender", "activeStatus", "cityUser", 'level', "education"];
-    protected $showWith = ["role", "gender", "activeStatus", "cityUser", 'level', "education", "culturalUsers", "notes","promotionInfos"];
+    protected $showWith = ["role", "gender", "activeStatus", "cityUser", 'level', "education", "culturalUsers",
+     "notes","promotionInfos"];
     protected $needles = ["Base\City", "Base\Province", "Base\Gender", "Level", "Education", 'Base\Status', "PromotionPosition"];
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
     protected $files = ["photo"];
