@@ -75,7 +75,7 @@ export default function Form({id}){
                             <TabList href="tab-first" title={Lang('public.personal_info')} active={"true"}>{Lang("public.personal_info")}</TabList>
                             <TabList href="tab-second" title={Lang('public.promotion_info')}>{Lang("public.promotion_info")}</TabList>
                             <TabList href="tab-third" title={Lang('public.cultural_users')}>{Lang("public.cultural_users")}</TabList>
-                            <TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>
+                            {user?.role_id==1 &&<TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>}
                         </TabHeader>
                         <TabBody>
                             <TabPanel id="tab-first" active={"true"}>

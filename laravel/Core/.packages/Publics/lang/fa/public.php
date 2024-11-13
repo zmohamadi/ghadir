@@ -39,7 +39,7 @@ $lang = [
    'pack_items'=>'اقلام بسته',
    'amount'=>'مبلغ',
    'support'=>'حمایت',
-   'job_position'=>'موقعیت شغلی',
+   'job_position'=>'مسئولیت',
    'included'=>'شامل',
    'change'=>'تغییر',
    'new_password_confirmation'=>'تایید رمزعبور',
@@ -48,7 +48,8 @@ $lang = [
    'promotion_info'=>'اطلاعات تبلیغی',
    'personal_info'=>'اطلاعات فردی',
    'place_name'=>'مکان',
-   'promotion_position'=>'جایگاه تبلیغی'
+   'promotion_position'=>'جایگاه تبلیغی',
+   'cultural_users_p'=>'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند ',
 ];
 
 $menus = include(__DIR__.'/./menus.php');
