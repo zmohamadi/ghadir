@@ -22,25 +22,6 @@ class AuthenticatedController extends Controller
         $request->session()->regenerate();
         return response()->noContent();
     }
-
-    public function store1(Request $request)
-    {
-        // Validate user credentials
-        if (!Auth::attempt($request->only(['email', 'password']))) {
-            // return $this->failedRequest('', 'Invalid email address or password', 400);
-            return response()->json(['message'=>'Invalid email address or password'], 400);
-        }
-
-        // Regenerate the user's session to prevent session fixation
-        $request->session()->regenerate();
-
-        // Sign in user
-        Auth::login(Auth::user());
-
-        // Return data
-        return $this->successfullRequest(Auth::user(), 'User successfully logged in', 200);
-    }
-
     /**
      * Destroy an authenticated session.
      *

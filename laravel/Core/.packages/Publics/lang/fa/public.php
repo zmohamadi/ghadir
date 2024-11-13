@@ -51,6 +51,17 @@ $lang = [
    'promotion_position'=>'جایگاه تبلیغی',
    'cultural_users_p'=>'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند ',
    'amount_if'=>'مبلغ (اگر بسته مالی ست وارد کنید)',
+   'register'=>'ثبت نام',
+   'verify_account'=>'تایید حساب',
+   'confirm_code'=>'کد تایید',
+   'send_confirm_code'=>'ارسال کد تایید',
+   'login_with_code'=>'ورود با کدتایید',
+   'login_with_pass'=>'ورود با رمزعبور',
+   'time_left'=>'زمان انقضا',
+   'seconds' =>'ثانیه',
+   'resend_code'=>'ارسال مجدد'
+   
+
 ];
 
 $menus = include(__DIR__.'/./menus.php');

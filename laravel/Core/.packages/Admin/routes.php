@@ -27,6 +27,8 @@ Route::resource("personnels", "Person\PersonnelController");
 
 Route::get('/user',"Auth\UserInfo@getInfo");
 Route::post('/login',"Auth\AuthenticatedController@store");
+Route::post('/verify',"Auth\RegisterController@verifyCheck");
+Route::post('/register',"Auth\RegisterController@register");
 Route::post('/logout',"Auth\AuthenticatedController@destroy");
 
 Route::get('/langs',function(){

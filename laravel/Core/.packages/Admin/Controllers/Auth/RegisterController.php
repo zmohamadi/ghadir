@@ -1,0 +1,118 @@
+<?php
+
+namespace Admin\Controllers\Auth;
+
+use Illuminate\Support\Facades\Validator;
+use Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Publics\Controllers\SMSIR\SMSIR_VerificationCode;
+
+class RegisterController extends Controller
+{
+    // اعتبارسنجی داده‌ها
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'firstname' => ['required', 'max:255'],
+            'lastname' => ['required', 'max:255'],
+            'mobile' => ['required', 'regex:/^(09)[0-9]{9}$/', 'unique:users,mobile,NULL,id,deleted_at,NULL'],
+            'password' => ['required', 'string', 'min:6'],
+        ]);
+    }
+
+    public function register(Request $request)
+    {
+        // اعتبارسنجی داده‌ها
+        $this->validator($request->all())->validate();
+
+        // بررسی وجود یا عدم وجود کاربر
+        $user = User::where('mobile', $request->mobile)->first();
+        
+        if ($user) {
+            return response()->json([
+                'message' => trans('Lang::public.user_exists_complete'), 
+                'response' => $user
+            ]);
+        }
+
+        // ثبت‌نام کاربر جدید
+        $user = $this->registerWithMobile($request->all());
+        $this->sendVerifyCode($user); // ارسال کد تایید
+        
+        return response()->json([
+            'message' => trans('Lang::public.user_not_exists'), 
+            'response' => $user
+        ]);
+    }
+
+    // ثبت‌نام کاربر جدید
+    protected function registerWithMobile(array $data)
+    {
+        return User::create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'mobile' => $data['mobile'],
+            'role_id' => 2,
+            'password' => bcrypt($data['mobile']), // استفاده از موبایل به عنوان پسورد
+        ]);
+    }
+
+    // اعتبارسنجی کد تایید
+    protected function verifyValidator(array $request)
+    {
+        return Validator::make($request, [
+            'verifyCode' => ['required', 'max:4', function($attribute, $value, $fail) use ($request) {
+                $user = User::where('mobile', $request['mobile'])->first();
+
+                // کاربر وجود ندارد
+                if (!$user) {
+                    $fail(trans('Lang::public.user_not_found'));
+                    return;
+                }
+
+                // بررسی انقضای کد
+                if (time() > $user->confirm_time) {
+                    $fail(trans('Lang::public.code_expired'));
+                    return;
+                }
+
+                // بررسی تطابق کد تایید
+                if ($user->confirm_code != $value) {
+                    $fail(trans('Lang::public.invalid_code'));
+                }
+            }]
+        ]);
+    }
+
+    public function verifyCheck(Request $request)
+    {
+        // اعتبارسنجی کد تایید
+        $this->verifyValidator($request->all())->validate();
+
+        // وارد شدن به سایت
+        return redirect()->route('panel');
+    }
+
+    // ارسال کد تایید
+    protected function sendVerifyCode($user)
+    {
+        $code = rand(1000, 9999); // تولید کد تایید
+        $sms = new SMSIR_VerificationCode();
+        
+        // ارسال کد تایید
+        $resultSMS = $sms->sendVerifyCode($user->mobile, $code);
+
+        // بروزرسانی اطلاعات کاربر
+        $user->update([
+            'confirm_code' => $code,
+            'confirm_time' => time() + 125, // زمان انقضای کد
+        ]);
+
+        // پاسخ بر اساس وضعیت ارسال کد
+        return response()->json([
+            'status' => $resultSMS ? 200 : 500, 
+            'data' => $resultSMS ? 'complete' : trans('Lang::public.error-500')
+        ]);
+    }
+}
