@@ -40,7 +40,7 @@ $lang = [
    'amount'=>'مبلغ',
    'support'=>'حمایت',
    'job_position'=>'مسئولیت',
-   'included'=>'شامل',
+   'included_users'=>'افراد مشمول',
    'change'=>'تغییر',
    'new_password_confirmation'=>'تایید رمزعبور',
    'note'=>'یادداشت',
@@ -50,6 +50,7 @@ $lang = [
    'place_name'=>'مکان',
    'promotion_position'=>'جایگاه تبلیغی',
    'cultural_users_p'=>'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند ',
+   'amount_if'=>'مبلغ (اگر بسته مالی ست وارد کنید)',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

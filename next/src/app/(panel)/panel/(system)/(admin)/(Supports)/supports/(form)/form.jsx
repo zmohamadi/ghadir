@@ -62,9 +62,9 @@ export default function Form({id}){
                             key={"type" + needles?.supporttype?.lenght} required="true"
                             data={needles?.supporttype} 
                         />
-                        <Input label="amount" refItem={[component, "amount"]}  />
+                        <Input label="amount_if" refItem={[component, "amount"]}  />
 
-                        <SelectTail multiple={true} label="included" refItem={[component, "promoters"]} 
+                        <SelectTail multiple={true} label="included_users" refItem={[component, "promoters"]} 
                             key={"type" + needles?.promoter?.lenght}
                         >
                             {
