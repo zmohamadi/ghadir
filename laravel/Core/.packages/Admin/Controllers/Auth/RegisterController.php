@@ -7,6 +7,7 @@ use Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Publics\Controllers\SMSIR\SMSIR_VerificationCode;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -31,20 +32,23 @@ class RegisterController extends Controller
         
         if ($user) {
             return response()->json([
-                'message' => trans('Lang::public.user_exists_complete'), 
-                'response' => $user
+                'message' => trans('AdminLang::public.user_exists_complete'), 
+                'response' => $user,
+                'mobile' => $user->mobile // شماره موبایل را بازگردانید
             ]);
         }
 
         // ثبت‌نام کاربر جدید
         $user = $this->registerWithMobile($request->all());
-        $this->sendVerifyCode($user); // ارسال کد تایید
+        $this->sendVerifyCode($user); // ارسال کد تایید بدون نیاز به return
         
         return response()->json([
-            'message' => trans('Lang::public.user_not_exists'), 
-            'response' => $user
+            'message' => trans('AdminLang::public.user_not_exists'), 
+            'response' => $user,
+            'mobile' => $user->mobile // شماره موبایل را بازگردانید
         ]);
     }
+
 
     // ثبت‌نام کاربر جدید
     protected function registerWithMobile(array $data)
@@ -67,19 +71,19 @@ class RegisterController extends Controller
 
                 // کاربر وجود ندارد
                 if (!$user) {
-                    $fail(trans('Lang::public.user_not_found'));
+                    $fail(trans('AdminLang::public.user_not_found'));
                     return;
                 }
 
                 // بررسی انقضای کد
                 if (time() > $user->confirm_time) {
-                    $fail(trans('Lang::public.code_expired'));
+                    $fail(trans('AdminLang::public.code_expired'));
                     return;
                 }
 
                 // بررسی تطابق کد تایید
                 if ($user->confirm_code != $value) {
-                    $fail(trans('Lang::public.invalid_code'));
+                    $fail(trans('AdminLang::public.invalid_code'));
                 }
             }]
         ]);
@@ -90,9 +94,12 @@ class RegisterController extends Controller
         // اعتبارسنجی کد تایید
         $this->verifyValidator($request->all())->validate();
 
-        // وارد شدن به سایت
-        return redirect()->route('panel');
+        return response()->json([
+            'redirect' => true,
+            'url' => 'login'
+        ]);
     }
+
 
     // ارسال کد تایید
     protected function sendVerifyCode($user)
@@ -109,10 +116,31 @@ class RegisterController extends Controller
             'confirm_time' => time() + 125, // زمان انقضای کد
         ]);
 
+        // نیازی به بازگرداندن پاسخ نیست
+        return $resultSMS; // برای اطلاع از وضعیت ارسال کد تایید
+    }
+
+    // ارسال مجدد کد تایید
+    public function resendVerifyCode($mobile)
+    {
+        $user = User::where('mobile', $mobile)->first();
+
+        $code = rand(1000, 9999); // تولید کد تایید
+        $sms = new SMSIR_VerificationCode();
+        
+        // ارسال کد تایید
+        $resultSMS = $sms->sendVerifyCode($mobile, $code);
+
+         // بروزرسانی اطلاعات کاربر
+        $user->update([
+            'confirm_code' => $code,
+            'confirm_time' => time() + 125, // زمان انقضای کد
+        ]);
+
         // پاسخ بر اساس وضعیت ارسال کد
         return response()->json([
             'status' => $resultSMS ? 200 : 500, 
-            'data' => $resultSMS ? 'complete' : trans('Lang::public.error-500')
+            'data' => $resultSMS
         ]);
     }
 }

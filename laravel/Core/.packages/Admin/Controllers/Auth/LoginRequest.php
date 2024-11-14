@@ -32,7 +32,15 @@ class LoginRequest extends FormRequest
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
-        // dd($this->only('email', 'password'));
+
+        // بررسی وضعیت تایید شماره موبایل
+        $user = Auth::guard('admin')->getProvider()->retrieveByCredentials($this->only('mobile'));
+
+        if ($user && $user->confirm_id === 0) {
+            throw ValidationException::withMessages([
+                'mobile' => __('auth.mobile_not_verified'),
+            ]);
+        }
 
         if (! Auth::guard('admin')->attempt($this->only('mobile', 'password'), $this->filled('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -44,6 +52,7 @@ class LoginRequest extends FormRequest
 
         RateLimiter::clear($this->throttleKey());
     }
+
     
     public function ensureIsNotRateLimited()
     {

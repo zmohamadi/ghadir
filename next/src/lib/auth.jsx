@@ -8,21 +8,20 @@ import { useConfig } from "@/lib/config";
 import { Notif } from '@/Theme/Midone/Utils/Notif';
 import { useLang } from '.';
 
+
 export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
     const router = useRouter();
     const { laraAdmin, nextAdmin } = useConfig();
     const csrf = () => axios.get('/sanctum/csrf-cookie');
     const { Lang } = useLang();
-    
-    const [mobile, setMobile] = useState(""); // Use state for mobile number
 
     const userUrl = `${laraAdmin}/user`;
     const loginUrl = `${laraAdmin}/login`;
     const logoutUrl = `${laraAdmin}/logout`;
     const verifyUrl = `${laraAdmin}/verify`;
     const registerUrl = `${laraAdmin}/register`;
-    const resendCodeUrl = `${laraAdmin}/resend-code`;
-    const loginWithCodeUrl = `${laraAdmin}/loginWithCode`;
+    const loginWithCodeUrl = `${laraAdmin}/login-with-code`;
+    const loginCheckUrl = `${laraAdmin}/login-check`;
 
     const { data: user, error, mutate } = useSWR(userUrl, () =>
         axios
@@ -39,11 +38,11 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
         setErrors([]);
         try {
             const response = await axios.post(registerUrl, props);
-            mutate();
-            Notif('success', Lang('public.wait_for_confirm'));
-            if (response?.status === 200) {
-                setMobile("1111111111111");  // Here set the mobile state
-                window.location.href = `${nextAdmin}/verify`;
+
+             // هدایت کاربر به صفحه verify با مقدار mobile
+            if (response?.status === 200 && response?.data?.mobile) {
+                // تبدیل مسیر به یک رشته کامل با پارامتر کوئری
+                router.push(`${nextAdmin}/verify?mobile=${response.data.mobile}`);
             }
         } catch (error) {
             if (error?.response?.status !== 422) throw error;
@@ -51,27 +50,30 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
         }
     };
 
+    
+
     const verify = async ({ setErrors, ...props }) => {
-        await csrf();
-
         setErrors([]);
-        const data = { ...props, mobile }; // Use the mobile state here
-
         try {
-            await axios.post(verifyUrl, data);
+            const response = await axios.post(verifyUrl, props);
             mutate();
             Notif('success', Lang('public.code_send'));
+            
+            if (response.data?.redirect) {
+                console.log(34);
+                window.location.href = `${nextAdmin}/${response.data?.url}`; // تغییر مسیر به صفحه لاگین
+            }
         } catch (error) {
             if (error?.response?.status !== 422) throw error;
             setErrors(error?.response?.data.errors);
         }
     };
+    
 
-    const login = async ({ setErrors, setStatus, ...props }) => {
+    const login = async ({ setErrors, ...props }) => {
         await csrf();
 
         setErrors([]);
-        setStatus(null);
 
         try {
             await axios.post(loginUrl, props);
@@ -82,11 +84,10 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
         }
     };
 
-    const loginWithCode = async ({ setErrors, setStatus, ...props }) => {
+    const loginWithCode = async ({ setErrors, ...props }) => {
         await csrf();
 
         setErrors([]);
-        setStatus(null);
 
         try {
             await axios.post(loginWithCodeUrl, props);
@@ -96,15 +97,13 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
             setErrors(error.response?.data.errors);
         }
     };
-
-    const resendCode = async ({ setErrors, setStatus, ...props }) => {
+    const loginCheck = async ({ setErrors, ...props }) => {
         await csrf();
 
         setErrors([]);
-        setStatus(null);
 
         try {
-            await axios.post(resendCodeUrl, props);
+            await axios.post(loginCheckUrl, props);
             mutate();
         } catch (error) {
             if (error.response?.status !== 422) throw error;
@@ -139,6 +138,6 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
         register,
         verify,
         loginWithCode,
-        resendCode
+        loginCheck
     };
 }

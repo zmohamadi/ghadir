@@ -27,8 +27,12 @@ Route::resource("personnels", "Person\PersonnelController");
 
 Route::get('/user',"Auth\UserInfo@getInfo");
 Route::post('/login',"Auth\AuthenticatedController@store");
+Route::post('/login-with-code',"Auth\AuthenticatedController@loginWithCode");
+Route::post('/login-check',"Auth\AuthenticatedController@verifyCheck");
 Route::post('/verify',"Auth\RegisterController@verifyCheck");
 Route::post('/register',"Auth\RegisterController@register");
+Route::get('/resend-code/{mobile}',"Auth\RegisterController@resendVerifyCode");
+// Route::get('/resend-code/{mobile}', [Auth\RegisterController::class, 'resendVerifyCode'])->name('resend.verify.code');
 Route::post('/logout',"Auth\AuthenticatedController@destroy");
 
 Route::get('/langs',function(){
