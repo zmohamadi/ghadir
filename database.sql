@@ -670,6 +670,9 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mobile` varchar(255) DEFAULT NULL,
+  `confirm_code` varchar(100) DEFAULT NULL,
+  `confirm_time` varchar(100) DEFAULT NULL,
+  `confirm_id` int(1) DEFAULT 0,
   `password` varchar(255) DEFAULT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
@@ -693,21 +696,18 @@ CREATE TABLE `users` (
   `level_id` int(11) DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
   `editor_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`mobile`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'09191964745','$2y$12$k4SUlp3fzAKAaeuWlbiQsuhYH3YT0GpsKUaJ8LbnbcHEnOkIS/OnG','مهدی','وثوقی',1,1,0,'09191964745','','','','','',0,'','','','','image52981731088384.png',1,NULL,0,'0000-00-00 00:00:00',NULL,1,NULL,NULL,'2024-11-08 18:55:19'),
-(2,NULL,NULL,NULL,NULL,2,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,'2024-11-05 19:34:43','2024-11-05 18:14:35','2024-11-05 19:34:43'),
-(3,NULL,NULL,'sdfdfg','dfgdfg',2,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',1,1,1,NULL,1,1,'2024-11-05 19:34:38','2024-11-05 18:15:47','2024-11-05 19:34:38'),
-(4,'09191519138',NULL,'رویا','روشن',2,2,1,NULL,'435354','345345','345345','453535','1234',2,'my city','روستا','قفثقفثقفERtertert','ثقفثقف','image41221730829326.png',1,1,1,NULL,1,1,NULL,'2024-11-05 18:55:35','2024-11-08 14:56:49'),
-(5,'09192510347',NULL,'dgdfg','dfgdg',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image45271730833021.jpg',1,NULL,NULL,NULL,1,NULL,'2024-11-05 19:57:24','2024-11-05 19:57:11','2024-11-05 19:57:24');
+insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','zahra','mhd',2,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,'OzwK3WrHQ2x9ADv1qt5wP1NOlWKRAzVMINIPgyGs7PwfLyN53kWQDRNalj9q',NULL,NULL,'2024-11-14 04:22:30','2024-11-14 05:46:01');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
