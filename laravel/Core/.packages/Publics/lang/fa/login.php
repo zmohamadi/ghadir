@@ -14,5 +14,18 @@ return [
     'acceptance_conditions' => 'با ورود، شما با تمامی شرایط و ضوابط زیر موافقت می‌کنید.',
     'firstname'=>'نام',
     'lastname'=>'نام خانوادگی',
+    'register'=>'ثبت نام',
+    'verify_account'=>'تایید حساب',
+    'confirm_code'=>'کد تایید',
+    'code'=>'کد تایید',
+    'send_confirm_code'=>'ارسال کد تایید',
+    'login_with_code'=>'ورود با کدتایید',
+    'login_with_pass'=>'ورود با رمزعبور',
+    'time_left'=>'زمان انقضا',
+    'seconds' =>'ثانیه',
+    'resend_code'=>'ارسال مجدد',
+    'code_expired'=>'کد منقضی شد !',
+    'mobile_required'=>'شماره موبایل الزامی ست !',
+    'user_not_found'=>'حساب شما وجود ندارد. لطفا ابتدا ثبت نام نمایید'
 ];
 ?>
