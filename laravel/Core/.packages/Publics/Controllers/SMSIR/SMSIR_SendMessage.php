@@ -2,7 +2,7 @@
 
 namespace Publics\Controllers\SMSIR;
 
-use Cryptommer\Smsir\Smsir;
+use Ipe\Sdk\Facades\SmsIr;
 
 class SMSIR_SendMessage
 {
