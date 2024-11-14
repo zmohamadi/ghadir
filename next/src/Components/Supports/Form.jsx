@@ -9,7 +9,7 @@ import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
-export default function Form({id}){
+export function Form({id,panel="admin"}){
     const link = "/supports";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();

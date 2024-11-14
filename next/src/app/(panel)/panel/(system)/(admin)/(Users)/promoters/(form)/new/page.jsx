@@ -1,7 +1,7 @@
 "use client";
-import Form from '@/app/(panel)/panel/(system)/(admin)/(Users)/promoters/(form)/form';
+import { Form } from "@/Components/Promoters/Form";
 
-export default function New(){
+export default function page(){
     return(
         <div>
             <Form />

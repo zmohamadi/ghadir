@@ -1,12 +1,10 @@
 "use client";
-import Form from '@/app/(panel)/panel/(system)/(admin)/(Users)/promoters/(form)/form';
+import { Form } from "@/Components/Promoters/Form";
 
-export default function Edit({params,id}){
-    let userId = params? params?.id : id;
-
+export default function Edit({params}){
     return(
         <div>
-            <Form id={userId} />
+            <Form id={params?.id} />
         </div>
     );
 }

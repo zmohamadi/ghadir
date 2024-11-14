@@ -1,9 +1,9 @@
 "use client";
 
-import { List } from "@/Components/Promotions/List";
+import { List } from "@/Components/Supports/List";
 
 export default function Page() {
-    const panel = "admin";
+    const panel = "promoter";
 
     return <List panel={panel} />;
 }

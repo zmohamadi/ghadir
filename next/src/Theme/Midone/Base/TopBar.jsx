@@ -43,7 +43,7 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                 {/* END: Logo */}
                 {/* BEGIN: Breadcrumb */}
                 <div className={'-intro-x breadcrumb '+(dir == "ltr"? "mr-auto": "ml-auto")}> 
-                    <a href=''> {Lang('public.usage_system')} {user?.role_id==2 ? Lang('public.student'):""} </a>
+                    <a href=''> {Lang('public.usage_system')} </a>
                     {dir == "ltr" ? <Icon.ChevronRight size='16' /> : <Icon.ChevronLeft size='16' />}
                     <a href='' className='breadcrumb--active'>{Lang('public.dashboard')}</a> 
                 </div>
@@ -61,7 +61,7 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                         <div className='dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white'>
                             <div className='p-4 border-b border-theme-12 dark:border-dark-3'>
                                 <div className='font-medium'>{user?.firstname} {user?.lastname}</div>
-                                <div className='text-xs text-theme-13 mt-0.5 dark:text-gray-600 text-left'>{user?.email}</div>
+                                <div className='text-xs text-theme-13 mt-0.5 dark:text-gray-600 text-left'>{user?.mobile}</div>
                             </div>
                             <div className='p-2'>
                                 <Link href={"/"} 
