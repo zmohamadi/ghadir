@@ -5,18 +5,22 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
+import { useAuth } from "@/lib/auth";
 
 export function List(panel="admin"){
+    const access = panel=="admin" ? true : false;
+    const {user} = useAuth();
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
 
     const formUrl = nextAdmin+"/supports";
+    const url = access ?  laraAdmin+"/supports" : laraAdmin+"/supports?promoter="+user?.id;
 
     let info = {
-        insertLink: formUrl + "/new",
+        insertLink: access ? `${formUrl}/new` : "",
         perPage:20,
-        url: laraAdmin+"/supports",
+        url: url,
         columns: [
            
             {label: "type", field: "type.title" },
@@ -26,10 +30,9 @@ export function List(panel="admin"){
             {label: "", sort:false, 
                 jsx:(item)=><>
                     <div className='flex justify-center '>
-                        <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
+                        <FeatherIcon access={access} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
                         {/* <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} /> */}
-                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/supports"+"/"+item?.id)} />
+                        <FeatherIcon access={access} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/supports"+"/"+item?.id)} />
                     </div>
                 </>
             }, 

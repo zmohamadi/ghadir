@@ -1,10 +1,10 @@
 "use client";
-import { Form } from "@/Components/Promotions/Form";
+import Form from '@/app/(panel)/panel/(system)/(promoters)/registerPromotion/(form)/form';
 
-export default function page(){
-    const panel = "promoter";
-
+export default function New(){
     return(
-        <Form panel={panel} />
+        <div>
+            <Form />
+        </div>
     );
 }

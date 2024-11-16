@@ -5,20 +5,23 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
+import { useAuth } from "@/lib";
 
 export function List({panel="admin"}){
-    console.log(panel);
-
+    // console.log(panel);
+    const access = panel=="admin" ? true : false;
+    const {user} = useAuth();
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
 
     const formUrl = nextAdmin+"/promotions";
+    const url = access ?  laraAdmin+"/promotions" : laraAdmin+"/promotions?register_status=1";
 
     let info = {
-        insertLink: formUrl + "/new",
+        insertLink: access ? `${formUrl}/new` : "",
         perPage:20,
-        url: laraAdmin+"/promotions",
+        url: url,
         columns: [
             {
                 label: "",

@@ -21,7 +21,7 @@ export const getMenus = (user) => {
        
         { title: "dashboard", icon: "Pocket", href: "/dashboard" },
         { title: "promotions", icon: "Book", href: "/promotions" },
-        { title: "register_promotions", icon: "Package", href: "/registerPromotion" },
+        { title: "register_promotions", icon: "Package", href: "/registerPromotion/new" },
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
         // { title: "myReports", icon: "Book", href: "/myReports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },

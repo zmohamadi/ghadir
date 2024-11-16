@@ -29,7 +29,9 @@ $lang = [
    'report'=>'گزارش',
    'promotion'=>'تبلیغ',
    'tribune'=>'منبر',
+   'tribunes'=>'منبرها',
    'course'=>'دوره',
+   'courses'=>'دوره ها',
    'has_course'=>'دوره دارد ؟ ',
    'has_tribune'=>'منبر دارد ؟',
    'has'=>'دارد',
@@ -51,7 +53,11 @@ $lang = [
    'promotion_position'=>'جایگاه تبلیغی',
    'cultural_users_p'=>'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند ',
    'amount_if'=>'مبلغ (اگر بسته مالی ست وارد کنید)',
-   ''
+   'registerPromotion'=>'ثبت نام تبلیغ',
+   'select_promotion'=>'انتخاب تبلیغ',
+   'duration'=>'مدت زمان',
+   'people_count'=>'تعداد مخاطب',
+   'people_type'=>'نوع مخاطب',
    
    
 

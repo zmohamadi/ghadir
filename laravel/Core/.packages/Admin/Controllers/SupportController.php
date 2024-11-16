@@ -17,6 +17,16 @@ class SupportController extends BaseAbstract
 
     public function init()
     {
+        $this->indexQuery = function ($query) {
+            if(request()->promoter)
+            {
+                $promoter = request()->promoter;
+
+                $query->whereHas('promoters', function ($q) use ($promoter) {
+                   $q->where('promoter_id', $promoter);
+                });
+            };
+        };
         $this->storeQuery = function ($query) {
             $query = $this->setOperator($query);
             
