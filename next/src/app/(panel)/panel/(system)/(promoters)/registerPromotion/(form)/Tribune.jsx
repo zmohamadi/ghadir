@@ -13,10 +13,13 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
             <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
-                <Input label="subject" refItem={[parent, `tr_subject_${index}`]} defaultValue={info?.tr_subject}  />
-                <Input label="duration" refItem={[parent, `tr_duration_${index}`]} defaultValue={info?.tr_duration}  />
-                <Input label="people_type" refItem={[parent, `tr_people_type_${index}`]} defaultValue={info?.tr_people_type}  />
+                <Input className="col-span-12" label="subject" refItem={[parent, `tr_subject_${index}`]} defaultValue={info?.tr_subject}  />
+                <SelectTail label="audiencetype" refItem={[parent,`tr_audiencetype_id_${index}`]} 
+                    key={"audiencetype"+needles?.audiencetype?.length}
+                    data={needles?.audiencetype}
+                />
                 <Input label="people_count" refItem={[parent, `tr_people_count_${index}`]} defaultValue={info?.tr_people_count}  />
+                <Input label="duration" refItem={[parent, `tr_duration_${index}`]} defaultValue={info?.tr_duration}  />
                 <Input label="place_name" refItem={[parent, `tr_place_name_${index}`]} defaultValue={info?.tr_place_name}  />
                 <SelectTail label="province" refItem={[parent,`tr_province_${index}`]} 
                     key={"province"+needles?.province?.length}

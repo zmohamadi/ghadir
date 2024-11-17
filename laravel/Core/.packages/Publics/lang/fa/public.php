@@ -57,7 +57,7 @@ $lang = [
    'select_promotion'=>'انتخاب تبلیغ',
    'duration'=>'مدت زمان',
    'people_count'=>'تعداد مخاطب',
-   'people_type'=>'نوع مخاطب',
+   'audiencetype'=>'نوع مخاطب',
    
    
 

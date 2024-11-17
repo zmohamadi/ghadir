@@ -14,9 +14,9 @@ import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 
 export default function Form({id,panel="admin"}){
-    const link = "/register-promoters";
+    const link = "/register-promotions";
     const {Lang, local} = useLang();
-    const {laraAdmin} = useConfig();
+    const {laraAdmin,nextAdmin} = useConfig();
     const router = useRouter();
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
@@ -27,13 +27,14 @@ export default function Form({id,panel="admin"}){
     let deleteUrl = laraAdmin+"/deleteFile/.-media-register_promotions";
     let uploadDir = 'media/register_promotions/';
         
-    let url = laraAdmin + link;
-    let method = "new";
-    let nextUrl = link;
+    let url = laraAdmin+link, method = "new";
+    if(id != 0 && id != undefined) url = laraAdmin+link+"/"+id, method = "edit";
+    let nextUrl = "/myPromotions";
+
 
     useEffect(() => {
-        getNeedles(laraAdmin+'/register-promoters/get-needles', setNeedles);
-        get(url, component, "info");
+        getNeedles(laraAdmin+'/register-promotions/get-needles', setNeedles);
+        if(id != 0 && id != undefined) get(url, component, "info");
     }, [url]);
 
     const saveItem = ()=>save(url, component, method, nextUrl);
@@ -43,7 +44,7 @@ export default function Form({id,panel="admin"}){
     const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
     const otherProps2 = (component?.state?.info?.notes?.length)? { count_data: component.state.info.notes.length } : {};
     const otherProps3 = (component?.state?.info?.promotion_infos?.length)? { count_data: component.state.info.promotion_infos.length } : {};
-
+// console.log(needles?.promotion);
 
     return(
         
@@ -59,8 +60,12 @@ export default function Form({id,panel="admin"}){
                         <TabBody>
                             <TabPanel id="tab-first" active={"true"}>
                                 
-                                <SelectTail label="promotions" data={needles?.promotion}  refItem={[component, "promotion_id"]} required="true" />
-                                
+                            <SelectTail label="promotion" refItem={[component, "promotion_id"]} 
+                                // key={"promotion" + needles?.promotion?.lenght} 
+                                required="true"
+                                data={needles?.promotion} 
+                            />
+
                                 <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
                             </TabPanel>  
                             <TabPanel id="tab-second">

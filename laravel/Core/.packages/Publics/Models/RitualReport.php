@@ -19,4 +19,9 @@ class RitualReport extends Model
     protected $casts = [
         'deleted_at' => 'timestamp',
     ];
+
+    public function ritual()
+    {
+        return $this->blonsTo(Ritual::class);
+    }
 }

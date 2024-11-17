@@ -36,12 +36,4 @@ class PromotionController extends BaseAbstract
             $query = $this->setOperator($query);
         };
     }
-    public function registerGetNeedles() {
-        $data['promotion'] = $this->model::where('register_status',1)->active()->get();
-        $data['province'] = \Models\Base\Province::active()->get();
-        $data['city'] = \Models\Base\City::active()->get();
-        $data['ritual'] = \Models\Ritual::active()->get();
-
-        return response()->json($data);
-    }
 }

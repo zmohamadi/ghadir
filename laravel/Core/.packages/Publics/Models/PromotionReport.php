@@ -40,7 +40,7 @@ class PromotionReport extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function Promotion()
+    public function promotion()
     {
         return $this->belongsTo(Promotion::class);
     }

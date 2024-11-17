@@ -9,7 +9,6 @@ use Models\Traits\Base;
 class AudienceType extends Model
 {
     use HasFactory,Base;
-    use Base;
     
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
     /**

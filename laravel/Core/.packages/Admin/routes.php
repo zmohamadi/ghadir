@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get("supports/get-needles", "SupportController@getNeedles");
 Route::resource("supports", "SupportController");
 
-Route::put("register-promoters/{id}", "PromotionController@edit");
-Route::post("register-promoters", "PromotionController@register");
-Route::get("register-promoters/get-needles", "PromotionController@registerGetNeedles");
+Route::get("register-promotions/get-needles", "PromotionReportController@getNeedles");
+Route::resource("register-promotions", "PromotionReportController");
+
 Route::get("promotions/get-needles", "PromotionController@getNeedles");
 Route::resource("promotions", "PromotionController");
 
