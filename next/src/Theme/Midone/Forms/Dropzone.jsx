@@ -141,7 +141,7 @@ const Dropzone = function(props) {
                 }
                 var mockFile = {name: name, size: size};
                 if(mockFiles.indexOf(mockFile.name) == -1){
-                    console.log("files:", files, myDropzone);
+                    //console.log("files:", files, myDropzone);
                     mockFiles.push(mockFile.name);
                     myDropzone?.options.addedfile.call(myDropzone, mockFile);
                     myDropzone?.options.thumbnail.call(myDropzone, mockFile, path);
@@ -212,7 +212,7 @@ const Dropzone = function(props) {
 
     useEffect(function(){
         let {vals} = processDefaultValue();
-        console.log("vals:", vals, myDropzone);
+        //console.log("vals:", vals, myDropzone);
         setState({value:vals, key: Math.random()});
         changeDropzone(vals, myDropzone);
     }, [defaultValue]);

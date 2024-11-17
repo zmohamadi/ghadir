@@ -68,7 +68,7 @@ export default function Main() {
             setTimer(120);
             setIsTimerActive(true);
         } catch (err) {
-            console.error("Failed to resend code:", err);
+            //console.error("Failed to resend code:", err);
         } finally {
             setIsSubmitting(false);
         }

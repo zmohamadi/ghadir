@@ -60,7 +60,7 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
             Notif('success', Lang('public.code_send'));
             
             if (response.data?.redirect) {
-                console.log(34);
+                //console.log(34);
                 window.location.href = `${nextAdmin}/${response.data?.url}`; // تغییر مسیر به صفحه لاگین
             }
         } catch (error) {

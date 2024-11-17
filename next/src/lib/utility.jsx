@@ -95,7 +95,7 @@ export const utility = {
         return (data)? data?.firstname+" "+data?.lastname : display;
     },
     getField: (item, display="---") => {
-        console.log(item);
+        //console.log(item);
         return (item != null && item != undefined && item != "")? item : display;
     },
     

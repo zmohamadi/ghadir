@@ -24,7 +24,7 @@ export default function Main() {
         try {
             await verify({ verifyCode,mobile, setErrors });
         } catch (err) {
-            console.error("Verification failed:", err);
+            //console.error("Verification failed:", err);
         } finally {
             setIsSubmitting(false);
         }
@@ -43,7 +43,7 @@ export default function Main() {
             setTimeLeft(120);
             setIsSubmitting(false);
         } catch (err) {
-            console.error("Failed to resend code:", err);
+            //console.error("Failed to resend code:", err);
             setIsSubmitting(false);
         }
     };

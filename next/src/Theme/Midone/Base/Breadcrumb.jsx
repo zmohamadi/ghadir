@@ -45,7 +45,7 @@ export const Breadcrumb = () => {
                 setBreadcrumbItems(breadcrumbItems);
             })
             .catch((error) => {
-                console.log(error)
+                //console.log(error)
             });
             
         }
