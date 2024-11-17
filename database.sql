@@ -284,13 +284,13 @@ CREATE TABLE `cultural_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `cultural_users` */
 
 insert  into `cultural_users`(`id`,`promoter_id`,`name`,`family`,`job_position`,`gender_id`,`phone`,`comments`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(3,2,'فاطمه','محمدی','همکار',2,'34534535345','همکاری در فعالیتهای فرهنگی غدیر در سال 1403',NULL,NULL,NULL,NULL),
-(4,2,'محدثه','عبادی','معلم',2,'32423423-342','تدریس بسیار عالی',NULL,NULL,NULL,NULL);
+(13,2,'فاطمه','محمدی','همکار',2,'34534535345','همکاری در فعالیتهای فرهنگی غدیر در سال 1403',NULL,NULL,NULL,NULL),
+(14,2,'محدثه','عبادی','معلم',2,'32423423-342','تدریس بسیار عالی',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `education` */
 
@@ -375,6 +375,19 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (22,'2024_11_03_220845_create_educational_bases_table',1),
 (23,'2024_11_03_220846_create_audience_types_table',1);
 
+/*Table structure for table `promotion_agree` */
+
+DROP TABLE IF EXISTS `promotion_agree`;
+
+CREATE TABLE `promotion_agree` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `promoter_id` int(11) DEFAULT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `promotion_agree` */
+
 /*Table structure for table `promotion_positions` */
 
 DROP TABLE IF EXISTS `promotion_positions`;
@@ -432,6 +445,9 @@ CREATE TABLE `promotions` (
   `has_course` tinyint(1) DEFAULT 0,
   `has_tribune` tinyint(1) DEFAULT 0,
   `status_id` int(1) DEFAULT 1,
+  `user_count` int(11) DEFAULT 0 COMMENT 'تعداد کل مشارکتهای مبلغین',
+  `report_count` int(11) DEFAULT 0 COMMENT 'تعداد گزارش های ثبت شده',
+  `sum_support` int(11) DEFAULT 0 COMMENT 'تعداد کل حمایتها',
   `creator_id` int(11) DEFAULT NULL,
   `editor_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -442,10 +458,10 @@ CREATE TABLE `promotions` (
 
 /*Data for the table `promotions` */
 
-insert  into `promotions`(`id`,`title`,`year`,`photo`,`comments`,`commitments`,`register_status`,`report_status`,`has_course`,`has_tribune`,`status_id`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',1,1,1,1,1,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-17 13:10:38'),
-(2,'نیمه شعبان',1404,'image41621731845468.jpg','نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',NULL,1,1,0,1,1,1,NULL,NULL,'2024-11-17 13:11:18','2024-11-17 13:11:18'),
-(3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,1,1,0,1,1,NULL,NULL,'2024-11-17 13:13:02','2024-11-17 13:13:02');
+insert  into `promotions`(`id`,`title`,`year`,`photo`,`comments`,`commitments`,`register_status`,`report_status`,`has_course`,`has_tribune`,`status_id`,`user_count`,`report_count`,`sum_support`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',1,1,1,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-17 13:10:38'),
+(2,'نیمه شعبان',1404,'image41621731845468.jpg','نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',NULL,1,1,0,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:11:18','2024-11-17 13:11:18'),
+(3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,1,1,0,1,0,0,0,1,NULL,NULL,'2024-11-17 13:13:02','2024-11-17 13:13:02');
 
 /*Table structure for table `ritual_reports` */
 
@@ -636,14 +652,14 @@ CREATE TABLE `user_notes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_notes` */
 
 insert  into `user_notes`(`id`,`promoter_id`,`creator_id`,`content`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(3,3,1,'مبلغ دارای 4 ستاره میباشد',NULL,NULL,NULL,NULL),
-(4,2,1,'خانم عبادی در زمینه فعالیت های فرهنگی و بسیج فعالیت دارند',NULL,NULL,NULL,NULL),
-(5,2,1,'این مبلغ 5 ستاره دارد',NULL,NULL,NULL,NULL);
+(14,3,1,'مبلغ دارای 4 ستاره میباشد',NULL,NULL,NULL,NULL),
+(15,2,1,'خانم عبادی در زمینه فعالیت های فرهنگی و بسیج فعالیت دارند',NULL,NULL,NULL,NULL),
+(16,2,1,'این مبلغ 5 ستاره دارد',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `user_promotions` */
 
@@ -654,7 +670,8 @@ CREATE TABLE `user_promotions` (
   `promoter_id` int(11) DEFAULT NULL,
   `position_id` int(11) DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
-  `city` varchar(255) NOT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
   `village` varchar(255) DEFAULT NULL,
   `place_name` varchar(255) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
@@ -662,13 +679,14 @@ CREATE TABLE `user_promotions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_promotions` */
 
-insert  into `user_promotions`(`id`,`promoter_id`,`position_id`,`city_id`,`city`,`village`,`place_name`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(2,3,2,3,'شهری ری',NULL,'مسجد محله',NULL,NULL,NULL,NULL),
-(3,2,3,2,'تهران',NULL,'قم',NULL,NULL,NULL,NULL);
+insert  into `user_promotions`(`id`,`promoter_id`,`position_id`,`city_id`,`province_id`,`city`,`village`,`place_name`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(8,3,2,3,2,'شهری ری',NULL,'مسجد محله',NULL,NULL,NULL,NULL),
+(9,2,3,1,NULL,'قم',NULL,'قم',NULL,NULL,NULL,NULL),
+(10,2,4,2,2,'تهران','دهدشت','مدرسه الزهرا',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `user_roles` */
 
@@ -736,8 +754,8 @@ CREATE TABLE `users` (
 
 insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
 (1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',1,NULL,NULL,NULL,NULL,'OzwK3WrHQ2x9ADv1qt5wP1NOlWKRAzVMINIPgyGs7PwfLyN53kWQDRNalj9q',1,NULL,'2024-11-14 04:22:30','2024-11-17 12:59:04'),
-(2,'09198526839',NULL,NULL,0,NULL,'مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',NULL,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,1,NULL,1,NULL,'2024-11-17 13:02:31','2024-11-17 13:05:07'),
-(3,'09191519138',NULL,NULL,0,NULL,'الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',1,2,4,NULL,1,NULL,NULL,NULL,'2024-11-17 13:04:53','2024-11-17 13:04:53');
+(2,'09198526839',NULL,NULL,0,NULL,'مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',1,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,1,NULL,1,NULL,'2024-11-17 13:02:31','2024-11-17 13:05:07'),
+(3,'09191519138',NULL,NULL,0,NULL,'الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',1,2,4,NULL,1,NULL,1,NULL,'2024-11-17 13:04:53','2024-11-17 19:44:06');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
