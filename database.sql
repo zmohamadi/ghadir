@@ -1,20 +1,3 @@
-/*
-SQLyog Professional v13.1.1 (64 bit)
-MySQL - 10.4.32-MariaDB : Database - ghadir
-*********************************************************************
-*/
-
-/*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`ghadir` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci */;
-
-USE `ghadir`;
 
 /*Table structure for table `audience_types` */
 
@@ -22,16 +5,22 @@ DROP TABLE IF EXISTS `audience_types`;
 
 CREATE TABLE `audience_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `audience_types` */
+
+insert  into `audience_types`(`id`,`title`,`description`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'نوجوانان','',1,NULL,NULL,NULL),
+(2,'جوانان','',1,NULL,NULL,NULL),
+(3,'خانم ها','',1,NULL,NULL,NULL),
+(4,'آقایان','',1,NULL,NULL,NULL);
 
 /*Table structure for table `base_cities` */
 
@@ -241,18 +230,27 @@ DROP TABLE IF EXISTS `courses`;
 
 CREATE TABLE `courses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `promotion_report_id` int(11) DEFAULT NULL,
+  `duration` varchar(100) DEFAULT NULL,
+  `audiencetype_id` int(11) DEFAULT NULL,
+  `people_count` int(11) DEFAULT NULL,
+  `place_name` varchar(255) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `courses` */
+
+insert  into `courses`(`id`,`subject`,`promotion_report_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,NULL,5,NULL,NULL,NULL,NULL,NULL,1,'1',NULL,1,NULL,NULL,NULL);
 
 /*Table structure for table `cultural_users` */
 
@@ -391,16 +389,22 @@ DROP TABLE IF EXISTS `promotion_reports`;
 
 CREATE TABLE `promotion_reports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `promotion_id` int(11) NOT NULL,
-  `report` text NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
+  `promoter_id` int(11) DEFAULT NULL,
+  `photo` varchar(100) DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotion_reports` */
+
+insert  into `promotion_reports`(`id`,`promotion_id`,`promoter_id`,`photo`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(3,4,1,NULL,1,NULL,'2024-11-17 03:59:31','2024-11-17 03:59:31'),
+(4,4,1,'',1,NULL,'2024-11-17 04:00:30','2024-11-17 04:00:30'),
+(5,4,1,'',1,NULL,'2024-11-17 04:07:08','2024-11-17 04:07:08');
 
 /*Table structure for table `promotions` */
 
@@ -440,17 +444,27 @@ DROP TABLE IF EXISTS `ritual_reports`;
 
 CREATE TABLE `ritual_reports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `ritual_id` int(11) NOT NULL,
-  `promotion_report_id` int(11) NOT NULL,
-  `report` text NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `ritual_id` int(11) DEFAULT NULL,
+  `promotion_report_id` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `place_name` varchar(255) DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ritual_reports` */
+
+insert  into `ritual_reports`(`id`,`ritual_id`,`promotion_report_id`,`description`,`city_id`,`place_name`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,1,3,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
+(2,1,4,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
+(3,3,5,NULL,3,'etredf',2,'teeeeeee','etttttt',1,NULL,NULL,NULL);
 
 /*Table structure for table `rituals` */
 
@@ -516,7 +530,7 @@ CREATE TABLE `support_users` (
 
 insert  into `support_users`(`id`,`promoter_id`,`support_id`,`deleted_at`,`created_at`,`updated_at`) values 
 (3,15,4,NULL,NULL,NULL),
-(4,1,4,NULL,NULL,NULL);
+(4,1,1,NULL,NULL,NULL);
 
 /*Table structure for table `supports` */
 
@@ -584,16 +598,27 @@ DROP TABLE IF EXISTS `tribunes`;
 
 CREATE TABLE `tribunes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `promotion_report_id` int(11) DEFAULT NULL,
+  `duration` varchar(10) DEFAULT NULL,
+  `audiencetype_id` int(11) DEFAULT NULL,
+  `people_count` int(11) DEFAULT NULL,
+  `place_name` varchar(255) DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `province_id` int(11) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `village` varchar(255) DEFAULT NULL,
+  `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tribunes` */
+
+insert  into `tribunes`(`id`,`subject`,`promotion_report_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'salm',5,'23',NULL,55,'teh',2,2,'tehhhh','ttt',1,NULL,NULL,NULL);
 
 /*Table structure for table `user_notes` */
 
@@ -708,8 +733,3 @@ CREATE TABLE `users` (
 
 insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
 (1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','zahra','mhd',2,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,'OzwK3WrHQ2x9ADv1qt5wP1NOlWKRAzVMINIPgyGs7PwfLyN53kWQDRNalj9q',NULL,NULL,'2024-11-14 04:22:30','2024-11-14 05:46:01');
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
