@@ -24,6 +24,8 @@ const Dropzone = function(props) {
         key: 0,
     });
 
+    // console.log("defaultValue is: ", defaultValue);
+
     const {laraDomain} = useConfig();
 
     const getLangVars = () =>{
@@ -126,8 +128,9 @@ const Dropzone = function(props) {
         return {vals};
     }
 
-    const changeDropzone = (value)=>{
+    const changeDropzone = function(value, myDropzone){
         let files = value.split('###');
+        
         files.forEach(element => {
             if(element != ""){
                 let name = getFileName(element), path = uploadUrl.split('.')[1].replace(/-/g, "/");
@@ -138,6 +141,7 @@ const Dropzone = function(props) {
                 }
                 var mockFile = {name: name, size: size};
                 if(mockFiles.indexOf(mockFile.name) == -1){
+                    console.log("files:", files, myDropzone);
                     mockFiles.push(mockFile.name);
                     myDropzone?.options.addedfile.call(myDropzone, mockFile);
                     myDropzone?.options.thumbnail.call(myDropzone, mockFile, path);
@@ -188,7 +192,7 @@ const Dropzone = function(props) {
         return eventHandlers;
     }
 
-    useEffect(()=>{
+    useEffect(function(){
         let {vals} = processDefaultValue();
         if(!run){
             let djsConfig = getDropzoneConfig();
@@ -196,6 +200,7 @@ const Dropzone = function(props) {
             state.vals = vals;
             let eventHandlers = getEventHandler();
             let dropzoneObj = new DropzoneMain("#dropzone-"+id, {...djsConfig, ...eventHandlers});
+            // console.log("dropzoneObj", dropzoneObj, setMyDropzone);
             setMyDropzone(dropzoneObj);
             setTimeout(() => {
                 // window.$('.dz-remove').removeAttr("href");
@@ -205,11 +210,13 @@ const Dropzone = function(props) {
         run = true;
     }, []);
 
-    useEffect(()=>{
+    useEffect(function(){
         let {vals} = processDefaultValue();
+        console.log("vals:", vals, myDropzone);
         setState({value:vals, key: Math.random()});
-        changeDropzone(vals);
+        changeDropzone(vals, myDropzone);
     }, [defaultValue]);
+    // console.log("myDropzone", myDropzone);
 
     return (
         <div className={className?className:" mb-3 col-span-12 md:col-span-6 "}>

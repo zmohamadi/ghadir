@@ -1,13 +1,11 @@
 "use client";
 
 import { useLang } from "@/lib";
-import { Input, Textarea, Box, Radio } from "@/Theme/Midone/Forms";
+import {Textarea } from "@/Theme/Midone/Forms";
 
 export function Notes({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
     const note = parent?.state?.info?.notes?.[index];
-    // console.log(culturalUser?.gender_id);
-
 
     return (
         <>

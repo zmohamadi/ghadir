@@ -37,13 +37,13 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
             <div className='h-full flex items-center'>
                 {/* BEGIN: Logo */}
                 <a href='' className='-intro-x hidden md:flex' key={adminMenuType+"-logo"}>
-                    <img style={{width:"100px",padding:"1rem"}} alt='Logo'src={mediaPath+'/logo/'+logo} />
+                    <img alt='logo' width="85px" className='w-50' src={mediaPath+'/logo/'+logo} />
                     <span className='text-white text-lg mr-3 adjust '><b> </b></span>
                 </a>
                 {/* END: Logo */}
                 {/* BEGIN: Breadcrumb */}
                 <div className={'-intro-x breadcrumb '+(dir == "ltr"? "mr-auto": "ml-auto")}> 
-                    <a href=''> {Lang('public.usage_system')} </a>
+                    <a href=''> {Lang('public.usage_system')}</a>
                     {dir == "ltr" ? <Icon.ChevronRight size='16' /> : <Icon.ChevronLeft size='16' />}
                     <a href='' className='breadcrumb--active'>{Lang('public.dashboard')}</a> 
                 </div>
@@ -52,16 +52,16 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                     <div className={(dir == "rtl" ? "float-left ": "float-right ")+'dropdown-toggle w-12 h-12 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110'} role='button' aria-expanded='false'>
                         {
                             user?.photo ?
-                            <img alt='user' src={mediaPath+'/users/'+user?.photo} />
+                            <img alt='IKVU' src={mediaPath+'/users/'+user?.photo} />
                             :
-                            <img alt='user' src={mediaPath+'/users/avatar.png'} />
+                            <img alt='IKVU' src={mediaPath+'/users/avatar.png'} />
                         }
                     </div>
                     <div className='dropdown-menu w-56'>
                         <div className='dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white'>
                             <div className='p-4 border-b border-theme-12 dark:border-dark-3'>
                                 <div className='font-medium'>{user?.firstname} {user?.lastname}</div>
-                                <div className='text-xs text-theme-13 mt-0.5 dark:text-gray-600 text-left'>{user?.mobile}</div>
+                                <div className='text-xs text-theme-13 mt-0.5 dark:text-gray-600 text-left'>{user?.email}</div>
                             </div>
                             <div className='p-2'>
                                 <Link href={"/"} 
@@ -70,7 +70,7 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                                         {Lang('public.home')} 
                                 </Link>
                                 {/* <Link href={prefix+"/editProfile"}  */}
-                                <Link href={prefix+"/editProfile"} 
+                                <Link href={prefix+"/viewProfile"} 
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'>
                                         <Icon.User className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                         {Lang('public.profile')} 

@@ -58,7 +58,14 @@ $lang = [
    'duration'=>'مدت زمان',
    'people_count'=>'تعداد مخاطب',
    'audiencetype'=>'نوع مخاطب',
-   
+   'pro_people_count'=>'تعداد مشارکت',
+   'report_count'=>'تعداد گزارش',
+   'sum_support'=>'مجموع حمایت ها',
+   'promotion_details'=>'جزییات اطلاعیه ی تبلیغ',
+   'yes'=>'بله',
+   'no'=>'خیر',
+   'open'=>'باز',
+   'close'=>'بسته',
    
 
 ];

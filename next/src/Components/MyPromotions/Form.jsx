@@ -4,9 +4,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
-import { Loading } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio, CheckBoxGroup } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
 export function Form({id,panel="admin"}){

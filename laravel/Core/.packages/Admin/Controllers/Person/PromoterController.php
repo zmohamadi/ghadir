@@ -12,7 +12,7 @@ class PromoterController extends BaseAbstract
     protected $request = "Publics\Requests\PromoterRequest";
     protected $with = ["role", "gender", "activeStatus", "cityUser", 'level', "education"];
     protected $showWith = ["role", "gender", "activeStatus", "cityUser", 'level', "education", "culturalUsers",
-     "notes","promotionInfos"];
+     "notes","promotionInfos","supports.promotion"];
     protected $needles = ["Base\City", "Base\Province", "Base\Gender", "Level", "Education", 'Base\Status', "PromotionPosition"];
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
     protected $files = ["photo"];
@@ -71,6 +71,7 @@ class PromoterController extends BaseAbstract
             foreach ($positions as $value) {
                 $positionsArray[] = [
                     'city_id' => $value['pos_city_id'] ?? null,
+                    'province_id' => $value['pos_province'] ?? null,
                     'city' => $value['pos_city'] ?? null,
                     'village' => $value['pos_village'] ?? null,
                     'position_id' => $value['promotion_position'] ?? null,

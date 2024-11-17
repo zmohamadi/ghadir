@@ -4,7 +4,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
-import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
@@ -33,13 +33,12 @@ export function Form({id,panel="admin"}){
     let finalId = pathname.includes("profile") ? user?.id : id;
     let url = laraAdmin + link;
     let method = "new";
-    let nextUrl = link;
+    let nextUrl = pathname.includes("profile") ? link : "/";
 
     
     if (finalId !== 0 && finalId !== undefined) {
         url = `${laraAdmin + link}/${finalId}`;
         method = "edit";
-        nextUrl = "/";
     }
 
     useEffect(() => {
@@ -64,7 +63,6 @@ export function Form({id,panel="admin"}){
     const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
     const otherProps2 = (component?.state?.info?.notes?.length)? { count_data: component.state.info.notes.length } : {};
     const otherProps3 = (component?.state?.info?.promotion_infos?.length)? { count_data: component.state.info.promotion_infos.length } : {};
-
 
     return(
         
@@ -120,10 +118,8 @@ export function Form({id,panel="admin"}){
                                 
                                 {
                                     user?.role_id==1 && <>
-                                        {/* <SelectTail label="star" data={needles?.level}  refItem={[component, "level_id"]} /> */}
-
                                         <Radio className="col-span-4" type="col" label="star" id="level_id" refItem={[component, `level_id`]}
-                                        data={needles?.level}  key={"level_id"+data?.level?.length}
+                                        data={needles?.level}  key={"level_id"+data?.level?.length} defaultValue={data?.level_id}
                                         /> 
                                         <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} type="col" label="status" id="status_id" refItem={[component, `status_id`]}
                                         data={needles?.status?.filter(item => item.group_id === 1)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}

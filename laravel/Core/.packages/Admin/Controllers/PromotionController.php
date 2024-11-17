@@ -11,6 +11,7 @@ class PromotionController extends BaseAbstract
     protected $request = 'Publics\Requests\PromotionRequest';
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor","registerStatus","reportStatus"];
+    protected $showWith = ["activeStatus","creator","editor","registerStatus","reportStatus","agrees","supports.type","reports"];
     protected $needles = ['Base\Status',"Ritual"];
     protected $files = ["photo"];
 

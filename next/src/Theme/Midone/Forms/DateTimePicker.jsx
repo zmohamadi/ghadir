@@ -29,7 +29,7 @@ export function DateTimePicker(props){
                 key = {'input-'+rand}
                 type = {"datetime-local"}
                 data-type = {"datetime-local"}
-                placeholder="yyyy-mm-dd"
+                placeholder="yyyy/mm/dd"
                 defaultValue = {state.value}
                 disabled = {disabled==true?true:false}
                 onChange={function(e){

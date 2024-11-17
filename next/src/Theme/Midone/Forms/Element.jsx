@@ -115,7 +115,7 @@ export const useFormElement = (props)=>{
             
             else if(typeof dvalue == 'object' && dvalue != null && type == "element"){
                 let newVal = [];
-                dvalue?.map((item)=>{newVal.push(item?.id)});
+                dvalue.map((item)=>{newVal.push(item?.id)});
                 dvalue = newVal;
             }
             

@@ -5,7 +5,6 @@ export * from './Input';
 export * from './Textarea';
 export * from './Radio';
 export * from './CheckBox';
-export * from './CheckBoxGroup';
 export * from './Button';
 export * from './ButtonContainer';
 export * from './Line';

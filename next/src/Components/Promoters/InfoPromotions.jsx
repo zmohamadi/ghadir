@@ -1,13 +1,11 @@
 "use client";
 
 import { useLang } from "@/lib";
-import { Input, Textarea, Box, Radio, SelectTail } from "@/Theme/Midone/Forms";
+import { Input, SelectTail } from "@/Theme/Midone/Forms";
 
 export function InfoPromotions({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
     const info = parent?.state?.info?.promotion_infos?.[index];
-    // console.log(culturalUser?.gender_id);
-
 
     return (<>
             <div className="col-span-12 flex justify-end items-end">

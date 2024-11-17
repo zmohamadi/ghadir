@@ -4,9 +4,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
-import { Loading } from "@/Theme/Midone/Utils";
-import { useData,useFormRefs,Input,Button,ButtonContainer,Box,CheckBox,Textarea,Frame,Radio, CheckBoxGroup } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
+import { useData,useFormRefs,Input,Button,ButtonContainer,CheckBox,Textarea,Radio, CheckBoxGroup } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
 export function Form({id,panel="admin"}){
@@ -46,36 +44,43 @@ export function Form({id,panel="admin"}){
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();
     const data = component?.state?.info;
-// console.log(user?.role_id);
-// console.log(provinceId);
 
     return(
         
             <>
-                <Frame title={Lang(["public.promotion"])}>
-                    <Box>
-                        <Input label="title" refItem={[component, "title"]} required="true" />
-                        <Input dir="ltr" label="year" refItem={[component, "year"]} required="true" />
+                {/* <Frame title={Lang(["public.promotion"])} className="grid-cols-12"> */}
+                    
+                    <div className="pos intro-y grid grid-cols-12 gap-5 mt-5">
+                        <div className="intro-y col-span-12 lg:col-span-8">
+                            <Input label="title" refItem={[component, "title"]} required="true" />
+                            <div className="post intro-y p-3 box mt-5 ">
+                                <Input dir="ltr" label="year" refItem={[component, "year"]} required="true" />
+                                <Textarea label="description" required="true" refItem={[component, "comments"]}  />
+                                <Textarea label="commitments" refItem={[component, "commitments"]}  />
+                                <Dropzone className="col-span-12" refItem={[component, "photo"]} required="true" uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
+
                         
+                            </div>
+                        </div>
+                        <div className="col-span-12 lg:col-span-4">
+                            <div className="intro-y box p-5">
+                                <Radio className="mt-5 border-b-2" defaultValue={data?.register_status ? data?.register_status: 1} type="col" label="register" id="register_status" refItem={[component, `register_status`]}
+                                data={needles?.status?.filter(item => item.group_id === 11)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                />
+                                <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status ? data?.report_status: 1} type="col" label="report" id="report_status" refItem={[component, `report_status`]}
+                                data={needles?.status?.filter(item => item.group_id === 8)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                />
+                                <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} refItem={[component, `has_course`]} />
+                                <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
 
-                        <Textarea label="description" required="true" refItem={[component, "comments"]}  />
-                        <Textarea label="commitments" refItem={[component, "commitments"]}  />
-                        <Dropzone className="col-span-12" refItem={[component, "photo"]} required="true" uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
+                                <CheckBoxGroup className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual"+data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
+                                
 
-                        
-                        <Radio className="col-span-3" defaultValue={data?.register_status ? data?.register_status: 1} type="col" label="register" id="register_status" refItem={[component, `register_status`]}
-                        data={needles?.status?.filter(item => item.group_id === 11)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
-                        />
-                        <Radio className="col-span-3"  defaultValue={data?.report_status ? data?.report_status: 1} type="col" label="report" id="report_status" refItem={[component, `report_status`]}
-                        data={needles?.status?.filter(item => item.group_id === 8)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
-                        />
-                        <CheckBox name={Lang('public.has')} className="col-span-3" label={Lang('public.has_course')} refItem={[component, `has_course`]} />
-                        <CheckBox name={Lang('public.has')} className="col-span-3" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
-
-                        <CheckBoxGroup  data={needles?.ritual} key={"ritual"+data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
-
-                    </Box>    
-                </Frame>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {/* </Frame> */}
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />
                     <Button label="back" onClick={back} />

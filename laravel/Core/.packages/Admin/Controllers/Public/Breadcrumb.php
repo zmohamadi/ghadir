@@ -6,65 +6,83 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class Breadcrumb extends Controller
-{
+{   // model, title, primaryKey:id
     private $models = [
-     // Base *****************************************************************************************************
-        'city' => [\Models\Base\City::class, 'name_'],
-        'province' => [\Models\Base\Province::class, 'name_'],
-        'country' => [\Models\Base\Country::class, 'name_'],
-        'socialType' => [\Models\Base\SocialType::class, 'name_'],
-        'keyword' => [\Models\Base\Keyword::class, 'title'],
-        'language' => [\Models\Base\Language::class, 'title'],
-        'status' => [\Models\Base\Status::class, 'title_'],
-        'month' => [\Models\Base\Month::class, 'title_'],
-        'facilitySubject' => [\Models\Project\FacilitySubject::class, 'title_'],
-        'facility' => [\Models\Project\Facility::class, 'title_'],
-    // Person ***************************************************************************************************
-        'personnelUser' => [\Models\Person\User::class, 'lname'],
-        'customer' => [\Models\Person\Customer::class, 'lname'],
-        'address' => [\Models\Person\Address::class, 'address'],
-        'level' => [\Models\Person\Level::class, 'name'],
-        'role' => [\Models\ACL\Role::class, 'name'],
-    // Kala ****************************************************************************************************
-        'product' => [\Models\Kala\Product::class, 'name'],
-        'category' => [\Models\Kala\Category::class, 'title_'],
-        'usage' => [\Models\Kala\Usage::class, 'title_'],
-        'feature' => [\Models\Kala\Feature::class, 'title_'],
-        'featureType' => [\Models\Kala\featureType::class, 'title_'],
-        'value' => [\Models\Kala\Value::class, 'title_'],
-        'brand' => [\Models\Kala\Brand::class, 'name_'],
-        'shop' => [\Models\Kala\Shop::class, 'name_'],
-        'productModel' => [\Models\Kala\ProductModel::class, 'title_'],
-        'color' => [\Models\Kala\Color::class, 'name_'],
-        // 'productComment' => [\Models\Kala\ProductComment::class, 'sender_name'],
-    // Content ***************************************************************************************************
-        'blog' => [\Models\Content\Blog::class, 'title'],
-        'blogSubject' => [\Models\Content\BlogSubject::class, 'title_'],
-        'siteText' => [\Models\Content\SiteText::class, 'title_'],
-        'slider' => [\Models\Content\Slider::class, 'title'],
-        'contact' => [\Models\Content\ContactUs::class, 'sender_name'],
-        'blogComment' => [\Models\Content\BlogComment::class, 'sender_name'],
-    // Financial ***************************************************************************************************
+        
+        'users' => [\Models\Person\User::class, 'lastname'],
+        'personnels' => [\Models\Person\Personnel::class, 'lastname'],
+        'promoters' => [\Models\Person\Promoter::class, 'lastname'],
+        'promotions' => [\Models\Promotion::class, 'title'],
     ];
+
+    public function getItems(Request $request)
+    {
+        $params = request()->except('lang');
+        $lang = app()->getLocale();
+        $info = [];
+
+        foreach ($params as $modelKey => $value){
+            if(isset($this->models[$modelKey])){
+                [$model, $attr] = $this->models[$modelKey];
+                $primary = $this->models[$modelKey][2]??"id";
+                if($primary == '') $primary = "id";
+                if (substr($attr, -1, 1) == '_') {
+                    $attr .= $lang;
+                }
+                $record = $model::select($attr)->where($primary, $value)->first();
+                $info[$modelKey] = $record[$attr]??"NotFound";
+            }
+        }
+        return response()->json([
+            'info' => $info
+        ]);
+    }
 
     public function getInfo(Request $request)
     {
-        $params = $request->except('lang');
+        $params = request()->except('lang');
         $lang = $request->lang;
         $info = [];
-        foreach ($params as $key => $item) {
-            $attr = $this->models[$key][1];
+
+        // dd("params: ", $params);
+        
+        // بررسی اینکه آیا کلید "path" وجود دارد یا نه
+        if (!$request->has('path')) {
+            return response()->json(['error' => 'Path parameter is missing'], 400);
+        }
+    
+        $path = $request->input('path');
+        
+        // تقسیم مسیر به اجزاء
+        $pathParts = explode('/', trim($path, '/')); // برای جدا کردن بخش‌های مسیر
+        $modelKey = isset($pathParts[1]) ? $pathParts[1] : null; // فرض کنیم اولین جزء مدل باشد
+        $itemId = isset($pathParts[2]) ? $pathParts[2] : null; // فرض کنیم دومین جزء شناسه آیتم باشد
+        
+        // بررسی وجود مدل برای جستجو
+        if ($modelKey && isset($this->models[$modelKey])) {
+            $attr = $this->models[$modelKey][1];
             if (substr($attr, -1, 1) == '_') {
                 $attr .= $lang;
             }
-
-            $obj = $this->models[$key][0]::
-                        select($attr)
-                        ->find($item);
-
-            $info[$key.'Title'] = $obj->$attr;
+    
+            // جستجو در مدل مربوطه با شناسه آیتم
+            $obj = $this->models[$modelKey][0]::select($attr)->find($itemId);
+            
+            if ($obj) {
+                $info[$modelKey . 'Title'] = $obj->$attr;
+            } else {
+                $info[$modelKey . 'Title'] = 'Not found';
+            }
+        } else {
+            return response()->json(['error' => 'Invalid model or item ID'], 400);
         }
-
-        return $info;
+    
+        // برگشت اطلاعات به صورت JSON
+        return response()->json([
+            'path' => $path,
+            'info' => $info
+        ]);
     }
+    
+
 }
