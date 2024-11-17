@@ -18,7 +18,8 @@ export function List(panel="admin"){
     const url = access ?  laraAdmin+"/supports" : laraAdmin+"/supports?promoter="+user?.id;
 
     let info = {
-        insertLink: access ? `${formUrl}/new` : "",
+        // insertLink: access ? `${formUrl}/new` : "",
+        insertLink: `${formUrl}/new`,
         perPage:20,
         url: url,
         columns: [

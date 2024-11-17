@@ -21,9 +21,9 @@ export function Form({id,panel="admin"}){
 
     const {user} = useAuth();
     
-    let uploadUrl = laraAdmin+"/upload/.-media-promotions";
-    let deleteUrl = laraAdmin+"/deleteFile/.-media-promotions";
-    let uploadDir = 'media/promotions/';
+    let uploadUrl = laraAdmin+"/upload/.-media-users";
+    let deleteUrl = laraAdmin+"/deleteFile/.-media-users";
+    let uploadDir = 'media/users/';
     
     let url = laraAdmin+link, method = "new";
     if(id != 0 && id != undefined) url = laraAdmin+link+"/"+id, method = "edit";

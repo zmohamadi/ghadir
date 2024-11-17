@@ -7,19 +7,19 @@ import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
 
-export function List({panel="admin"}){
+export default function Page({panel="admin"}){
     // console.log(panel);
-    const access = panel=="admin" ? true : false;
-    const {user} = useAuth();
+    // const access = panel=="admin" ? true : false;
+    // const {user} = useAuth();
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
 
-    const formUrl = nextAdmin+"/promotions";
-    const url = access ?  laraAdmin+"/promotions" : laraAdmin+"/promotions?register_status=1";
+    const formUrl = nextAdmin+"/reports";
+    const url = laraAdmin+"/reports" ;
 
     let info = {
-        insertLink: access ? `${formUrl}/new` : "",
+        insertLink: `${formUrl}/new`,
         perPage:20,
         url: url,
         columns: [
@@ -27,21 +27,21 @@ export function List({panel="admin"}){
                 label: "",
                 jsx: (item) => (
                     <Pic 
-                        src={mediaPath + "/promotions/" + item?.photo} 
+                        src={mediaPath + "/promotions/" + item?.promotion?.photo} 
                         defaultImg={`${mediaPath}/public/default/avatar.png`} 
-                        classImg="user-avatar" 
+                        classImg="user-avatar rounded-full" 
                         key={"img" + item?.photo} 
                     />
                 ),
             },
            
-            {label: "title", field: "title" },
-            {label: "year", field: "year" },
+            {label: "title", field: "promotion.title" },
+            {label: "year", field: "promotion.year" },
             // {label: "gender", sort:false, field: "gender.title_"+local},
-            {label: "register_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.register_status?.["title_"+local]}</span>},
-            {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
-            {label: "has_course", jsx: (item)=><span>{item?.has_course == 1 ?Lang('public.has') : "-"}</span>},
-            {label: "has_tribune", jsx: (item)=><span>{item?.has_tribune == 1 ?Lang('public.has') : "-"}</span>},
+            // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
+            // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
+            // {label: "has_course", jsx: (item)=><span>{item?.has_course == 1 ?Lang('public.has') : "-"}</span>},
+            // {label: "has_tribune", jsx: (item)=><span>{item?.has_tribune == 1 ?Lang('public.has') : "-"}</span>},
            
 
             

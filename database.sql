@@ -1,3 +1,20 @@
+/*
+SQLyog Professional v13.1.1 (64 bit)
+MySQL - 10.4.32-MariaDB : Database - ghadir
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`ghadir` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_persian_ci */;
+
+USE `ghadir`;
 
 /*Table structure for table `audience_types` */
 
@@ -245,12 +262,9 @@ CREATE TABLE `courses` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `courses` */
-
-insert  into `courses`(`id`,`subject`,`promotion_report_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,NULL,5,NULL,NULL,NULL,NULL,NULL,1,'1',NULL,1,NULL,NULL,NULL);
 
 /*Table structure for table `cultural_users` */
 
@@ -270,12 +284,13 @@ CREATE TABLE `cultural_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `cultural_users` */
 
 insert  into `cultural_users`(`id`,`promoter_id`,`name`,`family`,`job_position`,`gender_id`,`phone`,`comments`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(19,4,'زهرا','محمدی','دانشجو',NULL,'091934524','سلام توضیحات',NULL,NULL,NULL,NULL);
+(3,2,'فاطمه','محمدی','همکار',2,'34534535345','همکاری در فعالیتهای فرهنگی غدیر در سال 1403',NULL,NULL,NULL,NULL),
+(4,2,'محدثه','عبادی','معلم',2,'32423423-342','تدریس بسیار عالی',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `education` */
 
@@ -397,14 +412,9 @@ CREATE TABLE `promotion_reports` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotion_reports` */
-
-insert  into `promotion_reports`(`id`,`promotion_id`,`promoter_id`,`photo`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(3,4,1,NULL,1,NULL,'2024-11-17 03:59:31','2024-11-17 03:59:31'),
-(4,4,1,'',1,NULL,'2024-11-17 04:00:30','2024-11-17 04:00:30'),
-(5,4,1,'',1,NULL,'2024-11-17 04:07:08','2024-11-17 04:07:08');
 
 /*Table structure for table `promotions` */
 
@@ -428,15 +438,14 @@ CREATE TABLE `promotions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotions` */
 
 insert  into `promotions`(`id`,`title`,`year`,`photo`,`comments`,`commitments`,`register_status`,`report_status`,`has_course`,`has_tribune`,`status_id`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'efwe',45,NULL,'erer','werw',1,1,0,0,1,NULL,NULL,'2024-11-05 21:31:53','2024-11-05 20:51:35','2024-11-05 21:31:53'),
-(2,'efwe',45,'','erer','werw',1,1,0,0,1,1,NULL,NULL,'2024-11-05 20:52:20','2024-11-05 20:52:20'),
-(3,'جدید ت',1345,'image25041730836833.gif','promotion promotion promotion',NULL,1,1,0,0,1,1,NULL,'2024-11-05 21:01:07','2024-11-05 21:00:48','2024-11-05 21:01:07'),
-(4,'سلام',1234,'image23701730838448.jpg','CheckBoxGroup','ddfgfg',1,1,1,1,1,1,1,NULL,'2024-11-05 21:27:32','2024-11-05 21:30:37');
+(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',1,1,1,1,1,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-17 13:10:38'),
+(2,'نیمه شعبان',1404,'image41621731845468.jpg','نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',NULL,1,1,0,1,1,1,NULL,NULL,'2024-11-17 13:11:18','2024-11-17 13:11:18'),
+(3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,1,1,0,1,1,NULL,NULL,'2024-11-17 13:13:02','2024-11-17 13:13:02');
 
 /*Table structure for table `ritual_reports` */
 
@@ -457,14 +466,9 @@ CREATE TABLE `ritual_reports` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ritual_reports` */
-
-insert  into `ritual_reports`(`id`,`ritual_id`,`promotion_report_id`,`description`,`city_id`,`place_name`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,1,3,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
-(2,1,4,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
-(3,3,5,NULL,3,'etredf',2,'teeeeeee','etttttt',1,NULL,NULL,NULL);
 
 /*Table structure for table `rituals` */
 
@@ -524,13 +528,13 @@ CREATE TABLE `support_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `support_users` */
 
 insert  into `support_users`(`id`,`promoter_id`,`support_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(3,15,4,NULL,NULL,NULL),
-(4,1,1,NULL,NULL,NULL);
+(1,1,2,NULL,NULL,NULL),
+(2,3,3,NULL,NULL,NULL);
 
 /*Table structure for table `supports` */
 
@@ -550,13 +554,14 @@ CREATE TABLE `supports` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `supports` */
 
 insert  into `supports`(`id`,`pack_items`,`amount`,`type_id`,`promotion_id`,`description`,`creator_id`,`editor_id`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,NULL,'12333',2,4,'این بسته رسید',NULL,NULL,1,NULL,'2024-11-08 16:21:15','2024-11-08 16:21:15'),
-(2,'شامل کتاب و خرید',NULL,1,2,'شامل کتاب و خرید',NULL,NULL,1,NULL,'2024-11-08 16:22:10','2024-11-08 16:22:10');
+(1,'کتاب\nبروشور\nپرچم',NULL,1,3,'واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',NULL,NULL,1,NULL,'2024-11-17 13:22:10','2024-11-17 13:22:10'),
+(2,NULL,'500000',2,2,'واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',NULL,NULL,1,NULL,'2024-11-17 13:22:31','2024-11-17 13:22:31'),
+(3,'بن خرید',NULL,3,1,'واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',NULL,NULL,1,NULL,'2024-11-17 13:23:32','2024-11-17 13:23:32');
 
 /*Table structure for table `ticket_subjects` */
 
@@ -613,12 +618,9 @@ CREATE TABLE `tribunes` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tribunes` */
-
-insert  into `tribunes`(`id`,`subject`,`promotion_report_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'salm',5,'23',NULL,55,'teh',2,2,'tehhhh','ttt',1,NULL,NULL,NULL);
 
 /*Table structure for table `user_notes` */
 
@@ -634,13 +636,14 @@ CREATE TABLE `user_notes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_notes` */
 
 insert  into `user_notes`(`id`,`promoter_id`,`creator_id`,`content`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(10,4,1,'weretet',NULL,NULL,NULL,NULL),
-(11,4,1,'سلام',NULL,NULL,NULL,NULL);
+(3,3,1,'مبلغ دارای 4 ستاره میباشد',NULL,NULL,NULL,NULL),
+(4,2,1,'خانم عبادی در زمینه فعالیت های فرهنگی و بسیج فعالیت دارند',NULL,NULL,NULL,NULL),
+(5,2,1,'این مبلغ 5 ستاره دارد',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `user_promotions` */
 
@@ -664,8 +667,8 @@ CREATE TABLE `user_promotions` (
 /*Data for the table `user_promotions` */
 
 insert  into `user_promotions`(`id`,`promoter_id`,`position_id`,`city_id`,`city`,`village`,`place_name`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(2,4,1,1,'qom','vlg','promotionInfos',NULL,NULL,NULL,NULL),
-(3,4,NULL,2,'fghfh','fghf','fghfh',NULL,NULL,NULL,NULL);
+(2,3,2,3,'شهری ری',NULL,'مسجد محله',NULL,NULL,NULL,NULL),
+(3,2,3,2,'تهران',NULL,'قم',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `user_roles` */
 
@@ -727,9 +730,16 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','zahra','mhd',2,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,'OzwK3WrHQ2x9ADv1qt5wP1NOlWKRAzVMINIPgyGs7PwfLyN53kWQDRNalj9q',NULL,NULL,'2024-11-14 04:22:30','2024-11-14 05:46:01');
+(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',1,NULL,NULL,NULL,NULL,'OzwK3WrHQ2x9ADv1qt5wP1NOlWKRAzVMINIPgyGs7PwfLyN53kWQDRNalj9q',1,NULL,'2024-11-14 04:22:30','2024-11-17 12:59:04'),
+(2,'09198526839',NULL,NULL,0,NULL,'مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',NULL,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,1,NULL,1,NULL,'2024-11-17 13:02:31','2024-11-17 13:05:07'),
+(3,'09191519138',NULL,NULL,0,NULL,'الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',1,2,4,NULL,1,NULL,NULL,NULL,'2024-11-17 13:04:53','2024-11-17 13:04:53');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

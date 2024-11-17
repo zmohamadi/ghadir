@@ -21,9 +21,9 @@ export const getMenus = (user) => {
        
         { title: "dashboard", icon: "Pocket", href: "/dashboard" },
         { title: "promotions", icon: "Book", href: "/promotions" },
-        { title: "register_promotions", icon: "Package", href: "/registerPromotion/new" },
+        // { title: "register_promotions", icon: "Package", href: "/registerPromotion/new" },
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
-        // { title: "myReports", icon: "Book", href: "/myReports" },
+        { title: "myReports", icon: "Book", href: "/reports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },
         // { title: "blog", icon: "Book", href: "/blog" },
         // { title: "tickets", icon: "Book", href: "/myTickets" },
