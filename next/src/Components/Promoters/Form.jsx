@@ -43,7 +43,7 @@ export function Form({id,panel="admin"}){
 
     useEffect(() => {
         getNeedles(laraAdmin+'/promoters/get-needles', setNeedles);
-        get(url, component, "info");
+        if(finalId != 0 && finalId != undefined) get(url, component, "info");
     }, [url]);
 
     useEffect(()=>{

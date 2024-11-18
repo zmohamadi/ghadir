@@ -20,11 +20,11 @@ class Promotion extends Model
         'deleted_at' => 'timestamp',
     ];
 
-    public function registerStatus()
+    public function activeRegister()
     {
         return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 11);
     }
-    public function reportStatus()
+    public function activeReport()
     {
         return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 8);
     }
@@ -39,5 +39,9 @@ class Promotion extends Model
     public function agrees()
     {
         return $this->belongsToMany(\Models\Person\Promoter::class, 'promotion_agree', 'promotion_id', 'promoter_id');
+    }
+    public function rituals()
+    {
+        return $this->belongsToMany(Ritual::class, 'promotion_ritual', 'promotion_id', 'ritual_id');
     }
 }

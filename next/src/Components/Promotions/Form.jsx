@@ -4,8 +4,10 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
-import { useData,useFormRefs,Input,Button,ButtonContainer,CheckBox,Textarea,Radio, CheckBoxGroup } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame, Radio, CheckBox } from "@/Theme/Midone/Forms";
+import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
+import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 
 export function Form({id,panel="admin"}){
     const link = "/promotions";
@@ -28,7 +30,7 @@ export function Form({id,panel="admin"}){
 
     useEffect(() => {
         getNeedles(laraAdmin+'/promotions/get-needles', setNeedles);
-        get(url, component, "info");
+        if(id != 0 && id != undefined) get(url, component, "info");
     }, []);
 
     useEffect(()=>{
@@ -44,12 +46,14 @@ export function Form({id,panel="admin"}){
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();
     const data = component?.state?.info;
+// console.log(user?.role_id);
+// console.log(needles);
 
     return(
         
             <>
-                {/* <Frame title={Lang(["public.promotion"])} className="grid-cols-12"> */}
-                    
+                {/* <Frame title={Lang(["public.support"])}> */}
+                    {/* <Box> */}
                     <div className="pos intro-y grid grid-cols-12 gap-5 mt-5">
                         <div className="intro-y col-span-12 lg:col-span-8">
                             <Input label="title" refItem={[component, "title"]} required="true" />
@@ -73,13 +77,13 @@ export function Form({id,panel="admin"}){
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} refItem={[component, `has_course`]} />
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
 
-                                <CheckBoxGroup className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual"+data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
+                                <CheckBoxGroup className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual" + data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual[]`]} />
                                 
 
                             </div>
                         </div>
                     </div>
-                    
+                    {/* </Box>     */}
                 {/* </Frame> */}
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />

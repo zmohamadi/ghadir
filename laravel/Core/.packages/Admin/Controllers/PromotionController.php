@@ -10,8 +10,8 @@ class PromotionController extends BaseAbstract
     protected $model = 'Models\Promotion';
     protected $request = 'Publics\Requests\PromotionRequest';
     protected $searchFilter = ['title'];
-    protected $with = ["activeStatus","creator","editor","registerStatus","reportStatus"];
-    protected $showWith = ["activeStatus","creator","editor","registerStatus","reportStatus","agrees","supports.type","reports"];
+    protected $with = ["activeStatus","creator","editor","activeRegister","activeReport"];
+    protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport","agrees","supports.type","reports","rituals"];
     protected $needles = ['Base\Status',"Ritual"];
     protected $files = ["photo"];
 
@@ -22,7 +22,7 @@ class PromotionController extends BaseAbstract
             {
                 $register_status = request()->register_status;
 
-                $q->where('register_status', $register_status);
+                $query->where('register_status', $register_status);
             };
             if(request()->promoter)
             {

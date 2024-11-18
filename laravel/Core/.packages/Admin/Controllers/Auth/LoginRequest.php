@@ -36,7 +36,7 @@ class LoginRequest extends FormRequest
         // بررسی وضعیت تایید شماره موبایل
         $user = Auth::guard('admin')->getProvider()->retrieveByCredentials($this->only('mobile'));
 
-        if ($user && $user->confirm_id === 0) {
+        if ($user && $user->status_id === 0) {
             throw ValidationException::withMessages([
                 'mobile' => __('auth.mobile_not_verified'),
             ]);

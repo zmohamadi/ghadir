@@ -3,12 +3,9 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
-import { useAuth } from "@/lib";
 
-export function List({panel="admin"}){
-    // console.log(panel);
-    const access = panel=="admin" ? true : false;
-    const {user} = useAuth();
+export function List({panel,access}){
+
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
@@ -18,7 +15,7 @@ export function List({panel="admin"}){
 
     let info = {
         insertLink: access ? `${formUrl}/new` : "",
-        perPage:20,
+        perPage: 20,
         url: url,
         columns: [
             {
@@ -32,34 +29,70 @@ export function List({panel="admin"}){
                     />
                 ),
             },
-           
-            {label: "title", field: "title" },
-            {label: "year", field: "year" },
-            // {label: "gender", sort:false, field: "gender.title_"+local},
-            {label: "register_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.register_status?.["title_"+local]}</span>},
-            {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
-            {label: "pro_people_count", jsx: (item)=><span>{item?.user_count}</span>},
-            {label: "report_count", jsx: (item)=><span>{item?.report_count}</span>},
-            {label: "sum_support", jsx: (item)=><span>{item?.sum_support}</span>},
-            // {label: "has_course", jsx: (item)=><span>{item?.has_course == 1 ?Lang('public.has') : "-"}</span>},
-            // {label: "has_tribune", jsx: (item)=><span>{item?.has_tribune == 1 ?Lang('public.has') : "-"}</span>},
-           
-
-            
-            {label: "", sort:false, 
-                jsx:(item)=><>
-                    <div className='flex justify-center '>
-                        <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        <FeatherIcon name="Users" url={nextAdmin+"/promotions/"+item?.id+"/promoters"} tooltip={Lang('public.promoters')} />
-                        <FeatherIcon name="Package" url={nextAdmin+"/promotions/"+item?.id+"/supports"} tooltip={Lang('public.supports')} />
-                        <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
-                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/promotions"+"/"+item?.id)} />
+            { label: "title", field: "title" },
+            { label: "year", field: "year" },
+            ...(access ? [
+                { 
+                    label: "register_status", 
+                    jsx: (item) => (
+                        <span className={"text-" + item?.active_status?.color}>
+                            {item?.register_status?.["title_" + local]}
+                        </span>
+                    )
+                },
+                { 
+                    label: "report_status", 
+                    jsx: (item) => (
+                        <span className={"text-" + item?.active_status?.color}>
+                            {item?.report_status?.["title_" + local]}
+                        </span>
+                    )
+                },
+                { label: "pro_people_count", jsx: (item) => <span>{item?.user_count}</span> },
+                { label: "report_count", jsx: (item) => <span>{item?.report_count}</span> },
+                { label: "sum_support", jsx: (item) => <span>{item?.sum_support}</span> },
+            ] : []),
+            {
+                label: "",
+                sort: false,
+                jsx: (item) => (
+                    <div className="flex justify-center">
+                        <FeatherIcon 
+                            access={access} 
+                            name="Edit" 
+                            url={formUrl + "/" + item?.id + "/edit"} 
+                            tooltip={Lang('public.edit')} 
+                        />
+                        <FeatherIcon 
+                            access={access} 
+                            name="Users" 
+                            url={nextAdmin + "/promotions/" + item?.id + "/promoters"} 
+                            tooltip={Lang('public.promoters')} 
+                        />
+                        <FeatherIcon 
+                            access={access} 
+                            name="Package" 
+                            url={nextAdmin + "/promotions/" + item?.id + "/supports"} 
+                            tooltip={Lang('public.supports')} 
+                        />
+                        <FeatherIcon 
+                            name="Eye" 
+                            url={formUrl + "/" + item?.id} 
+                            tooltip={Lang('public.view')} 
+                        />
+                        <FeatherIcon 
+                            access={access} 
+                            name="XOctagon" 
+                            tooltip={Lang('public.delete')} 
+                            color="darkred" 
+                            onClick={() => destroy(laraAdmin + "/promotions/" + item?.id)} 
+                        />
                     </div>
-                </>
+                ),
             }, 
         ],
-    }
-
+    };
+    
     return(
         <>
             <Frame title={Lang(["public.promotions"])}>

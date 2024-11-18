@@ -2,17 +2,19 @@
 import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { useData, useFormRefs } from "@/Theme/Midone/Forms";
+import { Button, ButtonContainer, CheckBox, useData, useFormRefs } from "@/Theme/Midone/Forms";
 import { Pic } from "@/Theme/Midone";
 import { Frame } from "@/Theme/Midone/Forms";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
-export function View({ id }) {
+export function View({ id ,panel,access}) {
     const { Lang, local } = useLang();
     const { laraAdmin, mediaPath,nextAdmin } = useConfig();
-    const { get } = useData();
+    const { save,get } = useData();
     let url = `${laraAdmin}/promotions/${id}`;
+    const router = useRouter();
 
     let component = useFormRefs();
     useEffect(() => {
@@ -27,15 +29,21 @@ export function View({ id }) {
             </div>
         );
     }
+    const back = ()=>router.back();
+    const saveItem = ()=>save(`${laraAdmin}/register/${id}`, component, "new", `${nextAdmin}/promotions`);
 
-    return (
+    // console.log(data?.register_status);
+
+    return (<>
         <Frame title={data?.title || Lang(["public.promotion_details"])}>
             <Tab className="col-span-12">
                 <TabHeader>
                     <TabList href="tab-first" title={Lang('public.promotion_details')} active={"true"}>{Lang("public.promotion_details")}</TabList>
-                    <TabList href="tab-second" title={Lang('public.promoters')}>{Lang("public.promoters")}</TabList>
-                    <TabList href="tab-third" title={Lang('public.reports')}>{Lang("public.reports")}</TabList>
-                    <TabList href="tab-fourth" title={Lang('public.supports')}>{Lang("public.supports")}</TabList>
+                    {access&&<>
+                        <TabList href="tab-second" title={Lang('public.promoters')}>{Lang("public.promoters")}</TabList>
+                        <TabList href="tab-third" title={Lang('public.reports')}>{Lang("public.reports")}</TabList>
+                        <TabList href="tab-fourth" title={Lang('public.supports')}>{Lang("public.supports")}</TabList>
+                    </>}
                 </TabHeader>
                 <TabBody>
                     <TabPanel id="tab-first" active={"true"}>
@@ -67,42 +75,97 @@ export function View({ id }) {
                                     <p className="text-gray-700">{data?.commitments || "-"}</p>
                                 </div>
                             {/* Ritual */}
-                            <div className="lg:col-span-2">
+                            {
+                                data?.rituals?.length>0 &&<>
+                                <div className="lg:col-span-2">
                                     <p className="text-sm text-gray-500">{Lang(["public.ritual"])}</p>
                                     <ul className="list-disc list-inside text-gray-700">
-                                        {data?.ritual?.length
-                                            ? data?.ritual.map((ritual, index) => (
-                                                <li key={index}>{ritual[`title_${local}`]}</li>
+                                        {data?.rituals?.length
+                                            ? data?.rituals.map((ritual, index) => (
+                                                <li key={index}>{ritual[`title`]}</li>
                                             ))
                                             : <li>{Lang(["public.no_data"])}</li>}
                                     </ul>
                                 </div>
+                                </>
+                            }
                                 {/* Register Status */}
                                 <div className="flex justify-between">
+                                    
+                                    <div>
+                                        {panel == "admin" || (data?.has_course && data?.register_status !== 1) ? (
+                                            // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
+                                            <>
+                                                <p className="text-sm text-gray-500">{Lang(["public.has_course"])}</p>
+                                                <h2 className="text-lg font-medium text-gray-700">
+                                                    {data?.has_course ? Lang(["public.yes"]) : Lang(["public.no"])}
+                                                </h2>
+                                            </>
+                                        ) : (
+                                            // اگر پنل ادمین نباشد و ثبت‌نام باز باشد
+                                            <>
+                                                {data?.has_course && data?.register_status == 1 ? (
+                                                    <CheckBox 
+                                                        name={Lang("public.ready")} 
+                                                        className="mt-5" 
+                                                        label={Lang("public.holding_course")} 
+                                                        refItem={[component, "user_has_course"]} 
+                                                    />
+                                                ) : (
+                                                    <>
+                                                        <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
+                                                        <h2 className="text-lg font-medium text-gray-700">
+                                                            {data?.has_course ? Lang(["public.yes"]) : Lang(["public.no"])}
+                                                        </h2>
+                                                    </>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                    <div>
+                                        {panel == "admin" || (data?.has_tribune && data?.register_status !== 1) ? (
+                                            // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
+                                            <>
+                                                <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
+                                                <h2 className="text-lg font-medium text-gray-700">
+                                                    {data?.has_tribune ? Lang(["public.yes"]) : Lang(["public.no"])}
+                                                </h2>
+                                            </>
+                                        ) : (
+                                            // اگر پنل ادمین نباشد و ثبت‌نام باز باشد
+                                            <>
+                                                {data?.has_tribune && data?.register_status == 1 ? (
+                                                    <CheckBox 
+                                                        name={Lang("public.ready")} 
+                                                        className="mt-5" 
+                                                        label={Lang("public.holding_course")} 
+                                                        refItem={[component, "user_has_tribune"]} 
+                                                    />
+                                                ) : (
+                                                    <>
+                                                        <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
+                                                        <h2 className="text-lg font-medium text-gray-700">
+                                                            {data?.has_tribune ? Lang(["public.yes"]) : Lang(["public.no"])}
+                                                        </h2>
+                                                    </>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                    
                                     <div>
                                         <p className="text-sm text-gray-500">{Lang(["public.register_status"])} : </p>
                                         <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.register_status ? Lang(["public.open"]) : Lang(["public.close"])}
+                                            {data?.register_status == 1 ? Lang(["public.open"]) : Lang(["public.close"])}
                                         </h2>
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-500">{Lang(["public.report_status"])} : </p>
                                         <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.report_status ? Lang(["public.open"]) : Lang(["public.close"])}
+                                            {data?.report_status ==1 ? Lang(["public.open"]) : Lang(["public.close"])}
                                         </h2>
                                     </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500">{Lang(["public.has_course"])}</p>
-                                        <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.has_course ? Lang(["public.yes"]) : Lang(["public.no"])}
-                                        </h2>
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
-                                        <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.has_tribune ? Lang(["public.yes"]) : Lang(["public.no"])}
-                                        </h2>
-                                    </div>
+
                                 </div>
 
 
@@ -171,5 +234,12 @@ export function View({ id }) {
                 </TabBody>
             </Tab>
         </Frame>
+        <ButtonContainer>
+            {data?.register_status == 1 && <Button label="register" onClick={saveItem} />
+            }
+            <Button label="back" onClick={back} />
+        </ButtonContainer>
+    </>
+        
     );
 }

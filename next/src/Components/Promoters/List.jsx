@@ -6,7 +6,7 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
 
-export function List({panel="admin"}){
+export function List(){
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
@@ -43,8 +43,8 @@ export function List({panel="admin"}){
                 jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
-                        {/* <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} /> */}
+                        <FeatherIcon name="Lock" url={nextAdmin+"/change-password/"+item?.id} tooltip={Lang('public.change_password')} />
+                        <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
                         <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/promoters"+"/"+item?.id)} />
                     </div>
                 </>

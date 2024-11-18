@@ -66,6 +66,9 @@ $lang = [
    'no'=>'خیر',
    'open'=>'باز',
    'close'=>'بسته',
+   'ready'=>'داوطلب هستم',
+   'holding_course'=>'برگزاری دوره',
+   'register_promotion'=>'ثبتنام در تبلیغ'
    
 
 ];

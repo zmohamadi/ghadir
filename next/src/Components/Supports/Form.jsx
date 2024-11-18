@@ -28,7 +28,7 @@ export function Form({id,panel="admin"}){
 
     useEffect(() => {
         getNeedles(laraAdmin+'/supports/get-needles', setNeedles);
-        get(url, component, "info");
+        if(id != 0 && id != undefined) get(url, component, "info");
     }, []);
 
     useEffect(()=>{
