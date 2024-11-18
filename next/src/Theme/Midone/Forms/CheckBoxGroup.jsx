@@ -28,7 +28,7 @@ export function CheckBoxGroup(props) {
             newSelectedValues.delete(itemValue);
         }
         setSelectedValues(newSelectedValues);
-
+        // state.value = newSelectedValues;
         onChange && onChange(Array.from(newSelectedValues));
     };
 
@@ -45,12 +45,19 @@ export function CheckBoxGroup(props) {
                             type='checkbox'
                             data-type='checkbox'
                             id={`${id}-${index}`}
-                            ref={Element.createRef(refItem)}
+                            // ref={Element.createRef(refItem)}
+                            name={refItem[1]}
                             value={item[valueKey]}
                             checked={selectedValues.has(item[valueKey])}
                             onFocus={() => Element.removeError()}
                             onChange={(e) => handleChange(e, item[valueKey])}
                             className='form-check-input'
+                            
+                        />
+                        <input id={id} 
+                            type='hidden'
+                            ref={Element.createRef(refItem)}
+                            defaultValue={"["+[...selectedValues].join(',')+"]"}
                         />
                         <label className='form-check-label' htmlFor={`${id}-${index}`}>
                             {Lang('public.' + item[titleKey])}

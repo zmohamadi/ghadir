@@ -30,7 +30,6 @@ export function CheckBox(props){
                     value={value?value:1}
                     onFocus = {()=>Element.removeError()}
                     onChange={function(e){
-                        // console.log(e.target.checked)
                         state.value = e.target.checked?value:0;
                         onChange && onChange(state.value);
                     }}
