@@ -8,6 +8,7 @@ import { Frame } from "@/Theme/Midone/Forms";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 
 export function View({ id ,panel,access}) {
     const { Lang, local } = useLang();
@@ -74,26 +75,51 @@ export function View({ id ,panel,access}) {
                                     <p className="text-sm text-gray-500">{Lang(["public.commitments"])}</p>
                                     <p className="text-gray-700">{data?.commitments || "-"}</p>
                                 </div>
-                            {/* Ritual */}
-                            {
-                                data?.rituals?.length>0 &&<>
-                                <div className="lg:col-span-2">
-                                    <p className="text-sm text-gray-500">{Lang(["public.ritual"])}</p>
-                                    <ul className="list-disc list-inside text-gray-700">
-                                        {data?.rituals?.length
-                                            ? data?.rituals.map((ritual, index) => (
-                                                <li key={index}>{ritual[`title`]}</li>
-                                            ))
-                                            : <li>{Lang(["public.no_data"])}</li>}
-                                    </ul>
-                                </div>
-                                </>
-                            }
+                                {/* Ritual */}
+                            
+                                    {panel == "admin" || (data?.has_tribune && data?.register_status !== 1) ? (
+                                        // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
+                                        <>
+                                            <div className="lg:col-span-2">
+                                                <p className="text-sm text-gray-500">{Lang(["public.ritual"])}</p>
+                                                <ul className="list-disc list-inside text-gray-700">
+                                                    {data?.rituals?.length
+                                                        ? data?.rituals.map((ritual, index) => (
+                                                            <li key={index}>{ritual[`title`]}</li>
+                                                        ))
+                                                        : <li>{Lang(["public.no_data"])}</li>}
+                                                </ul>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        // اگر پنل ادمین نباشد و ثبت‌نام باز باشد
+                                        <>
+                                            {data?.has_tribune && data?.register_status == 1 ? (
+                                                <div className="lg:col-span-2"><CheckBoxGroup  data={data?.rituals} key={"ritual" + data?.rituals?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual[]`]} /></div>
+
+                                            ) : (
+                                                <>
+                                                    <div className="lg:col-span-2">
+                                                        <p className="text-sm text-gray-500">{Lang(["public.ritual"])}</p>
+                                                        <ul className="list-disc list-inside text-gray-700">
+                                                            {data?.rituals?.length
+                                                                ? data?.rituals.map((ritual, index) => (
+                                                                    <li key={index}>{ritual[`title`]}</li>
+                                                                ))
+                                                                : <li>{Lang(["public.no_data"])}</li>}
+                                                        </ul>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </>
+                                    )}
+                               
+                            
                                 {/* Register Status */}
-                                <div className="flex justify-between">
+                                {/* <div className="flex justify-between"> */}
                                     
-                                    <div>
-                                        {panel == "admin" || (data?.has_course && data?.register_status !== 1) ? (
+                                <div className="lg:col-span-2">
+                                {panel == "admin" || (data?.has_course && data?.register_status !== 1) ? (
                                             // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
                                             <>
                                                 <p className="text-sm text-gray-500">{Lang(["public.has_course"])}</p>
@@ -122,8 +148,8 @@ export function View({ id ,panel,access}) {
                                             </>
                                         )}
                                     </div>
-                                    <div>
-                                        {panel == "admin" || (data?.has_tribune && data?.register_status !== 1) ? (
+                                    <div className="lg:col-span-2">
+                                    {panel == "admin" || (data?.has_tribune && data?.register_status !== 1) ? (
                                             // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
                                             <>
                                                 <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
@@ -152,21 +178,26 @@ export function View({ id ,panel,access}) {
                                             </>
                                         )}
                                     </div>
-                                    
-                                    <div>
-                                        <p className="text-sm text-gray-500">{Lang(["public.register_status"])} : </p>
-                                        <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.register_status == 1 ? Lang(["public.open"]) : Lang(["public.close"])}
-                                        </h2>
-                                    </div>
-                                    <div>
-                                        <p className="text-sm text-gray-500">{Lang(["public.report_status"])} : </p>
-                                        <h2 className="text-lg font-medium text-gray-700">
-                                            {data?.report_status ==1 ? Lang(["public.open"]) : Lang(["public.close"])}
-                                        </h2>
-                                    </div>
+                                    {
+                                        panel=="admin" &&<>
+                                                                                            <div className="lg:col-span-2">
 
-                                </div>
+                                                    <p className="text-sm text-gray-500">{Lang(["public.register_status"])} : </p>
+                                                    <h2 className="text-lg font-medium text-gray-700">
+                                                        {data?.register_status == 1 ? Lang(["public.open"]) : Lang(["public.close"])}
+                                                    </h2>
+                                                </div>
+                                                <div className="lg:col-span-2">
+
+                                                    <p className="text-sm text-gray-500">{Lang(["public.report_status"])} : </p>
+                                                    <h2 className="text-lg font-medium text-gray-700">
+                                                        {data?.report_status ==1 ? Lang(["public.open"]) : Lang(["public.close"])}
+                                                    </h2>
+                                                </div>
+                                        </>
+                                    }
+
+                                {/* </div> */}
 
 
                                 
@@ -235,8 +266,9 @@ export function View({ id ,panel,access}) {
             </Tab>
         </Frame>
         <ButtonContainer>
-            {data?.register_status == 1 && <Button label="register" onClick={saveItem} />
-            }
+            {data?.register_status == 1 && <Button label="register" onClick={saveItem} />}
+            {/* {data?.report_status == 1 && <Link className="btn btn-primary" href={`${nextAdmin}/report/${id}`}>{Lang('public.report')}</Link>} */}
+            {data?.report_status == 1 && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new`}>{Lang('public.report')}</Link>}
             <Button label="back" onClick={back} />
         </ButtonContainer>
     </>
