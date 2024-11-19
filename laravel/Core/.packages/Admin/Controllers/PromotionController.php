@@ -49,9 +49,11 @@ class PromotionController extends BaseAbstract
             };
             if(request()->promoter)
             {
+                // dd(request()->promoter);
+
                 $promoter = request()->promoter;
 
-                $query->whereHas('promoters', function ($q) use ($promoter) {
+                $query->whereHas('agreePromoters', function ($q) use ($promoter) {
                    $q->where('promoter_id', $promoter);
                 });
             };

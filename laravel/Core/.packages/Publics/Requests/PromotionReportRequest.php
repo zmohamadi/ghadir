@@ -23,7 +23,7 @@ class PromotionReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+          "promotion_id"=>'required'
         ];
     }
 }

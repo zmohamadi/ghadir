@@ -4,14 +4,14 @@ import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 
-export function List({panel,access}){
+export function List({panel,access , query}){
 
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
 
     const formUrl = nextAdmin+"/promotions";
-    const url = access ?  laraAdmin+"/promotions" : laraAdmin+"/promotions?register_status=1";
+    const url = `${laraAdmin}/promotions?${query}`;
 
     let info = {
         insertLink: access ? `${formUrl}/new` : "",

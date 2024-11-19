@@ -73,7 +73,8 @@ $lang = [
    'created_at'=>'تاریخ ثبت',
    'promoters_registered'=>'مبلغ هایی که ثبت نام کرده اند !',
    'promoters_reports'=>'گزارش هایی که مبلغین ثبت کرده اند !',
-   'supports_promoions'=>'حمایتهای که برای این تبلیغ اجرا شده است !'
+   'supports_promoions'=>'حمایتهای که برای این تبلیغ اجرا شده است !',
+   'you_send_photo'=>'عکس ارسالی از شما',
    
 
 ];

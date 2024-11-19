@@ -50,14 +50,14 @@ export default function Form({ id, panel = "admin" }) {
     const back = () => router.back();
     const data = component?.state?.info;
 
-    const otherProps = component?.state?.info?.cultural_users?.length
-        ? { count_data: component.state.info.cultural_users.length }
+    const otherProps = component?.state?.info?.courses?.length
+        ? { count_data: component.state.info.courses.length }
         : {};
-    const otherProps2 = component?.state?.info?.notes?.length
-        ? { count_data: component.state.info.notes.length }
+    const otherProps2 = component?.state?.info?.tribunes?.length
+        ? { count_data: component.state.info.tribunes.length }
         : {};
-    const otherProps3 = component?.state?.info?.promotion_infos?.length
-        ? { count_data: component.state.info.promotion_infos.length }
+    const otherProps3 = component?.state?.info?.ritual_reports?.length
+        ? { count_data: component.state.info.ritual_reports.length }
         : {};
 
     return (
@@ -83,7 +83,7 @@ export default function Form({ id, panel = "admin" }) {
                             <SelectTail
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
-                                // key={"promotion" + needles?.promotion?.length}
+                                key={"promotion" + needles?.promotion?.length}
                                 required="true"
                                 data={needles?.promotion}
                             />
