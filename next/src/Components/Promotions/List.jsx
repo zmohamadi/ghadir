@@ -4,7 +4,7 @@ import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 
-export function List({panel,access , query}){
+export function List({panel="admin",access=true , query=""}){
 
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
@@ -52,6 +52,7 @@ export function List({panel,access , query}){
                 { label: "report_count", jsx: (item) => <span>{item?.report_count}</span> },
                 { label: "sum_support", jsx: (item) => <span>{item?.sum_support}</span> },
             ] : []),
+            { label: "created_at", field: "created_at" },
             {
                 label: "",
                 sort: false,

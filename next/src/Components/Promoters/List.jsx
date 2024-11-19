@@ -6,7 +6,7 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
 
-export function List(){
+export function List({panel="admin",access=true , query=""}){
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
@@ -36,7 +36,7 @@ export function List(){
             {label: "mobile", field: "mobile" },
             {label: "gender", sort:false, field: "gender.title_"+local},
             {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
-           
+            { label: "created_at", field: "created_at" },
 
             
             {label: "", sort:false, 

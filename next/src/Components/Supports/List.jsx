@@ -5,7 +5,7 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { useAuth } from "@/lib/auth";
 
-export function List({panel,query,access}){
+export function List({panel="admin",access=true , query=""}){
     
     // var access = panel == "admin";
     // const {user} = useAuth();
@@ -38,6 +38,7 @@ export function List({panel,query,access}){
             {label: "type", field: "type.title" },
             {label: "amount", field: "amount" },
             {label: "pack_items", field: "pack_items" },
+            { label: "created_at", field: "created_at" },
             {label: "", sort:false, 
                 jsx:(item)=><>
                     <div className='flex justify-center '>

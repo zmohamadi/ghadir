@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
 
-export function List({panel="admin"}){
+export function List({panel="admin",access=true,query=""}){
     // console.log(panel);
     // const access = panel=="admin" ? true : false;
     // const {user} = useAuth();
@@ -16,10 +16,10 @@ export function List({panel="admin"}){
     const {destroy} = useData();
 
     const formUrl = nextAdmin+"/reports";
-    const url = laraAdmin+"/reports" ;
+    const url = laraAdmin+"/reports?"+query ;
 
     let info = {
-        insertLink: `${formUrl}/new`,
+        insertLink: !access && `${formUrl}/new`,
         perPage:20,
         url: url,
         columns: [
@@ -41,17 +41,24 @@ export function List({panel="admin"}){
             // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
             // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
             // {label: "has_course", jsx: (item)=><span>{item?.has_course == 1 ?Lang('public.has') : "-"}</span>},
-            // {label: "has_tribune", jsx: (item)=><span>{item?.has_tribune == 1 ?Lang('public.has') : "-"}</span>},
-           
-
-            
+            ...(access ? [
+                { 
+                    label: "promoter", 
+                    jsx: (item) => (
+                        <span>
+                            {item?.promoter?.firstname} {item?.promoter?.lastname}
+                        </span>
+                    )
+                },
+            ] : []),
+            { label: "created_at", field: "created_at" },
             {label: "", sort:false, 
                 jsx:(item)=><>
                     <div className='flex justify-center '>
-                        <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
+                        <FeatherIcon access={!access} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
                         {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
                         <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
-                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/promotions"+"/"+item?.id)} />
+                        <FeatherIcon name="XOctagon" access={!access} tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/promotions"+"/"+item?.id)} />
                     </div>
                 </>
             }, 

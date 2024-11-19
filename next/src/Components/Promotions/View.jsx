@@ -267,7 +267,7 @@ export function View({ id ,panel,access}) {
                                     {data?.reports.map((report, index) => (
                                         <li key={index}>
                                             <Link href={`${nextAdmin}/reports/${report.id}`} className="text-blue-600">
-                                            {index + 1}.{report?.firstname} {report?.lastname}
+                                                {index + 1}.{report?.promoter?.firstname} {report?.promoter?.lastname} ({Lang('public.view')} {Lang('public.report')})
                                             </Link>
                                         </li>
                                     ))}
@@ -286,7 +286,7 @@ export function View({ id ,panel,access}) {
                                     {data?.supports.map((support, index) => (
                                         <li key={index}>
                                             <Link href={`${nextAdmin}/supports/${support.id}`} className="text-blue-600">
-                                            {index + 1}.{support?.type?.title}
+                                            {index + 1}.{support?.type?.title} ({Lang('public.view')} {Lang('public.support')})
                                             </Link>
                                         </li>
                                     ))}

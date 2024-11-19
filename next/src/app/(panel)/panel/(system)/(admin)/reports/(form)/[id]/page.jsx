@@ -1,5 +1,5 @@
 "use client";
-import { View } from "@/Components/Supports/View";
+import { View } from "@/Components/Reports/View";
 
 export default function page({params}){
     return(

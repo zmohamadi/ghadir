@@ -11,7 +11,8 @@ class PromotionController extends BaseAbstract
     protected $request = 'Publics\Requests\PromotionRequest';
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor","activeRegister","activeReport"];
-    protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport","agrees","supports.type","reports","rituals"];
+    protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport",
+    "supports.type","rituals"];
     protected $needles = ['Base\Status',"Ritual"];
     protected $files = ["photo"];
 
@@ -20,22 +21,30 @@ class PromotionController extends BaseAbstract
         $this->showQuery = function ($query,$before) {
             $user = $this->user_id;
             $role = $this->role_id;
+            $promoter_id = $query->id;
             if($role==1){
                 $query->with(['agrees.promoter','agrees.rituals']);
             }else{
 
                 // بارگذاری agrees و rituals با استفاده از فیلترها
-                $query->with(['agrees' => function ($q) use ($user,$query) {
-                    // فیلتر کردن agrees بر اساس promoter_id و promotion_id
+                $query->with(['agrees' => function ($q) use ($user,$promoter_id) {
                     $q->where('promoter_id', $user)
-                      ->where('promotion_id', 3); // فرض بر این است که promotion_id از جایی آمده است (مثلاً $this->promotion_id)
+                      ->where('promotion_id', $promoter_id);
                     
                     // بارگذاری rituals برای هر agree
-                    $q->with(['rituals' => function ($q) use ($user,$query) {
-                        // فیلتر کردن rituals بر اساس promoter_id و promotion_id
+                    $q->with(['rituals' => function ($q) use ($user,$promoter_id) {
                         $q->where('promoter_id', $user)
-                          ->where('promotion_id', 3); // فرض بر این است که promotion_id از جایی آمده است (مثلاً $this->promotion_id)
+                          ->where('promotion_id', $promoter_id);
                     }]);
+                }]);
+            }
+            if($role==1){
+                $query->with(['reports.promoter']);
+            }else{
+
+                $query->with(['reports' => function ($q) use ($user,$promoter_id) {
+                    $q->where('promoter_id', $user)
+                      ->where('promotion_id', $promoter_id);
                 }]);
             }
         };

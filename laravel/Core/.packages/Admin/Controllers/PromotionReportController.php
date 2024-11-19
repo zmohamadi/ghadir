@@ -13,8 +13,8 @@ class PromotionReportController extends BaseAbstract
     protected $model = 'Models\PromotionReport';
     protected $request = 'Publics\Requests\PromotionReportRequest';
     protected $searchFilter = ['title'];
-    protected $with = ["promotion"];
-    protected $showWith = ["promotion","tribunes.audienceType","courses.audienceType","ritualReports.ritual"];
+    protected $with = ["promotion","promoter"];
+    protected $showWith = ["promotion","promoter","tribunes.audienceType","courses.audienceType","ritualReports.ritual"];
     protected $files = ["photo"];
     protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType"];
 
@@ -22,7 +22,10 @@ class PromotionReportController extends BaseAbstract
     public function init()
     {
         $this->indexQuery = function ($query) {
-            $query->where('promoter_id', $this->user_id);
+            if(request()->promoter)
+            {
+                $query->where('promoter_id', $this->user_id);
+            };
         };
 
         $this->storeQuery = function ($query) {

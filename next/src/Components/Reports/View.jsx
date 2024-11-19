@@ -8,8 +8,7 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { Button, ButtonContainer, Frame, Pic, useData, useFormRefs } from "@/Theme/Midone";
 import Link from "next/link";
 
-export function View({params }) {
-    let id = params?.id
+export function View({id }) {
     const { Lang,local } = useLang();
     const { laraAdmin,nextAdmin,mediaPath  } = useConfig();
     const { get,getNeedles } = useData();
@@ -50,13 +49,13 @@ export function View({params }) {
                         <TabList href="tab-first" title={Lang("public.promotion")} active={"true"}>
                             {Lang("public.promotion")}
                         </TabList>
-                        <TabList href="tab-second" title={Lang("public.courses")}>
+                        <TabList href="tab-second" title={Lang("public.user_courses")}>
                             {Lang("public.courses")}
                         </TabList>
-                        <TabList href="tab-third" title={Lang("public.tribunes")}>
+                        <TabList href="tab-third" title={Lang("public.user_tribunes")}>
                             {Lang("public.tribunes")}
                         </TabList>
-                        <TabList href="tab-fourth" title={Lang("public.ritual")}>
+                        <TabList href="tab-fourth" title={Lang("public.user_ritual")}>
                             {Lang("public.ritual")}
                         </TabList>
                     </TabHeader>

@@ -21,7 +21,7 @@ return [
     'myPromotions'=>'تبلیغات من',
     'myReports'=>'گزارشات من',
     'mySupports'=>'حمایتهای من',
-    'promoters'=>'مبلغین',
+    'promoters'=>'مبلّغین',
     'personnels'=>'پرسنل',
     'active_promotions'=>'تبلیغات فعال',
 
