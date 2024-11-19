@@ -8,6 +8,7 @@ import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame, Ra
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
+import { Loading } from "@/Theme/Midone";
 
 export function Form({id,panel="admin"}){
     const link = "/promotions";
@@ -54,6 +55,11 @@ export function Form({id,panel="admin"}){
             <>
                 {/* <Frame title={Lang(["public.support"])}> */}
                     {/* <Box> */}
+                    {(data==undefined || needles==null)?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
                     <div className="pos intro-y grid grid-cols-12 gap-5 mt-5">
                         <div className="intro-y col-span-12 lg:col-span-8">
                             <Input label="title" refItem={[component, "title"]} required="true" />
@@ -81,7 +87,7 @@ export function Form({id,panel="admin"}){
 
                             </div>
                         </div>
-                    </div>
+                    </div></>}
                     {/* </Box>     */}
                 {/* </Frame> */}
                 <ButtonContainer>

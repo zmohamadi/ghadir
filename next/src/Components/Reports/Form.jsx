@@ -63,6 +63,11 @@ export function Form({ id, panel = "admin" }) {
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
+            {(data==undefined || needles==null)?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
                 <Tab className="col-span-12">
                     <TabHeader>
                         <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}>
@@ -83,7 +88,7 @@ export function Form({ id, panel = "admin" }) {
                             <SelectTail
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
-                                key={"promotion" + needles?.promotion?.length}
+                                // key={"promotion" + needles?.promotion?.length}
                                 required="true"
                                 data={needles?.promotion}
                             />
@@ -99,7 +104,7 @@ export function Form({ id, panel = "admin" }) {
                             <Repeat needles={needles} {...otherProps3} child={Ritual} parent={component} />
                         </TabPanel>
                     </TabBody>
-                </Tab>
+                </Tab> </>}
             </Frame>
             <ButtonContainer>
                 <Button label="save" onClick={saveItem} />

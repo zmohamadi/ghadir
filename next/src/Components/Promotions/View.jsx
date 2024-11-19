@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Button, ButtonContainer, CheckBox, Input, useData, useFormRefs } from "@/Theme/Midone/Forms";
-import { Pic } from "@/Theme/Midone";
+import { Loading, Pic } from "@/Theme/Midone";
 import { Frame } from "@/Theme/Midone/Forms";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import Link from "next/link";
@@ -41,6 +41,11 @@ export function View({ id ,panel,access}) {
 
     return (<>
         <Frame title={data?.title || Lang(["public.promotion_details"])}>
+        {((data==undefined))?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
             <Input type="hidden" defaultValue={id} refItem={[component, "promotion_id"]} />
             <Tab className="col-span-12">
                 <TabHeader>
@@ -293,6 +298,7 @@ export function View({ id ,panel,access}) {
                     </TabPanel>
                 </TabBody>
             </Tab>
+            </>}
         </Frame>
         <ButtonContainer>
             {
@@ -306,6 +312,7 @@ export function View({ id ,panel,access}) {
             {data?.report_status == 1 && panel=="promoter" && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new`}>{Lang('public.report')}</Link>}
             <Button label="back" onClick={back} />
         </ButtonContainer>
+        
     </>
         
     );

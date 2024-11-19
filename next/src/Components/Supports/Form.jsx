@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from "@/lib/auth";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
+import { Loading } from "@/Theme/Midone";
 
 export function Form({id,panel="admin"}){
     const link = "/supports";
@@ -52,18 +53,25 @@ export function Form({id,panel="admin"}){
             <>
                 <Frame title={Lang(["public.support"])}>
                     <Box>
+                {(data==undefined || needles==null)?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
                         <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
-                            key={"occasion" + needles?.promotion?.lenght} required="true"
+                            // key={"occasion" + needles?.promotion?.lenght} 
+                            required="true"
                             data={needles?.promotion} 
                         />
                         <SelectTail label="type" refItem={[component, "type_id"]} 
-                            key={"type" + needles?.supporttype?.lenght} required="true"
+                            // key={"type" + needles?.supporttype?.lenght} 
+                            required="true"
                             data={needles?.supporttype} 
                         />
                         <Input label="amount_if" refItem={[component, "amount"]}  />
 
                         <SelectTail multiple={true} label="included_users" refItem={[component, "promoters"]} 
-                            key={"type" + needles?.promoter?.lenght}
+                            // key={"type" + needles?.promoter?.lenght}
                         >
                             {
                                 needles?.promoter?.map((item ,index)=>{
@@ -73,8 +81,7 @@ export function Form({id,panel="admin"}){
                         </SelectTail>
                         <Textarea label="pack_items"  refItem={[component, "pack_items"]}  />
                         <Textarea label="description" required="true" refItem={[component, "description"]}  />
-
-                    </Box>    
+                    </>}</Box>
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />

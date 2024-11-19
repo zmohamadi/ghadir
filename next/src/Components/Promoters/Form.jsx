@@ -68,6 +68,11 @@ export function Form({id,panel="admin"}){
         
             <>
                 <Frame title={Lang(["public.promoter"])}>
+                {(data==undefined || needles==null)?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
                     <Tab className="col-span-12">
                         <TabHeader>
                             <TabList href="tab-first" title={Lang('public.personal_info')} active={"true"}>{Lang("public.personal_info")}</TabList>
@@ -143,6 +148,7 @@ export function Form({id,panel="admin"}){
                             </TabPanel>
                         </TabBody>
                     </Tab>
+                    </>}
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />
