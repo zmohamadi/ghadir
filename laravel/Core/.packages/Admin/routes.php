@@ -9,8 +9,9 @@ Route::resource("supports", "SupportController");
 Route::get("reports/get-needles", "PromotionReportController@getNeedles");
 Route::resource("reports", "PromotionReportController");
 
-Route::get("register-promotions/get-needles", "PromotionReportController@getNeedles");
-Route::resource("register-promotions", "PromotionReportController");
+// Route::post("agree/{id}", "Person\UserController@changeRole");
+Route::get("agree/get-needles", "PromotionAgreeController@getNeedles");
+Route::resource("agree", "PromotionAgreeController");
 
 Route::get("promotions/get-needles", "PromotionController@getNeedles");
 Route::resource("promotions", "PromotionController");

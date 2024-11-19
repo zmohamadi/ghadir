@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Button, ButtonContainer, CheckBox, useData, useFormRefs } from "@/Theme/Midone/Forms";
+import { Button, ButtonContainer, CheckBox, Input, useData, useFormRefs } from "@/Theme/Midone/Forms";
 import { Pic } from "@/Theme/Midone";
 import { Frame } from "@/Theme/Midone/Forms";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
@@ -31,12 +31,13 @@ export function View({ id ,panel,access}) {
         );
     }
     const back = ()=>router.back();
-    const saveItem = ()=>save(`${laraAdmin}/register/${id}`, component, "new", `${nextAdmin}/promotions`);
+    const saveItem = ()=>save(`${laraAdmin}/agree`, component, "new", `/promotions`);
 
     // console.log(data?.register_status);
 
     return (<>
         <Frame title={data?.title || Lang(["public.promotion_details"])}>
+            <Input type="hidden" defaultValue={id} refItem={[component, "promotion_id"]} />
             <Tab className="col-span-12">
                 <TabHeader>
                     <TabList href="tab-first" title={Lang('public.promotion_details')} active={"true"}>{Lang("public.promotion_details")}</TabList>
@@ -95,7 +96,7 @@ export function View({ id ,panel,access}) {
                                         // اگر پنل ادمین نباشد و ثبت‌نام باز باشد
                                         <>
                                             {data?.has_tribune && data?.register_status == 1 ? (
-                                                <div className="lg:col-span-2"><CheckBoxGroup  data={data?.rituals} key={"ritual" + data?.rituals?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual[]`]} /></div>
+                                                <div className="lg:col-span-2"><CheckBoxGroup  data={data?.rituals} key={"ritual" + data?.rituals?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `agree_ritual`]} /></div>
 
                                             ) : (
                                                 <>
@@ -135,7 +136,7 @@ export function View({ id ,panel,access}) {
                                                         name={Lang("public.ready")} 
                                                         className="mt-5" 
                                                         label={Lang("public.holding_course")} 
-                                                        refItem={[component, "user_has_course"]} 
+                                                        refItem={[component, "agree_has_course"]} 
                                                     />
                                                 ) : (
                                                     <>
@@ -165,7 +166,7 @@ export function View({ id ,panel,access}) {
                                                         name={Lang("public.ready")} 
                                                         className="mt-5" 
                                                         label={Lang("public.holding_course")} 
-                                                        refItem={[component, "user_has_tribune"]} 
+                                                        refItem={[component, "agree_has_tribune"]} 
                                                     />
                                                 ) : (
                                                     <>

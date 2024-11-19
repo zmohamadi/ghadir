@@ -38,8 +38,16 @@ class Promotion extends Model
     }
     public function agrees()
     {
-        return $this->belongsToMany(\Models\Person\Promoter::class, 'promotion_agree', 'promotion_id', 'promoter_id');
+        return $this->hasMany(PromotionAgree::class, 'promotion_id');
     }
+    public function agreePromoters()
+    {
+        return $this->belongsToMany(\Models\Person\Promoter::class, 'promotion_agree', 'promotion_id', 'promoter_id')
+            ->select(['users.id']) // فقط ستون id از مدل Promoter انتخاب شود
+            ->withPivot(['has_course', 'has_tribune']) // انتخاب فیلدهای جدول میانی
+            ;
+    }
+
     public function rituals()
     {
         return $this->belongsToMany(Ritual::class, 'promotion_ritual', 'promotion_id', 'ritual_id');

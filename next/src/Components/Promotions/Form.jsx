@@ -76,8 +76,7 @@ export function Form({id,panel="admin"}){
                                 />
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} refItem={[component, `has_course`]} />
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
-
-                                <CheckBoxGroup className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual" + data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual[]`]} />
+                                <CheckBoxGroup defaultValue={data?.rituals} className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual" + data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
                                 
 
                             </div>
