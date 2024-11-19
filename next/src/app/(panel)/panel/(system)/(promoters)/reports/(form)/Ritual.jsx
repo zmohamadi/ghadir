@@ -21,6 +21,8 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                 <SelectTail label="province" refItem={[parent,`r_province_${index}`]} 
                     key={"province"+needles?.province?.length}
                     data={needles?.province} titleKey={"name_fa"} 
+                    defaultValue={info?.province_id}
+
                 />
                 <SelectTail label="city_sh" refItem={[parent,`r_city_id_${index}`]} 
                     key={"city_sh"+needles?.city?.length}
@@ -33,7 +35,7 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
 
                 
             
-            <div className="col-span-12 flex justify-start items-start">
+            <div className="col-span-12 flex justify-start items-start border-b-2">
                 {addIcon}
             </div>
     </>

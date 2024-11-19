@@ -21,4 +21,8 @@ class Course extends Model
         'end_date' => 'datetime',
         'deleted_at' => 'timestamp',
     ];
+    public function audienceType()
+    {
+        return $this->belongsTo(AudienceType::class, 'audiencetype_id');
+    }
 }

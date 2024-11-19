@@ -14,7 +14,7 @@ class PromotionReportController extends BaseAbstract
     protected $request = 'Publics\Requests\PromotionReportRequest';
     protected $searchFilter = ['title'];
     protected $with = ["promotion"];
-    protected $showWith = ["promotion","tribunes","courses","ritualReports"];
+    protected $showWith = ["promotion","tribunes.audienceType","courses.audienceType","ritualReports.ritual"];
     protected $files = ["photo"];
     protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType"];
 
@@ -32,9 +32,8 @@ class PromotionReportController extends BaseAbstract
             $query->save();
         
             // ************************************ Course ************************************
-            $courses = $this->getRepeatValues(['c_province', 'c_city_id', 'c_city', 'c_village', 
-                'c_subject', 'c_place_name','c_duration','c_people_count','c_audiencetype_id']);
-        
+            $courses = $this->getRepeatValues(['c_province', 'c_city_id', 'c_city', 'c_village',
+                'c_subject', 'c_place_name','c_duration','c_people_count','c_audiencetype_id']);            
             if (!empty($courses)) {
                 $coursesArray = [];
                 foreach ($courses as $value) {

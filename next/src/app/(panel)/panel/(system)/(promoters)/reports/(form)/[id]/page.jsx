@@ -47,8 +47,8 @@ export default function page({params }) {
             <Frame title={Lang(["public.promoter"])}>
                 <Tab className="col-span-12">
                     <TabHeader>
-                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}>
-                            {Lang("public.select_promotion")}
+                        <TabList href="tab-first" title={Lang("public.promotion")} active={"true"}>
+                            {Lang("public.promotion")}
                         </TabList>
                         <TabList href="tab-second" title={Lang("public.courses")}>
                             {Lang("public.courses")}
@@ -69,7 +69,6 @@ export default function page({params }) {
                                         defaultImg={`${mediaPath}/public/default/avatar.png`}
                                         className="rounded-md border"
                                         key={"img" + data?.photo}
-                                        label={Lang("public.you_send_photo")}
                                     />
                                 </div>
                                 <div className="flex gap-4">
@@ -106,7 +105,7 @@ export default function page({params }) {
                                     </div>
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.audiencetype")}</label>
-                                        <div className="p-2 border rounded">{info?.audiencetype_id}</div>
+                                        <div className="p-2 border rounded">{info?.audience_type?.title}</div>
                                     </div>
                                     
                                 </div>
@@ -121,17 +120,17 @@ export default function page({params }) {
                                             }
                                             {
                                                 info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
                                                 info?.city ? `${Lang('public.city')}: ${info.city} - ` : ""
                                             }
                                             {
-                                                info?.village ? `${Lang('public.village')}: ${info.village}` : ""
+                                                info?.village ? `${Lang('public.village')}: ${info.village} - ` : ""
                                             }
                                             {
-                                                info?.place_name ? `${Lang('public.place')}: ${info.place_name}` : ""
+                                                info?.place_name ? `${Lang('public.place_name')}: ${info.place_name}` : ""
                                             }
                                         </p>
                                     </div>
@@ -162,7 +161,7 @@ export default function page({params }) {
                                     </div>
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.audiencetype")}</label>
-                                        <div className="p-2 border rounded">{info?.audiencetype_id}</div>
+                                        <div className="p-2 border rounded">{info?.audience_type?.title}</div>
                                     </div>
                                     
                                 </div>
@@ -172,22 +171,22 @@ export default function page({params }) {
                                         <p className="text-sm text-gray-700">
                                             {
                                                 info?.province_id && needles?.province?.find(item => item.id === info.province_id)
-                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id === info.province_id)?.name_fa} - `
+                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id === info.province_id)?.name_fa} -`
                                                     : ""
                                             }
                                             {
                                                 info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
                                                 info?.city ? `${Lang('public.city')}: ${info.city} - ` : ""
                                             }
                                             {
-                                                info?.village ? `${Lang('public.village')}: ${info.village}` : ""
+                                                info?.village ? `${Lang('public.village')}: ${info.village} - ` : ""
                                             }
                                             {
-                                                info?.place_name ? `${Lang('public.place')}: ${info.place_name}` : ""
+                                                info?.place_name ? `${Lang('public.place_name')}: ${info.place_name}` : ""
                                             }
                                         </p>
                                     </div>
@@ -206,7 +205,7 @@ export default function page({params }) {
                                 <div className="flex gap-4">
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.ritual")}</label>
-                                        <div className="p-2 border rounded">{info?.ritual_id}</div>
+                                        <div className="p-2 border rounded">{info?.ritual?.title}</div>
                                     </div>
                                 </div>
                                 <div className="w-full">
@@ -224,17 +223,17 @@ export default function page({params }) {
                                             }
                                             {
                                                 info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
                                                 info?.city ? `${Lang('public.city')}: ${info.city} - ` : ""
                                             }
                                             {
-                                                info?.village ? `${Lang('public.village')}: ${info.village}` : ""
+                                                info?.village ? `${Lang('public.village')}: ${info.village} -` : ""
                                             }
                                             {
-                                                info?.place_name ? `${Lang('public.place')}: ${info.place_name}` : ""
+                                                info?.place_name ? `${Lang('public.place_name')}: ${info.place_name}` : ""
                                             }
                                         </p>
                                     </div>
