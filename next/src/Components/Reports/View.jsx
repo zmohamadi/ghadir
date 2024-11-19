@@ -8,7 +8,7 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { Button, ButtonContainer, Frame, Pic, useData, useFormRefs } from "@/Theme/Midone";
 import Link from "next/link";
 
-export default function page({params }) {
+export function View({params }) {
     let id = params?.id
     const { Lang,local } = useLang();
     const { laraAdmin,nextAdmin,mediaPath  } = useConfig();

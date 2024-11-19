@@ -1,5 +1,5 @@
 "use client";
-import Form from '@/app/(panel)/panel/(system)/(promoters)/reports/(form)/form';
+import { Form } from "@/Components/Reports/Form";
 
 export default function page({params}){
     const panel = "promoter";

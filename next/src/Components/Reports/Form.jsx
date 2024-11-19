@@ -13,7 +13,7 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 
-export default function Form({ id, panel = "admin" }) {
+export function Form({ id, panel = "admin" }) {
     const link = "/reports";
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();

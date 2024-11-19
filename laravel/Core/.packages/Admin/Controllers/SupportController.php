@@ -20,8 +20,7 @@ class SupportController extends BaseAbstract
         $this->indexQuery = function ($query) {
             if(request()->promoter)
             {
-                $promoter = request()->promoter;
-
+                $promoter = request()->promoter;                
                 $query->whereHas('promoters', function ($q) use ($promoter) {
                    $q->where('promoter_id', $promoter);
                 });

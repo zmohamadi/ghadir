@@ -63,6 +63,11 @@ export function View({ id ,panel,access}) {
                                 />
                             </div>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+                                {/* Title */}
+                                <div>
+                                    <p className="text-sm text-gray-500">{Lang(["public.title"])}</p>
+                                    <h2 className="text-lg font-medium text-gray-700">{data?.title || "-"}</h2>
+                                </div>
                                 {/* Year */}
                                 <div>
                                     <p className="text-sm text-gray-500">{Lang(["public.year"])}</p>

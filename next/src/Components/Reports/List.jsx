@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ButtonContainer } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
 
-export default function Page({panel="admin"}){
+export function List({panel="admin"}){
     // console.log(panel);
     // const access = panel=="admin" ? true : false;
     // const {user} = useAuth();
@@ -60,7 +60,7 @@ export default function Page({panel="admin"}){
 
     return(
         <>
-            <Frame title={Lang(["public.promotions"])}>
+            <Frame title={Lang(["public.reports"])}>
                 <div className="intro-y col-span-12">
                     <Grid {...info} />
                    

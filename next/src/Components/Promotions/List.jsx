@@ -35,16 +35,16 @@ export function List({panel,access , query}){
                 { 
                     label: "register_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_status?.color}>
-                            {item?.register_status?.["title_" + local]}
+                        <span className={"text-" + item?.active_register?.color}>
+                            {item?.active_register?.["title_" + local]}
                         </span>
                     )
                 },
                 { 
                     label: "report_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_status?.color}>
-                            {item?.report_status?.["title_" + local]}
+                        <span className={"text-" + item?.active_report?.color}>
+                            {item?.active_report?.["title_" + local]}
                         </span>
                     )
                 },
@@ -85,7 +85,7 @@ export function List({panel,access , query}){
                             name="XOctagon" 
                             tooltip={Lang('public.delete')} 
                             color="darkred" 
-                            onClick={() => destroy(laraAdmin + "/promotions/" + item?.id)} 
+                            onClick={() => destroy(laraAdmin + "/reports/" + item?.id)} 
                         />
                     </div>
                 ),

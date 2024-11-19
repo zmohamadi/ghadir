@@ -1,6 +1,6 @@
 "use client";
 
-import { List } from "@/Components/Supports/List";
+import { List } from "@/Components/Reports/List";
 import { useAuth } from "@/lib";
 
 export default function Page() {

@@ -30,11 +30,11 @@ class Promotion extends Model
     }
     public function supports()
     {
-        return $this->hasMany(Support::class, 'promotion_id', 'id');
+        return $this->hasMany(Support::class, 'promotion_id');
     }
     public function reports()
     {
-        return $this->hasMany(PromotionReport::class, 'promotion_id', 'id');
+        return $this->hasMany(PromotionReport::class, 'promotion_id');
     }
     public function agrees()
     {

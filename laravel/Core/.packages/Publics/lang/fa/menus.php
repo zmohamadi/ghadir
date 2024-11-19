@@ -23,6 +23,7 @@ return [
     'mySupports'=>'حمایتهای من',
     'promoters'=>'مبلغین',
     'personnels'=>'پرسنل',
+    'active_promotions'=>'تبلیغات فعال',
 
 ];
 ?>

@@ -10,7 +10,7 @@ export const getMenus = (user) => {
         
         { title: "promotions", icon: "Book", href: "/promotions" },
         { title: "supports", icon: "Aperture", href: "/supports" },
-        // { title: "reports", icon: "Package", href: "/promotion_reports" },
+        { title: "reports", icon: "Package", href: "/reports" },
         
         // { title: "blog", icon: "Book", href: "/blog" },
         // { title: "comments", icon: "BookOpen", href: "/comments" },
@@ -20,9 +20,9 @@ export const getMenus = (user) => {
     const promoter = [
        
         { title: "dashboard", icon: "Pocket", href: "/dashboard" },
-        { title: "promotions", icon: "Book", href: "/promotions" },
+        { title: "active_promotions", icon: "Book", href: "/promotions" },
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
-        { title: "myReports", icon: "Book", href: "/reports" },
+        { title: "myReports", icon: "Book", href: "/myReports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },
         // { title: "blog", icon: "Book", href: "/blog" },
         // { title: "tickets", icon: "Book", href: "/myTickets" },
