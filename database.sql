@@ -248,7 +248,9 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE `courses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `subject` varchar(255) DEFAULT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
   `promotion_report_id` int(11) DEFAULT NULL,
+  `promoter_id` int(11) DEFAULT NULL,
   `duration` varchar(100) DEFAULT NULL,
   `audiencetype_id` int(11) DEFAULT NULL,
   `people_count` int(11) DEFAULT NULL,
@@ -383,10 +385,38 @@ CREATE TABLE `promotion_agree` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `promoter_id` int(11) DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
+  `has_course` int(1) DEFAULT 0,
+  `has_tribune` int(1) DEFAULT 0,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `promotion_agree` */
+
+insert  into `promotion_agree`(`id`,`promoter_id`,`promotion_id`,`has_course`,`has_tribune`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,2,3,1,1,NULL,'2024-11-19 17:26:56','2024-11-19 13:56:56');
+
+/*Table structure for table `promotion_agree_item` */
+
+DROP TABLE IF EXISTS `promotion_agree_item`;
+
+CREATE TABLE `promotion_agree_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `agree_id` int(11) DEFAULT NULL,
+  `ritual_id` int(11) DEFAULT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
+  `promoter_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+
+/*Data for the table `promotion_agree_item` */
+
+insert  into `promotion_agree_item`(`id`,`agree_id`,`ritual_id`,`promotion_id`,`promoter_id`) values 
+(1,1,2,3,2),
+(2,1,3,3,2),
+(3,1,4,3,2);
 
 /*Table structure for table `promotion_positions` */
 
@@ -425,9 +455,12 @@ CREATE TABLE `promotion_reports` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotion_reports` */
+
+insert  into `promotion_reports`(`id`,`promotion_id`,`promoter_id`,`photo`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,2,2,'image72951732021183.jpg',NULL,NULL,'2024-11-19 13:59:49','2024-11-19 13:59:49');
 
 /*Table structure for table `promotion_ritual` */
 
@@ -438,14 +471,15 @@ CREATE TABLE `promotion_ritual` (
   `ritual_id` int(11) DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `promotion_ritual` */
 
 insert  into `promotion_ritual`(`id`,`ritual_id`,`promotion_id`) values 
 (1,1,3),
 (2,2,3),
-(3,3,3);
+(3,3,3),
+(4,4,3);
 
 /*Table structure for table `promotions` */
 
@@ -477,7 +511,7 @@ CREATE TABLE `promotions` (
 /*Data for the table `promotions` */
 
 insert  into `promotions`(`id`,`title`,`year`,`photo`,`comments`,`commitments`,`register_status`,`report_status`,`has_course`,`has_tribune`,`status_id`,`user_count`,`report_count`,`sum_support`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',1,1,1,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-17 13:10:38'),
+(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',0,1,1,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-17 13:10:38'),
 (2,'نیمه شعبان',1404,'image41621731845468.jpg','نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',NULL,1,1,0,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:11:18','2024-11-17 13:11:18'),
 (3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,1,1,1,1,0,0,0,1,2,NULL,'2024-11-17 13:13:02','2024-11-18 13:47:20');
 
@@ -489,6 +523,8 @@ CREATE TABLE `ritual_reports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ritual_id` int(11) DEFAULT NULL,
   `promotion_report_id` int(11) DEFAULT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
+  `promoter_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `place_name` varchar(255) DEFAULT NULL,
@@ -500,9 +536,12 @@ CREATE TABLE `ritual_reports` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ritual_reports` */
+
+insert  into `ritual_reports`(`id`,`ritual_id`,`promotion_report_id`,`promotion_id`,`promoter_id`,`description`,`city_id`,`place_name`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,4,1,2,2,'اطعام در مدرسه دخترانه انجام شد.نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',1,'مدرسه مهدویت',1,'کهک','کهک',1,NULL,NULL,NULL);
 
 /*Table structure for table `rituals` */
 
@@ -562,13 +601,14 @@ CREATE TABLE `support_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `support_users` */
 
 insert  into `support_users`(`id`,`promoter_id`,`support_id`,`deleted_at`,`created_at`,`updated_at`) values 
 (1,1,2,NULL,NULL,NULL),
-(2,3,3,NULL,NULL,NULL);
+(2,3,3,NULL,NULL,NULL),
+(3,2,3,NULL,NULL,NULL);
 
 /*Table structure for table `supports` */
 
@@ -639,6 +679,8 @@ CREATE TABLE `tribunes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `subject` varchar(255) DEFAULT NULL,
   `promotion_report_id` int(11) DEFAULT NULL,
+  `promoter_id` int(11) DEFAULT NULL,
+  `promotion_id` int(11) DEFAULT NULL,
   `duration` varchar(10) DEFAULT NULL,
   `audiencetype_id` int(11) DEFAULT NULL,
   `people_count` int(11) DEFAULT NULL,
@@ -652,9 +694,12 @@ CREATE TABLE `tribunes` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tribunes` */
+
+insert  into `tribunes`(`id`,`subject`,`promotion_report_id`,`promoter_id`,`promotion_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(7,'مهدویت و جامعه امروز',1,2,2,'45',2,200,'مسجد الزهرا',2,2,'تهران',NULL,1,NULL,NULL,NULL);
 
 /*Table structure for table `user_notes` */
 
@@ -771,7 +816,7 @@ CREATE TABLE `users` (
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',1,NULL,NULL,NULL,NULL,'5hI3dooHk4wqpGvHOgyqdw76tC5UZUK4Rxhil2MTClxedsXUYW0TvJQoblXN',1,NULL,'2024-11-14 04:22:30','2024-11-17 12:59:04'),
+(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',1,NULL,NULL,NULL,NULL,'n042AyoCuYzA2nl9Bfq3Mjha1SEWVni3KBNF6lqEQHVocDgn5PxKdj9uUrVo',1,NULL,'2024-11-14 04:22:30','2024-11-17 12:59:04'),
 (2,'09198526839',NULL,NULL,0,'$2y$12$fNtBeR/d.A5udXPa6cgC0.5lgER02tgxUnKzwffWOsEQSjL5O2aAq','مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',1,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,1,'sDmMDV6EH4ICSYxIdSalEDmgEQegmi6dF3XqgyyyERP2WL7A4tIX7IvOcuiV',1,NULL,'2024-11-17 13:02:31','2024-11-18 12:23:28'),
 (3,'09191519138',NULL,NULL,0,NULL,'الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',1,2,4,NULL,1,'sDmMDV6EH4ICSYxIdSalEDmgEQegmi6dF3XqgyyyERP2WL7A4tIX7IvOcuiV',1,NULL,'2024-11-17 13:04:53','2024-11-17 19:44:06');
 
