@@ -5,7 +5,7 @@ namespace Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Models\Traits\Base;
-
+use Morilog\Jalali\Jalalian;
 class Promotion extends Model
 {
     use HasFactory,Base;
@@ -17,7 +17,7 @@ class Promotion extends Model
      * @var array
      */
     protected $casts = [
-        'deleted_at' => 'timestamp',
+        'deleted_at' => 'timestamp','created_at' => 'datetime','updated_at' => 'datetime',
     ];
 
     public function activeRegister()
@@ -51,5 +51,9 @@ class Promotion extends Model
     public function rituals()
     {
         return $this->belongsToMany(Ritual::class, 'promotion_ritual', 'promotion_id', 'ritual_id');
+    }
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
     }
 }

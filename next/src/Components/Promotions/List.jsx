@@ -63,7 +63,7 @@ export function List({panel,access}){
                             url={formUrl + "/" + item?.id + "/edit"} 
                             tooltip={Lang('public.edit')} 
                         />
-                        <FeatherIcon 
+                        {/* <FeatherIcon 
                             access={access} 
                             name="Users" 
                             url={nextAdmin + "/promotions/" + item?.id + "/promoters"} 
@@ -74,7 +74,7 @@ export function List({panel,access}){
                             name="Package" 
                             url={nextAdmin + "/promotions/" + item?.id + "/supports"} 
                             tooltip={Lang('public.supports')} 
-                        />
+                        /> */}
                         <FeatherIcon 
                             name="Eye" 
                             url={formUrl + "/" + item?.id} 

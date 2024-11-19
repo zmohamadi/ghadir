@@ -68,7 +68,12 @@ $lang = [
    'close'=>'بسته',
    'ready'=>'داوطلب هستم',
    'holding_course'=>'برگزاری دوره',
-   'register_promotion'=>'ثبتنام در تبلیغ'
+   'register_promotion'=>'ثبتنام در تبلیغ',
+   'you_registered'=>'شما قبلا ثبتنام کرده اید !',
+   'created_at'=>'تاریخ ثبت',
+   'promoters_registered'=>'مبلغ هایی که ثبت نام کرده اند !',
+   'promoters_reports'=>'گزارش هایی که مبلغین ثبت کرده اند !',
+   'supports_promoions'=>'حمایتهای که برای این تبلیغ اجرا شده است !'
    
 
 ];
