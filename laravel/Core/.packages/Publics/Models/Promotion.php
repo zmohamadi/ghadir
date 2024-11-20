@@ -17,7 +17,7 @@ class Promotion extends Model
      * @var array
      */
     protected $casts = [
-        'deleted_at' => 'timestamp','created_at' => 'datetime','updated_at' => 'datetime',
+        'deleted_at' => 'timestamp','created_at' => 'datetime','updated_at' => 'datetime',"last_login"=>'datetime'
     ];
 
     public function activeRegister()
@@ -53,6 +53,10 @@ class Promotion extends Model
         return $this->belongsToMany(Ritual::class, 'promotion_ritual', 'promotion_id', 'ritual_id');
     }
     public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
+    }
+    public function getLastLoginAttribute($date)
     {
         return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
     }

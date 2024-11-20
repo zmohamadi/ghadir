@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -50,8 +51,12 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        // ثبت ساعت ورود کاربر
+        User::where('mobile', $this->mobile)->update(['last_login' => now()]);
+
         RateLimiter::clear($this->throttleKey());
     }
+
 
     
     public function ensureIsNotRateLimited()

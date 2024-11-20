@@ -37,6 +37,7 @@ export function List({panel="admin",access=true , query=""}){
             {label: "gender", sort:false, field: "gender.title_"+local},
             ...(access ? [
                 {label: "level", field: "level_id" },
+                {label: "last_login", field: "last_login" },
             ] : []),
             {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
             { label: "created_at", field: "created_at" },

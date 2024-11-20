@@ -22,14 +22,14 @@ DROP TABLE IF EXISTS `audience_types`;
 
 CREATE TABLE `audience_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `audience_types` */
 
@@ -155,7 +155,7 @@ CREATE TABLE `base_statuses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `base_statuses` */
 
@@ -172,7 +172,11 @@ insert  into `base_statuses`(`id`,`title_fa`,`title_en`,`group_id`,`code`,`color
 (10,'بسته',NULL,8,'0','theme-24',1,NULL,NULL,NULL),
 (11,'وضعیت ثبت نام',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
 (12,'باز',NULL,11,'1','theme-10',1,NULL,NULL,NULL),
-(13,'بسته',NULL,11,'0','theme-24',1,NULL,NULL,NULL);
+(13,'بسته',NULL,11,'0','theme-24',1,NULL,NULL,NULL),
+(14,'وضعیت تایید',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
+(15,'تایید',NULL,14,'1','theme-10',1,NULL,NULL,NULL),
+(16,'رد',NULL,14,'0','theme-24',1,NULL,NULL,NULL),
+(17,'حذف',NULL,14,'-1','theme-24',1,NULL,NULL,NULL);
 
 /*Table structure for table `base_villages` */
 
@@ -247,29 +251,26 @@ DROP TABLE IF EXISTS `courses`;
 
 CREATE TABLE `courses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `subject` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
   `promotion_report_id` int(11) DEFAULT NULL,
   `promoter_id` int(11) DEFAULT NULL,
-  `duration` varchar(100) DEFAULT NULL,
+  `duration` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `audiencetype_id` int(11) DEFAULT NULL,
   `people_count` int(11) DEFAULT NULL,
-  `place_name` varchar(255) DEFAULT NULL,
+  `place_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `province_id` int(11) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `village` varchar(255) DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `village` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `courses` */
-
-insert  into `courses`(`id`,`subject`,`promotion_id`,`promotion_report_id`,`promoter_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(2,'دوره جدید با موضوع مهدویت',2,1,2,'30',4,120,'جمکران',1,1,'قم',NULL,1,NULL,NULL,NULL);
 
 /*Table structure for table `cultural_users` */
 
@@ -289,13 +290,9 @@ CREATE TABLE `cultural_users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `cultural_users` */
-
-insert  into `cultural_users`(`id`,`promoter_id`,`name`,`family`,`job_position`,`gender_id`,`phone`,`comments`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(13,2,'فاطمه','محمدی','همکار',2,'34534535345','همکاری در فعالیتهای فرهنگی غدیر در سال 1403',NULL,NULL,NULL,NULL),
-(14,2,'محدثه','عبادی','معلم',2,'32423423-342','تدریس بسیار عالی',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `education` */
 
@@ -310,13 +307,15 @@ CREATE TABLE `education` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `education` */
 
 insert  into `education`(`id`,`title`,`description`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'لیسانس','',1,NULL,NULL,NULL),
-(2,'فوق لیسانس','',1,NULL,NULL,NULL);
+(1,'دیپلم','',1,NULL,NULL,NULL),
+(2,'لیسانس','',1,NULL,NULL,NULL),
+(3,'فوق لیسانس','',1,NULL,NULL,NULL),
+(4,'تحصیلات حوزوی','',1,NULL,NULL,NULL);
 
 /*Table structure for table `levels` */
 
@@ -331,7 +330,7 @@ CREATE TABLE `levels` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `levels` */
 
@@ -394,12 +393,9 @@ CREATE TABLE `promotion_agree` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `promotion_agree` */
-
-insert  into `promotion_agree`(`id`,`promoter_id`,`promotion_id`,`has_course`,`has_tribune`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,2,3,1,1,NULL,'2024-11-19 17:26:56','2024-11-19 13:56:56');
 
 /*Table structure for table `promotion_agree_item` */
 
@@ -412,14 +408,9 @@ CREATE TABLE `promotion_agree_item` (
   `promotion_id` int(11) DEFAULT NULL,
   `promoter_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `promotion_agree_item` */
-
-insert  into `promotion_agree_item`(`id`,`agree_id`,`ritual_id`,`promotion_id`,`promoter_id`) values 
-(1,1,2,3,2),
-(2,1,3,3,2),
-(3,1,4,3,2);
 
 /*Table structure for table `promotion_positions` */
 
@@ -434,7 +425,7 @@ CREATE TABLE `promotion_positions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotion_positions` */
 
@@ -454,16 +445,15 @@ CREATE TABLE `promotion_reports` (
   `promoter_id` int(11) DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
+  `confirm_id` int(1) DEFAULT 1,
+  `level_id` int(1) DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotion_reports` */
-
-insert  into `promotion_reports`(`id`,`promotion_id`,`promoter_id`,`photo`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,2,2,'image72951732021183.jpg',NULL,NULL,'2024-11-19 13:59:49','2024-11-19 13:59:49');
 
 /*Table structure for table `promotion_ritual` */
 
@@ -474,15 +464,9 @@ CREATE TABLE `promotion_ritual` (
   `ritual_id` int(11) DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `promotion_ritual` */
-
-insert  into `promotion_ritual`(`id`,`ritual_id`,`promotion_id`) values 
-(1,1,3),
-(2,2,3),
-(3,3,3),
-(4,4,3);
 
 /*Table structure for table `promotions` */
 
@@ -509,14 +493,14 @@ CREATE TABLE `promotions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `promotions` */
 
 insert  into `promotions`(`id`,`title`,`year`,`photo`,`comments`,`commitments`,`register_status`,`report_status`,`has_course`,`has_tribune`,`status_id`,`user_count`,`report_count`,`sum_support`,`creator_id`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',0,1,1,1,1,0,0,0,1,NULL,NULL,'2024-11-17 13:10:38','2024-11-19 18:23:27'),
+(1,'دهه ی فاطمیه',1403,'image59661731845420.jpg','در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.','تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.',1,0,1,0,1,0,0,0,1,1,'2024-11-20 15:13:26','2024-11-17 13:10:38','2024-11-20 15:13:26'),
 (2,'نیمه شعبان',1404,'image41621731845468.jpg','نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',NULL,1,1,0,1,1,0,1,1,1,NULL,NULL,'2024-11-17 13:11:18','2024-11-20 06:56:12'),
-(3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,0,1,1,1,0,0,1,1,2,NULL,'2024-11-17 13:13:02','2024-11-20 08:11:26');
+(3,'عید غدیر',1403,'image3991731845572.jpg','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.','واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',1,0,1,1,1,0,1,1,1,2,NULL,'2024-11-17 13:13:02','2024-11-20 15:55:18');
 
 /*Table structure for table `ritual_reports` */
 
@@ -539,12 +523,9 @@ CREATE TABLE `ritual_reports` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ritual_reports` */
-
-insert  into `ritual_reports`(`id`,`ritual_id`,`promotion_report_id`,`promotion_id`,`promoter_id`,`description`,`city_id`,`place_name`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(3,4,1,2,2,'اطعام در مدرسه دخترانه انجام شد.نیمهٔ شعبان (۱۵ شعبان در گاهشماری هجری قمری) یکی از جشن‌های مسلمانان شیعه است که هم‌زمان با زادروز امام دوازدهم شیعیان، حجت بن حسن است. دعاهای زیادی مانند دعای کمیل در این شب خوانده می‌شود. اهل سنت شب نیمه شعبان را «شب برات» نامیده و آن را به عنوان روز انزال قرآن به شب زنده‌داری و دعا می‌پردازند.',1,'مدرسه مهدویت',1,'کهک','کهک',1,NULL,NULL,NULL);
 
 /*Table structure for table `rituals` */
 
@@ -559,7 +540,7 @@ CREATE TABLE `rituals` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `rituals` */
 
@@ -583,7 +564,7 @@ CREATE TABLE `support_types` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `support_types` */
 
@@ -601,16 +582,12 @@ CREATE TABLE `support_users` (
   `promoter_id` int(11) DEFAULT NULL,
   `support_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `support_users` */
-
-insert  into `support_users`(`id`,`promoter_id`,`support_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(2,2,1,NULL,NULL,NULL),
-(3,3,1,NULL,NULL,NULL);
 
 /*Table structure for table `supports` */
 
@@ -630,7 +607,7 @@ CREATE TABLE `supports` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `supports` */
 
@@ -651,7 +628,7 @@ CREATE TABLE `ticket_subjects` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ticket_subjects` */
 
@@ -669,7 +646,7 @@ CREATE TABLE `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tickets` */
 
@@ -696,12 +673,9 @@ CREATE TABLE `tribunes` (
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tribunes` */
-
-insert  into `tribunes`(`id`,`subject`,`promotion_report_id`,`promoter_id`,`promotion_id`,`duration`,`audiencetype_id`,`people_count`,`place_name`,`city_id`,`province_id`,`city`,`village`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(9,'مهدویت و جامعه امروز',1,2,2,'45',2,200,'مسجد الزهرا',2,2,'تهران',NULL,1,NULL,NULL,NULL);
 
 /*Table structure for table `user_notes` */
 
@@ -714,17 +688,17 @@ CREATE TABLE `user_notes` (
   `content` text DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_notes` */
 
 insert  into `user_notes`(`id`,`promoter_id`,`creator_id`,`content`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(14,3,1,'مبلغ دارای 4 ستاره میباشد',NULL,NULL,NULL,NULL),
-(15,2,1,'خانم عبادی در زمینه فعالیت های فرهنگی و بسیج فعالیت دارند',NULL,NULL,NULL,NULL),
-(16,2,1,'این مبلغ 5 ستاره دارد',NULL,NULL,NULL,NULL);
+(14,3,1,'مبلغ دارای 4 ستاره میباشد',1,NULL,'2024-11-20 19:58:17','2024-11-20 19:58:17'),
+(15,2,1,'خانم عبادی در زمینه فعالیت های فرهنگی و بسیج فعالیت دارند',1,NULL,'2024-11-20 19:58:18','2024-11-20 19:58:18'),
+(16,2,1,'این مبلغ 5 ستاره دارد',1,NULL,'2024-11-20 19:58:18','2024-11-20 19:58:18');
 
 /*Table structure for table `user_promotions` */
 
@@ -741,17 +715,12 @@ CREATE TABLE `user_promotions` (
   `place_name` varchar(255) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_promotions` */
-
-insert  into `user_promotions`(`id`,`promoter_id`,`position_id`,`city_id`,`province_id`,`city`,`village`,`place_name`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(8,3,2,3,2,'شهری ری',NULL,'مسجد محله',NULL,NULL,NULL,NULL),
-(9,2,3,1,NULL,'قم',NULL,'قم',NULL,NULL,NULL,NULL),
-(10,2,4,2,2,'تهران','دهدشت','مدرسه الزهرا',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `user_roles` */
 
@@ -766,7 +735,7 @@ CREATE TABLE `user_roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user_roles` */
 
@@ -781,10 +750,6 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mobile` varchar(255) DEFAULT NULL,
-  `confirm_code` varchar(100) DEFAULT NULL,
-  `confirm_time` varchar(100) DEFAULT NULL,
-  `confirm_id` int(1) DEFAULT 0,
-  `password` varchar(255) DEFAULT NULL,
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
@@ -802,25 +767,28 @@ CREATE TABLE `users` (
   `address` text DEFAULT NULL,
   `postal_code` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `status_id` int(11) DEFAULT 1,
   `education_id` int(11) DEFAULT NULL,
+  `status_id` int(11) DEFAULT 1,
   `level_id` int(11) DEFAULT NULL,
+  `confirm_code` varchar(100) DEFAULT NULL,
+  `confirm_time` varchar(100) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `last_login` datetime DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
   `remember_token` varchar(255) DEFAULT NULL,
   `editor_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`mobile`,`confirm_code`,`confirm_time`,`confirm_id`,`password`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`status_id`,`education_id`,`level_id`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'09191964745','4712','1731559686',1,'$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',1,NULL,NULL,NULL,NULL,'16RPfvLyfpwII5oiUNDq52g4EkU9kA6PVMHrMxjt8cjBWoVxmNMavELSWzxF',1,NULL,'2024-11-14 04:22:30','2024-11-17 12:59:04'),
-(2,'09198526839',NULL,NULL,0,'$2y$12$fNtBeR/d.A5udXPa6cgC0.5lgER02tgxUnKzwffWOsEQSjL5O2aAq','مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',1,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,1,'iw1SXgHbywmzGxQnS6djqFpny9Kg0WBgpL5pNZE0DJYycs3I1mZY2NGvAdbi',1,NULL,'2024-11-17 13:02:31','2024-11-18 12:23:28'),
-(3,'09191519138',NULL,NULL,0,NULL,'الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',1,2,4,NULL,1,'sDmMDV6EH4ICSYxIdSalEDmgEQegmi6dF3XqgyyyERP2WL7A4tIX7IvOcuiV',1,NULL,'2024-11-17 13:04:53','2024-11-17 19:44:06');
+insert  into `users`(`id`,`mobile`,`firstname`,`lastname`,`role_id`,`gender_id`,`is_not_citizen`,`codemeli`,`khadamat_code`,`tablighat_office_code`,`tablighat_organization_code`,`ovghaf_code`,`bank_account_number`,`city_id`,`city`,`village`,`address`,`postal_code`,`photo`,`education_id`,`status_id`,`level_id`,`confirm_code`,`confirm_time`,`password`,`last_login`,`creator_id`,`remember_token`,`editor_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'09191964745','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',NULL,1,NULL,'4712','1731559686','$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','2024-11-20 15:46:20',NULL,'XzSND68rhX3Kez7jUQoqA9kpqJ0tCxoOK233GOJPNWRliu4texCPcpMfrCJ9',1,NULL,'2024-11-20 20:16:20','2024-11-20 16:46:20'),
+(2,'09198526839','مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',1,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,NULL,'$2y$12$fNtBeR/d.A5udXPa6cgC0.5lgER02tgxUnKzwffWOsEQSjL5O2aAq',NULL,1,'IcbAIAQ1MiUjkoKoe27ZV5yhb1GOFP57gohC0ieC4aIfyVvhxZXAWp2fq3Mw',1,NULL,'2024-11-20 18:54:24','2024-11-20 18:54:24'),
+(3,'09191519138','الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',2,1,4,'8705','1732117465',NULL,NULL,1,'sDmMDV6EH4ICSYxIdSalEDmgEQegmi6dF3XqgyyyERP2WL7A4tIX7IvOcuiV',1,NULL,'2024-11-20 20:12:20','2024-11-20 16:42:20');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
