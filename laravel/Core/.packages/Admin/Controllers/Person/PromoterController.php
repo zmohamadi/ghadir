@@ -12,7 +12,7 @@ class PromoterController extends BaseAbstract
     protected $request = "Publics\Requests\PromoterRequest";
     protected $with = ["role", "gender", "activeStatus", "cityUser", 'level', "education"];
     protected $showWith = ["role", "gender", "activeStatus", "cityUser", 'level', "education", "culturalUsers",
-     "notes","promotionInfos","supports.promotion","agrees.promotion","reports.promotion"];
+     "notes","promotionInfos","supports.promotion","agrees.promotion","agrees.rituals","reports.promotion"];
     protected $needles = ["Base\City", "Base\Province", "Base\Gender", "Level", "Education", 'Base\Status', "PromotionPosition"];
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
     protected $files = ["photo"];
