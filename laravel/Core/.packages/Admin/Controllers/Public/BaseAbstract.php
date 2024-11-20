@@ -485,30 +485,25 @@ abstract class BaseAbstract extends Controller
 
     }
 
-    public function getRepeatValues($values)
-    {
+    public function getRepeatValues($values){
         $data = [];
-        $requestData = request()->all();
-
-        foreach ($requestData as $key => $value) {
-            // شناسایی کلید پایه
+        // dd($values);
+        // dd(request()->all());
+        foreach(request()->all() as $key=>$value)
+        {
             $first = $values[0];
-            if (substr($key, 0, strlen($first)) === $first) {
-                // استخراج شماره‌ی پایانی
+            if(\substr($key, 0, strlen($first)) == $first)
+            {
                 $i = substr($key, strlen($first));
-
-                foreach ($values as $var) {
-                    $var2 = $var . $i; // ترکیب کلید با شماره
-                    if (isset($requestData[$var2]) && $requestData[$var2] !== "") {
-                        $data[$i][$var] = $requestData[$var2];
-                    }
+                foreach($values as $var){
+                    $var2 = $var.$i;
+                    if(request()->$var2!="")
+                    $data[$i][$var] = request()->$var2;
                 }
             }
         }
-
         return $data;
     }
-
 
     public function saveFiles($files, $dataInsert, $request)
     {
@@ -648,6 +643,11 @@ abstract class BaseAbstract extends Controller
         }
 
         return $query;
+    }
+
+    public function getIdFromUrl(){
+        $id = (int) filter_var(request()->path(), FILTER_SANITIZE_NUMBER_INT);
+        return $id;
     }
 
 

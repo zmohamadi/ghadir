@@ -18,12 +18,8 @@ class PromotionController extends BaseAbstract
 
     public function init()
     {
-        $this->showQuery = function ($query,$before) {
-            // dd($before);
-            if ($before==false) { 
-                dd($query->id);
-                $promotion_id = $query->id;
-            }
+        $this->showQuery = function ($query) {
+            $promotion_id = $this->getIdFromUrl();
             $user = $this->user_id;
             $role = $this->role_id;
             
