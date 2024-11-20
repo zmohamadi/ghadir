@@ -243,10 +243,19 @@ export function View({ id, panel = "admin" }) {
                         <TabPanel id="tab-fourth">
                             {/* بخش یادداشت‌ها */}
                             {data?.notes?.map((note, index) => (
-                                <div key={index} className="col-span-12 space-y-4 grid grid-cols-1">
+                                <div key={index} className="col-span-12 space-y-4 grid grid-cols-1 border-b-2 pb-2">
                                     <div className="flex">
                                         <span className="font-medium ml-1"> {Lang('public.note')} {index+1} : </span>
                                         <span> {note?.content || "-"} </span>
+                                        
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.created_at')}: </span>
+                                        <span>{note?.created_at || "-"} </span>
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.creator')}: </span>
+                                        <span>{note?.creator?.firstname} {note?.creator?.lastname} </span>
                                     </div>
                                 </div>
                             ))}
