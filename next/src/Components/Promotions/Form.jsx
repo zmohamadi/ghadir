@@ -74,13 +74,22 @@ export function Form({id,panel="admin"}){
                         </div>
                         <div className="col-span-12 lg:col-span-4">
                             <div className="intro-y box p-5">
-                                <Radio className="mt-5 border-b-2" defaultValue={data?.register_status ? data?.register_status: 1} type="col" label="register" id="register_status" refItem={[component, `register_status`]}
-                                data={needles?.status?.filter(item => item.group_id === 11)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                <Radio className="mt-5 border-b-2" 
+                                // defaultValue={data?.register_status} 
+                                type="col" label="register" 
+                                // id="register_status" 
+                                refItem={[component, `register_status`]}
+                                data={needles?.status?.filter(item => item.group_id === 11)} 
+                                valueKey="code" titleKey={"title_"+local}  
+                                key={"register_status"+data?.register_status}
                                 />
-                                <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status ? data?.report_status: 1} type="col" label="report" id="report_status" refItem={[component, `report_status`]}
-                                data={needles?.status?.filter(item => item.group_id === 8)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status} type="col" label="report" id="report_status" refItem={[component, `report_status`]}
+                                data={needles?.status?.filter(item => item.group_id === 8)} valueKey="code" 
+                                titleKey={"title_"+local}  
+                                key={"report_status"+data?.report_status}
                                 />
-                                <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} refItem={[component, `has_course`]} />
+                                <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} 
+                                refItem={[component, `has_course`]} />
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
                                 <CheckBoxGroup defaultValue={data?.rituals} className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual" + data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
                                 
