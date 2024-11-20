@@ -38,6 +38,10 @@ class SupportController extends BaseAbstract
                 $data->promoters()->detach();
                 $data->promoters()->sync($promoters);
             }
+            $promotionId = request()->promotion_id;
+            $promotionCount = $this->model::where('promotion_id', $promotionId)->count();
+            $update = \Models\Promotion::where('id', $promotionId)->update(['sum_support' => $promotionCount]);
+
         };
     }
 }

@@ -148,6 +148,10 @@ class PromotionReportController extends BaseAbstract
                         Log::error('Error inserting rituals: ' . $e->getMessage());
                     }
                 }
+
+                $promotionCount = $this->model::where('promotion_id', $promotion)->count();
+                $update = \Models\Promotion::where('id', $promotion)->update(['report_count' => $promotionCount]);
+
             }
         };
         

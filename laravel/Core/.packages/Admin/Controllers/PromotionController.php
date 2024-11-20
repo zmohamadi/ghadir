@@ -21,7 +21,9 @@ class PromotionController extends BaseAbstract
         $this->showQuery = function ($query,$before) {
             $user = $this->user_id;
             $role = $this->role_id;
+            // مشکل اینجاست 
             $promoter_id = $query->id;
+            
             if($role==1){
                 $query->with(['agrees.promoter','agrees.rituals']);
             }else{
