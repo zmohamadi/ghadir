@@ -31,7 +31,7 @@ class Support extends Model
     
     public function promoters()
     {
-        return $this->belongsToMany(\Models\Person\Promoter::class,"support_users","promoter_id","support_id");
+        return $this->belongsToMany(\Models\Person\Promoter::class,"support_users","support_id","promoter_id");
     }
 
 
