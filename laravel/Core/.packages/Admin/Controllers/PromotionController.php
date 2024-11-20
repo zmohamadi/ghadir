@@ -51,11 +51,15 @@ class PromotionController extends BaseAbstract
         };
         
         $this->indexQuery = function ($query) {
-            if(request()->register_status)
+            if(request()->register_status!=null)
             {
                 $register_status = request()->register_status;
-
                 $query->where('register_status', $register_status);
+            };
+            if(request()->report_status!=null)
+            {
+                $report_status = request()->report_status;
+                $query->where('report_status', $report_status);
             };
             if(request()->promoter)
             {

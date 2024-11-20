@@ -13,10 +13,11 @@ class PromotionReportController extends BaseAbstract
     protected $model = 'Models\PromotionReport';
     protected $request = 'Publics\Requests\PromotionReportRequest';
     protected $searchFilter = ['title'];
-    protected $with = ["promotion","promoter"];
-    protected $showWith = ["promotion","promoter","tribunes.audienceType","courses.audienceType","ritualReports.ritual"];
+    protected $with = ["promotion","promoter","confirmRepo","level"];
+    protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
+    "courses.audienceType","ritualReports.ritual","confirmRepo"];
     protected $files = ["photo"];
-    protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType"];
+    protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
 
 
     public function init()

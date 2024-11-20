@@ -37,10 +37,6 @@ export function List({panel="admin",access=true,query=""}){
            
             {label: "title", field: "promotion.title" },
             {label: "year", field: "promotion.year" },
-            // {label: "gender", sort:false, field: "gender.title_"+local},
-            // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
-            // {label: "report_status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.report_status?.["title_"+local]}</span>},
-            // {label: "has_course", jsx: (item)=><span>{item?.has_course == 1 ?Lang('public.has') : "-"}</span>},
             ...(access ? [
                 { 
                     label: "promoter", 
@@ -50,15 +46,18 @@ export function List({panel="admin",access=true,query=""}){
                         </span>
                     )
                 },
+                {label: "level", field: "level_id" },
+                {label: "confirm_status", jsx: (item)=><span className={"text-"+item?.confirm_repo?.color}>{item?.confirm_repo?.["title_"+local]}</span>},
+
             ] : []),
             { label: "created_at", field: "created_at" },
             {label: "", sort:false, 
                 jsx:(item)=><>
                     <div className='flex justify-center '>
-                        <FeatherIcon access={!access} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
+                        <FeatherIcon name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
                         {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
                         <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
-                        <FeatherIcon name="XOctagon" access={!access} tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/reports"+"/"+item?.id)} />
+                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/reports"+"/"+item?.id)} />
                     </div>
                 </>
             }, 

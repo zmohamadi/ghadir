@@ -6,8 +6,6 @@ export const getMenus = (user) => {
     const admin = [
         { title: "dashboard", icon: "Home", href: "/dashboard" },
         { title: "promoters", icon: "PenTool", href: "/promoters" },
-        { title: "personnels", icon: "Aperture", href: "/personnels" },
-        
         { title: "promotions", icon: "Book", href: "/promotions" },
         { title: "supports", icon: "Aperture", href: "/supports" },
         { title: "reports", icon: "Package", href: "/reports" },
@@ -15,6 +13,8 @@ export const getMenus = (user) => {
         // { title: "blog", icon: "Book", href: "/blog" },
         // { title: "comments", icon: "BookOpen", href: "/comments" },
         // { title: "tickets", icon: "Book", href: "/tickets" },
+        { title: "personnels", icon: "Aperture", href: "/personnels" },
+
         
     ];
     const promoter = [

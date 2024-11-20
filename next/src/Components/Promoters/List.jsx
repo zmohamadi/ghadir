@@ -35,6 +35,9 @@ export function List({panel="admin",access=true , query=""}){
             },
             {label: "mobile", field: "mobile" },
             {label: "gender", sort:false, field: "gender.title_"+local},
+            ...(access ? [
+                {label: "level", field: "level_id" },
+            ] : []),
             {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
             { label: "created_at", field: "created_at" },
 

@@ -123,11 +123,17 @@ export function Form({id,panel="admin"}){
                                 
                                 {
                                     user?.role_id==1 && <>
-                                        <Radio className="col-span-4" type="col" label="star" id="level_id" refItem={[component, `level_id`]}
-                                        data={needles?.level}  key={"level_id"+data?.level?.length} defaultValue={data?.level_id}
+                                        <Radio className="col-span-4" type="col" label="star"     
+                                            refItem={[component, `level_id`]}
+                                            data={needles?.level}  
+                                            key={"level_id"+data?.level_id} 
+                                        
                                         /> 
-                                        <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} type="col" label="status" id="status_id" refItem={[component, `status_id`]}
-                                        data={needles?.status?.filter(item => item.group_id === 1)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                        <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
+                                            type="col" label="status" refItem={[component, `status_id`]}
+                                            data={needles?.status?.filter(item => item.group_id === 1)} 
+                                            valueKey="code" titleKey={"title_"+local}  
+                                            key={"status_id"+data?.status_id}
                                         /> 
                                     </>
                                 }
