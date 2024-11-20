@@ -11,29 +11,43 @@ class PromotionController extends BaseAbstract
     protected $request = 'Publics\Requests\PromotionRequest';
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor","activeRegister","activeReport"];
-    protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport","agrees","supports.type","reports","rituals"];
+    protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport",
+    "supports.type","rituals"];
     protected $needles = ['Base\Status',"Ritual"];
     protected $files = ["photo"];
 
     public function init()
     {
-        $this->showQuery = function ($query,$before) {
+        $this->showQuery = function ($query) {
+            $promotion_id = $this->getIdFromUrl();
             $user = $this->user_id;
-            // dd(request()->id);
-            // if($before==false)
-            // بارگذاری agrees و rituals با استفاده از فیلترها
-            $query->with(['agrees' => function ($q) use ($user,$query) {
-                // فیلتر کردن agrees بر اساس promoter_id و promotion_id
-                $q->where('promoter_id', $user)
-                  ->where('promotion_id', 3); // فرض بر این است که promotion_id از جایی آمده است (مثلاً $this->promotion_id)
-                
-                // بارگذاری rituals برای هر agree
-                $q->with(['rituals' => function ($q) use ($user,$query) {
-                    // فیلتر کردن rituals بر اساس promoter_id و promotion_id
+            $role = $this->role_id;
+            
+            if($role==1){
+                $query->with(['agrees.promoter','agrees.rituals']);
+            }else{
+
+                // بارگذاری agrees و rituals با استفاده از فیلترها
+                $query->with(['agrees' => function ($q) use ($user,$promotion_id) {
                     $q->where('promoter_id', $user)
-                      ->where('promotion_id', 3); // فرض بر این است که promotion_id از جایی آمده است (مثلاً $this->promotion_id)
+                      ->where('promotion_id', $promoter_id);
+                    
+                    // بارگذاری rituals برای هر agree
+                    $q->with(['rituals' => function ($q) use ($user,$promotion_id) {
+                        $q->where('promoter_id', $user)
+                          ->where('promotion_id', $promotion_id);
+                    }]);
                 }]);
-            }]);
+            }
+            if($role==1){
+                $query->with(['reports.promoter']);
+            }else{
+
+                $query->with(['reports' => function ($q) use ($user,$promotion_id) {
+                    $q->where('promoter_id', $user)
+                      ->where('promotion_id', $promotion_id);
+                }]);
+            }
         };
         
         $this->indexQuery = function ($query) {
@@ -45,9 +59,11 @@ class PromotionController extends BaseAbstract
             };
             if(request()->promoter)
             {
+                // dd(request()->promoter);
+
                 $promoter = request()->promoter;
 
-                $query->whereHas('promoters', function ($q) use ($promoter) {
+                $query->whereHas('agreePromoters', function ($q) use ($promoter) {
                    $q->where('promoter_id', $promoter);
                 });
             };

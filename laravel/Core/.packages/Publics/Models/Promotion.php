@@ -22,7 +22,7 @@ class Promotion extends Model
 
     public function activeRegister()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 11);
+        return $this->belongsTo(\Models\Base\Status::class, 'register_status', 'code')->where('group_id', 11);
     }
     public function activeReport()
     {

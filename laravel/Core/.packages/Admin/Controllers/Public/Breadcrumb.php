@@ -13,6 +13,7 @@ class Breadcrumb extends Controller
         'personnels' => [\Models\Person\Personnel::class, 'lastname'],
         'promoters' => [\Models\Person\Promoter::class, 'lastname'],
         'promotions' => [\Models\Promotion::class, 'title'],
+        'blogs' => [\Models\Content\Blog::class, 'title'],
     ];
 
     public function getItems(Request $request)

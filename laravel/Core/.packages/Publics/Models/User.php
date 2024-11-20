@@ -103,4 +103,46 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(AudienceType::class);
     }
+    /**
+    * Get the blogs for the user The created.
+    */
+   public function createBlogs(): HasMany
+   {
+       return $this->hasMany(\Models\Content\Blog::class);
+   }
+    /**
+    * Get the blogs for the user The edited.
+    */
+   public function editBlogs(): HasMany
+   {
+       return $this->hasMany(\Models\Content\Blog::class);
+   }
+    /**
+     * Get the comments for the user The created.
+     */
+    public function createComments(): HasMany
+    {
+        return $this->hasMany(\Models\Content\BlogComment::class);
+    }
+    /**
+     * Get the comments for the user The edited.
+     */
+    public function editComments(): HasMany
+    {
+        return $this->hasMany(\Models\Content\BlogComment::class);
+    }
+    /**
+     * Get the comments for the user The replie.
+     */
+    public function replieComments(): HasMany
+    {
+        return $this->hasMany(\Models\Content\BlogComment::class);
+    }
+    /**
+     * The blogs that belong to the comments.
+     */
+    public function blogs(): BelongsToMany
+    {
+        return $this->belongsToMany(\Models\Content\Blog::class);
+    }
 }

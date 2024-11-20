@@ -68,9 +68,15 @@ $lang = [
    'close'=>'بسته',
    'ready'=>'داوطلب هستم',
    'holding_course'=>'برگزاری دوره',
-   'register_promotion'=>'ثبتنام در تبلیغ'
-   
-
+   'register_promotion'=>'ثبتنام در تبلیغ',
+   'specifications'=>'مشخصات',
+   'documents'=>'فایل ها',
+   'videos' => 'ویدئوها',
+   'not_check_comments' => 'پیام های نیاز به بررسی',
+   'view_info' => 'مشاهده جزییات',
+   'creator' => 'ثبت کننده',
+   'editor' => 'ویرایش کننده',
+   'to_answer' => 'پاسخ دادن',
 ];
 
 $menus = include(__DIR__.'/./menus.php');
