@@ -30,7 +30,7 @@ class PromotionController extends BaseAbstract
                 // بارگذاری agrees و rituals با استفاده از فیلترها
                 $query->with(['agrees' => function ($q) use ($user,$promotion_id) {
                     $q->where('promoter_id', $user)
-                      ->where('promotion_id', $promoter_id);
+                      ->where('promotion_id', $promotion_id);
                     
                     // بارگذاری rituals برای هر agree
                     $q->with(['rituals' => function ($q) use ($user,$promotion_id) {
