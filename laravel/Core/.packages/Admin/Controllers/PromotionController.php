@@ -19,24 +19,27 @@ class PromotionController extends BaseAbstract
     public function init()
     {
         $this->showQuery = function ($query,$before) {
+            // dd($before);
+            if ($before==false) { 
+                dd($query->id);
+                $promotion_id = $query->id;
+            }
             $user = $this->user_id;
             $role = $this->role_id;
-            // مشکل اینجاست 
-            $promoter_id = $query->id;
             
             if($role==1){
                 $query->with(['agrees.promoter','agrees.rituals']);
             }else{
 
                 // بارگذاری agrees و rituals با استفاده از فیلترها
-                $query->with(['agrees' => function ($q) use ($user,$promoter_id) {
+                $query->with(['agrees' => function ($q) use ($user,$promotion_id) {
                     $q->where('promoter_id', $user)
                       ->where('promotion_id', $promoter_id);
                     
                     // بارگذاری rituals برای هر agree
-                    $q->with(['rituals' => function ($q) use ($user,$promoter_id) {
+                    $q->with(['rituals' => function ($q) use ($user,$promotion_id) {
                         $q->where('promoter_id', $user)
-                          ->where('promotion_id', $promoter_id);
+                          ->where('promotion_id', $promotion_id);
                     }]);
                 }]);
             }
@@ -44,9 +47,9 @@ class PromotionController extends BaseAbstract
                 $query->with(['reports.promoter']);
             }else{
 
-                $query->with(['reports' => function ($q) use ($user,$promoter_id) {
+                $query->with(['reports' => function ($q) use ($user,$promotion_id) {
                     $q->where('promoter_id', $user)
-                      ->where('promotion_id', $promoter_id);
+                      ->where('promotion_id', $promotion_id);
                 }]);
             }
         };
