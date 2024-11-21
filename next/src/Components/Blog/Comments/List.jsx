@@ -1,31 +1,24 @@
 "use client";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid,Frame,useData,FeatherIcon } from "@/Theme/Midone/Utils";
+import { Grid,Frame,FeatherIcon,Pic } from "@/Theme/Midone/Utils";
 
-export function List(){
-    const {local,Lang} = useLang();
-    const {mediaPath, laraAdmin ,nextAdmin } = useConfig();
-    const formUrl = "/blogs"; 
-    const {destroy} = useData();
+export default function List(){
+    const {Lang,local} = useLang();
+    const {laraAdmin ,nextAdmin} = useConfig();
+    const formUrl = "/blog-comments"; 
+
     let info = {
-        insertLink: nextAdmin+formUrl+"/new",
         url: laraAdmin+formUrl,
         columns: [
-            {label: "pic", jsx:(item)=><img src={mediaPath+"/blogs/"+item?.thumb} width={100} height={100} alt={item?.image} />},
-            {label: "title", field: "title"},
-            {label: "subject",  field:"subject.title_"+local},
-            {label: "created_at", field: "created_at"},
-            {label: "lang", field: "lang"},
-            {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
-            {label: "",
-                sort:false, 
-                width:"110px", 
-                jsx:(item)=><>
+            {label: "", jsx: (item)=>(<Pic src={mediaPath + "/users/" + item?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="user-avatar rounded-full" key={"img" + item?.photo} />),},
+            {label: "creator", jsx: (item) => <span>{item?.creator?.firstname + " " + item?.creator?.lastname}</span>,},
+            // {label: "parent", field: "parent"},
+            {label: "blog",  field:"blog.title"},
+            {label: "status",  jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "", sort:false, width:"110px", jsx:(item)=><>
                     <div className='flex justify-center '>
-                        <FeatherIcon name="Edit" url={nextAdmin+formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        <FeatherIcon name="Eye" url={nextAdmin+formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
-                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+formUrl+"/"+item?.id)} />
+                        <FeatherIcon name="Edit" url={nextAdmin+formUrl+"/"+item.id+"/edit"} tooltip={Lang('public.edit')} />
                     </div>
                 </>
             },
@@ -33,7 +26,7 @@ export function List(){
     }
 
     return(
-        <Frame title={Lang(["public.blogs"])}>
+        <Frame title={Lang(["public.comments"])}>
             <div className="intro-y col-span-12">
                 <Grid {...info} key={"table key"} />
             </div>
