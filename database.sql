@@ -1,3 +1,20 @@
+/*
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 10.4.24-MariaDB : Database - ghadir
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`ghadir` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+USE `ghadir`;
 
 /*Table structure for table `audience_types` */
 
@@ -28,14 +45,14 @@ DROP TABLE IF EXISTS `base_cities`;
 
 CREATE TABLE `base_cities` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_fa` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
   `province_id` int(11) DEFAULT NULL COMMENT 'شناسه استان',
-  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
-  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `icon` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -56,8 +73,8 @@ DROP TABLE IF EXISTS `base_genders`;
 
 CREATE TABLE `base_genders` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title_fa` varchar(100) DEFAULT NULL,
-  `title_en` varchar(100) DEFAULT NULL,
+  `title_fa` varchar(100) COLLATE utf8_persian_ci DEFAULT NULL,
+  `title_en` varchar(100) COLLATE utf8_persian_ci DEFAULT NULL,
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال ',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -77,10 +94,10 @@ DROP TABLE IF EXISTS `base_languages`;
 
 CREATE TABLE `base_languages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(10) DEFAULT NULL COMMENT 'عنوان',
-  `symbol` varchar(5) DEFAULT NULL COMMENT 'عنوان اختصاری',
-  `dir` varchar(3) NOT NULL DEFAULT 'rtl' COMMENT 'چینش',
-  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
+  `title` varchar(10) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان',
+  `symbol` varchar(5) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان اختصاری',
+  `dir` varchar(3) COLLATE utf8_persian_ci NOT NULL DEFAULT 'rtl' COMMENT 'چینش',
+  `icon` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'آیکون',
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -101,14 +118,14 @@ DROP TABLE IF EXISTS `base_provinces`;
 
 CREATE TABLE `base_provinces` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_fa` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
   `country_id` int(11) DEFAULT NULL COMMENT 'شناسه کشور',
-  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
-  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `icon` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -128,11 +145,11 @@ DROP TABLE IF EXISTS `base_statuses`;
 
 CREATE TABLE `base_statuses` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title_fa` varchar(200) DEFAULT NULL COMMENT 'عنوان به زبان فارسی',
-  `title_en` varchar(200) DEFAULT NULL COMMENT 'عنوان به زبان عربی',
+  `title_fa` varchar(200) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان به زبان فارسی',
+  `title_en` varchar(200) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'عنوان به زبان عربی',
   `group_id` int(11) DEFAULT NULL COMMENT 'شناسه گروه وضعیت',
-  `code` varchar(3) DEFAULT NULL COMMENT 'کد وضعیت',
-  `color` varchar(20) DEFAULT NULL COMMENT 'رنگ',
+  `code` varchar(3) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'کد وضعیت',
+  `color` varchar(20) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'رنگ',
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -167,14 +184,14 @@ DROP TABLE IF EXISTS `base_villages`;
 
 CREATE TABLE `base_villages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name_fa` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_en` varchar(50) DEFAULT NULL COMMENT 'نام',
-  `name_ar` varchar(50) DEFAULT NULL COMMENT 'نام',
+  `name_fa` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_en` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
+  `name_ar` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'نام',
   `city_id` int(11) DEFAULT NULL COMMENT 'شناسه کشور',
-  `icon` varchar(50) DEFAULT NULL COMMENT 'آیکون',
-  `description_fa` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_en` text DEFAULT NULL COMMENT 'توضیحات',
-  `description_ar` text DEFAULT NULL COMMENT 'توضیحات',
+  `icon` varchar(50) COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'آیکون',
+  `description_fa` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_en` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
+  `description_ar` text COLLATE utf8_persian_ci DEFAULT NULL COMMENT 'توضیحات',
   `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -184,16 +201,85 @@ CREATE TABLE `base_villages` (
 
 /*Data for the table `base_villages` */
 
+/*Table structure for table `blog_comments` */
+
+DROP TABLE IF EXISTS `blog_comments`;
+
+CREATE TABLE `blog_comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ثبت کننده(فرستنده پیام)',
+  `editor_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ویرایش کننده',
+  `blog_id` int(11) DEFAULT NULL COMMENT 'شناسه محتوا',
+  `parent_id` int(11) NOT NULL DEFAULT 0 COMMENT 'شناسه پیام اصلی',
+  `comment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'اظهار نظر',
+  `reply` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'پاسخ',
+  `confirmer_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه پرسنل برای تأیید',
+  `confirm_id` int(11) NOT NULL DEFAULT 2 COMMENT 'شناسه وضعیت تأیید، از جدول وضعیت ها',
+  `lang` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fa' COMMENT 'زبان',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `blog_comments` */
+
+/*Table structure for table `blog_keyword` */
+
+DROP TABLE IF EXISTS `blog_keyword`;
+
+CREATE TABLE `blog_keyword` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `blog_id` int(11) DEFAULT NULL COMMENT 'شناسه مقاله',
+  `keyword_id` int(11) DEFAULT NULL COMMENT 'شناسه کلمه کلیدی',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `blog_keyword` */
+
+/*Table structure for table `blog_subjects` */
+
+DROP TABLE IF EXISTS `blog_subjects`;
+
+CREATE TABLE `blog_subjects` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title_fa` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'عنوان',
+  `order` int(11) DEFAULT 1 COMMENT 'ترتیب',
+  `count_blog` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد محتوا',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `blog_subjects` */
+
 /*Table structure for table `blogs` */
 
 DROP TABLE IF EXISTS `blogs`;
 
 CREATE TABLE `blogs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `content` text NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'عنوان',
+  `subject_id` int(11) DEFAULT NULL COMMENT 'شناسه موضوع محتوا',
+  `creator_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ثبت کننده',
+  `editor_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ویرایش کننده',
+  `thumb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'بند انگشتی',
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'چندین عمس',
+  `video` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'چندین ویدئو',
+  `document` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'چندین فایل داکیومنت',
+  `summary` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'متن خلاصه',
+  `text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'متن توضیحات',
+  `count_comment` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد پیام',
+  `count_comment_not_check` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد پیام بررسی نشده',
+  `count_view` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد بازدید',
+  `lang` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fa' COMMENT 'زبان',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -207,8 +293,8 @@ CREATE TABLE `blogs` (
 DROP TABLE IF EXISTS `cache`;
 
 CREATE TABLE `cache` (
-  `key` varchar(255) NOT NULL,
-  `value` mediumtext NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int(11) NOT NULL,
   PRIMARY KEY (`key`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -220,8 +306,8 @@ CREATE TABLE `cache` (
 DROP TABLE IF EXISTS `cache_locks`;
 
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int(11) NOT NULL,
   PRIMARY KEY (`key`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -265,12 +351,12 @@ DROP TABLE IF EXISTS `cultural_users`;
 CREATE TABLE `cultural_users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `promoter_id` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `family` varchar(255) DEFAULT NULL,
-  `job_position` varchar(255) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `family` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `job_position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gender_id` int(11) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `comments` text DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comments` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -289,8 +375,8 @@ DROP TABLE IF EXISTS `education`;
 
 CREATE TABLE `education` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -312,8 +398,8 @@ DROP TABLE IF EXISTS `levels`;
 
 CREATE TABLE `levels` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(1) NOT NULL DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -336,10 +422,10 @@ DROP TABLE IF EXISTS `migrations`;
 
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -356,7 +442,7 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (10,'2024_11_03_220833_create_cities_table',1),
 (11,'2024_11_03_220834_create_provinces_table',1),
 (12,'2024_11_03_220835_create_roles_table',1),
-(13,'2024_11_03_220836_create_blogs_table',1),
+(13,'2024_11_03_220836_create_blogs1_table',1),
 (14,'2024_11_03_220837_create_support_types_table',1),
 (15,'2024_11_03_220838_create_tickets_table',1),
 (16,'2024_11_03_220839_create_ticket_subjects_table',1),
@@ -366,7 +452,11 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (20,'2024_11_03_220843_create_tribunes_table',1),
 (21,'2024_11_03_220844_create_courses_table',1),
 (22,'2024_11_03_220845_create_educational_bases_table',1),
-(23,'2024_11_03_220846_create_audience_types_table',1);
+(23,'2024_11_03_220846_create_audience_types_table',1),
+(24,'2024_11_03_220830_create_blog_comments_table',2),
+(25,'2024_11_03_220830_create_blog_keyword_table',2),
+(26,'2024_11_03_220830_create_blog_subjects_table',2),
+(27,'2024_11_03_220830_create_blogs_table',2);
 
 /*Table structure for table `promotion_agree` */
 
@@ -414,8 +504,8 @@ DROP TABLE IF EXISTS `promotion_positions`;
 
 CREATE TABLE `promotion_positions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `comments` text DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comments` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -439,7 +529,7 @@ CREATE TABLE `promotion_reports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `promotion_id` int(11) DEFAULT NULL,
   `promoter_id` int(11) DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL,
+  `photo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `confirm_id` int(1) DEFAULT 1,
   `level_id` int(1) DEFAULT 0,
@@ -486,11 +576,11 @@ DROP TABLE IF EXISTS `promotions`;
 
 CREATE TABLE `promotions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `comments` text DEFAULT NULL,
-  `commitments` text DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comments` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `commitments` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `register_status` tinyint(1) DEFAULT 1,
   `report_status` tinyint(1) DEFAULT 1,
   `has_course` tinyint(1) DEFAULT 0,
@@ -524,12 +614,12 @@ CREATE TABLE `ritual_reports` (
   `promotion_report_id` int(11) DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
   `promoter_id` int(11) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
-  `place_name` varchar(255) DEFAULT NULL,
+  `place_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `province_id` int(11) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `village` varchar(255) DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `village` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -548,8 +638,8 @@ DROP TABLE IF EXISTS `rituals`;
 
 CREATE TABLE `rituals` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -573,7 +663,7 @@ DROP TABLE IF EXISTS `support_types`;
 
 CREATE TABLE `support_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(1) NOT NULL DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -616,11 +706,11 @@ DROP TABLE IF EXISTS `supports`;
 
 CREATE TABLE `supports` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `pack_items` varchar(255) DEFAULT NULL COMMENT 'اقلام بسته / اگر بسته باشد',
-  `amount` varchar(255) DEFAULT NULL COMMENT 'مبلغ / اگر مالی باشد',
+  `pack_items` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'اقلام بسته / اگر بسته باشد',
+  `amount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'مبلغ / اگر مالی باشد',
   `type_id` int(11) DEFAULT NULL COMMENT 'نوع حمایت',
   `promotion_id` int(11) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
   `editor_id` int(11) DEFAULT NULL,
   `status_id` int(1) DEFAULT 1,
@@ -643,7 +733,7 @@ DROP TABLE IF EXISTS `ticket_subjects`;
 
 CREATE TABLE `ticket_subjects` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -661,7 +751,7 @@ CREATE TABLE `tickets` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -677,18 +767,18 @@ DROP TABLE IF EXISTS `tribunes`;
 
 CREATE TABLE `tribunes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `subject` varchar(255) DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `promotion_report_id` int(11) DEFAULT NULL,
   `promoter_id` int(11) DEFAULT NULL,
   `promotion_id` int(11) DEFAULT NULL,
-  `duration` varchar(10) DEFAULT NULL,
+  `duration` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `audiencetype_id` int(11) DEFAULT NULL,
   `people_count` int(11) DEFAULT NULL,
-  `place_name` varchar(255) DEFAULT NULL,
+  `place_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `province_id` int(11) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `village` varchar(255) DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `village` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(1) DEFAULT 1,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -709,7 +799,7 @@ CREATE TABLE `user_notes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `promoter_id` int(11) NOT NULL,
   `creator_id` int(11) DEFAULT NULL,
-  `content` text DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -734,9 +824,9 @@ CREATE TABLE `user_promotions` (
   `position_id` int(11) DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL,
   `province_id` int(11) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `village` varchar(255) DEFAULT NULL,
-  `place_name` varchar(255) DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `village` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `place_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -755,8 +845,8 @@ DROP TABLE IF EXISTS `user_roles`;
 
 CREATE TABLE `user_roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `status_id` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -776,33 +866,33 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `mobile` varchar(255) DEFAULT NULL,
-  `firstname` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   `gender_id` int(11) DEFAULT NULL,
   `is_not_citizen` int(1) DEFAULT 0,
-  `codemeli` varchar(255) DEFAULT NULL,
-  `khadamat_code` varchar(255) DEFAULT NULL,
-  `tablighat_office_code` varchar(255) DEFAULT NULL,
-  `tablighat_organization_code` varchar(255) DEFAULT NULL,
-  `ovghaf_code` varchar(255) DEFAULT NULL,
-  `bank_account_number` varchar(255) DEFAULT NULL,
+  `codemeli` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `khadamat_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tablighat_office_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tablighat_organization_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ovghaf_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_account_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city_id` int(11) DEFAULT NULL COMMENT 'شهرستان',
-  `city` varchar(255) DEFAULT NULL COMMENT 'شهر',
-  `village` varchar(255) DEFAULT NULL COMMENT 'روستا',
-  `address` text DEFAULT NULL,
-  `postal_code` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'شهر',
+  `village` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'روستا',
+  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `education_id` int(11) DEFAULT NULL,
   `status_id` int(11) DEFAULT 1,
   `level_id` int(11) DEFAULT NULL,
-  `confirm_code` varchar(100) DEFAULT NULL,
-  `confirm_time` varchar(100) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `confirm_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `confirm_time` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_login` timestamp NULL DEFAULT NULL,
   `creator_id` int(11) DEFAULT NULL,
-  `remember_token` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `editor_id` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -816,3 +906,8 @@ insert  into `users`(`id`,`mobile`,`firstname`,`lastname`,`role_id`,`gender_id`,
 (1,'09191964745','پرسنل','غدیر',1,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'image88381731844742.png',NULL,1,NULL,'4712','1731559686','$2y$12$tEr5zN7Fx/GnPu/6rrc1gucC9PqYm9EQvrD2PHmk2qRNBK/6GlKT2','2024-11-21 03:41:54',NULL,'XzSND68rhX3Kez7jUQoqA9kpqJ0tCxoOK233GOJPNWRliu4texCPcpMfrCJ9',1,NULL,'2024-11-21 08:11:54','2024-11-21 04:41:54'),
 (2,'09198526839','مریم','عبادی',2,2,0,'1234567','122324','44444','33333','222222222','43535355-34534535',1,'قم',NULL,'قم میدان رسالت','23424234-343','image8961731845105.png',1,1,5,NULL,NULL,'$2y$12$5ov2vBu7ueo7Th6MK.0kCusu32bIkvkdHSZlkX..RJDmDL7tnctdC','2024-11-21 04:48:16',1,'DLDckPJ7ZWGPDFiH34vOhNHEEKUlqVrFaYRCdMIsNctVvXbyCXLvr1ZX4H4e',1,NULL,'2024-11-21 08:18:16','2024-11-21 04:48:16'),
 (3,'09191519138','الیاس','مصباح',2,1,1,NULL,NULL,NULL,'345345','3534534','345345345345',3,'تهران',NULL,NULL,'345345','image63481731845052.png',2,1,4,'8705','1732117465','$2y$12$B6BHbJy1JHx/P7u2vPDIVuiO4b6B1qB7n1HiQ0Pz9GcYk9jOgdV86',NULL,1,'sDmMDV6EH4ICSYxIdSalEDmgEQegmi6dF3XqgyyyERP2WL7A4tIX7IvOcuiV',1,NULL,'2024-11-21 07:47:33','2024-11-21 04:17:33');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
