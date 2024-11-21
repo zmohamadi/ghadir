@@ -13,7 +13,7 @@ import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 
-export function Form({id,panel="admin"}){
+export function Form({id,panel}){
     const link = "/promoters";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();

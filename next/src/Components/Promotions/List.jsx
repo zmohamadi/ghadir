@@ -7,7 +7,7 @@ import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
 
-export function List({panel="admin",access=true , query=""}){
+export function List({panel,access , query}){
 
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
@@ -28,12 +28,18 @@ export function List({panel="admin",access=true , query=""}){
       }, [getNeedles, laraAdmin, formUrl]);
     
       useEffect(() => {
+        // ساختن query string از params
         const urlItems = Object.keys(params)
-          .filter(key => params[key] !== "")
-          .map(key => `${key}=${params[key]}`)
-          .join("&");
-        setUrl(`${laraAdmin}/promotions?${urlItems}`);
-      }, [params, laraAdmin]);
+            .filter(key => params[key] !== "")
+            .map(key => `${key}=${params[key]}`)
+            .join("&");
+    
+        // ادغام query و urlItems با در نظر گرفتن شرایط
+        const combinedQuery = [query, urlItems].filter(Boolean).join("&");
+    
+        // تنظیم URL نهایی
+        setUrl(`${laraAdmin}/promotions?${combinedQuery}`);
+    }, [params, query, laraAdmin]);
     
     const handleFilterChange = (e, filter) => {
         setParams((prevParams) => ({ ...prevParams, [filter]: e.target.value }));

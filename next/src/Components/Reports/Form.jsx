@@ -13,7 +13,7 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 
-export function Form({ id, panel = "admin" }) {
+export function Form({ id, panel }) {
     const link = "/reports";
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
@@ -33,6 +33,7 @@ export function Form({ id, panel = "admin" }) {
     const url = id != 0 && id != undefined ? `${laraAdmin}${link}/${id}` : `${laraAdmin}${link}`;
     const method = id != 0 && id != undefined ? "edit" : "new";
     const nextUrl = "/reports";
+// console.log(panel);
 
     useEffect(() => {
         if (!fetchNeedlesRef.current) {

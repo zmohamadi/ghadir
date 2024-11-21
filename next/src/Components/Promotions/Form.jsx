@@ -10,7 +10,7 @@ import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 import { Loading } from "@/Theme/Midone";
 
-export function Form({id,panel="admin"}){
+export function Form({id,panel}){
     const link = "/promotions";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();

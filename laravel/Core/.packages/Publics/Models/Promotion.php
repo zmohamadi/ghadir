@@ -9,16 +9,6 @@ use Morilog\Jalali\Jalalian;
 class Promotion extends Model
 {
     use HasFactory,Base;
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'deleted_at' => 'timestamp','created_at' => 'datetime','updated_at' => 'datetime',"last_login"=>'datetime'
-    ];
 
     public function activeRegister()
     {
@@ -56,8 +46,8 @@ class Promotion extends Model
     {
         return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
     }
-    public function getLastLoginAttribute($date)
-    {
-        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
-    }
+    
+
+
+
 }

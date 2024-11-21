@@ -11,13 +11,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Laravel\Sanctum\HasApiTokens;
 use Models\Traits\Base;
+use Morilog\Jalali\Jalalian;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens,HasFactory,Base;
 
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
-    protected $hidden  = ['created_at', 'updated_at', 'deleted_at','password'];
+    // protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
+    // protected $hidden  = ['created_at', 'updated_at', 'deleted_at','password'];
     protected $dates   = ['deleted_at'];
     protected $table   = 'users';
     const PERSONNEL = 1;
@@ -30,7 +31,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'is_not_citizen' => 'boolean',
-        'last_login' => 'datetime',
         'deleted_at' => 'timestamp',
     ];
 
@@ -102,5 +102,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function audienceTypes()
     {
         return $this->belongsToMany(AudienceType::class);
+    }
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
+    }
+    public function getLastLoginAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
+
     }
 }

@@ -8,7 +8,7 @@ import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame } f
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Loading } from "@/Theme/Midone";
 
-export function Form({id,panel="admin"}){
+export function Form({id,panel}){
     const link = "/supports";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();

@@ -6,6 +6,7 @@ use Models\User;
 class Promoter extends User
 {
     protected $attributes = ['role_id' => 2];
+    
     public function newQuery($excludeDeleted = true)
     {
         $c =  parent::newQuery($excludeDeleted);
