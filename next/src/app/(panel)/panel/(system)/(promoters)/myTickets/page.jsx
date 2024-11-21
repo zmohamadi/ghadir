@@ -1,14 +1,16 @@
 "use client";
 
-import View from '@/Components/Blog/View';
+import {List as Items} from '@/Components/Ticket/List';
 import { useAuth } from '@/lib';
 
-export default function ShowInfo({ params }){
+export default function List(){
     const {user} = useAuth();
     const panel = user?.role_id == 1 ?  "admin" : "promoter";
     const access = user?.role_id == 1 ?  true : false;
 
+    const query = `promoter=${user?.id}`;
+
     return(
-        <View id={params?.id} panel={panel} access={access} />
+        <Items access={access} query={query} panel={panel} />
     );
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Publics\Requests;
+namespace Publics\Requests\Ticket;
 
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TicketRequest extends FormRequest
+class TicketSubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

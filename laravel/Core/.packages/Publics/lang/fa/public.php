@@ -80,7 +80,10 @@ $lang = [
    'user_ritual'=>'شعائری که مبلّغ اجرا کرده است !',
    'confirm_status'=>'وضعیت تایید',
    'last_login'=>'آخرین بازدید',
-   
+   'status_reply'=>'وضعیت پاسخ',
+   'status_ticket'=>'وضعیت تیکت',
+   'new_ticket'=>'تیکت جدید',
+   'myTickets'=>'تیکت های من',
 
    'specifications'=>'مشخصات',
    'documents'=>'فایل ها',

@@ -41,6 +41,16 @@ Route::put("blog-comments/edit-status-confirm/{id}", "Content\BlogCommentControl
 Route::get("blog-comments/get-status-confirm/show/{id}", "Content\BlogCommentController@getConfirmShowConfirm");
 Route::resource("/blog-comments", "Content\BlogCommentController");
 // ======================================== End Routes Content ======================================================
+// ======================================== Start Routes Ticket ======================================================
+Route::get("tickets/get-needles", "Ticket\TicketController@getNeedles");
+Route::get("tickets/details/{id}", "Ticket\TicketController@details");
+Route::resource("tickets", "Ticket\TicketController");
+
+// Route::post("ticket-comment/send", "Ticket\TicketCommentController@sendComment");
+// Route::put("ticket-comments/edit-status-confirm/{id}", "Ticket\TicketCommentController@editConfirm");
+// Route::get("ticket-comments/get-status-confirm/show/{id}", "Ticket\TicketCommentController@getConfirmShowConfirm");
+// Route::resource("/ticket-comments", "Ticket\TicketCommentController");
+// ======================================== End Routes Ticket ======================================================
 
 Route::get('/user',"Auth\UserInfo@getInfo");
 Route::post('/login',"Auth\AuthenticatedController@store");

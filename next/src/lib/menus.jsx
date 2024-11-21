@@ -12,7 +12,7 @@ export const getMenus = (user) => {
         
         { title: "blogs", icon: "Book", href: "/blogs" },
         { title: "comments", icon: "BookOpen", href: "/blogComments" },
-        // { title: "tickets", icon: "Book", href: "/tickets" },
+        { title: "tickets", icon: "Book", href: "/tickets" },
         { title: "personnels", icon: "Aperture", href: "/personnels" },
 
         
@@ -24,8 +24,8 @@ export const getMenus = (user) => {
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
         { title: "myReports", icon: "Book", href: "/myReports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },
-        // { title: "blog", icon: "Book", href: "/blog" },
-        // { title: "tickets", icon: "Book", href: "/myTickets" },
+        { title: "myTickets", icon: "Book", href: "/myTickets" },
+        { title: "blogs", icon: "Book", href: "/blogs" },
       
     ];
     const commonMenus = [
