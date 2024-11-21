@@ -10,8 +10,8 @@ export const getMenus = (user) => {
         { title: "supports", icon: "Aperture", href: "/supports" },
         { title: "reports", icon: "Package", href: "/reports" },
         
-        // { title: "blog", icon: "Book", href: "/blog" },
-        // { title: "comments", icon: "BookOpen", href: "/comments" },
+        { title: "blogs", icon: "Book", href: "/blogs" },
+        { title: "comments", icon: "BookOpen", href: "/blogComments" },
         // { title: "tickets", icon: "Book", href: "/tickets" },
         { title: "personnels", icon: "Aperture", href: "/personnels" },
 

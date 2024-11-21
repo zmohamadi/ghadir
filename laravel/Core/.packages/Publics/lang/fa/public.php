@@ -82,6 +82,14 @@ $lang = [
    'last_login'=>'آخرین بازدید',
    
 
+   'specifications'=>'مشخصات',
+   'documents'=>'فایل ها',
+   'videos' => 'ویدئوها',
+   'not_check_comments' => 'پیام های نیاز به بررسی',
+   'view_info' => 'مشاهده جزییات',
+   'creator' => 'ثبت کننده',
+   'editor' => 'ویرایش کننده',
+   'to_answer' => 'پاسخ دادن',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

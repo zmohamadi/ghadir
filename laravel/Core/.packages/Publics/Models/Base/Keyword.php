@@ -22,4 +22,11 @@ class Keyword extends Model
     // {
     //     return parent::newQuery($excludeDeleted)->where($this->table.'.lang', \App::getLocale());
     // }
+    /**
+     * The blogs that belong to the keyword.
+     */
+    public function blogs(): BelongsToMany
+    {
+        return $this->belongsToMany(\Models\Content\Blog::class);
+    }
 }

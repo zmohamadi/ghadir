@@ -31,6 +31,16 @@ Route::resource("personnels", "Person\PersonnelController");
 // Route::resource("users", "Person\UserController");
 // Route::resource("roles", "Person\RoleController");
 
+// ======================================== Start Routes Content ======================================================
+Route::get("blogs/get-needles", "Content\BlogController@getNeedles");
+Route::get("blogs/details/{id}", "Content\BlogController@details");
+Route::resource("blogs", "Content\BlogController");
+// Route::resource("/blog-subjects", "Content\BlogSubjectController");
+Route::post("blog-comment/send", "Content\BlogCommentController@sendComment");
+Route::put("blog-comments/edit-status-confirm/{id}", "Content\BlogCommentController@editConfirm");
+Route::get("blog-comments/get-status-confirm/show/{id}", "Content\BlogCommentController@getConfirmShowConfirm");
+Route::resource("/blog-comments", "Content\BlogCommentController");
+// ======================================== End Routes Content ======================================================
 
 Route::get('/user',"Auth\UserInfo@getInfo");
 Route::post('/login',"Auth\AuthenticatedController@store");
