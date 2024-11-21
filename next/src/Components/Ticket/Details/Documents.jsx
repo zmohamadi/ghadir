@@ -24,7 +24,7 @@ export const Documents = ({item,deleteUrl}) => {
             </a>
             <div className="dropdown-menu w-40">
                 <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                    <a href={mediaPath+"/tickets/"+item} download={item} target="blank" className="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                    <a href={mediaPath+"/tickets/"+item} download={item} target="blank" className="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                         <FeatherIcon name="ExternalLink" className="w-4" />{Lang("public.download")}
                     </a>
                     {/* <a href="#wrapper " onClick={()=>destroy(deleteUrl)} className="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">

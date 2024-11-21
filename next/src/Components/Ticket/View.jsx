@@ -14,7 +14,7 @@ export default function View({ id }){
     let {get} = useData();
     const formUrl = "/tickets"; 
     let url = laraAdmin+formUrl+"/details/"+id;
-    if(id != 0 && id != undefined) url = url;
+    // if(id != 0 && id != undefined) url = url;
 
     useEffect(() => {
         get(url, component, "info");
@@ -103,7 +103,7 @@ export default function View({ id }){
                                                 const Com = tab?.["tagInfo"];
                                                 return (
                                                     <div className="intro-y col-span-6 sm:col-span-4 md:col-span-3 xxl:col-span-2">
-                                                        <div className="file box rounded-md px-5 pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
+                                                        <div className="file box rounded-md pt-8 pb-5 px-3 sm:px-5 relative zoom-in">
                                                             <Com item={record} deleteUrl={laraAdmin+formUrl+"/delete-file/"+record?.id} />
                                                         </div>
                                                     </div>
