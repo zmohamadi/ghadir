@@ -243,19 +243,69 @@ export function View({ id, panel = "admin" }) {
                         <TabPanel id="tab-fourth">
                             {/* بخش یادداشت‌ها */}
                             {data?.notes?.map((note, index) => (
-                                <div key={index} className="col-span-12 space-y-4 grid grid-cols-1">
+                                <div key={index} className="col-span-12 space-y-4 grid grid-cols-1 border-b-2 pb-2">
                                     <div className="flex">
                                         <span className="font-medium ml-1"> {Lang('public.note')} {index+1} : </span>
                                         <span> {note?.content || "-"} </span>
+                                        
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.created_at')}: </span>
+                                        <span>{note?.created_at || "-"} </span>
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.creator')}: </span>
+                                        <span>{note?.creator?.firstname} {note?.creator?.lastname} </span>
                                     </div>
                                 </div>
                             ))}
                         </TabPanel>
                         <TabPanel id="tab-fifth">
-                            fifth
+                            <div className="col-span-12">
+                                {data?.reports?.length ? (
+                                    <ul className="list-disc list-inside">
+                                        {data?.reports.map((report, index) => (
+                                            <li key={index}>
+                                                <Link href={`${nextAdmin}/reports/${report.id}`} className="text-blue-600">
+                                                    {index + 1}.{report?.promotion?.title} ({Lang('public.view')} {Lang('public.report')})
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>{Lang(["public.no_data"])}</p>
+                                )}
+                            </div>
                         </TabPanel>
                         <TabPanel id="tab-sixth">
-                            sixth
+                            <div className="col-span-12">
+                                {data?.agrees?.length ? (
+                                    <ul className="">
+                                        {data.agrees.map((agree, index) => (
+                                            <li className="border-b-2 pb-2 mb-2" key={index}>
+                                                <span className="font-bold text-gray-700">
+                                                    {index + 1}. {agree?.promotion?.title}
+                                                    <span className="p-1 m-1">( {Lang("public.created_at")} : {agree?.created_at} )</span>
+                                                </span>
+                                                <ul className="list-disc list-inside ml-5 text-gray-600">
+                                                    {agree?.has_course === 1 && (
+                                                        <li>{Lang("public.course")}</li>
+                                                    )}
+                                                    {agree?.has_tribune === 1 && (
+                                                        <li>{Lang("public.tribune")}</li>
+                                                    )}
+                                                    {agree?.rituals?.length > 0 &&
+                                                        agree.rituals.map((ritual, ritualIndex) => (
+                                                            <li key={ritualIndex}>{ritual?.title}</li>
+                                                        ))}
+                                                </ul>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p>{Lang("public.no_data")}</p>
+                                )}
+                            </div>
                         </TabPanel>
                         <TabPanel id="tab-seventh">
                             {data?.supports?.map((support, index) => (

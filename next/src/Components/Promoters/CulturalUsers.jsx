@@ -19,7 +19,8 @@ export function CulturalUsers({ index, parent, addIcon, closeIcon,needles }) {
             <Textarea label="description" refItem={[parent, `c_comments_${index}`]} defaultValue={culturalUser?.comments}  />
             <Radio defaultValue={culturalUser?.gender_id}   type="col" label="gender" id="c_gender_id" 
                 refItem={[parent,`c_gender_id_${index}`]}
-                data={needles?.gender} titleKey={"title_"+local}  key={"c_gender_id_"+needles?.gender}
+                data={needles?.gender} titleKey={"title_"+local}  
+                key={"c_gender_id_"+index}
             />
             <div className="col-span-12 flex justify-start items-start">
                 {addIcon}

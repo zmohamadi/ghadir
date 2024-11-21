@@ -107,9 +107,9 @@ class AuthenticatedController extends Controller
     {
         // اعتبارسنجی کد تایید
         $this->verifyValidator($request->all())->validate();
-        $user = User::where('mobile', $request['mobile'])->first();
-
+        
         // وارد شدن به سایت
+        $last_login = User::where('mobile', $request['mobile'])->update(['last_login',now()]);
         \Auth::guard('admin')->login($user, true);
         // return redirect()->route('panel');
     }

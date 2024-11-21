@@ -26,8 +26,8 @@ export default function Promoter() {
                     <span>{user?.firstname} {user?.lastname} {Lang('public.wellcome')}!</span>
                 </div>
 
-                <Link href={nextAdmin+"/registerPromotion/new"} className="btn w-32 bg-white dark:bg-dark-2 mt-6 sm:mt-10">
-                {Lang('public.register_promotions')}
+                <Link href={nextAdmin+"/promotions"} className="btn w-32 bg-white dark:bg-dark-2 mt-6 sm:mt-10">
+                    {Lang('public.promotions')}
                 </Link>
                 
                 <img className="hidden sm:block absolute top-0 left-0 w-2/5 -mt-3 ml-2" 

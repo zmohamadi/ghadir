@@ -73,7 +73,10 @@ class PromotionAgreeController extends BaseAbstract
             // درج داده‌های جدید
             if (!empty($items)) {
                 \DB::table('promotion_agree_item')->insert($items);
-}
+            }
+            $promotionCount = $this->model::where('promotion_id', $promotion_id)->count();
+            $update = \Models\Promotion::where('id', $promotion_id)->update(['user_count' => $promotionCount]);
+
         };
         
     }

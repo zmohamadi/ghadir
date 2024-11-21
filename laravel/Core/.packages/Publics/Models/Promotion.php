@@ -5,36 +5,26 @@ namespace Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Models\Traits\Base;
-
+use Morilog\Jalali\Jalalian;
 class Promotion extends Model
 {
     use HasFactory,Base;
-    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'deleted_at' => 'timestamp',
-    ];
 
     public function activeRegister()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 11);
+        return $this->belongsTo(\Models\Base\Status::class, 'register_status', 'code')->where('group_id', 11);
     }
     public function activeReport()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'status_id', 'code')->where('group_id', 8);
+        return $this->belongsTo(\Models\Base\Status::class, 'report_status', 'code')->where('group_id', 8);
     }
     public function supports()
     {
-        return $this->hasMany(Support::class, 'promotion_id', 'id');
+        return $this->hasMany(Support::class, 'promotion_id');
     }
     public function reports()
     {
-        return $this->hasMany(PromotionReport::class, 'promotion_id', 'id');
+        return $this->hasMany(PromotionReport::class, 'promotion_id');
     }
     public function agrees()
     {
@@ -52,4 +42,12 @@ class Promotion extends Model
     {
         return $this->belongsToMany(Ritual::class, 'promotion_ritual', 'promotion_id', 'ritual_id');
     }
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
+    }
+    
+
+
+
 }

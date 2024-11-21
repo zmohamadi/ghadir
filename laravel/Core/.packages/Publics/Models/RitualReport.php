@@ -22,6 +22,6 @@ class RitualReport extends Model
 
     public function ritual()
     {
-        return $this->blonsTo(Ritual::class);
+        return $this->belongsTo(Ritual::class,"ritual_id");
     }
 }

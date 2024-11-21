@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Models\Traits\Base;
+use Morilog\Jalali\Jalalian;
 
 class Support extends Model
 {
@@ -19,7 +20,8 @@ class Support extends Model
      * @var array
      */
     protected $casts = [
-        'deleted_at' => 'timestamp',
+        'deleted_at' => 'timestamp','created_at' => 'datetime',
+
     ];
 
     /**
@@ -29,7 +31,7 @@ class Support extends Model
     
     public function promoters()
     {
-        return $this->belongsToMany(\Models\Person\Promoter::class,"support_users","promoter_id","support_id");
+        return $this->belongsToMany(\Models\Person\Promoter::class,"support_users","support_id","promoter_id");
     }
 
 
@@ -41,5 +43,9 @@ class Support extends Model
     public function promotion()
     {
         return $this->belongsTo(Promotion::class,"promotion_id");
+    }
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
     }
 }

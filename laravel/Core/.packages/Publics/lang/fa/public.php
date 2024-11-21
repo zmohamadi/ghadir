@@ -19,7 +19,7 @@ $lang = [
    'citizen'=>'تابعیت',
    'city_sh'=>'شهرستان',
    'photo'=>'عکس',
-   'promoter'=>'مبلغ',
+   'promoter'=>'مبلّغ',
    'star'=>'امتیاز',
    'commitments'=>'تعهدات',
    'description'=>'توضیحات',
@@ -68,7 +68,18 @@ $lang = [
    'close'=>'بسته',
    'ready'=>'داوطلب هستم',
    'holding_course'=>'برگزاری دوره',
-   'register_promotion'=>'ثبتنام در تبلیغ'
+   'register_promotion'=>'ثبتنام در تبلیغ',
+   'you_registered'=>'شما قبلا ثبتنام کرده اید !',
+   'created_at'=>'تاریخ ثبت',
+   'promoters_registered'=>'مبلّغ هایی که ثبت نام کرده اند !',
+   'promoters_reports'=>'گزارش هایی که مبلّغین ثبت کرده اند !',
+   'supports_promoions'=>'حمایتهای که برای این تبلیغ اجرا شده است !',
+   'you_send_photo'=>'عکس ارسالی از شما',
+   'user_courses'=>'دوره هایی که مبلّغ برگزار کرده است !',
+   'user_tribunes'=>'منبرهایی که مبلّغ برگزار کرده است !',
+   'user_ritual'=>'شعائری که مبلّغ اجرا کرده است !',
+   'confirm_status'=>'وضعیت تایید',
+   'last_login'=>'آخرین بازدید',
    
 
 ];

@@ -13,7 +13,7 @@ import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 
-export function Form({id,panel="admin"}){
+export function Form({id,panel}){
     const link = "/promoters";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
@@ -68,6 +68,11 @@ export function Form({id,panel="admin"}){
         
             <>
                 <Frame title={Lang(["public.promoter"])}>
+                {(data==undefined || needles==null)?
+                    <div className="col-span-12 xxl:col-span-9">
+                        <Loading className="mt-5" />
+                    </div>
+                :<>
                     <Tab className="col-span-12">
                         <TabHeader>
                             <TabList href="tab-first" title={Lang('public.personal_info')} active={"true"}>{Lang("public.personal_info")}</TabList>
@@ -118,11 +123,17 @@ export function Form({id,panel="admin"}){
                                 
                                 {
                                     user?.role_id==1 && <>
-                                        <Radio className="col-span-4" type="col" label="star" id="level_id" refItem={[component, `level_id`]}
-                                        data={needles?.level}  key={"level_id"+data?.level?.length} defaultValue={data?.level_id}
+                                        <Radio className="col-span-4" type="col" label="star"     
+                                            refItem={[component, `level_id`]}
+                                            data={needles?.level}  
+                                            key={"level_id"+data?.level_id} 
+                                        
                                         /> 
-                                        <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} type="col" label="status" id="status_id" refItem={[component, `status_id`]}
-                                        data={needles?.status?.filter(item => item.group_id === 1)} valueKey="code" titleKey={"title_"+local}  key={"status_id"+data?.status?.length}
+                                        <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
+                                            type="col" label="status" refItem={[component, `status_id`]}
+                                            data={needles?.status?.filter(item => item.group_id === 1)} 
+                                            valueKey="code" titleKey={"title_"+local}  
+                                            key={"status_id"+data?.status_id}
                                         /> 
                                     </>
                                 }
@@ -143,6 +154,7 @@ export function Form({id,panel="admin"}){
                             </TabPanel>
                         </TabBody>
                     </Tab>
+                    </>}
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />

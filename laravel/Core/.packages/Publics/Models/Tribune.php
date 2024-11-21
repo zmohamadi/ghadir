@@ -19,4 +19,8 @@ class Tribune extends Model
     protected $casts = [
         'deleted_at' => 'timestamp',
     ];
+    public function audienceType()
+    {
+        return $this->belongsTo(AudienceType::class, 'audiencetype_id');
+    }
 }

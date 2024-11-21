@@ -3,16 +3,52 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
+import { Select } from "@/Theme/Midone/Forms/Select";
+import { useEffect, useRef, useState } from "react";
+import { Box, Button, ButtonContainer } from "@/Theme/Midone";
 
-export function List({panel,access}){
+export function List({panel,access , query}){
 
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
-    const {destroy} = useData();
-
+    const {destroy,getNeedles} = useData();
+    const [ needles, setNeedles ] = useState();
+    const [ params, setParams ] = useState({ register_status: "", report_status: "" });
+    const [ url, setUrl ] = useState(`${laraAdmin}/promotions?${query}`);
+    const effectRan = useRef(false);
     const formUrl = nextAdmin+"/promotions";
-    const url = access ?  laraAdmin+"/promotions" : laraAdmin+"/promotions?register_status=1";
+    // const url = `${laraAdmin}/promotions?${query}`;
+    // const formUrl = "/promotions";
 
+    useEffect(() => {
+        if (!effectRan.current) {
+          getNeedles(`${laraAdmin}/promotions/get-needles`, setNeedles);
+          effectRan.current = true;
+        }
+      }, [getNeedles, laraAdmin, formUrl]);
+    
+      useEffect(() => {
+        // ساختن query string از params
+        const urlItems = Object.keys(params)
+            .filter(key => params[key] !== "")
+            .map(key => `${key}=${params[key]}`)
+            .join("&");
+    
+        // ادغام query و urlItems با در نظر گرفتن شرایط
+        const combinedQuery = [query, urlItems].filter(Boolean).join("&");
+    
+        // تنظیم URL نهایی
+        setUrl(`${laraAdmin}/promotions?${combinedQuery}`);
+    }, [params, query, laraAdmin]);
+    
+    const handleFilterChange = (e, filter) => {
+        setParams((prevParams) => ({ ...prevParams, [filter]: e.target.value }));
+      };
+    
+      const clearFilter = () => {
+        setParams({ register_status: "", report_status: "" });
+      };
+    
     let info = {
         insertLink: access ? `${formUrl}/new` : "",
         perPage: 20,
@@ -35,16 +71,16 @@ export function List({panel,access}){
                 { 
                     label: "register_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_status?.color}>
-                            {item?.register_status?.["title_" + local]}
+                        <span className={"text-" + item?.active_register?.color}>
+                            {item?.active_register?.["title_" + local]}
                         </span>
                     )
                 },
                 { 
                     label: "report_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_status?.color}>
-                            {item?.report_status?.["title_" + local]}
+                        <span className={"text-" + item?.active_report?.color}>
+                            {item?.active_report?.["title_" + local]}
                         </span>
                     )
                 },
@@ -52,6 +88,7 @@ export function List({panel,access}){
                 { label: "report_count", jsx: (item) => <span>{item?.report_count}</span> },
                 { label: "sum_support", jsx: (item) => <span>{item?.sum_support}</span> },
             ] : []),
+            { label: "created_at", field: "created_at" },
             {
                 label: "",
                 sort: false,
@@ -63,7 +100,7 @@ export function List({panel,access}){
                             url={formUrl + "/" + item?.id + "/edit"} 
                             tooltip={Lang('public.edit')} 
                         />
-                        <FeatherIcon 
+                        {/* <FeatherIcon 
                             access={access} 
                             name="Users" 
                             url={nextAdmin + "/promotions/" + item?.id + "/promoters"} 
@@ -74,7 +111,7 @@ export function List({panel,access}){
                             name="Package" 
                             url={nextAdmin + "/promotions/" + item?.id + "/supports"} 
                             tooltip={Lang('public.supports')} 
-                        />
+                        /> */}
                         <FeatherIcon 
                             name="Eye" 
                             url={formUrl + "/" + item?.id} 
@@ -85,7 +122,7 @@ export function List({panel,access}){
                             name="XOctagon" 
                             tooltip={Lang('public.delete')} 
                             color="darkred" 
-                            onClick={() => destroy(laraAdmin + "/promotions/" + item?.id)} 
+                            onClick={() => destroy(laraAdmin + "/reports/" + item?.id)} 
                         />
                     </div>
                 ),
@@ -96,9 +133,32 @@ export function List({panel,access}){
     return(
         <>
             <Frame title={Lang(["public.promotions"])}>
+                {panel=="admin"&&<>
+                    <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
+                        <Select
+                            defaultValue={params.register_status}
+                            onChange={(e) => handleFilterChange(e, "register_status")}
+                            className="col-span-5 md:col-span-3"
+                            label="register_status"
+                            data={needles?.status?.filter(item => item.group_id === 11)}
+                            titleKey={"title_" + local} valueKey="code"
+                        />
+                        <Select
+                            defaultValue={params.report_status}
+                            onChange={(e) => handleFilterChange(e, "report_status")}
+                            className="col-span-5 md:col-span-3"
+                            label="report_status"
+                            data={needles?.status?.filter(item => item.group_id === 8)}
+                            titleKey={"title_" + local} valueKey="code"
+                        />
+                        
+                        <ButtonContainer className="mt-7 md:mt-6 text-right ">
+                            <Button label="clear_filter" className="btn btn-secondary w-20" onClick={clearFilter} />
+                        </ButtonContainer>
+                        </Box>
+                </>}
                 <div className="intro-y col-span-12">
                     <Grid {...info} />
-                   
                 </div>
             </Frame>
         </>

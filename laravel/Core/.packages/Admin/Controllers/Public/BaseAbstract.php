@@ -645,5 +645,10 @@ abstract class BaseAbstract extends Controller
         return $query;
     }
 
+    public function getIdFromUrl(){
+        $id = (int) filter_var(request()->path(), FILTER_SANITIZE_NUMBER_INT);
+        return $id;
+    }
+
 
 }
