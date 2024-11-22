@@ -10,6 +10,8 @@ class Promotion extends Model
 {
     use HasFactory,Base;
 
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
+
     public function activeRegister()
     {
         return $this->belongsTo(\Models\Base\Status::class, 'register_status', 'code')->where('group_id', 11);

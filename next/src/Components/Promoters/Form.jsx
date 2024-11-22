@@ -13,7 +13,7 @@ import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 
-export function Form({id,panel}){
+export function Form({id,panel,access}){
     const link = "/promoters";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
@@ -30,10 +30,10 @@ export function Form({id,panel}){
     let uploadDir = 'media/users/';
     
     // اگر روت پروفایل باشد، از user.id استفاده می‌شود
-    let finalId = pathname.includes("profile") ? user?.id : id;
+    let finalId = panel=="admin" ? user?.id : id;
     let url = laraAdmin + link;
     let method = "new";
-    let nextUrl = pathname.includes("profile") ? link : "/";
+    let nextUrl = panel!="admin" ? link : "/";
 
     
     if (finalId !== 0 && finalId !== undefined) {

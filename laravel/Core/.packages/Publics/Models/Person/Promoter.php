@@ -5,6 +5,8 @@ use Models\User;
 
 class Promoter extends User
 {
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
+
     protected $attributes = ['role_id' => 2];
     
     public function newQuery($excludeDeleted = true)
@@ -29,7 +31,7 @@ class Promoter extends User
     }
     public function supports()
     {
-        return $this->belongsToMany(\Models\Support::class,"support_users","support_id","promoter_id");
+        return $this->belongsToMany(\Models\Support::class,"support_users","promoter_id","support_id");
     }
     public function agrees()
     {

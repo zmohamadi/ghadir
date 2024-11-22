@@ -39,6 +39,7 @@ class PromoterController extends BaseAbstract
                     'content' => $value['note'] ?? null,
                     'promoter_id' => $query->id,
                     'creator_id' => $this->user_id,
+                    'created_at' => now(),
                 ];
             }
 

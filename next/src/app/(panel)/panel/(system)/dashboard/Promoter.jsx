@@ -15,7 +15,7 @@ export default function Promoter() {
         <div className="col-span-12 lg:col-span-12 mt-6">
             <div className="ads-box box p-8 relative overflow-hidden bg-theme-17 intro-y">
                 <div className="ads-box__title w-full sm:w-72 text-white text-xl -mt-3 flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="w-12 h-12 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
+                    <div className="w-12 h-12 ml-2 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
                         {
                             user?.photo ?
                             <img alt="user" src={`${mediaPath}/users/${user.photo}`} />

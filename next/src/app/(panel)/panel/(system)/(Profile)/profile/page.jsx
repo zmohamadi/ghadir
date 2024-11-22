@@ -7,10 +7,14 @@ import { Form } from "@/Components/Promoters/Form";
 
 export default function page()
 {
-    const {user} = useAuth({guard: "admin"});
+    const {user} = useAuth();
     const role_id = user?.role_id;
+    const panel = user?.role_id == 1 ?  "admin" : "promoter";
+    const access = user?.role_id == 1 ?  true : false;
+
+    const query = `promoter=${user?.id}`;
 
     return <>
-            {role_id==1 ? <PersonnelForm />: <Form /> }
+            {role_id==1 ? <PersonnelForm panel={panel} access={access} />: <Form /> }
             </>;
 }
