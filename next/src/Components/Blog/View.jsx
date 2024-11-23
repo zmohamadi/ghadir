@@ -1,24 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect,useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from '@/lib/config';
 import { useRouter } from 'next/navigation';
-import { useData,useFormRefs,Button,Input,Textarea,CheckBox,Frame } from "@/Theme/Midone/Forms";
-import {Images,Videos,Documents,Comments,NotCheckComments,Info} from './Details';
+import { useData,useFormRefs,Button,Frame } from "@/Theme/Midone/Forms";
+import { Images,Videos,Documents,WaitingComments,Info } from './Details';
 
 export default function View({ id }){
-    const {Lang} = useLang();
+    const {Lang,local} = useLang();
     const {laraAdmin,nextAdmin,mediaPath} = useConfig();
     let component = useFormRefs();
     const router = useRouter();
     let {get} = useData();
+    let [infoServer, setInfoServer] = useState(1);
     const formUrl = "/blogs"; 
     let url = laraAdmin+formUrl+"/details/"+id;
     if(id != 0 && id != undefined) url = url;
 
     useEffect(() => {
         get(url, component, "info");
-    }, []);
+    }, [infoServer]);
 
     const back = ()=>router.back();
 
@@ -35,18 +37,17 @@ export default function View({ id }){
     let videos = (data?.item?.video)? data?.item?.video?.split("###") : [];
     let documents = (data?.item?.document)? data?.item?.document?.split("###") : [];
     let comments = (data?.comments)? data?.comments : [];
-    let notCheckComments = (data?.awating_comments)? data?.awating_comments : [];
+    let waitingComments = (data?.waiting_comments)? data?.waiting_comments : [];
 
     const listTabs = [
         {"tabInfo":"image", "arrayInfo":images, "tagInfo":Images, "displayInfo":"",},
         {"tabInfo":"video", "arrayInfo":videos, "tagInfo":Videos, "displayInfo":"",},
         {"tabInfo":"document", "arrayInfo":documents, "tagInfo":Documents, "displayInfo":"",},
-        // {"tabInfo":"notCheckComments", "arrayInfo":notCheckComments, "tagInfo":NotCheckComments, "displayInfo":"",},
     ];
 
     return(
         <>
-            <Frame title={Lang(["public.blogs"])}>
+            <Frame title={Lang(["public.blogs"])} key={infoServer}>
                 <div className="col-span-12 lg:col-span-3 xxl:col-span-2">
                     <div className="intro-y box p-5 mt-6 overflow-hidden">
                         <div className="mt-1 post__tabs">
@@ -67,9 +68,9 @@ export default function View({ id }){
                                     <i className="w-4 h-4 ml-2" data-feather="document"></i>{Lang("public.documents")}
                             </a>
                             {access?
-                                <a href="#wrapper " data-toggle="tab" data-target="#notCheckComments" id="notCheckComments-tab" role="tab" aria-selected="false"
-                                className="flex items-center px-3 py-2 mt-2 rounded-md classTab" onClick={()=>changeCalss("notCheckComments")}>
-                                    <i className="w-4 h-4 ml-2" data-feather="notCheckComments"></i>{Lang("public.not_check_comments")}
+                                <a href="#wrapper " data-toggle="tab" data-target="#waitingComments" id="waitingComments-tab" role="tab" aria-selected="false"
+                                className="flex items-center px-3 py-2 mt-2 rounded-md classTab" onClick={()=>changeCalss("waitingComments")}>
+                                    <i className="w-4 h-4 ml-2" data-feather="waitingComments"></i>{Lang("public.not_check_comments")}
                             </a>
                             : ""}
                         </div>
@@ -87,7 +88,8 @@ export default function View({ id }){
                     </div>
                     <div className="post__content tab-content">
                         <div id="info" className="tab-pane p-5 active" role="tabpanel" aria-labelledby="info-tab">   
-                            <Info access={access} item={item} comments={comments} creator={creator} editor={editor} mediaPath={mediaPath} laraAdmin={laraAdmin} Lang={Lang} />
+                            <Info access={access} item={item} comments={comments} creator={creator} editor={editor}
+                                mediaPath={mediaPath} laraAdmin={laraAdmin} Lang={Lang} local={local} keyServer={setInfoServer} />
                         </div>
                         {listTabs?.map((tab, i)=>
                         {
@@ -115,14 +117,13 @@ export default function View({ id }){
                             );
                         })}
                         {access?
-                            <div id="notCheckComments" className="tab-pane p-5" role="tabpanel" aria-labelledby="notCheckComments-tab">   
-                                <NotCheckComments notCheckComments={notCheckComments} mediaPath={mediaPath} nextAdmin={nextAdmin} Lang={Lang}  />
+                            <div id="waitingComments" className="tab-pane p-5" role="tabpanel" aria-labelledby="waitingComments-tab">   
+                                <WaitingComments waitingComments={waitingComments} mediaPath={mediaPath} nextAdmin={nextAdmin} Lang={Lang}  />
                             </div>
                         : ""}
                     </div>
                 </div>
             </Frame>
-
         </>
     );
 }

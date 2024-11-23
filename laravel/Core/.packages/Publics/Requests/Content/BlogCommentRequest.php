@@ -21,9 +21,14 @@ class BlogCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $comment = [
-            'reply' => 'required',
-        ];
+        $id = (int) filter_var(request()->path(), FILTER_SANITIZE_NUMBER_INT);
+        $type = request()->type;
+        $comment = [];
+        if(request()->_method == "PUT" && $type==3)
+        {
+            $field = "comment".$id;
+            $comment[$field] = 'required';
+        }
         return $comment;
     }
 }

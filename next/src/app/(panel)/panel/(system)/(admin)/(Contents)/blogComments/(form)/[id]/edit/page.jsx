@@ -1,11 +1,9 @@
 "use client";
 
-import Form from '../../form';
+import View from '@/Components/Blog/Comments/View';
 
-export default function Edit({params}){
+export default function ShowInfo({ params }){
     return(
-        <div>
-            <Form id={params.id}></Form>
-        </div>
+        <View id={params?.id} />
     );
 }

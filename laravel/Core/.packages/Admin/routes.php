@@ -36,9 +36,9 @@ Route::get("blogs/get-needles", "Content\BlogController@getNeedles");
 Route::get("blogs/details/{id}", "Content\BlogController@details");
 Route::resource("blogs", "Content\BlogController");
 // Route::resource("/blog-subjects", "Content\BlogSubjectController");
-Route::post("blog-comment/send", "Content\BlogCommentController@sendComment");
-Route::put("blog-comments/edit-status-confirm/{id}", "Content\BlogCommentController@editConfirm");
-Route::get("blog-comments/get-status-confirm/show/{id}", "Content\BlogCommentController@getConfirmShowConfirm");
+Route::post("blog-comments/send", "Content\BlogCommentController@sendComment");
+Route::put("blog-comments/delete/{id}", "Content\BlogCommentController@deleteComment");
+Route::get("blog-comments/details/{id}", "Content\BlogCommentController@details");
 Route::resource("/blog-comments", "Content\BlogCommentController");
 // ======================================== End Routes Content ======================================================
 

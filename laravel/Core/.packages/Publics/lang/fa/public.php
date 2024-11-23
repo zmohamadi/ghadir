@@ -80,16 +80,23 @@ $lang = [
    'user_ritual'=>'شعائری که مبلّغ اجرا کرده است !',
    'confirm_status'=>'وضعیت تایید',
    'last_login'=>'آخرین بازدید',
-   
-
    'specifications'=>'مشخصات',
    'documents'=>'فایل ها',
    'videos' => 'ویدئوها',
    'not_check_comments' => 'پیام های نیاز به بررسی',
    'view_info' => 'مشاهده جزییات',
-   'creator' => 'ثبت کننده',
-   'editor' => 'ویرایش کننده',
+   'creator_record' => 'ثبت کننده',
+   'editor_record' => 'ویرایش کننده',
    'to_answer' => 'پاسخ دادن',
+   'text_comments_yes' => 'پیام های شما',
+   'text_comments_no' => 'در حال حاضر پیامی ثبت نشده است',
+   'edit_comment' => 'ویرایش پیام',
+   'confirm' => 'تأیید',
+   'rejected' => 'رد',
+   'cancel' => 'انصراف',
+   'text_confirm' => 'آیا از تأیید پیام اطمینان دارید؟',
+   'text_edit' => 'انصراف',
+   'text_delete' => 'آیا از حذف پیام اطمینان دارید؟',
 ];
 
 $menus = include(__DIR__.'/./menus.php');
