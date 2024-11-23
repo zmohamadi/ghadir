@@ -46,10 +46,7 @@ Route::get("tickets/get-needles", "Ticket\TicketController@getNeedles");
 Route::get("tickets/details/{id}", "Ticket\TicketController@details");
 Route::resource("tickets", "Ticket\TicketController");
 
-// Route::post("ticket-comment/send", "Ticket\TicketCommentController@sendComment");
-// Route::put("ticket-comments/edit-status-confirm/{id}", "Ticket\TicketCommentController@editConfirm");
-// Route::get("ticket-comments/get-status-confirm/show/{id}", "Ticket\TicketCommentController@getConfirmShowConfirm");
-// Route::resource("/ticket-comments", "Ticket\TicketCommentController");
+Route::resource("/ticket-subjects", "Ticket\TicketSubjectController");
 // ======================================== End Routes Ticket ======================================================
 
 Route::get('/user',"Auth\UserInfo@getInfo");

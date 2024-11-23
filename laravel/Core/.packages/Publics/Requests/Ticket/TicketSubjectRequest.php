@@ -22,8 +22,9 @@ class TicketSubjectRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $item = [
+            'title_fa'=>'required',
         ];
+        return $item;
     }
 }

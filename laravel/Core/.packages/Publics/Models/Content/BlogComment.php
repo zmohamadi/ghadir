@@ -4,9 +4,9 @@ namespace Models\Content;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Models\Traits\Base;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Models\Traits\Base;
 
 class BlogComment extends Model
 {

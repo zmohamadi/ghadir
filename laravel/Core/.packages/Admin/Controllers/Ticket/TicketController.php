@@ -16,6 +16,13 @@ class TicketController extends BaseAbstract
 
     public function init()
     {
+        $this->indexQuery = function ($query) {
+            dd(request()->promoter);
+            if(request()->promoter)
+            {
+                $query->where('user_id', $this->user_id);
+            };
+        };
         $this->storeQuery = function ($query) {
             // dd(request()->panel);
             if(request()->panel=="promoter"){
@@ -27,12 +34,6 @@ class TicketController extends BaseAbstract
                 $query->reply_creator = $this->user_id;
             }
             $query->save();
-        };
-        $this->indexQuery = function ($query) {
-            if(request()->promoter)
-            {
-                $query->where('promoter_id', $this->user_id);
-            };
         };
     }
 }
