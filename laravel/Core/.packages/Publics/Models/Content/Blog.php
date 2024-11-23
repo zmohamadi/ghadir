@@ -5,6 +5,7 @@ namespace Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Models\Traits\Base;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Blog extends Model
 {
@@ -24,7 +25,7 @@ class Blog extends Model
     protected static function booted(): void
     {
         static::deleting(function(Blog $blog) { // before delete() method call this        
-            $blog->comments->delete();
+            $blog->comments()->delete();
         });
     }
     /**
@@ -39,7 +40,7 @@ class Blog extends Model
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(BlogComment::class);
+        return $this->hasMany(BlogComment::class, 'blog_id');
     }
     /**
      * The users that belong to the blogs.

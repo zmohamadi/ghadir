@@ -8,16 +8,34 @@ class BlogCommentController extends BaseAbstract
 {
     protected $model = 'Models\Content\BlogComment';
     protected $request = 'Publics\Requests\Content\BlogCommentRequest';
+    protected $with = ["activeStatus","blog","creator","editor"];
     protected $searchFilter = ['title'];
-    protected $with = ["activeStatus","creator","editor"];
-    protected $files = ["photo"];
 
     public function init()
     {
+        $this->indexQuery = function ($query) {
+            $query->Waiting();
+        };
         $this->storeQuery = function ($query) {
-            $query = $this->setOperator($query);
-            // $query->confirmer_id = $this->user_id;
-            // $query->save();               
+            $id = $this->getIdFromUrl();
+            $type = request()->type;
+            if($type==1) // for confirm
+            {
+                $query->confirm_user_id = $this->user_id;
+                $query->confirm_id = 1;
+            }
+            else if($type==2) // for rejected
+            {
+                $query->confirm_user_id = $this->user_id;
+                $query->confirm_id = 0;
+            }
+            else if($type==3) // for edit
+            {
+                $field = "comment".$id;
+                $query->comment = request()->$field;
+                $query->editor_id = $this->user_id;
+            }
+            $query->save();               
         };
     }
     /**
@@ -25,17 +43,15 @@ class BlogCommentController extends BaseAbstract
     */
     public function details($id)
     {
-        $item = $this->model::with("confirmStatus","responderUser","confirmUser")->find($id);
-        $record_blog = \Models\Content\Blog::with("subject","type","keywords")
-                        ->select("id","title","subject_id","type_id","created_at")
-                        ->find($item->blog_id);
-        $other_comments = \Models\Content\BlogComment::where("id", "!=", $item->id)->where("blog_id", $item->blog_id)
-                        ->with("confirmStatus")    
-                        ->select("id","sender_name","sender_email","comment","confirm_id","created_at")
-                        ->get();
-        $item->other_comments = $other_comments;
-        $item->record_blog = $record_blog;
-        return \response()->json($item);
+        $item = $this->model::find($id);
+        $blog = \Models\Content\Blog::with("creator","editor")->select("id","title","text","creator_id","editor_id","created_at")->find($item->blog_id);
+        $comments = \Models\Content\BlogComment::where("blog_id", $item->blog_id)->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->ParentComment()->get();
+        $data = [
+            "item"=>$item,
+            "blog"=>$blog,
+            "comments"=>$comments,
+        ];
+        return \response()->json($data);
     }
     /**
      * post info for Insert Comment
@@ -45,11 +61,11 @@ class BlogCommentController extends BaseAbstract
         request()->validate([
             'comment' => 'required',
         ]);
-        $confirmer_id = null;
+        $confirm_user_id = null;
         $confirm_id = 2;
         if($this->role_id == 1)
         {
-            $confirmer_id = $this->user_id;
+            $confirm_user_id = $this->user_id;
             $confirm_id = 1;
         }
 
@@ -58,30 +74,15 @@ class BlogCommentController extends BaseAbstract
         $comment->blog_id = request()->b;
         $comment->parent_id = request()->p;
         $comment->comment = request()->comment;
-        $comment->confirmer_id = $confirmer_id;
+        $comment->confirm_user_id = $confirm_user_id;
         $comment->confirm_id = $confirm_id;
         $comment->save();
     }
     /**
-     * get statuses of comments Modal
+     * post info for Delete Comment
     */
-    public function getConfirmShowConfirm($id)
+    public function deleteComment($id)
     {
-        $item = $this->model::select('id','confirm_id')->find($id);
-        $statuses = PublicClr::getRecords('Base-Status', 'group_id', 14);
-        $data = [
-            "item" => $item,
-            "statuses" => $statuses,
-        ];
-        return \Response::json($data);
-    }
-    /**
-     * edit status for comment in Modal
-    */
-    public function editConfirm($id)
-    {
-        $this->validate(request(), ["confirm_id" => "required"]);
-        $confirm_edit = PublicClr::updateRecord('Content-BlogComment', $id, ['confirm_id'=>request()->confirm_id,'confirm_user_id'=>$this->user_id]);
-        return \Response::json($confirm_edit);
+        $this->destroy($id);
     }
 }

@@ -24,7 +24,9 @@ return new class extends Migration
             $table->text('summary')->nullable()->comment('متن خلاصه');
             $table->text('text')->nullable()->comment('متن توضیحات');
             $table->integer('count_comment')->default(0)->comment('تعداد پیام');
-            $table->integer('count_comment_not_check')->default(0)->comment('تعداد پیام بررسی نشده');
+            $table->integer('count_comment_waiting')->default(0)->comment('تعداد پیام نیاز به بررسی');
+            $table->integer('count_comment_confirmed')->default(0)->comment('تعداد پیام تأیید شده');
+            $table->integer('count_comment_rejected')->default(0)->comment('تعداد پیام رد شده');
             $table->integer('count_view')->default(0)->comment('تعداد بازدید');
             $table->string('lang', 2)->default('fa')->comment('زبان');
             $table->integer('status_id')->length(1)->default(1)->comment('شناسه وضعیت فعال/غیر فعال');

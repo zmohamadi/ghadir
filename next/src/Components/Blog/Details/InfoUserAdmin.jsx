@@ -11,8 +11,7 @@ export const InfoUserAdmin = ({creator,editor,mediaPath,Lang}) => {
                         <Pic src={mediaPath + "/users/" + creator?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="rounded-full" key={"img" + creator?.photo}  />
                     </div>
                     <div className="mr-3 ml-auto">
-                        <span className="font-medium">{creator?.firstname+" "+creator?.lastname}</span>{" "+Lang([",","public.creator"])}
-                        {/* <div className="text-gray-600">فرانت اند دولوپر سینیور</div> */}
+                        <span className="font-medium">{creator?.firstname+" "+creator?.lastname}</span>{" "+Lang([",","public.creator_record"])}
                     </div>
                 </div>
                 {(editor)?
@@ -21,8 +20,7 @@ export const InfoUserAdmin = ({creator,editor,mediaPath,Lang}) => {
                             <Pic src={mediaPath + "/users/" + editor?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="rounded-full" key={"img" + editor?.photo}  />
                         </div>
                         <div className="mr-3 ml-auto">
-                            <span className="font-medium">{editor?.firstname+" "+editor?.lastname}</span>{" "+Lang([",","public.editor"])}
-                            {/* <div className="text-gray-600">فرانت اند دولوپر سینیور</div> */}
+                            <span className="font-medium">{editor?.firstname+" "+editor?.lastname}</span>{" "+Lang([",","public.editor_record"])}
                         </div>
                     </div>                                
                 :""}

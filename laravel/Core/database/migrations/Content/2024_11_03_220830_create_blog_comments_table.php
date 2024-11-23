@@ -18,8 +18,7 @@ return new class extends Migration
             $table->integer('blog_id')->nullable()->comment('شناسه محتوا');
             $table->integer('parent_id')->default(0)->comment('شناسه پیام اصلی');
             $table->text('comment')->nullable()->comment('اظهار نظر');
-            $table->text('reply')->nullable()->comment('پاسخ');
-            $table->integer('confirmer_id')->default(1)->comment('شناسه پرسنل برای تأیید');
+            $table->integer('confirm_user_id')->nullable()->comment('شناسه پرسنل برای تأیید یا رد');
             $table->integer('confirm_id')->default(2)->comment('شناسه وضعیت تأیید، از جدول وضعیت ها');
             $table->string('lang', 2)->default('fa')->comment('زبان');
             $table->integer('status_id')->length(1)->default(1)->comment('شناسه وضعیت فعال/غیر فعال');

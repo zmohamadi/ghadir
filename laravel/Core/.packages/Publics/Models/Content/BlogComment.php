@@ -5,6 +5,8 @@ namespace Models\Content;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Models\Traits\Base;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BlogComment extends Model
 {
@@ -37,7 +39,7 @@ class BlogComment extends Model
     /**
      * Get the childs for the comment.
      */
-    public function childs()
+    public function childs(): HasMany
     {
         return $this->hasMany(BlogComment::class, 'parent_id');
     }
@@ -81,15 +83,15 @@ class BlogComment extends Model
     {
         return $query->where('parent_id', 0);
     }
-    public function scopeConfirm($query)
+    public function scopeConfirmed($query)
     {
         return $query->where('confirm_id', 1);
     }
-    public function scopeNotConfirm($query)
+    public function scopeRejected($query)
     {
         return $query->where('confirm_id', 0);
     }
-    public function scopeAwatingConfirm($query)
+    public function scopeWaiting($query)
     {
         return $query->where('confirm_id', 2);
     }
