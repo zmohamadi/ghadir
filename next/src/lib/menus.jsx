@@ -13,6 +13,7 @@ export const getMenus = (user) => {
         { title: "blogs", icon: "Book", href: "/blogs" },
         { title: "comments", icon: "BookOpen", href: "/blogComments" },
         { title: "tickets", icon: "Book", href: "/tickets" },
+        { title: "send_ticket", icon: "Book", href: "/tickets/new" },
         { title: "ticket_subjects", icon: "Book", href: "/ticketSubjects" },
         { title: "personnels", icon: "Aperture", href: "/personnels" },
 

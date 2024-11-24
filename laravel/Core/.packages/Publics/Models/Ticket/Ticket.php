@@ -44,11 +44,11 @@ class Ticket extends Model
     }
     public function waitingChilds(): HasMany // تیکت های سطح 2 که هنوز مشاهده و بررسی نشده اند
     {
-        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status", 0);
+        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status_id", 0);
     }
     public function closedChilds(): HasMany // تیکت های سطح 2 که هنوز بسته نشده اند
     {
-        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status", "!=", 3);
+        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status_id", "!=", 3);
     }
     public function user(): belongsTo
     {
@@ -66,6 +66,10 @@ class Ticket extends Model
     {
         return $this->belongsTo(\Models\Base\Status::class, 'reply_status_id', 'code')->where('group_id', 18);
     }
+    public function priorityStatus()
+    {
+        return $this->belongsTo(\Models\Base\Status::class, 'priority_status_id', 'code')->where('group_id', 23);
+    }
     /**
      * Get the creatorUser the blog.
      */
@@ -74,4 +78,11 @@ class Ticket extends Model
      * Get the editorUser the blog.
      */
     // function editor Is In Base Traits
+    /**
+     * Scopes
+     */
+    public function scopeParentTicket($query)
+    {
+        return $query->where('parent_id', 0);
+    }
 }

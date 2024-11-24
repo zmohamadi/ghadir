@@ -44,6 +44,7 @@ Route::resource("/blog-comments", "Content\BlogCommentController");
 // ======================================== Start Routes Ticket ======================================================
 Route::get("tickets/get-needles", "Ticket\TicketController@getNeedles");
 Route::get("tickets/details/{id}", "Ticket\TicketController@details");
+Route::get("tickets/get-data", "Ticket\TicketController@getData");
 Route::resource("tickets", "Ticket\TicketController");
 
 Route::resource("/ticket-subjects", "Ticket\TicketSubjectController");

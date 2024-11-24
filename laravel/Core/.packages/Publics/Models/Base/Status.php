@@ -29,5 +29,4 @@ class Status extends Model
     {
         return $query->where('group_id', $group_id);
     }
-    
 }
