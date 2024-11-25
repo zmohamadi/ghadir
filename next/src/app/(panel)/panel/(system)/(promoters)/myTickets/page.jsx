@@ -5,12 +5,17 @@ import { useAuth } from '@/lib';
 
 export default function List(){
     const {user} = useAuth();
-    const panel = user?.role_id == 1 ?  "admin" : "promoter";
-    const access = user?.role_id == 1 ?  true : false;
-
-    const query = `promoter=${user?.id}`;
+    let access = false;
+    let query = `filter=MyTicket`;
+    let formUrl = "/myTickets";
+    if(user?.role_id == 1)
+    {
+        access = true;
+        query = `filter=AllTicket`;
+        formUrl = "/tickets";
+    }
 
     return(
-        <Items access={access} query={query} panel={panel} />
+        <Items access={access} query={query} formUrl={formUrl} />
     );
 }

@@ -26,7 +26,7 @@ export const InfoComments = ({ comments,parent,parentId,mediaPath,Lang,local }) 
                     let classDiv = (i==0)? "pt-5" : "mt-5 pt-5 border-t border-gray-200 dark:border-dark-5";
                     return(
                         <>
-                            <div className={classDiv}>
+                            <div className={classDiv} id={comments?.id}>
                                 <div className="flex">
                                     <div className="w-10 h-10 sm:w-12 sm:h-12 flex-none image-fit">
                                         <Pic src={mediaPath+"/users/"+comments?.creator?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="rounded-full" key={"img"+comments?.creator?.photo}  />

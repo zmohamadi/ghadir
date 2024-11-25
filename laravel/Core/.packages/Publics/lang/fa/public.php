@@ -99,9 +99,17 @@ $lang = [
    'confirm' => 'تأیید',
    'rejected' => 'رد',
    'cancel' => 'انصراف',
+   'reply_status' => 'وضعیت پاسخ',
    'text_confirm' => 'آیا از تأیید پیام اطمینان دارید؟',
    'text_edit' => 'انصراف',
    'text_delete' => 'آیا از حذف پیام اطمینان دارید؟',
+   'media' => 'آپلود رسانه',
+   'ticket_text' => 'متن تیکت',
+   'check_priority' => 'اولویت بررسی',
+   'accept_format'=>'فرمت های آپلود',
+   'evaluate'=>'امتیاز',
+   'your_evaluate'=>'امتیاز شما',
+   'your_evaluate'=>'امتیاز شما',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

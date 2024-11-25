@@ -1,33 +1,29 @@
 "use client";
+
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid,Frame,useData,FeatherIcon,Tools } from "@/Theme/Midone/Utils";
+import { Grid,Frame,FeatherIcon,Pic } from "@/Theme/Midone/Utils";
 
-export function List({panel="admin",access=true , query=""}){
-
+export function List({ access,query,formUrl }){
     const {local,Lang} = useLang();
-    const {mediaPath, laraAdmin ,nextAdmin } = useConfig();
-    const formUrl = panel == "admin" ? "/tickets" : "/myTickets"; 
-    const {destroy} = useData();
+    const { mediaPath,laraAdmin,nextAdmin } = useConfig();
+    const laravelUrl = "/tickets"; 
+
     let info = {
-        insertLink: panel=="promoter" && nextAdmin+"/myTickets/new",
+        insertLink: (!access) && nextAdmin+"/"+formUrl+"/new",
         insertLabel:"new_ticket",
-        url: laraAdmin+"/tickets?"+query,
+        url: laraAdmin+laravelUrl+"?"+query,
         columns: [
-            {label: "title", field: "title"},
-            {label: "subject", field: "subject.title"},
-            {label: "promoter", jsx: (item)=><span>{item?.promoter?.firstname} {item?.promoter?.lastname}</span>},
-            {label: "date", jsx: (item)=><span dir="ltr" className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</span>},
-            {label: "status_ticket", jsx: (item)=><span className={"text-"+item?.ticket_status?.color}>{item?.ticket_status?.["title_"+local]}</span>},
-            {label: "status_reply", jsx: (item)=><span className={"text-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
-            {label: "",
-                sort:false, 
-                width:"110px", 
-                jsx:(item)=><>
+            {label: "", jsx: (item)=>(<Pic src={mediaPath + "/users/" + item?.user?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="user-avatar rounded-full" key={"img" + item?.user?.photo} />),},
+            {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{item?.created_at}</div> </span>},
+            {label: "subject", field: "subject.title_"+local},
+            {label: "evaluate", field: "score"},
+            {label: "reply_status", jsx: (item)=><span className={"text-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
+            {label: "check_priority", jsx: (item)=><span className={"text-"+item?.priority_status?.color}>{item?.priority_status?.["title_"+local]}</span>},
+            // {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "", sort:false, width:"110px", jsx:(item)=><>
                     <div className='flex justify-center '>
-                        <FeatherIcon name="Edit" url={nextAdmin+formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        {/* <FeatherIcon name="Eye" url={nextAdmin+formUrl+"/"+item?.id} tooltip={Lang('public.view')} /> */}
-                        <FeatherIcon name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+formUrl+"/"+item?.id)} />
+                        <FeatherIcon name="Eye" url={nextAdmin+formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
                     </div>
                 </>
             },

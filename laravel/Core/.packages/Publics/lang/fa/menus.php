@@ -14,7 +14,7 @@ return [
     'blog'=>'بلاگ',
     'comments'=>'کامنت ها',
     'tickets'=>'تیکت ها',
-    'ticket_subjects'=>'موضوعات',
+    'ticket_subjects'=>'موضوعات تیکت',
     'base_management'=>'اطلاعات پایه',
     'register_promotions'=>'ثبت نام در تبلیغات',
     'reports'=>'گزارشات',

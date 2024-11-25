@@ -23,12 +23,12 @@ class BlogCommentRequest extends FormRequest
     {
         $id = (int) filter_var(request()->path(), FILTER_SANITIZE_NUMBER_INT);
         $type = request()->type;
-        $comment = [];
+        $item = [];
         if(request()->_method == "PUT" && $type==3)
         {
             $field = "comment".$id;
-            $comment[$field] = 'required';
+            $item[$field] = 'required';
         }
-        return $comment;
+        return $item;
     }
 }

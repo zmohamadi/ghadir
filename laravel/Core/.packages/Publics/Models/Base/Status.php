@@ -29,5 +29,9 @@ class Status extends Model
     {
         return $query->where('group_id', $group_id);
     }
-    
+    public function scopeSelectInReply($query, $filter="false") // جهت انتخاب گزینه مناسب در فرم پاسخ به تیکت کاربر سایت توسط مدیریت
+    {
+        $filterCode = ($filter=="true")? [3] : [1,3];
+        return $query->where('group_id', 18)->whereIn('code', $filterCode);
+    }
 }

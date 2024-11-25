@@ -4,5 +4,6 @@
         'panel' => 'پنل کاربری',
         'editProfile' => 'ویرایش پروفایل',
         'blogComments' => 'پیام های وبلاگ',
+        'ticketSubjects' => 'موضوعات تیکت',
     ];
 ?>

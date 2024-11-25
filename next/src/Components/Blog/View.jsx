@@ -5,7 +5,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from '@/lib/config';
 import { useRouter } from 'next/navigation';
 import { useData,useFormRefs,Button,Frame } from "@/Theme/Midone/Forms";
-import { Images,Videos,Documents,WaitingComments,Info } from './Details';
+import { Images,Videos,Documents,WaitingComments,Info } from '@/Components/Blog/Details';
 
 export default function View({ id }){
     const {Lang,local} = useLang();

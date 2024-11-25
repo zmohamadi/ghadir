@@ -21,13 +21,13 @@ class BlogRequest extends FormRequest
      */
     public function rules(): array
     {
-        $blog = [
+        $item = [
             'title'=>'required',
             // 'subject_id'=>'required',
             'thumb'=>'required',
             // 'summary'=>'required',
             'text'=>'required',
         ];
-        return $blog;
+        return $item;
     }
 }
