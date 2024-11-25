@@ -4,7 +4,7 @@ import { useEffect,useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useData,useFormRefs,Frame,Input,Button,ButtonContainer,Textarea,Box,Radio } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Frame,Input,Button,ButtonContainer,Textarea,Box,Line } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { Loading } from "@/Theme/Midone";
@@ -40,6 +40,8 @@ export default function Form(){
                 :
                     <>
                         <Box>
+                            <Input label="title" refItem={[component, "title"]} required="true" />
+                            <Line/>
                             <SelectTail label="subject" data={needles?.subject} titleKey={"title_"+local} required="true"
                                 refItem={[component, "subject_id"]} defaultValue={(data?.subject_id==undefined)? "" : data?.subject_id} />
                             <SelectTail label="check_priority" data={needles?.priorityStatus} titleKey={"title_"+local} valueKey="code" required="true"

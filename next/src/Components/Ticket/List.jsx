@@ -15,8 +15,9 @@ export function List({ access,query,formUrl }){
         url: laraAdmin+laravelUrl+"?"+query,
         columns: [
             {label: "", jsx: (item)=>(<Pic src={mediaPath + "/users/" + item?.user?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="user-avatar rounded-full" key={"img" + item?.user?.photo} />),},
-            {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{item?.created_at}</div> </span>},
+            {label: "title", field: "title"},
             {label: "subject", field: "subject.title_"+local},
+            {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{item?.created_at}</div> </span>},
             {label: "evaluate", field: "score"},
             {label: "reply_status", jsx: (item)=><span className={"text-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
             {label: "check_priority", jsx: (item)=><span className={"text-"+item?.priority_status?.color}>{item?.priority_status?.["title_"+local]}</span>},

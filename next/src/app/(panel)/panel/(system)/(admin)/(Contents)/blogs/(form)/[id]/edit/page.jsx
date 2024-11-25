@@ -1,6 +1,7 @@
 "use client";
 
 import Form from '@/Components/Blog/Form';
+import { useAuth } from '@/lib';
 
 export default function Edit({ params }){
     const {user} = useAuth();

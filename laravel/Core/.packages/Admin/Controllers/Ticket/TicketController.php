@@ -12,7 +12,7 @@ class TicketController extends BaseAbstract
      protected $model = 'Models\Ticket\Ticket';
     protected $request = 'Publics\Requests\Ticket\TicketRequest';
     protected $with = ["subject","replyStatus","priorityStatus","user"];
-    // protected $searchFilter = ['title'];
+    protected $searchFilter = ['title'];
 
     public function init()
     {

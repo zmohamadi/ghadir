@@ -25,13 +25,13 @@ export default function View({ id,filterStatus }){
     let ticket = data?.ticket;
     let ticketItems = data?.ticketItems;
     let replyStatus = data?.replyStatus;
-console.log(filterStatus)
+
     return(
         <>
             <Frame title={Lang(["public.tickets"])} key={infoServer}>
                 <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">
                     <TicketInfo item={ticket} Lang={Lang} />
-                    <SendScore item={ticket} Lang={Lang} />
+                    {(filterStatus)? <SendScore item={ticket} Lang={Lang} /> : ""}
                 </div>
                 <div className="col-span-12 lg:col-span-8 xxl:col-span-10 ">
                     <List id={id} laraAdmin={laraAdmin} mediaPath={mediaPath} laravelUrl="/ticket-items" Lang={Lang} />

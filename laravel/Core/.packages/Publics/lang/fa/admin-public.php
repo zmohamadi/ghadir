@@ -41,7 +41,7 @@ return [
     'Are you Sure you want To delete?' => 'آیا مطمئن هستید که می‌خواهید حذف کنید؟',
     'The record was not found, probably deleted Already' => 'رکورد یافت نشد، احتمالاً قبلاً حذف شده است.',
     'operation Successfully done' => 'عملیات با موفقیت انجام شد!',
-    'New Item' => 'آیتم جدید',
+    'New Item' => 'افزودن',
     // ******************* Public Form words ************************
     'grid_loading' => 'در حال بارگذاری اطلاعات ...',
     'no_data' => 'بدون داده',

@@ -12,7 +12,6 @@ export function List({ panel="admin",access=true , query="" }){
 
     let info = {
         insertLink: nextAdmin+formUrl+"/new",
-        insertLabel:"new_ticket",
         url: laraAdmin+laravelUrl+"/?"+query,
         columns: [
             {label: "title", field: "title_"+local},
