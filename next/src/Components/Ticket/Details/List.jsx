@@ -1,11 +1,10 @@
 
 "use client"
 
-import { Grid,FeatherIcon,Tools } from "@/Theme/Midone/Utils";
+import { Grid } from "@/Theme/Midone/Utils";
 import { Items } from "@/Components/Ticket/Details/Items";
 
-export const List = ({ id,laraAdmin,mediaPath,laravelUrl,Lang }) => {
-
+export const List = ({ id,laraAdmin,laravelUrl,mediaPath,Lang }) => {
     let info = {
         url: `${laraAdmin}${laravelUrl}/list/?id=${id}`,
         theme: (item)=> <Items item={item} Lang={Lang} mediaPath={mediaPath} />,

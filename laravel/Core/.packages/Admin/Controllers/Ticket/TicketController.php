@@ -6,12 +6,14 @@ use Admin\Controllers\Public\BaseAbstract;
 use Models\Ticket\TicketSubject;
 use Models\Ticket\TicketItem;
 use Models\Base\Status;
+use Models\User;
 
 class TicketController extends BaseAbstract
 {
      protected $model = 'Models\Ticket\Ticket';
     protected $request = 'Publics\Requests\Ticket\TicketRequest';
     protected $with = ["subject","replyStatus","priorityStatus","user"];
+    protected $showWith = ["subject","replyStatus","priorityStatus"];
     protected $searchFilter = ['title'];
 
     public function init()
@@ -38,11 +40,13 @@ class TicketController extends BaseAbstract
      */
     public function details($id)
     {
-        $ticket = $this->model::with($this->with)->find($id);
+        $ticket = $this->model::with($this->showWith)->find($id);
+        $user = User::with("gender")->select("id","gender_id","firstname","lastname","photo")->find($ticket->user_id);
         $ticketItems = TicketItem::with("user")->where("ticket_id", $id)->get();
         $replyStatus = Status::SelectInReply(request()->filter)->active()->get();
         $data = [
             "ticket" => $ticket,
+            "user" => $user,
             "ticketItems" => $ticketItems,
             'replyStatus' => $replyStatus,
         ];

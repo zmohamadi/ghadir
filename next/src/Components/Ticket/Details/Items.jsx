@@ -27,18 +27,18 @@ export const Items = ({ item,Lang,mediaPath }) => {
                                     {/* <div className="text-xs text-gray-500 mt-1 mb-3"><span className={"text-"+item?.id}>{item?.id}</span></div> */}
                                 </div>
                             </div>
-                            <div className="md:border-r w-full dark:border-dark-5 md:mr-3 px-5">
+                            {/* <div className="md:border-r w-full dark:border-dark-5 md:mr-3 px-5">
                                 <div className="flex items-center">
                                     <div className="font-medium">{item?.title}</div>
                                 </div>
                                 <div className="text-gray-600">
-                                    <div className="mt-2 w-full text-justify">{item?.text}</div>
-                            {/* <div className="md:border-r w-full dark:border-dark-5 md:mr-3 px-5">
+                                    <div className="mt-2 w-full text-justify">{item?.text}</div> */}
+                            <div className="md:border-r w-full dark:border-dark-5 md:mr-3 px-5">
                                 <div className="items-center">
                                     <div className="font-medium">{item?.title}</div>
                                     <div className="font-medium mt-2 w-full text-justify">{item?.text}</div>
                                 </div>
-                                <div className="text-gray-600"> */}
+                                <div className="text-gray-600">
                                     <div className="mt-2 mb-1 border-t border-gray-200 dark:border-dark-5">
                                         <div className="pos flex mt-3">
                                             <Files data={attachments} Lang={Lang} />
@@ -52,7 +52,6 @@ export const Items = ({ item,Lang,mediaPath }) => {
                         </div>
                     </div>
                 </div>
-                {/* <div className="intro-x text-gray-500 text-xs text-center my-4">12 خرداد</div> */}
             </div>
         </>
     );

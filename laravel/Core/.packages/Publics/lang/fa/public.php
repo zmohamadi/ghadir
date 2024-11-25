@@ -110,6 +110,7 @@ $lang = [
    'evaluate'=>'امتیاز',
    'your_evaluate'=>'امتیاز شما',
    'your_evaluate'=>'امتیاز شما',
+   'y'=>'ی',
 ];
 
 $menus = include(__DIR__.'/./menus.php');
