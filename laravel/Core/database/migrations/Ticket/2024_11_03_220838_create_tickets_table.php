@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable()->comment('عنوان');
             $table->integer('user_id')->nullable()->comment('شناسه کاربر ارسال کننده');            
             $table->integer('subject_id')->nullable()->comment('شناسه موضوع');
             $table->integer('priority_status_id')->length(1)->default(0)->comment('شناسه وضعیت اولویت بررسی تیکت، از جدول وضعیت ها');
