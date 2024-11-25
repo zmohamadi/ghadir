@@ -155,7 +155,7 @@ CREATE TABLE `base_statuses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_persian_ci;
 
 /*Data for the table `base_statuses` */
 
@@ -177,12 +177,15 @@ insert  into `base_statuses`(`id`,`title_fa`,`title_en`,`group_id`,`code`,`color
 (15,'تایید',NULL,14,'1','theme-10',1,NULL,NULL,NULL),
 (16,'رد',NULL,14,'0','theme-24',1,NULL,NULL,NULL),
 (17,'حذف',NULL,14,'-1','theme-24',1,NULL,NULL,NULL),
-(18,'وضعیت تیکت',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
-(19,'پاسخ داده شد',NULL,18,'1','theme-10',1,NULL,NULL,NULL),
-(20,'در انتظار پاسخ',NULL,18,'0','theme-24',1,NULL,NULL,NULL),
-(21,'وضعیت پاسخ تیکت',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
-(22,'باز',NULL,21,'1','theme-10',1,NULL,NULL,NULL),
-(23,'بسته',NULL,21,'0','theme-10',1,NULL,NULL,NULL);
+(18,'وضعیت پاسخ تیکت',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
+(19,'در انتظار پاسخ',NULL,18,'0','theme-24',1,NULL,NULL,NULL),
+(20,'در حال بررسی',NULL,18,'1','theme-10',1,NULL,NULL,NULL),
+(21,'پاسخ داده شد',NULL,18,'2','theme-10',1,NULL,NULL,NULL),
+(22,'بسته شد',NULL,18,'3','theme-24',1,NULL,NULL,NULL),
+(23,'وضعیت اولویت پاسخ به تیکت',NULL,NULL,NULL,NULL,1,NULL,NULL,NULL),
+(24,'کم',NULL,23,'1','theme-10',1,NULL,NULL,NULL),
+(25,'متوسط',NULL,23,'2','theme-10',1,NULL,NULL,NULL),
+(26,'زیاد',NULL,23,'3','theme-10',1,NULL,NULL,NULL);
 
 /*Table structure for table `base_villages` */
 
@@ -291,9 +294,13 @@ CREATE TABLE `blogs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `blogs` */
+
+insert  into `blogs`(`id`,`title`,`subject_id`,`creator_id`,`editor_id`,`thumb`,`img`,`video`,`document`,`summary`,`text`,`count_comment`,`count_comment_waiting`,`count_comment_confirmed`,`count_comment_rejected`,`count_view`,`lang`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'rrrr',NULL,1,1,'image69071732531023.jpg','image7481732531019.jpg###',NULL,'application29651732531018.pdf###',NULL,'<p>rrrلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>',0,0,0,0,0,'fa',0,NULL,'2024-11-25 10:37:11','2024-11-25 10:40:13'),
+(2,'fvfvfbb',NULL,1,NULL,'image26371732531249.jpg','image48271732531241.jpg###',NULL,'application72881732531236.xlsx###',NULL,'<p>document</p>',0,0,0,0,0,'fa',0,NULL,'2024-11-25 10:40:56','2024-11-25 10:40:56');
 
 /*Table structure for table `cache` */
 
@@ -794,9 +801,12 @@ CREATE TABLE `ticket_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ticket_items` */
+
+insert  into `ticket_items`(`id`,`user_id`,`ticket_id`,`text`,`media`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,1,1,'feffffv',NULL,1,NULL,'2024-11-25 10:53:37','2024-11-25 10:53:37');
 
 /*Table structure for table `ticket_subjects` */
 
@@ -814,9 +824,12 @@ CREATE TABLE `ticket_subjects` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ticket_subjects` */
+
+insert  into `ticket_subjects`(`id`,`title_fa`,`creator_id`,`editor_id`,`count_parent`,`count_parent_awaiting`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'ffbvb vb v ',NULL,NULL,0,0,1,NULL,NULL,NULL);
 
 /*Table structure for table `tickets` */
 
@@ -824,6 +837,7 @@ DROP TABLE IF EXISTS `tickets`;
 
 CREATE TABLE `tickets` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'عنوان',
   `user_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ارسال کننده',
   `subject_id` int(11) DEFAULT NULL COMMENT 'شناسه موضوع',
   `priority_status_id` int(11) NOT NULL DEFAULT 0 COMMENT 'شناسه وضعیت اولویت بررسی تیکت، از جدول وضعیت ها',
@@ -835,9 +849,12 @@ CREATE TABLE `tickets` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tickets` */
+
+insert  into `tickets`(`id`,`title`,`user_id`,`subject_id`,`priority_status_id`,`reply_status_id`,`score`,`lang`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
+(1,'dcdvdvdv',1,1,0,2,NULL,'fa',1,NULL,NULL,'2024-11-25 10:53:37');
 
 /*Table structure for table `tribunes` */
 

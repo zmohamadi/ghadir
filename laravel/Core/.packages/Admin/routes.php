@@ -51,7 +51,7 @@ Route::get("tickets/details/{id}", "Ticket\TicketController@details");
 Route::get("tickets/get-data", "Ticket\TicketController@getData");
 Route::resource("tickets", "Ticket\TicketController");
 
-Route::resource("/ticket-subjects", "Ticket\TicketSubjectController");
+Route::resource("ticket-subjects", "Ticket\TicketSubjectController");
 // ======================================== End Routes Ticket ======================================================
 
 Route::get('/user',"Auth\UserInfo@getInfo");

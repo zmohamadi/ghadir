@@ -12,7 +12,7 @@ export function List({ panel="admin",access=true , query="" }){
 
     let info = {
         insertLink: nextAdmin+formUrl+"/new",
-        url: laraAdmin+laravelUrl+"/?"+query,
+        url: laraAdmin+laravelUrl,
         columns: [
             {label: "title", field: "title_"+local},
             {label: "creator_record", jsx: (item)=><span>{item?.creator?.firstname+" "+item?.creator?.lastname}</span>},
