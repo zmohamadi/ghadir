@@ -42,7 +42,11 @@ Route::get("blog-comments/details/{id}", "Content\BlogCommentController@details"
 Route::resource("/blog-comments", "Content\BlogCommentController");
 // ======================================== End Routes Content ======================================================
 // ======================================== Start Routes Ticket ======================================================
-Route::get("tickets/get-needles", "Ticket\TicketController@getNeedles");
+Route::post("ticket-items/send/{id}", "Ticket\TicketController@saveItem");
+Route::get("ticket-items/get-replyStatus", "Ticket\TicketController@getReplyStatus");
+Route::get("ticket-items/list", "Ticket\TicketController@listItems");
+
+Route::put("tickets/save-evaluate/{id}", "Ticket\TicketController@saveEvaluate");
 Route::get("tickets/details/{id}", "Ticket\TicketController@details");
 Route::get("tickets/get-data", "Ticket\TicketController@getData");
 Route::resource("tickets", "Ticket\TicketController");

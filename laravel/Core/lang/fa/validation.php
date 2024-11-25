@@ -304,5 +304,6 @@ return [
         'studentID'=>'کد دانشجویی',
         'codemeli' => 'کد ملی',
         'username' => 'نام کاربری',
+        'priority_status_id' => 'اولویت تیکت',
     ],
 ];

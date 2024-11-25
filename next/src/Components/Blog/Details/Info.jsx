@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import {InfoHead} from './InfoHead';
-import {InfoUserAdmin} from './InfoUserAdmin';
-import {InfoReply} from './InfoReply';
-import {InfoComments} from './InfoComments';
+import {InfoHead} from '@/Components/Blog/Details/InfoHead';
+import {InfoUserAdmin} from '@/Components/Blog/Details/InfoUserAdmin';
+import {InfoReply} from '@/Components/Blog/Details/InfoReply';
+import {InfoComments} from '@/Components/Blog/Details/InfoComments';
 
 export const Info = ({ access,item,comments,creator,editor,laraAdmin,mediaPath,Lang,local,keyServer }) => {
     let [parentId, setParentId] = useState();

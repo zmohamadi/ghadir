@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->nullable()->comment('شناسه کاربر ارسال کننده');            
             $table->integer('subject_id')->nullable()->comment('شناسه موضوع');
-            $table->integer('parent_id')->default(0)->comment('شناسه تیکت اصلی');  
-            $table->text('text')->nullable()->comment('متن تیکت');
             $table->integer('priority_status_id')->length(1)->default(0)->comment('شناسه وضعیت اولویت بررسی تیکت، از جدول وضعیت ها');
             $table->integer('reply_status_id')->length(1)->default(0)->comment('شناسه وضعیت پاسخ تیکت، از جدول وضعیت ها');
-            $table->string('files')->nullable()->comment('چندین فایل');
+            $table->integer('score')->length(1)->nullable()->comment('امتیاز کاربر در مرود پاسخ به تیکت');
             $table->string('lang', 2)->default('fa')->comment('زبان');
             $table->integer('status_id')->length(1)->default(1)->comment('شناسه وضعیت فعال/غیر فعال');
             $table->timestamp('deleted_at')->nullable();

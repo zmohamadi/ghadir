@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useData,useFormRefs,Frame,Input,Button,ButtonContainer,Box } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Frame,Input,CheckBox,Button,ButtonContainer,Box } from "@/Theme/Midone/Forms";
 
 export default function Form({ id }){
     const { Lang,local } = useLang();
@@ -29,6 +29,7 @@ export default function Form({ id }){
             <Frame title={Lang(["public.ticket_subjects"])}>
                 <Box>
                     <Input label="title" required="true" refItem={[component, "title_"+local]} />
+                    <CheckBox className="col-span-6" label="status" name={Lang('public.active')} refItem={[component, "status_id"]} />
                 </Box>
             </Frame>
             <ButtonContainer>

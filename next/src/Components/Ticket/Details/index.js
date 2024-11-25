@@ -1,7 +1,6 @@
 'use client'
 
-export * from "./Info";
-export * from "./Images";
-export * from "./Videos";
-export * from "./Documents";
-export * from "./NotCheckComments";
+export * from "./FormReply";
+export * from "./TicketInfo";
+export * from "./List";
+export * from "./SendScore";

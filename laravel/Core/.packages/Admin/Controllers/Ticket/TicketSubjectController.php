@@ -2,7 +2,6 @@
 
 namespace Admin\Controllers\Ticket;
 
-use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
 
 class TicketSubjectController extends BaseAbstract

@@ -13,22 +13,18 @@ export const getMenus = (user) => {
         { title: "blogs", icon: "Book", href: "/blogs" },
         { title: "comments", icon: "BookOpen", href: "/blogComments" },
         { title: "tickets", icon: "Book", href: "/tickets" },
-        { title: "send_ticket", icon: "Book", href: "/tickets/new" },
         { title: "ticket_subjects", icon: "Book", href: "/ticketSubjects" },
         { title: "personnels", icon: "Aperture", href: "/personnels" },
-
-        
     ];
     const promoter = [
-       
         { title: "dashboard", icon: "Pocket", href: "/dashboard" },
         { title: "active_promotions", icon: "Book", href: "/promotions" },
         { title: "myPromotions", icon: "Book", href: "/myPromotions" },
         { title: "myReports", icon: "Book", href: "/myReports" },
         { title: "mySupports", icon: "Book", href: "/mySupports" },
         { title: "myTickets", icon: "Book", href: "/myTickets" },
+        { title: "new_ticket", icon: "Book", href: "/tickets/new" },
         { title: "blogs", icon: "Book", href: "/blogs" },
-      
     ];
     const commonMenus = [
         { title: "profile", icon: "User", href: "/profile" },

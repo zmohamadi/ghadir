@@ -28,27 +28,15 @@ class Ticket extends Model
     protected static function booted(): void
     {
         static::deleting(function(Ticket $ticket) { // before delete() method call this 
-            $ticket->childs->delete();
+            $ticket->ticketItems()->delete();
         });
     }
     /**
      * Relationships
      */
-    public function parent(): belongsTo // هر تیکت فقط می تواند در یک گروه ثبت شود
+    public function ticketItems(): HasMany //  هر تیکت می تواند چند پاسخ را در گروه خود داشته باشد
     {
-        return $this->belongsTo(Ticket::class);
-    }
-    public function childs(): HasMany //  هر تیکت می تواند چند پاسخ را در گروه خود داشته باشد
-    {
-        return $this->hasMany(Ticket::class, "parent_id");
-    }
-    public function waitingChilds(): HasMany // تیکت های سطح 2 که هنوز مشاهده و بررسی نشده اند
-    {
-        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status_id", 0);
-    }
-    public function closedChilds(): HasMany // تیکت های سطح 2 که هنوز بسته نشده اند
-    {
-        return $this->hasMany(Ticket::class, "parent_id")->where("reply_status_id", "!=", 3);
+        return $this->hasMany(TicketItem::class, "ticket_id");
     }
     public function user(): belongsTo
     {
@@ -81,8 +69,24 @@ class Ticket extends Model
     /**
      * Scopes
      */
-    public function scopeParentTicket($query)
+    public function scopeAllTicket($query, $user_id="")
     {
-        return $query->where('parent_id', 0);
+        return $query;
+    }
+    public function scopeMyTicket($query, $user_id)
+    {
+        return $query->where('user_id', $user_id);
+    }
+    public function scopeWaiting($query)
+    {
+        return $query->where("reply_status_id", 0);
+    }
+    public function scopeClosed($query)
+    {
+        return $query->where("reply_status_id", 3);
+    }
+    public function scopeNotClosed($query)
+    {
+        return $query->where("reply_status_id", "!=", 3);
     }
 }

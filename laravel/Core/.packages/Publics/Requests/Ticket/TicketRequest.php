@@ -23,7 +23,9 @@ class TicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'text' => 'required',
+            'subject_id' => 'required',
+            'priority_status_id' => 'required',
         ];
     }
 }
