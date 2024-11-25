@@ -432,7 +432,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -451,8 +451,8 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (12,'2024_11_03_220835_create_roles_table',1),
 (13,'2024_11_03_220836_create_blogs1_table',1),
 (14,'2024_11_03_220837_create_support_types_table',1),
-(15,'2024_11_03_220838_create_tickets_table',1),
-(16,'2024_11_03_220839_create_ticket_subjects_table',1),
+(15,'2024_11_03_220838_create_tickets1_table',1),
+(16,'2024_11_03_220839_create_ticket_subjects1_table',1),
 (17,'2024_11_03_220840_create_rituals_table',1),
 (18,'2024_11_03_220841_create_promotion_reports_table',1),
 (19,'2024_11_03_220842_create_ritual_reports_table',1),
@@ -463,7 +463,10 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (24,'2024_11_03_220830_create_blog_comments_table',2),
 (25,'2024_11_03_220830_create_blog_keyword_table',2),
 (26,'2024_11_03_220830_create_blog_subjects_table',2),
-(27,'2024_11_03_220830_create_blogs_table',2);
+(27,'2024_11_03_220830_create_blogs_table',2),
+(28,'2024_11_03_220838_create_ticket_items_table',2),
+(29,'2024_11_03_220838_create_tickets_table',2),
+(30,'2024_11_03_220839_create_ticket_subjects_table',2);
 
 /*Table structure for table `migrations11` */
 
@@ -776,26 +779,44 @@ insert  into `supports`(`id`,`pack_items`,`amount`,`type_id`,`promotion_id`,`des
 (2,NULL,'500000',2,2,'واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',NULL,NULL,1,NULL,'2024-11-17 14:22:31','2024-11-17 14:22:31'),
 (3,'بن خرید',NULL,3,1,'واقعه غدیر خم از مهم‌ترین وقایع تاریخ اسلام است که در آن، پیامبر اسلام (صلی‌الله‌علیه‌و‌آله‌وسلّم) هنگام بازگشت از حجةالوداع در ۱۸ ذی‌الحجه سال دهم قمری در مکانی به نام غدیرخم، امام علی (علیه‌السّلام) را ولی و جانشین خود معرفی کرد و حاضران که بزرگان صحابه نیز در میان‌شان بودند، در آنجا با امام علی (علیه‌السّلام) بیعت کردند.\nطبق آیه تبلیغ، پیامبر از جانب خداوند مامور بود آنچه را که خدا دستور داده به مردم ابلاغ کند و اگر این کار را انجام ندهد رسالتش را انجام نداده است. پس از واقعه غدیر آیه اکمال نازل شده و این روز را روز اکمال دین و اتمام نعمت معرفی نمود.',NULL,NULL,1,NULL,'2024-11-17 14:23:32','2024-11-17 14:23:32');
 
+/*Table structure for table `ticket_items` */
+
+DROP TABLE IF EXISTS `ticket_items`;
+
+CREATE TABLE `ticket_items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ارسال کننده',
+  `ticket_id` int(11) DEFAULT NULL COMMENT 'شناسه تیکت',
+  `text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'متن تیکت',
+  `media` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'فایل های مدیا',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `ticket_items` */
+
 /*Table structure for table `ticket_subjects` */
 
 DROP TABLE IF EXISTS `ticket_subjects`;
 
 CREATE TABLE `ticket_subjects` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status_id` int(1) NOT NULL DEFAULT 1,
+  `title_fa` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'عنوان',
+  `creator_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ثبت کننده',
+  `editor_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ویرایش کننده',
+  `count_parent` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد تیکت های والد (شروع تیکت)',
+  `count_parent_awaiting` int(11) NOT NULL DEFAULT 0 COMMENT 'تعداد تیکت های والد که وضعیت درانتظار پاسخ دارند (شروع تیکت)',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `ticket_subjects` */
-
-insert  into `ticket_subjects`(`id`,`title`,`status_id`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,'ثبت نام',1,NULL,NULL,NULL),
-(2,'گزارش',1,NULL,NULL,NULL),
-(3,'همکاری',1,NULL,NULL,NULL);
 
 /*Table structure for table `tickets` */
 
@@ -803,26 +824,20 @@ DROP TABLE IF EXISTS `tickets`;
 
 CREATE TABLE `tickets` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `promoter_id` int(11) DEFAULT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reply` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reply_creator` int(11) DEFAULT NULL,
-  `status_id` int(1) DEFAULT 1,
-  `status_reply` int(1) DEFAULT 0,
-  `status_ticket` int(1) DEFAULT 1,
+  `user_id` int(11) DEFAULT NULL COMMENT 'شناسه کاربر ارسال کننده',
+  `subject_id` int(11) DEFAULT NULL COMMENT 'شناسه موضوع',
+  `priority_status_id` int(11) NOT NULL DEFAULT 0 COMMENT 'شناسه وضعیت اولویت بررسی تیکت، از جدول وضعیت ها',
+  `reply_status_id` int(11) NOT NULL DEFAULT 0 COMMENT 'شناسه وضعیت پاسخ تیکت، از جدول وضعیت ها',
+  `score` int(11) DEFAULT NULL COMMENT 'امتیاز کاربر در مرود پاسخ به تیکت',
+  `lang` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fa' COMMENT 'زبان',
+  `status_id` int(11) NOT NULL DEFAULT 1 COMMENT 'شناسه وضعیت فعال/غیر فعال',
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `tickets` */
-
-insert  into `tickets`(`id`,`promoter_id`,`subject_id`,`title`,`content`,`photo`,`reply`,`reply_creator`,`status_id`,`status_reply`,`status_ticket`,`deleted_at`,`created_at`,`updated_at`) values 
-(1,2,3,'درخواست همکاری','سلام وقت بخیر من در خواست همکاری در ستاد غدیر را دارم.','image35271732223226.jpg','سلام با شما تماس میگیریم .',1,1,1,1,NULL,'2024-11-22 01:52:38','2024-11-22 01:52:38');
 
 /*Table structure for table `tribunes` */
 
