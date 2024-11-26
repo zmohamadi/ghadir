@@ -110,6 +110,10 @@ $lang = [
    'evaluate'=>'امتیاز',
    'your_evaluate'=>'امتیاز شما',
    'your_evaluate'=>'امتیاز شما',
+   'people_course'=>'مخاطبین دوره ها',
+   'people_tribune'=>'مخاطبین منبر ها',
+   "time_tribune"=>"ساعت منبرها",
+   "time_course"=>"ساعت دوره",
 ];
 
 $menus = include(__DIR__.'/./menus.php');

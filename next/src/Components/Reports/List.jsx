@@ -29,7 +29,7 @@ export function List({panel="admin",access=true,query=""}){
                     <Pic 
                         src={mediaPath + "/promotions/" + item?.promotion?.photo} 
                         defaultImg={`${mediaPath}/public/default/avatar.png`} 
-                        classImg="user-avatar rounded-full" 
+                        classImg="user-avatar" 
                         key={"img" + item?.photo} 
                     />
                 ),

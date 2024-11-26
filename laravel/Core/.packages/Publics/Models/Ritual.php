@@ -19,4 +19,9 @@ class Ritual extends Model
     protected $casts = [
         'deleted_at' => 'timestamp',
     ];
+
+    public function promotions()
+    {
+        return $this->belongsToMany(Promotion::class, 'promotion_ritual','ritual_id', 'promotion_id');
+    }
 }

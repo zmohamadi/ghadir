@@ -82,3 +82,5 @@ Route::get('deleteFile/{dir}/{file}', 'Public\Upload@deleteFile');
 Route::get('/home', 'Base\HomeController@home');
 
 Route::post('/breadcrumb', 'Public\Breadcrumb@getItems');
+
+Route::get('/statistics', 'Base\HomeController@statistics');
