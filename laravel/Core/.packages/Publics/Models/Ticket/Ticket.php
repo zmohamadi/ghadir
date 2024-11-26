@@ -52,11 +52,11 @@ class Ticket extends Model
     }
     public function replyStatus()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'reply_status_id', 'code')->where('group_id', 18);
+        return $this->belongsTo(\Models\Base\Status::class, 'reply_status_id', 'code')->where('group_id', 19);
     }
     public function priorityStatus()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'priority_status_id', 'code')->where('group_id', 23);
+        return $this->belongsTo(\Models\Base\Status::class, 'priority_status_id', 'code')->where('group_id', 24);
     }
     /**
      * Get the creatorUser the blog.
