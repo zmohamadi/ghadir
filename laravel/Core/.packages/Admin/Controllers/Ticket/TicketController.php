@@ -100,7 +100,7 @@ class TicketController extends BaseAbstract
     public function getData()
     {
         $subject = TicketSubject::active()->get();
-        $priorityStatus = Status::FilterGroup(23)->active()->get();
+        $priorityStatus = Status::FilterGroup(24)->active()->get();
         $data = [
             'subject' => $subject,
             'priorityStatus' => $priorityStatus,
