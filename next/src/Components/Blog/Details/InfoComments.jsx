@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Tools,Pic,FeatherIcon } from "@/Theme/Midone/Utils";
 
-export const InfoComments = ({ comments,parent,parentId,mediaPath,Lang,local }) => {
+export const InfoComments = ({ comments,access,parent,parentId,mediaPath,Lang,local }) => {
     let [parentComment, setParentComment] = useState();
     let limit = 100;
     let parentReply = parentComment;
@@ -36,13 +36,16 @@ export const InfoComments = ({ comments,parent,parentId,mediaPath,Lang,local }) 
                                             <span className="font-medium">{comments?.creator?.firstname+" "+comments?.creator?.lastname}</span>
                                             {(comments?.confirm_id==1)?
                                                 <a className="mr-auto text-xs text-green-600 cursor-pointer" onClick={()=>changeParent(comments?.id,comments?.comment)} >{Lang("public.to_answer")}</a>
-                                            :
-                                                <span className={"mr-auto  text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>
+                                            :""
                                             }
-                                            {/* <a className="mr-auto text-xs text-gray-600" onClick={()=>changeParent(comments?.id,comments?.comment)} >{Lang("public.to_answer")}</a> */}
                                         </div>
                                         <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(comments?.created_at)}</div>
                                         <div className="mt-2">{comments?.comment}</div>
+                                        {(access && comments?.confirmer)? <div className="mt-2">{Lang("public.comment_status")+" : "}
+                                                <span className={"mr-auto  text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>
+                                                <span className="">{" "+Lang("public.by")+" "}<strong>{comments?.confirmer?.firstname+" "+comments?.confirmer?.lastname}</strong></span>
+                                            </div>
+                                        :""}
                                     </div>
                                 </div>
                             </div>
@@ -57,14 +60,14 @@ export const InfoComments = ({ comments,parent,parentId,mediaPath,Lang,local }) 
                                             <div className="mr-3 flex-1">
                                                 <div className="flex items-center">
                                                     <span className="font-medium">{child?.creator?.firstname+" "+child?.creator?.lastname}</span>
-                                                    {(child?.confirm_id==1)?
-                                                        ""
-                                                    :
-                                                        <span className={"mr-auto  text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>
-                                                    }
                                                 </div>
                                                 <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(child?.created_at)}</div>
                                                 <div className="mt-2">{child?.comment}</div>
+                                                {(access)? <div className="mt-2">{Lang("public.comment_status")+" : "}
+                                                        <span className={"mr-auto  text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>
+                                                        <span className="">{" "+Lang("public.by")+" "}<strong>{child?.confirmer?.firstname+" "+child?.confirmer?.lastname}</strong></span>
+                                                    </div>
+                                                :""}
                                             </div>
                                         </div>
                                     </div>

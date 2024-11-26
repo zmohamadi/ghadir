@@ -16,6 +16,7 @@ export function UserInfo({ item }){
                     </div>
                     <div className="mr-5">
                         <div className="w-full sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{gender+" "+item?.firstname+" "+item?.lastname}</div>
+                        <div className="text-gray-600">{item?.mobile}</div>
                     </div>
                 </div>
             </div>

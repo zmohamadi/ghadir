@@ -41,7 +41,7 @@ class TicketController extends BaseAbstract
     public function details($id)
     {
         $ticket = $this->model::with($this->showWith)->find($id);
-        $user = User::with("gender")->select("id","gender_id","firstname","lastname","photo")->find($ticket->user_id);
+        $user = User::with("gender")->select("id","gender_id","firstname","lastname","photo","mobile")->find($ticket->user_id);
         $ticketItems = TicketItem::with("user")->where("ticket_id", $id)->get();
         $replyStatus = Status::SelectInReply(request()->filter)->active()->get();
         $data = [
@@ -57,7 +57,7 @@ class TicketController extends BaseAbstract
      */
     public function listItems()
     {
-        $items = TicketItem::where("ticket_id",request()->id)->with("user");
+        $items = TicketItem::where("ticket_id",request()->id)->with("user")->orderBy("id", "ASC");
         return $this->grid($items, "");
     }
     /**

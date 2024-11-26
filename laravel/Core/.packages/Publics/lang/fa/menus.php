@@ -24,6 +24,8 @@ return [
     'promoters'=>'مبلّغین',
     'personnels'=>'پرسنل',
     'active_promotions'=>'تبلیغات فعال',
+    'waiting_tickets'=>'تیکت های نیاز به بررسی',
+    'myTickets'=>'تیکت های من',
 
 ];
 ?>

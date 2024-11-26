@@ -158,7 +158,7 @@ return [
     'confirm_delete'=>'آیا مطمئن هستید که می خواهید حذف کنید؟',
     'select_option'=>'انتخاب گزینه',
     'creator'=>'پرسنل',
-    'clear_filter'=>'حذف فیلتر'
-    
+    'clear_filter'=>'حذف فیلتر',
+    'new_ticket'=>'تیکت جدید',    
 ];
 ?>

@@ -35,12 +35,12 @@ class BlogController extends BaseAbstract
         if($this->role_id == 1)
         {
             $access = true;
-            $comments = BlogComment::ParentComment()->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $comments = BlogComment::ParentComment()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
             $waiting_comments = BlogComment::Waiting()->where("blog_id",$item->id)->with("creator","editor")->get();
         }
         else
         {    
-            $comments = BlogComment::ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $comments = BlogComment::ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
             $waiting_comments = BlogComment::Waiting()->active()->where("blog_id",$item->id)->with("creator","editor")->get();
         }
         $data = [

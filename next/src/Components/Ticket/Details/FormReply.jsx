@@ -6,19 +6,19 @@ import { useRouter } from 'next/navigation';
 import { useData,useFormRefs,Button,ButtonContainer,Box,Textarea,Radio } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 
-export function FormReply({ keyServer,id,replyStatus }) {
+export function FormReply({ keyServer,id,replyStatus,formUrl }) {
     const { Lang,local } = useLang();
     const { laraAdmin } = useConfig();
     let component = useFormRefs();
     const router = useRouter();
     let { save } = useData();
-    const formUrl = "/ticket-items"; 
+    const laravelUrl = "/ticket-items"; 
     let uploadUrl = laraAdmin+"/upload/.-media-tickets";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-tickets";
 
-    let url = laraAdmin+formUrl+"/send/"+id, method = "new";
+    let url = laraAdmin+laravelUrl+"/send/"+id, method = "new";
 
-    const saveItem = ()=>save(url, component, method, `/tickets/${id}?`+Math.random(), keyServer(Math.random()));
+    const saveItem = ()=>save(url, component, method, `/${formUrl}/${id}?`+Math.random(), keyServer(Math.random()));
     const back = ()=>router.back();
     
     return(
