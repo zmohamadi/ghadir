@@ -5,26 +5,37 @@ export const getMenus = (user) => {
 
     const admin = [
         { title: "dashboard", icon: "Home", href: "/dashboard" },
-        { title: "promoters", icon: "PenTool", href: "/promoters" },
+        { title: "promoters", icon: "Shield", href: "/promoters" },
         { title: "promotions", icon: "Book", href: "/promotions" },
-        { title: "supports", icon: "Aperture", href: "/supports" },
-        { title: "reports", icon: "Package", href: "/reports" },
+        { title: "supports", icon: "List", href: "/supports" },
+        { title: "reports", icon: "PenTool", href: "/reports" },
+        { title: "statistics", icon: "Calendar", href: "/statistics" },
+        {
+            title: "blogs", icon: "Pocket", open: false, 
+            childs: [
+                { title: "blogs", icon: "List", href: "/blogs" },
+                { title: "comments", icon: "BookOpen", href: "/blogComments" },
+            ]
+        },
+        {
+            title: "tickets", icon: "Tag", open: false, 
+            childs: [
+                { title: "tickets", icon: "List", href: "/tickets" },
+                { title: "ticket_subjects", icon: "Tag", href: "/ticketSubjects" },
+            ]
+        },
         
-        { title: "blogs", icon: "Book", href: "/blogs" },
-        { title: "comments", icon: "BookOpen", href: "/blogComments" },
-        { title: "tickets", icon: "Book", href: "/tickets" },
-        { title: "ticket_subjects", icon: "Book", href: "/ticketSubjects" },
-        { title: "personnels", icon: "Aperture", href: "/personnels" },
+        { title: "personnels", icon: "Users", href: "/personnels" },
     ];
     const promoter = [
-        { title: "dashboard", icon: "Pocket", href: "/dashboard" },
+        { title: "dashboard", icon: "Home", href: "/dashboard" },
         { title: "active_promotions", icon: "Book", href: "/promotions" },
-        { title: "myPromotions", icon: "Book", href: "/myPromotions" },
-        { title: "myReports", icon: "Book", href: "/myReports" },
-        { title: "mySupports", icon: "Book", href: "/mySupports" },
-        { title: "myTickets", icon: "Book", href: "/myTickets" },
-        { title: "new_ticket", icon: "Book", href: "/tickets/new" },
-        { title: "blogs", icon: "Book", href: "/blogs" },
+        { title: "myPromotions", icon: "Aperture", href: "/myPromotions" },
+        { title: "myReports", icon: "List", href: "/myReports" },
+        { title: "mySupports", icon: "PenTool", href: "/mySupports" },
+        { title: "myTickets", icon: "Tag", href: "/myTickets" },
+        { title: "new_ticket", icon: "Pocket", href: "/tickets/new" },
+        { title: "blogs", icon: "Framer", href: "/blogs" },
     ];
     const commonMenus = [
         { title: "profile", icon: "User", href: "/profile" },

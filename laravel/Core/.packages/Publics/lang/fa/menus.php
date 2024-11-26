@@ -24,6 +24,7 @@ return [
     'promoters'=>'مبلّغین',
     'personnels'=>'پرسنل',
     'active_promotions'=>'تبلیغات فعال',
+    'statistics'=>'آمار و ارقام',
 
 ];
 ?>
