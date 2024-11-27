@@ -3,7 +3,7 @@
 import { useEffect,useRef,useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid,useData,Frame,FeatherIcon,Pic } from "@/Theme/Midone/Utils";
+import { Grid,useData,Frame,Tools,FeatherIcon,Pic } from "@/Theme/Midone/Utils";
 import { Button,ButtonContainer,Input,Box } from "@/Theme/Midone/Forms";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
@@ -56,7 +56,7 @@ export function List({ access,query,formUrl }){
             {label: "", jsx: (item)=>(<Pic src={mediaPath + "/users/" + item?.user?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="user-avatar rounded-full" key={"img" + item?.user?.photo} />),},
             {label: "title", field: "title"},
             {label: "subject", field: "subject.title_"+local},
-            {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{item?.created_at}</div> </span>},
+            {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</div> </span>},
             {label: "evaluate", field: "score"},
             {label: "reply_status", jsx: (item)=><span className={"text-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
             {label: "check_priority", jsx: (item)=><span className={"text-"+item?.priority_status?.color}>{item?.priority_status?.["title_"+local]}</span>},
@@ -84,7 +84,7 @@ export function List({ access,query,formUrl }){
                         data={needles?.statuses?.filter(reply => reply.group_id === 19)} titleKey={"title_" + local} valueKey="code"
                         onChange={(e) => handleFilterChange(e, "replyStatus")}   
                     />
-                    <Select label="priority_status" className="col-span-3 md:col-span-3" defaultValue={params.priorityStatus}
+                    <Select label="check_priority" className="col-span-3 md:col-span-3" defaultValue={params.priorityStatus}
                         data={needles?.statuses?.filter(priority => priority.group_id === 24)} titleKey={"title_" + local} valueKey="code"
                         onChange={(e) => handleFilterChange(e, "priorityStatus")}
                     />

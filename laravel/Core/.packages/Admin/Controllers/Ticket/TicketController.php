@@ -91,14 +91,13 @@ class TicketController extends BaseAbstract
                     'text' => 'required_without:media',
                     'media' => 'required_without:text',
                 ]);
-                $reply_status_id = 2;
+                $reply_status_id = ($this->role_id==1)? 2 : 1 ;
             }
             if($text || $media)
             {
                 $item = [
                     "user_id" => $this->user_id,
                     "ticket_id" => $id,
-                    "reply_status_id" => $reply_status_id,
                     "text" => $text,
                     "media" => $media,
                 ];
