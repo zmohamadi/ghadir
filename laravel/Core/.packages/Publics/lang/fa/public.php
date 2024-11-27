@@ -105,6 +105,7 @@ $lang = [
    'evaluate'=>'امتیاز',
    'your_evaluate'=>'امتیاز شما',
    'comment' => 'پیام',
+   'filter_ticket_user' => 'لطفا بعد از وارد کردن کاربر مورد نظر، Enter بزنید.',
    'by' => 'توسط',
    'y'=>'ی',
 ];

@@ -20,7 +20,22 @@ class TicketController extends BaseAbstract
     {
         $this->indexQuery = function ($query) {
             $scop = request()->filter;
+            $priority_status = request()->priorityStatus;
+            $reply_status = request()->replyStatus;
+            $subject = request()->subject;
+            $userInfo = request()->userInfo;
+
             $query->$scop($this->user_id);
+            if($priority_status) $query->where('priority_status_id', $priority_status);
+            if($reply_status) $query->where('reply_status_id', $reply_status);
+            if($subject) $query->where('subject_id', $subject);
+            if($userInfo)
+            {
+                $query->whereHas('user',function($q) use($userInfo)
+                {
+                    $q->where("firstname", 'like', "%$userInfo%")->orWhere("lastname", 'like', "%$userInfo%");
+                });
+            }
         };
         $this->storeQuery = function ($query) {
             $query->user_id = $this->user_id;
@@ -104,10 +119,10 @@ class TicketController extends BaseAbstract
     public function getData()
     {
         $subject = TicketSubject::active()->get();
-        $priorityStatus = Status::FilterGroup(23)->active()->get();
+        $statuses = Status::FilterGroup([19,24])->active()->get();
         $data = [
             'subject' => $subject,
-            'priorityStatus' => $priorityStatus,
+            'statuses' => $statuses,
         ];
         return \response()->json($data);
     }

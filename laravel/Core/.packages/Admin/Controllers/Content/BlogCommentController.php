@@ -45,7 +45,7 @@ class BlogCommentController extends BaseAbstract
     {
         $item = $this->model::find($id);
         $blog = \Models\Content\Blog::with("creator","editor")->select("id","title","text","creator_id","editor_id","created_at")->find($item->blog_id);
-        $comments = \Models\Content\BlogComment::where("blog_id", $item->blog_id)->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->ParentComment()->get();
+        $comments = \Models\Content\BlogComment::where("blog_id", $item->blog_id)->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->ParentComment()->get();
         $data = [
             "item"=>$item,
             "blog"=>$blog,

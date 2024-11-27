@@ -6,7 +6,7 @@ import { useFormElement } from './Element';
 import { useState, useEffect } from 'react';
 
 export function Input(props) {
-    let { refItem, className, inputClassName, type, options, disabled, name, value, checked, max, min, maxlength, dir, onEnter } = props;
+    let { refItem, className, inputClassName, type, options, disabled, name, value, checked, max, min, maxlength, dir, onEnter,note } = props;
     // value used for checkbox or radio value
     let Element = useFormElement(props);
     let { id, rand, label, helpDiv, divError, requiredDiv, placeholder, defaultValue } = Element.init();
@@ -100,6 +100,8 @@ export function Input(props) {
             )}
             {helpDiv}
             {divError}
+            {note ? <small id={id + "-note"} className="form-text text-muted">{note}</small> : ""}
         </div>
+            
     );
 }

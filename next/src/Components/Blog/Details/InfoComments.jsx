@@ -41,10 +41,25 @@ export const InfoComments = ({ comments,access,parent,parentId,mediaPath,Lang,lo
                                         </div>
                                         <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(comments?.created_at)}</div>
                                         <div className="mt-2">{comments?.comment}</div>
-                                        {(access && comments?.confirmer)? <div className="mt-2">{Lang("public.comment_status")+" : "}
-                                                <span className={"mr-auto  text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>
-                                                <span className="">{" "+Lang("public.by")+" "}<strong>{comments?.confirmer?.firstname+" "+comments?.confirmer?.lastname}</strong></span>
-                                            </div>
+                                        {(access)? <div className="intro-y flex text-xs sm:text-sm flex-col sm:flex-row">
+                                            <>
+                                                {(comments?.confirmer)&&
+                                                    <div className="flex items-center">
+                                                        <div className="mr-3 ml-auto">
+                                                            <span className="font-medium">{comments?.confirmer?.firstname+" "+comments?.confirmer?.lastname}</span>{" , "}
+                                                            <span className={"mr-auto  text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>{" "+Lang("public.comment")}
+                                                        </div>
+                                                    </div>
+                                                }
+                                                {(comments?.editor)&&
+                                                    <div className="flex items-center text-gray-700 dark:text-gray-600 sm:mr-auto mt-5 sm:mt-0">
+                                                        <div className="mr-3 ml-auto">
+                                                            <span className="font-medium">{comments?.editor?.firstname+" "+comments?.editor?.lastname}</span>{" "+Lang([",","public.editor_record"])}
+                                                        </div>
+                                                    </div> 
+                                                }
+                                                </>
+                                            </div>               
                                         :""}
                                     </div>
                                 </div>
@@ -63,10 +78,25 @@ export const InfoComments = ({ comments,access,parent,parentId,mediaPath,Lang,lo
                                                 </div>
                                                 <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(child?.created_at)}</div>
                                                 <div className="mt-2">{child?.comment}</div>
-                                                {(access)? <div className="mt-2">{Lang("public.comment_status")+" : "}
-                                                        <span className={"mr-auto  text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>
-                                                        <span className="">{" "+Lang("public.by")+" "}<strong>{child?.confirmer?.firstname+" "+child?.confirmer?.lastname}</strong></span>
-                                                    </div>
+                                                {(access)? <div className="intro-y flex text-xs sm:text-sm flex-col sm:flex-row">
+                                                    <>
+                                                        {(child?.confirmer)&&
+                                                            <div className="flex items-center">
+                                                                <div className="mr-3 ml-auto">
+                                                                    <span className="font-medium">{child?.confirmer?.firstname+" "+child?.confirmer?.lastname}</span>{" , "}
+                                                                    <span className={"mr-auto  text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>{" "+Lang("public.comment")}
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        {(child?.editor)&&
+                                                            <div className="flex items-center text-gray-700 dark:text-gray-600 sm:mr-auto mt-5 sm:mt-0">
+                                                                <div className="mr-3 ml-auto">
+                                                                    <span className="font-medium">{child?.editor?.firstname+" "+child?.editor?.lastname}</span>{" "+Lang([",","public.editor_record"])}
+                                                                </div>
+                                                            </div> 
+                                                        }
+                                                        </>
+                                                    </div>               
                                                 :""}
                                             </div>
                                         </div>
