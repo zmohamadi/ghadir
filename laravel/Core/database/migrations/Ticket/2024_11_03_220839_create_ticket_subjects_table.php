@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('title_fa', 200)->nullable()->comment('عنوان');
             $table->integer('creator_id')->nullable()->comment('شناسه کاربر ثبت کننده');  
             $table->integer('editor_id')->nullable()->comment('شناسه کاربر ویرایش کننده');          
-            $table->integer('count_parent')->default(0)->comment('تعداد تیکت های والد (شروع تیکت)');
-            $table->integer('count_parent_awaiting')->default(0)->comment('تعداد تیکت های والد که وضعیت درانتظار پاسخ دارند (شروع تیکت)');
+            $table->integer('count_ticket')->default(0)->comment('تعداد تیکت ها');
+            $table->integer('count_ticket_awaiting')->default(0)->comment('تعداد تیکت هایی که وضعیت درانتظار پاسخ دارند');
+            $table->integer('count_ticket_checking')->default(0)->comment('تعداد تیکت هایی که وضعیت درحال بررسی دارند');
+            $table->integer('count_ticket_answered')->default(0)->comment('تعداد تیکت هایی که وضعیت پاسخ داده شده دارند');
+            $table->integer('count_ticket_closed')->default(0)->comment('تعداد تیکت هایی که وضعیت بسته شده دارند');
             $table->integer('status_id')->length(1)->default(1)->comment('شناسه وضعیت فعال/غیر فعال');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
