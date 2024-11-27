@@ -6,7 +6,7 @@ import { Items } from "@/Components/Ticket/Details/Items";
 
 export const List = ({ id,laraAdmin,laravelUrl,mediaPath,Lang }) => {
     let info = {
-        url: `${laraAdmin}${laravelUrl}/list/?id=${id}`,
+        url: `${laraAdmin}${laravelUrl}/list?id=${id}`,
         theme: (item)=> <Items item={item} Lang={Lang} mediaPath={mediaPath} />,
     }
 

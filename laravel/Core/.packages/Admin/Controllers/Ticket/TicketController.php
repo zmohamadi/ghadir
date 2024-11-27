@@ -82,6 +82,7 @@ class TicketController extends BaseAbstract
     {
 		\DB::beginTransaction();
 		try{
+            $ticket_info = $this->model::find($id);
             $reply_status_id = request()->reply_status_id;
             $text = request()->text;
             $media = request()->media;
@@ -91,7 +92,13 @@ class TicketController extends BaseAbstract
                     'text' => 'required_without:media',
                     'media' => 'required_without:text',
                 ]);
-                $reply_status_id = ($this->role_id==1)? 2 : 1 ;
+                $reply_status_id = 0;
+                if($this->role_id==1)
+                {
+                    $ticket_user = User::find($ticket_info["user_id"]);
+                    $reply_status_id = 2;
+                    // $this->sendMessage($ticket_info["user_id"], "پاسخ تیکت برای شما ثبت شده است.");
+                }
             }
             if($text || $media)
             {
@@ -103,7 +110,8 @@ class TicketController extends BaseAbstract
                 ];
                 TicketItem::create($item);
             }
-            $this->model::find($id)->update(["reply_status_id"=>$reply_status_id]);
+            $ticket_info->update(["reply_status_id"=>$reply_status_id]);
+            // $this->model::find($id)->update(["reply_status_id"=>$reply_status_id]);
 
             \DB::commit();
 		}

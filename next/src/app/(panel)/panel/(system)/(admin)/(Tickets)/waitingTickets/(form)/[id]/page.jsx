@@ -5,10 +5,15 @@ import View from '@/Components/Ticket/View';
 
 export default function ShowInfo({ params }){
     const {user} = useAuth();
-    
-    let filterStatus = (user?.role_id == 1)? false : true;
+    let filterStatus = true;
+    let formUrl = "";
+    if(user?.role_id == 1)
+    {
+        filterStatus = false;
+        formUrl = "/waitingTickets";
+    }
 
     return(
-        <View id={params?.id} filterStatus={filterStatus} formUrl="waitingTickets" />
+        <View id={params?.id} filterStatus={filterStatus} formUrl={formUrl} />
     );
 }
