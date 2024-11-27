@@ -19,7 +19,7 @@ export const Info = ({ access,item,comments,creator,editor,laraAdmin,mediaPath,L
                 <div className="intro-y mt-5 pt-5 border-t border-gray-200 dark:border-dark-5">
                     <div className="text-base sm:text-lg font-medium">{Lang("public."+textComment)}</div>   
                 </div>
-                <InfoComments comments={comments} parent={setParentId} parentId={parentId} mediaPath={mediaPath} Lang={Lang} local={local} />
+                <InfoComments comments={comments} access={access} parent={setParentId} parentId={parentId} mediaPath={mediaPath} Lang={Lang} local={local} />
                 <InfoReply laraAdmin={laraAdmin} blogId={item?.id} parentId={parentId} sendKeyServer={keyServer} />
             </div>
         </>

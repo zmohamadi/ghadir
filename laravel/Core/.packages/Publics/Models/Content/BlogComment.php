@@ -59,7 +59,7 @@ class BlogComment extends Model
      */
     public function confirmer(): BelongsTo
     {
-        return $this->belongsTo(\Models\User::class);
+        return $this->belongsTo(\Models\User::class,'confirm_user_id');
     }
     /**
      * Get the creatorUser that owns the comment.

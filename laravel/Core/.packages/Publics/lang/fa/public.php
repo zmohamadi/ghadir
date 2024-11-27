@@ -82,9 +82,6 @@ $lang = [
    'last_login'=>'آخرین بازدید',
    'status_reply'=>'وضعیت پاسخ',
    'status_ticket'=>'وضعیت تیکت',
-   'new_ticket'=>'تیکت جدید',
-   'myTickets'=>'تیکت های من',
-
    'specifications'=>'مشخصات',
    'documents'=>'فایل ها',
    'videos' => 'ویدئوها',
@@ -100,9 +97,7 @@ $lang = [
    'rejected' => 'رد',
    'cancel' => 'انصراف',
    'reply_status' => 'وضعیت پاسخ',
-   'text_confirm' => 'آیا از تأیید پیام اطمینان دارید؟',
-   'text_edit' => 'انصراف',
-   'text_delete' => 'آیا از حذف پیام اطمینان دارید؟',
+   'comment_status' => 'وضعیت پیام',
    'media' => 'آپلود رسانه',
    'ticket_text' => 'متن تیکت',
    'check_priority' => 'اولویت بررسی',
@@ -114,6 +109,10 @@ $lang = [
    'people_tribune'=>'مخاطبین منبر ها',
    "time_tribune"=>"ساعت منبرها",
    "time_course"=>"ساعت دوره",
+   'comment' => 'پیام',
+   'filter_ticket_user' => 'لطفا بعد از وارد کردن کاربر مورد نظر، Enter بزنید.',
+   'by' => 'توسط',
+   'y'=>'ی',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

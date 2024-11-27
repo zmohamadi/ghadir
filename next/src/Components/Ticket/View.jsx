@@ -2,26 +2,25 @@
 import { useEffect,useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from '@/lib/config';
-import { useRouter } from 'next/navigation';
-import { useData,useFormRefs,Button,Input,Textarea,CheckBox,Frame } from "@/Theme/Midone/Forms";
-import { TicketInfo,List,FormReply,SendScore } from '@/Components/Ticket/Details';
+import { Loading } from "@/Theme/Midone/Utils";
+import { useData,useFormRefs,Frame } from "@/Theme/Midone/Forms";
+import { UserInfo,TicketInfo,List,FormReply,SendScore } from '@/Components/Ticket/Details';
 
-export default function View({ id,filterStatus }){
+export default function View({ id,formUrl,filterStatus }){
     const {Lang} = useLang();
-    const {laraAdmin,nextAdmin,mediaPath} = useConfig();
+    const {laraAdmin,mediaPath} = useConfig();
     let component = useFormRefs();
-    const router = useRouter();
     let {get} = useData();
     let [infoServer, setInfoServer] = useState(1);
-    const formUrl = "/tickets"; 
-    let url = laraAdmin+formUrl+"/details/"+id+"?filter="+filterStatus;
+    const laravelUrl = "/tickets"; 
+    let url = laraAdmin+laravelUrl+"/details/"+id+"?filter="+filterStatus;
 
     useEffect(() => {
         get(url, component, "info");
     }, [infoServer]);
 
-    const back = ()=>router.back();
     const data = component?.state?.info;
+    let user = data?.user;
     let ticket = data?.ticket;
     let ticketItems = data?.ticketItems;
     let replyStatus = data?.replyStatus;
@@ -29,14 +28,23 @@ export default function View({ id,filterStatus }){
     return(
         <>
             <Frame title={Lang(["public.tickets"])} key={infoServer}>
-                <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">
-                    <TicketInfo item={ticket} Lang={Lang} />
-                    {(filterStatus)? <SendScore item={ticket} Lang={Lang} /> : ""}
+            {(data == undefined)?
+                <div className="col-span-12 xxl:col-span-9">
+                    <Loading className="mt-5" />
                 </div>
-                <div className="col-span-12 lg:col-span-8 xxl:col-span-10 ">
-                    <List id={id} laraAdmin={laraAdmin} mediaPath={mediaPath} laravelUrl="/ticket-items" Lang={Lang} />
-                    {(ticket?.reply_status_id == 3)? "" : <FormReply keyServer={setInfoServer} id={id} replyStatus={replyStatus} /> }
-                </div>
+            :
+                <>
+                    <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">
+                        <UserInfo item={user} />
+                        <TicketInfo item={ticket} useLang={useLang()} />
+                        {(filterStatus)? <SendScore item={ticket} Lang={Lang} /> : ""}
+                    </div>
+                    <div className="col-span-12 lg:col-span-8 xxl:col-span-10 ">
+                        <List id={id} laraAdmin={laraAdmin} mediaPath={mediaPath} laravelUrl="/ticket-items" Lang={Lang} />
+                        {(ticket?.reply_status_id == 3)? "" : <FormReply keyServer={setInfoServer} id={id} replyStatus={replyStatus} formUrl={formUrl} /> }
+                    </div>
+                </>
+            }
             </Frame>
         </>
     );

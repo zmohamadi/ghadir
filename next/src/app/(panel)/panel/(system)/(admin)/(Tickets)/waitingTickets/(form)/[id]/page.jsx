@@ -9,6 +9,6 @@ export default function ShowInfo({ params }){
     let filterStatus = (user?.role_id == 1)? false : true;
 
     return(
-        <View id={params?.id} filterStatus={filterStatus} formUrl="tickets" />
+        <View id={params?.id} filterStatus={filterStatus} formUrl="waitingTickets" />
     );
 }

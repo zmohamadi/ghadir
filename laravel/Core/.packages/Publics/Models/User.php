@@ -140,6 +140,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\Models\Content\BlogComment::class);
     }
     /**
+     * Get the comments for the user The check confirm.
+     */
+    public function confirmComments(): HasMany
+    {
+        return $this->hasMany(\Models\Content\BlogComment::class);
+    }
+    /**
      * The blogs that belong to the comments.
      */
     public function blogs(): BelongsToMany

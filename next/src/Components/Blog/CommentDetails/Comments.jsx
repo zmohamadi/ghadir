@@ -69,12 +69,27 @@ export const Comments = ({ keyServer,itemId,comments,laraAdmin,formUrl,mediaPath
                                         <div className="mr-3 flex-1">
                                             <div className="flex items-center">
                                                 <span className="font-medium">{comments?.creator?.firstname+" "+comments?.creator?.lastname}</span>
-                                                {(comments?.confirm_id==2)? displayIcon(comments?.id)
-                                                : <span className={"mr-auto text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>
-                                                }
+                                                {(comments?.confirm_id==2)&& displayIcon(comments?.id)}
                                             </div>
                                             <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(comments?.created_at)}</div>
-                                            <div className="mt-2">{comments?.comment}</div>       
+                                            <div className="mt-2">{comments?.comment}</div>
+                                            <div className="intro-y flex text-xs sm:text-sm flex-col sm:flex-row">
+                                                {(comments?.confirmer)&&
+                                                    <div className="flex items-center">
+                                                        <div className="mr-3 ml-auto">
+                                                            <span className="font-medium">{comments?.confirmer?.firstname+" "+comments?.confirmer?.lastname}</span>{" , "}
+                                                            <span className={"mr-auto  text-xl text-"+comments?.confirm_status?.color}>{comments?.confirm_status?.["title_"+local]}</span>{" "+Lang("public.comment")}
+                                                        </div>
+                                                    </div>
+                                                }
+                                                {(comments?.editor)&&
+                                                    <div className="flex items-center text-gray-700 dark:text-gray-600 sm:mr-auto mt-5 sm:mt-0">
+                                                        <div className="mr-3 ml-auto">
+                                                            <span className="font-medium">{comments?.editor?.firstname+" "+comments?.editor?.lastname}</span>{" "+Lang([",","public.editor_record"])}
+                                                        </div>
+                                                    </div> 
+                                                }
+                                            </div>
                                             <div className="hidden show-comment" id={"comment-"+comments?.id}>
                                                 <div className="sm:w-full">
                                                     <Textarea row="2" label="edit_comment" required="true" refItem={[component, "comment-"+comments?.id]} defaultValue={comments?.comment} />
@@ -99,12 +114,27 @@ export const Comments = ({ keyServer,itemId,comments,laraAdmin,formUrl,mediaPath
                                                 <div className="mr-3 flex-1">
                                                     <div className="flex items-center">
                                                         <span className="font-medium">{child?.creator?.firstname+" "+child?.creator?.lastname}</span>
-                                                        {(child?.confirm_id==2)? displayIcon(child?.id)
-                                                        : <span className={"mr-auto text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>
-                                                        }
+                                                        {(child?.confirm_id==2)&& displayIcon(child?.id)}
                                                     </div>
                                                     <div className="text-gray-600 text-xs sm:text-sm ltr">{Tools?.toJalaliDateString(child?.created_at)}</div>
-                                                    <div className="mt-2">{child?.comment}</div>        
+                                                    <div className="mt-2">{child?.comment}</div>
+                                                    <div className="intro-y flex text-xs sm:text-sm flex-col sm:flex-row">
+                                                        {(child?.confirmer)&&
+                                                            <div className="flex items-center">
+                                                                <div className="mr-3 ml-auto">
+                                                                    <span className="font-medium">{child?.confirmer?.firstname+" "+child?.confirmer?.lastname}</span>{" , "}
+                                                                    <span className={"mr-auto  text-xl text-"+child?.confirm_status?.color}>{child?.confirm_status?.["title_"+local]}</span>{" "+Lang("public.comment")}
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        {(child?.editor)&&
+                                                            <div className="flex items-center text-gray-700 dark:text-gray-600 sm:mr-auto mt-5 sm:mt-0">
+                                                                <div className="mr-3 ml-auto">
+                                                                    <span className="font-medium">{child?.editor?.firstname+" "+child?.editor?.lastname}</span>{" "+Lang([",","public.editor_record"])}
+                                                                </div>
+                                                            </div> 
+                                                        }
+                                                    </div>
                                                     <div className="hidden show-comment" id={"comment-"+child?.id}>
                                                         <div className="sm:w-full">
                                                             <Textarea row="2" label="edit_comment" required="true" refItem={[component, "comment-"+child?.id]} defaultValue={child?.comment} />

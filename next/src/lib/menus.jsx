@@ -21,6 +21,7 @@ export const getMenus = (user) => {
             title: "tickets", icon: "Tag", open: false, 
             childs: [
                 { title: "tickets", icon: "List", href: "/tickets" },
+                { title: "waiting_tickets", icon: "List", href: "/waitingTickets" },
                 { title: "ticket_subjects", icon: "Tag", href: "/ticketSubjects" },
             ]
         },

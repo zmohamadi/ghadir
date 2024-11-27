@@ -1,21 +1,18 @@
 "use client";
 
 import { useConfig } from '@/lib/config';
-import { useData,useFormRefs,Button, Radio, ButtonContainer } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Button,Radio,ButtonContainer } from "@/Theme/Midone/Forms";
 import { Tools } from "@/Theme/Midone/Utils";
-import { useRouter } from 'next/navigation';
 
 export const SendScore = ({ item,Lang }) => {
     const {laraAdmin} = useConfig();
     let component = useFormRefs();
-    const router = useRouter();
     let { save } = useData();
     const formUrl = "/tickets";
 
     let url = laraAdmin+formUrl+"/save-evaluate/"+item?.id, method = "edit";
 
     const saveItem = ()=>save(url, component, method, formUrl);
-    const back = ()=>router.back();
 
     let options= [];
     for(let i=1; i<=5; i++)
@@ -51,9 +48,6 @@ export const SendScore = ({ item,Lang }) => {
                     </div>
                 </>
             }
-            {/* <ButtonContainer className="box flex p-5 mt-5 text-right">
-                <Button label="back" onClick={back} />
-            </ButtonContainer> */}
         </>
     );
 }

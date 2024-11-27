@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from '@/lib/config';
 import { useRouter } from 'next/navigation';
+import { Loading } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Box,Frame,Button,ButtonContainer } from "@/Theme/Midone/Forms";
 
 export default function View({ id }){
@@ -26,6 +27,11 @@ export default function View({ id }){
     return(
         <>
             <Frame title={Lang("public.ticket_subjects")}>
+            {(data == undefined)?
+                <div className="col-span-12 xxl:col-span-9">
+                    <Loading className="mt-5" />
+                </div>
+            :
                 <Box cols="grid-cols-1">
                     <h2 className="intro-y font-medium text-xl sm:text-2xl">
                         {data?.['title_'+local]}
@@ -51,6 +57,7 @@ export default function View({ id }){
                         <Button label="back" onClick={back} />
                     </ButtonContainer>
                 </Box>
+            }
             </Frame>
         </>
     );

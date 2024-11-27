@@ -1,11 +1,12 @@
 "use client";
+
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid,Frame,useData,FeatherIcon,Tools } from "@/Theme/Midone/Utils";
+import { Grid,Frame,useData,FeatherIcon } from "@/Theme/Midone/Utils";
 
-export function List({ panel="admin",access=true , query="" }){
+export function List(){
     const {local,Lang} = useLang();
-    const {mediaPath, laraAdmin ,nextAdmin } = useConfig();
+    const {laraAdmin,nextAdmin} = useConfig();
     const formUrl = "/ticketSubjects";
     const laravelUrl = "/ticket-subjects";
     const {destroy} = useData();

@@ -27,7 +27,8 @@ class Status extends Model
      */
     public function scopeFilterGroup($query, $group_id) // عمومی
     {
-        return $query->where('group_id', $group_id);
+        return $query->whereIn('group_id', $group_id);
+        // return $query->where('group_id', $group_id);
     }
     public function scopeSelectInReply($query, $filter="false") // جهت انتخاب گزینه مناسب در فرم پاسخ به تیکت کاربر سایت توسط مدیریت
     {

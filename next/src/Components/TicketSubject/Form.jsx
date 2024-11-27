@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";

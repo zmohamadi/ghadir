@@ -4,6 +4,7 @@ namespace Admin\Controllers\Content;
 
 use Admin\Controllers\Public\BaseAbstract;
 use Models\Content\BlogComment;
+use Models\User;
 
 class BlogController extends BaseAbstract
 {
@@ -27,19 +28,19 @@ class BlogController extends BaseAbstract
     public function details($id)
     {
         $item = $this->model::with("creator","editor")->find($id);
-        $creator = \Models\User::select("id","firstname","lastname","photo")->find($item->creator_id);
-        $editor = \Models\User::select("id","firstname","lastname","photo")->find($item->editor_id);
+        $creator = User::select("id","firstname","lastname","photo")->find($item->creator_id);
+        $editor = User::select("id","firstname","lastname","photo")->find($item->editor_id);
         // $all_comments = BlogComment::where("blog_id",$item->id);
         $access = false;
         if($this->role_id == 1)
         {
             $access = true;
-            $comments = BlogComment::ParentComment()->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $comments = BlogComment::ParentComment()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
             $waiting_comments = BlogComment::Waiting()->where("blog_id",$item->id)->with("creator","editor")->get();
         }
         else
         {    
-            $comments = BlogComment::ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $comments = BlogComment::ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
             $waiting_comments = BlogComment::Waiting()->active()->where("blog_id",$item->id)->with("creator","editor")->get();
         }
         $data = [

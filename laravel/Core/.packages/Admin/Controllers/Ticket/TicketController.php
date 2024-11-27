@@ -6,19 +6,36 @@ use Admin\Controllers\Public\BaseAbstract;
 use Models\Ticket\TicketSubject;
 use Models\Ticket\TicketItem;
 use Models\Base\Status;
+use Models\User;
 
 class TicketController extends BaseAbstract
 {
      protected $model = 'Models\Ticket\Ticket';
     protected $request = 'Publics\Requests\Ticket\TicketRequest';
     protected $with = ["subject","replyStatus","priorityStatus","user"];
+    protected $showWith = ["subject","replyStatus","priorityStatus"];
     protected $searchFilter = ['title'];
 
     public function init()
     {
         $this->indexQuery = function ($query) {
             $scop = request()->filter;
+            $priority_status = request()->priorityStatus;
+            $reply_status = request()->replyStatus;
+            $subject = request()->subject;
+            $userInfo = request()->userInfo;
+
             $query->$scop($this->user_id);
+            if($priority_status) $query->where('priority_status_id', $priority_status);
+            if($reply_status) $query->where('reply_status_id', $reply_status);
+            if($subject) $query->where('subject_id', $subject);
+            if($userInfo)
+            {
+                $query->whereHas('user',function($q) use($userInfo)
+                {
+                    $q->where("firstname", 'like', "%$userInfo%")->orWhere("lastname", 'like', "%$userInfo%");
+                });
+            }
         };
         $this->storeQuery = function ($query) {
             $query->user_id = $this->user_id;
@@ -38,11 +55,13 @@ class TicketController extends BaseAbstract
      */
     public function details($id)
     {
-        $ticket = $this->model::with($this->with)->find($id);
+        $ticket = $this->model::with($this->showWith)->find($id);
+        $user = User::with("gender")->select("id","gender_id","firstname","lastname","photo","mobile")->find($ticket->user_id);
         $ticketItems = TicketItem::with("user")->where("ticket_id", $id)->get();
         $replyStatus = Status::SelectInReply(request()->filter)->active()->get();
         $data = [
             "ticket" => $ticket,
+            "user" => $user,
             "ticketItems" => $ticketItems,
             'replyStatus' => $replyStatus,
         ];
@@ -53,7 +72,7 @@ class TicketController extends BaseAbstract
      */
     public function listItems()
     {
-        $items = TicketItem::where("ticket_id",request()->id)->with("user");
+        $items = TicketItem::where("ticket_id",request()->id)->with("user")->orderBy("id", "ASC");
         return $this->grid($items, "");
     }
     /**
@@ -100,10 +119,10 @@ class TicketController extends BaseAbstract
     public function getData()
     {
         $subject = TicketSubject::active()->get();
-        $priorityStatus = Status::FilterGroup(24)->active()->get();
+        $statuses = Status::FilterGroup([19,24])->active()->get();
         $data = [
             'subject' => $subject,
-            'priorityStatus' => $priorityStatus,
+            'statuses' => $statuses,
         ];
         return \response()->json($data);
     }
