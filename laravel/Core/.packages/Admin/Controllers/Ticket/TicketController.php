@@ -3,6 +3,7 @@
 namespace Admin\Controllers\Ticket;
 
 use Admin\Controllers\Public\BaseAbstract;
+use Admin\Controllers\Public\PublicController;
 use Models\Ticket\TicketSubject;
 use Models\Ticket\TicketItem;
 use Models\Base\Status;
@@ -48,6 +49,9 @@ class TicketController extends BaseAbstract
                 "media" => request()->media,
             ];
             $query->ticketItems()->create($items);
+            $updateCount = new PublicController();
+            $updateCount->updateCountTicket();
+            $updateCount->updateCountTicketAwaiting();
         };
     }
     /**
@@ -93,12 +97,19 @@ class TicketController extends BaseAbstract
                     'media' => 'required_without:text',
                 ]);
                 $reply_status_id = 0;
+                $updateCount->updateCountTicketAwaiting();
                 if($this->role_id==1)
                 {
                     $ticket_user = User::find($ticket_info["user_id"]);
                     $reply_status_id = 2;
                     // $this->sendMessage($ticket_info["user_id"], "پاسخ تیکت برای شما ثبت شده است.");
+                    $updateCount->updateCountTicketAnswered();
                 }
+            }
+            else
+            {
+                $updateCount->updateCountTicketChecking();
+                $updateCount->updateCountTicketClosed();
             }
             if($text || $media)
             {
@@ -111,7 +122,9 @@ class TicketController extends BaseAbstract
                 TicketItem::create($item);
             }
             $ticket_info->update(["reply_status_id"=>$reply_status_id]);
-            // $this->model::find($id)->update(["reply_status_id"=>$reply_status_id]);
+
+            $updateCount = new PublicController();
+            $updateCount->updateCountTicket();
 
             \DB::commit();
 		}

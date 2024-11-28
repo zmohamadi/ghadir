@@ -3,6 +3,7 @@
 namespace Admin\Controllers\Content;
 
 use Admin\Controllers\Public\BaseAbstract;
+use Admin\Controllers\Public\PublicController;
 
 class BlogCommentController extends BaseAbstract
 {
@@ -35,7 +36,12 @@ class BlogCommentController extends BaseAbstract
                 $query->comment = request()->$field;
                 $query->editor_id = $this->user_id;
             }
-            $query->save();               
+            $query->save();
+            $updateCount = new PublicController();
+            $updateCount->updateCountComment();
+            $updateCount->updateCountCommentWaiting();
+            $updateCount->updateCountCommentConfirmed();
+            $updateCount->updateCountCommentRejected();
         };
     }
     /**
@@ -58,31 +64,59 @@ class BlogCommentController extends BaseAbstract
     */
     public function sendComment()
     {
-        request()->validate([
-            'comment' => 'required',
-        ]);
-        $confirm_user_id = null;
-        $confirm_id = 2;
-        if($this->role_id == 1)
-        {
-            $confirm_user_id = $this->user_id;
-            $confirm_id = 1;
-        }
-
-        $comment = new $this->model();
-        $comment->creator_id = $this->user_id;
-        $comment->blog_id = request()->b;
-        $comment->parent_id = request()->p;
-        $comment->comment = request()->comment;
-        $comment->confirm_user_id = $confirm_user_id;
-        $comment->confirm_id = $confirm_id;
-        $comment->save();
+		\DB::beginTransaction();
+		try{
+            request()->validate([
+                'comment' => 'required',
+            ]);
+            $confirm_user_id = null;
+            $confirm_id = 2;
+            if($this->role_id == 1)
+            {
+                $confirm_user_id = $this->user_id;
+                $confirm_id = 1;
+            }
+            $comment = new $this->model();
+            $comment->creator_id = $this->user_id;
+            $comment->blog_id = request()->b;
+            $comment->parent_id = request()->p;
+            $comment->comment = request()->comment;
+            $comment->confirm_user_id = $confirm_user_id;
+            $comment->confirm_id = $confirm_id;
+            $comment->save();
+            $updateCount = new PublicController();
+            $updateCount->updateCountComment();
+            $updateCount->updateCountCommentWaiting();
+            $updateCount->updateCountCommentConfirmed();
+            $updateCount->updateCountCommentRejected();
+            
+            \DB::commit();
+		}
+		catch (\Exception $e) {
+			\DB::rollBack();
+			return response()->json($e->getMessage(), '501');
+		}
     }
     /**
      * post info for Delete Comment
     */
     public function deleteComment($id)
     {
-        $this->destroy($id);
+		\DB::beginTransaction();
+		try{
+            $this->destroy($id);
+            
+            $updateCount = new PublicController();
+            $updateCount->updateCountComment();
+            $updateCount->updateCountCommentWaiting();
+            $updateCount->updateCountCommentConfirmed();
+            $updateCount->updateCountCommentRejected();
+
+            \DB::commit();
+        }
+        catch (\Exception $e) {
+            \DB::rollBack();
+            return response()->json($e->getMessage(), '501');
+        }
     }
 }

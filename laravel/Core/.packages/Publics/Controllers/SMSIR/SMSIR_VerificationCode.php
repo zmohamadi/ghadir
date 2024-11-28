@@ -16,12 +16,13 @@ class SMSIR_VerificationCode
                 return 'Mock verification code sent to log';
             }
 
-            // $templateId = 488864;
-            $templateId = 100000;
+            $templateId = 488864;
+            // $templateId = 100000;
             
             $parameters = [
                 [
-                    "name" => "Code",
+                    // "name" => "Code",
+                    "name" => "OTP",
                     "value" => $code
                 ]
             ];

@@ -110,80 +110,85 @@ class PublicController extends Controller
     //     $email = "afgwomen@afg-womens-academy.org";
     //     return $this->view('views::emails.sample')->with(compact('email'));
     // }
-
     /**
-     * Get Role User In Course
+     * Update field count_comment of tables blogs
      */
-    /**
-     * Update field count_response of tables surveys
-     */
-    public static function updateCountResponseSurvey()
+    public static function updateCountComment()
     {
-        \DB::update("UPDATE surveys SET `count_response` =
-            (SELECT count(survey_attemp.survey_id) FROM survey_attemp
-                WHERE survey_attemp.survey_id = surveys.id AND survey_attemp.deleted_at IS null)");
+        \DB::update("UPDATE blogs SET `count_comment` =
+            (SELECT count(blog_comments.blog_id) FROM blog_comments
+                WHERE blog_comments.blog_id = blogs.id AND blog_comments.deleted_at IS null)");
     }
     /**
-     * Update field count_selected of tables surveys
+     * Update field count_comment_waiting of tables blogs
      */
-    public static function updateCountSelectedOption()
+    public static function updateCountCommentWaiting()
     {
-        \DB::update("UPDATE survey_question_options SET `count_selected` =
-            (SELECT count(survey_answer.question_option_id) FROM survey_answer
-                WHERE survey_answer.question_option_id = survey_question_options.id AND survey_answer.deleted_at IS null)");
+        \DB::update("UPDATE blogs SET `count_comment_waiting` =
+            (SELECT count(blog_comments.blog_id) FROM blog_comments
+                WHERE blog_comments.blog_id = blogs.id AND blog_comments.confirm_id = 2 AND blog_comments.deleted_at IS null)");
     }
     /**
-     * Update field count_post of tables forums
+     * Update field count_comment_confirmed of tables blogs
      */
-    public static function updateCountPost()
+    public static function updateCountCommentConfirmed()
     {
-        \DB::update("UPDATE forums SET `count_post` =
-            (SELECT count(forum_posts.forum_id) FROM forum_posts
-                WHERE forum_posts.forum_id = forums.id AND forum_posts.deleted_at IS null)");
+        \DB::update("UPDATE blogs SET `count_comment_confirmed` =
+            (SELECT count(blog_comments.blog_id) FROM blog_comments
+                WHERE blog_comments.blog_id = blogs.id AND blog_comments.confirm_id = 1 AND blog_comments.deleted_at IS null)");
     }
     /**
-     * Update field count_post_not_check of tables forums
+     * Update field count_comment_rejected of tables blogs
      */
-    public static function updateCountPostNotCheck()
+    public static function updateCountCommentRejected()
     {
-        \DB::update("UPDATE forums SET `count_post_not_check` =
-            (SELECT count(forum_posts.forum_id) FROM forum_posts
-                WHERE forum_posts.forum_id = forums.id AND forum_posts.type_id = 0 AND forum_posts.deleted_at IS null)");
+        \DB::update("UPDATE blogs SET `count_comment_rejected` =
+            (SELECT count(blog_comments.blog_id) FROM blog_comments
+                WHERE blog_comments.blog_id = blogs.id AND blog_comments.confirm_id = 0 AND blog_comments.deleted_at IS null)");
     }
     /**
-     * Update field count_post_parent of tables forums
+     * Update field count_ticket of tables ticket_subjects
      */
-    public static function updateCountPostParent()
+    public static function updateCountTicket()
     {
-        \DB::update("UPDATE forums SET `count_post_parent` =
-            (SELECT count(forum_posts.forum_id) FROM forum_posts
-                WHERE forum_posts.forum_id = forums.id AND forum_posts.parent_id = 0 AND forum_posts.deleted_at IS null)");
+        \DB::update("UPDATE ticket_subjects SET `count_ticket` =
+            (SELECT count(tickets.subject_id) FROM tickets
+                WHERE tickets.subject_id = ticket_subjects.id AND tickets.deleted_at IS null)");
     }
     /**
-     * Update field count_like of tables forum_posts
+     * Update field count_ticket_awaiting of tables ticket_subjects
      */
-    public static function updateCountLike()
+    public static function updateCountTicketAwaiting()
     {
-        \DB::update("UPDATE forum_posts SET `count_like` =
-            (SELECT count(forum_likes.post_id) FROM forum_likes
-                WHERE forum_likes.post_id = forum_posts.id AND forum_likes.like_type_id = 1 AND forum_likes.deleted_at IS null)");
+        \DB::update("UPDATE ticket_subjects SET `count_ticket_awaiting` =
+            (SELECT count(tickets.subject_id) FROM tickets
+                WHERE tickets.subject_id = ticket_subjects.id AND tickets.reply_status_id = 0 AND tickets.deleted_at IS null)");
     }
     /**
-     * Update field count_dislike of tables forum_posts
+     * Update field count_ticket_checking of tables ticket_subjects
      */
-    public static function updateCountDisLike()
+    public static function updateCountTicketChecking()
     {
-        \DB::update("UPDATE forum_posts SET `count_dislike` =
-            (SELECT count(forum_likes.post_id) FROM forum_likes
-                WHERE forum_likes.post_id = forum_posts.id AND forum_likes.like_type_id = 0 AND forum_likes.deleted_at IS null)");
+        \DB::update("UPDATE ticket_subjects SET `count_ticket_checking` =
+            (SELECT count(tickets.subject_id) FROM tickets
+                WHERE tickets.subject_id = ticket_subjects.id AND tickets.reply_status_id = 1 AND tickets.deleted_at IS null)");
     }
     /**
-     * Update field count_dislike of tables forum_posts
+     * Update field count_ticket_answered of tables ticket_subjects
      */
-    public static function updateCountAttachment()
+    public static function updateCountTicketAnswered()
     {
-        \DB::update("UPDATE forum_posts SET `count_attachment` =
-            (SELECT count(forum_attachments.post_id) FROM forum_attachments
-                WHERE forum_attachments.post_id = forum_posts.id AND forum_attachments.deleted_at IS null)");
+        \DB::update("UPDATE ticket_subjects SET `count_ticket_answered` =
+            (SELECT count(tickets.subject_id) FROM tickets
+                WHERE tickets.subject_id = ticket_subjects.id AND tickets.reply_status_id = 2 AND tickets.deleted_at IS null)");
+    }
+    /**
+     * Update field count_ticket_closed of tables ticket_subjects
+     */
+    public static function updateCountTicketClosed()
+    {
+        \DB::update("UPDATE ticket_subjects SET `count_ticket_closed` =
+            (SELECT count(tickets.subject_id) FROM tickets
+                WHERE tickets.subject_id = ticket_subjects.id AND tickets.reply_status_id = 3 AND tickets.deleted_at IS null)");
     }
 }

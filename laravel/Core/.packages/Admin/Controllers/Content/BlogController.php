@@ -51,6 +51,7 @@ class BlogController extends BaseAbstract
             "waiting_comments"=>$waiting_comments,
             "access"=>$access,
         ];
+        $item->update(["count_view"=>$item->count_view+1]);
         return \response()->json($data);
     }
 }
