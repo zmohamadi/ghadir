@@ -28,9 +28,7 @@ export default function View({ id }){
         <>
             <Frame title={Lang("public.ticket_subjects")}>
             {(data == undefined)?
-                <div className="col-span-12 xxl:col-span-9">
-                    <Loading className="mt-5" />
-                </div>
+                <Loading  />
             :
                 <Box cols="grid-cols-1">
                     <h2 className="intro-y font-medium text-xl sm:text-2xl">

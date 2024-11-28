@@ -27,9 +27,7 @@ export default function View({ id }){
     return(
         <Frame title={Lang(["public.blog","public.comments"])}>
             {(data == undefined)?
-                <div className="col-span-12 xxl:col-span-9">
-                    <Loading className="mt-5" />
-                </div>
+                <Loading />
             :
                 <>
                     <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">

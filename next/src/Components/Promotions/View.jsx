@@ -42,9 +42,7 @@ export function View({ id ,panel,access}) {
     return (<>
         <Frame title={data?.title || Lang(["public.promotion_details"])}>
         {((data==undefined))?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading  />
                 :<>
             <Input type="hidden" defaultValue={id} refItem={[component, "promotion_id"]} />
             <Tab className="col-span-12">

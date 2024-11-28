@@ -35,9 +35,7 @@ export function Form({id,panel}){
                 <Frame title={Lang(["public.support"])}>
                     <Box>
                 {(data==undefined || needles==null)?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading  />
                 :<>
                         <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
                             // key={"occasion" + needles?.promotion?.lenght} 

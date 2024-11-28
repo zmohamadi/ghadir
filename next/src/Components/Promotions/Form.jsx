@@ -43,9 +43,7 @@ export function Form({id,panel}){
                 {/* <Frame title={Lang(["public.support"])}> */}
                     {/* <Box> */}
                     {(data==undefined || needles==null)?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading  />
                 :<>
                     <div className="pos intro-y grid grid-cols-12 gap-5 mt-5">
                         <div className="intro-y col-span-12 lg:col-span-8">

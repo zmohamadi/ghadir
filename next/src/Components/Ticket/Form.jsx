@@ -35,9 +35,7 @@ export default function Form(){
         <>
             <Frame title={Lang(["public.tickets"])}>
                 {(needles==null)?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading  />
                 :
                     <>
                         <Box>
