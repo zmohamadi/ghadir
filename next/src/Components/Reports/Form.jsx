@@ -4,7 +4,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
-import { useData, useFormRefs, Input, Button, ButtonContainer, Box, CheckBox, Textarea, Frame, Radio } from "@/Theme/Midone/Forms";
+import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { useRouter } from "next/navigation";
@@ -16,13 +16,11 @@ import { Ritual } from "./Ritual";
 export function Form({ id, panel }) {
     const link = "/reports";
     const { Lang, local } = useLang();
-    const { laraAdmin, nextAdmin } = useConfig();
+    const { laraAdmin } = useConfig();
     const router = useRouter();
     const component = useFormRefs();
     const { save, get, getNeedles } = useData();
     const [needles, setNeedles] = useState();
-    const { user } = useAuth();
-
     const fetchNeedlesRef = useRef(false); // جلوگیری از درخواست‌های تکراری
     const fetchDataRef = useRef(false); // جلوگیری از درخواست‌های تکراری
 
@@ -65,9 +63,7 @@ export function Form({ id, panel }) {
         <>
             <Frame title={Lang(["public.promoter"])}>
             {(data==undefined || needles==null)?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading />
                 :<>
                 <Tab className="col-span-12">
                     <TabHeader>
@@ -89,7 +85,6 @@ export function Form({ id, panel }) {
                             <SelectTail
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
-                                // key={"promotion" + needles?.promotion?.length}
                                 required="true"
                                 data={needles?.promotion}
                             />
@@ -100,7 +95,6 @@ export function Form({ id, panel }) {
                                     refItem={[component, `level_id`]}
                                     data={needles?.level}  
                                     key={"level_id"+data?.level_id} 
-                                        
                                         /> 
                                 <Radio
                                     type="col" 

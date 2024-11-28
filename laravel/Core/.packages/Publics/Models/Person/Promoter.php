@@ -27,7 +27,7 @@ class Promoter extends User
     }
     public function reports()
     {
-        return $this->hasMany(\Models\PromotionReport::class,"promotion_reports","promoter_id","promotion_id");
+        return $this->hasMany(\Models\PromotionReport::class);
     }
     public function supports()
     {

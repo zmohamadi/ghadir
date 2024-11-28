@@ -10,19 +10,12 @@ import { Loading } from "@/Theme/Midone";
 
 export function Form({id,panel}){
     const link = "/supports";
-    const {Lang, local} = useLang();
+    const {Lang} = useLang();
     const {laraAdmin} = useConfig();
     const router = useRouter();
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    let [provinceId, setProvinceId] = useState(null);
-
-    const {user} = useAuth();
-    
-    let uploadUrl = laraAdmin+"/upload/.-media-users";
-    let deleteUrl = laraAdmin+"/deleteFile/.-media-users";
-    let uploadDir = 'media/users/';
     
     let url = laraAdmin+link, method = "new";
     if(id != 0 && id != undefined) url = laraAdmin+link+"/"+id, method = "edit";
@@ -32,21 +25,9 @@ export function Form({id,panel}){
         if(id != 0 && id != undefined) get(url, component, "info");
     }, []);
 
-    useEffect(()=>{
-        
-        if(component?.state.info["city_id"]) setProvinceId(component?.state.info?.city_user?.province_id);
-       
-    }, [component?.state?.info]);
-
-    const filterCity = (e)=>{
-        setProvinceId(e.value);
-    };
-
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();
     const data = component?.state?.info;
-// console.log(user?.role_id);
-// console.log(needles);
 
     return(
         

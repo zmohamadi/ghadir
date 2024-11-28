@@ -18,9 +18,6 @@ export function Form({id,panel}){
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    let [provinceId, setProvinceId] = useState(null);
-
-    const {user} = useAuth();
     
     let uploadUrl = laraAdmin+"/upload/.-media-promotions";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-promotions";
@@ -33,16 +30,6 @@ export function Form({id,panel}){
         getNeedles(laraAdmin+'/promotions/get-needles', setNeedles);
         if(id != 0 && id != undefined) get(url, component, "info");
     }, []);
-
-    useEffect(()=>{
-        
-        if(component?.state.info["city_id"]) setProvinceId(component?.state.info?.city_user?.province_id);
-       
-    }, [component?.state?.info]);
-
-    const filterCity = (e)=>{
-        setProvinceId(e.value);
-    };
 
     const saveItem = ()=>save(url, component, method, link);
     const back = ()=>router.back();

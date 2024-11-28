@@ -12,6 +12,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
+import { SelectLocation } from "../Public/SelectLocation";
 
 export function Form({id,panel,access}){
     const link = "/promoters";
@@ -69,9 +70,7 @@ export function Form({id,panel,access}){
             <>
                 <Frame title={Lang(["public.promoter"])}>
                 {(data==undefined || needles==null)?
-                    <div className="col-span-12 xxl:col-span-9">
-                        <Loading className="mt-5" />
-                    </div>
+                    <Loading className="mt-5" />
                 :<>
                     <Tab className="col-span-12">
                         <TabHeader>
@@ -97,8 +96,9 @@ export function Form({id,panel,access}){
                                 <Input className="col-span-4" dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]}  />
                                 <Input className="col-span-4" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
                                 <SelectTail className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
-                                
-                                <SelectTail defaultValue={data?.city_id ? data?.city_user?.province_id: provinceId} className="col-span-4" label="province" refItem={[component, "province_id"]} 
+                                <SelectLocation classNameProvince="col-span-4" classNameCity="col-span-3" needles={needles} component={component} data={data} />
+                                {/* <SelectTail defaultValue={data?.city_id ? data?.city_user?.province_id: provinceId} 
+                                className="col-span-4" label="province" refItem={[component, "province_id"]} 
                                     key={"province"+needles?.province?.length}
                                     data={needles?.province} titleKey={"name_fa"}
                                     onChange={(e) => filterCity(e)}
@@ -107,9 +107,9 @@ export function Form({id,panel,access}){
                                     key={"city" + provinceId}
                                     data={provinceId>0 ?  needles?.city?.filter(item => item.province_id == provinceId) :  needles?.city} 
                                     titleKey={"name_fa"}
-                                />
-                                <Input className="col-span-3" label="city" refItem={[component, "city"]}  />
-                                <Input className="col-span-3" label="village" refItem={[component, "village"]}  />
+                                /> */}
+                                {/* <Input className="col-span-3" label="city" refItem={[component, "city"]}  />
+                                <Input className="col-span-3" label="village" refItem={[component, "village"]}  /> */}
 
                                 
                                 <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />

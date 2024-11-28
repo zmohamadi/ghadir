@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Frame, useData, useFormRefs } from "@/Theme/Midone/Forms";
+import { Loading } from "@/Theme/Midone/Utils/Loading";
 
 export function View({ id }) {
     const { Lang } = useLang();
@@ -18,9 +19,7 @@ export function View({ id }) {
 
     if (!data) {
         return (
-            <div className="flex items-center justify-center h-screen">
-                <div className="text-lg text-gray-500">Loading...</div>
-            </div>
+            <Loading />
         );
     }
 

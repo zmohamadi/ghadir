@@ -2,6 +2,7 @@
 
 import { useLang } from "@/lib";
 import { Input, Textarea, Box, Radio, SelectTail } from "@/Theme/Midone/Forms";
+import { SelectLocation } from "../Public/SelectLocation";
 
 export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
@@ -21,7 +22,7 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                 <Input label="people_count" refItem={[parent, `tr_people_count_${index}`]} defaultValue={info?.people_count}  />
                 <Input label="duration" refItem={[parent, `tr_duration_${index}`]} defaultValue={info?.duration}  />
                 <Input label="place_name" refItem={[parent, `tr_place_name_${index}`]} defaultValue={info?.place_name}  />
-                <SelectTail label="province" refItem={[parent,`tr_province_${index}`]} 
+                {/* <SelectTail label="province" refItem={[parent,`tr_province_${index}`]} 
                     key={"province"+needles?.province?.length}
                     data={needles?.province} titleKey={"name_fa"} 
                     defaultValue={info?.province_id}
@@ -30,7 +31,12 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                     key={"city_sh"+needles?.city?.length}
                     data={needles?.city} 
                     titleKey={"name_fa"} defaultValue={info?.city_id}
+                /> */}
+                <SelectLocation needles={needles} component={parent} data={info} 
+                refProvince={`tr_province_${index}`} refCitySh={`tr_city_id_${index}`} 
+                refCity={`tr_city_${index}`} refVillage={`tr_village_${index}`} 
                 />
+
                 <Input  label="city" refItem={[parent,`tr_city_${index}`]} defaultValue={info?.city}  />
                 <Input  label="village" refItem={[parent,`tr_village_${index}`]} defaultValue={info?.village}  />
                 
