@@ -48,7 +48,7 @@ class AuthenticatedController extends Controller
     $user = User::where('mobile', $mobile)->first();
 
     // Check if user exists and is unverified
-    if ($user && $user->status_id === 0) {
+    if ($user && $user->status_id != 1) {
         return response()->json([
             'status' => 422,
             'errors' => ['mobile' => __('auth.mobile_not_verified')],
