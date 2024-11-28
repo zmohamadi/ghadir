@@ -27,15 +27,20 @@ export const Comments = ({ keyServer,itemId,comments,laraAdmin,formUrl,mediaPath
             </>
         );
     }
-    const confirm = (id) => { save(`${laraAdmin}${formUrl}/${id}?type=1`, component, "edit", `/blogComments/${itemId}?`+Math.random()), keyServer(Math.random()) }
-    const rejected = (id) => { save(`${laraAdmin}${formUrl}/${id}?type=2`, component, "edit", `/blogComments/${itemId}?`+Math.random()), keyServer(Math.random()) }
+    const completeEdit = ()=>{
+        completeSetState();
+        typeof window != "undefined" && window?.$(`.show-comment`).addClass("hidden").removeClass("sm:flex sm:flex-row mt-2");
+    };
+    const completeSetState = ()=>{ keyServer(Math.random()); };
+    const confirm = (id) => { save(`${laraAdmin}${formUrl}/${id}?type=1`, component, "edit", `/blogComments/${itemId}?`+Math.random(), ()=>completeSetState()) }
+    const rejected = (id) => { save(`${laraAdmin}${formUrl}/${id}?type=2`, component, "edit", `/blogComments/${itemId}?`+Math.random(), ()=>completeSetState()) }
     const deleted = (id) => {
         let redirectUrl = "/blogComments";
         let callBackUrl = ()=>{};
         if(itemId != id)
         {
             redirectUrl = `/blogComments/${itemId}?`+Math.random();
-            callBackUrl = keyServer(Math.random());
+            callBackUrl = ()=>completeSetState();
         }
         save(laraAdmin+formUrl+"/delete/"+id, component, "edit", redirectUrl, callBackUrl);
     }
@@ -45,10 +50,6 @@ export const Comments = ({ keyServer,itemId,comments,laraAdmin,formUrl,mediaPath
     }
     const editItem = (id)=>{
         save(`${laraAdmin}${formUrl}/${id}?type=3`, component, "edit", "", ()=>completeEdit());
-    };
-    const completeEdit = ()=>{
-        keyServer(Math.random());
-        typeof window != "undefined" && window?.$(`.show-comment`).addClass("hidden").removeClass("sm:flex sm:flex-row mt-2");
     };
 
     return(

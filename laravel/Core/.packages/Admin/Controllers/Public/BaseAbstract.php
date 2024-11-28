@@ -3,7 +3,7 @@ namespace Admin\Controllers\Public;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Publics\Controllers\BaseTrait;
+use Publics\Controllers\SMSIR\SMSIR_SendMessage;
 use Publics\Controllers\Tools;
 use Publics\Traits\FileTrait;
 use Models\Person\Role;
@@ -13,9 +13,7 @@ use \DB;
 
 abstract class BaseAbstract extends Controller
 {
-    // use BaseTrait;
     use FileTrait;
-
 
     protected $local; //Model file address
     protected $model; //Model file address
@@ -454,7 +452,15 @@ abstract class BaseAbstract extends Controller
         return response()->json($info);
     }
 
+    public function sendMessage($userId, $messages)
+    {
+        $user = \Models\User::find($userId);
+        $mobileNumbers = $user->mobile;
 
+        $sms = new SMSIR_SendMessage;
+        $send = $sms->sendSMS($mobileNumbers,$messages);
+        return $send;
+    }
     private function processExcept($except){
         $newExcept = [];
         foreach($except as $item){
@@ -484,7 +490,6 @@ abstract class BaseAbstract extends Controller
         return $array;
 
     }
-
     public function getRepeatValues($values){
         $data = [];
         // dd($values);
@@ -504,7 +509,6 @@ abstract class BaseAbstract extends Controller
         }
         return $data;
     }
-
     public function saveFiles($files, $dataInsert, $request)
     {
         foreach ($files as $key => $value) {
@@ -543,7 +547,6 @@ abstract class BaseAbstract extends Controller
 
         return $dataInsert;
     }
-
     public function grid($modelObject, $searchTerm=['name'], $resultCallback = null,$searchCondition=[]){
         $request = request();
         $number = $request->number;
@@ -614,8 +617,6 @@ abstract class BaseAbstract extends Controller
     public function minusCount($field){
         \Models\Base\TotalCount::where('title',$field)->decrement("count");
     }
-
-    
     /**
      * get role of User Logined For Check access in Operation
      */
@@ -644,11 +645,8 @@ abstract class BaseAbstract extends Controller
 
         return $query;
     }
-
     public function getIdFromUrl(){
         $id = (int) filter_var(request()->path(), FILTER_SANITIZE_NUMBER_INT);
         return $id;
     }
-
-
 }

@@ -33,6 +33,6 @@ class Status extends Model
     public function scopeSelectInReply($query, $filter="false") // جهت انتخاب گزینه مناسب در فرم پاسخ به تیکت کاربر سایت توسط مدیریت
     {
         $filterCode = ($filter=="true")? [3] : [1,3];
-        return $query->where('group_id', 18)->whereIn('code', $filterCode);
+        return $query->where('group_id', 19)->whereIn('code', $filterCode);
     }
 }

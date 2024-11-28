@@ -26,6 +26,7 @@ return [
     'active_promotions'=>'تبلیغات فعال',
     'statistics'=>'آمار و ارقام',
     'waiting_tickets'=>'تیکت های نیاز به بررسی',
+    'waiting_comments'=>'پیام های نیاز به بررسی',
     'myTickets'=>'تیکت های من',
 
 ];

@@ -14,7 +14,7 @@ export const getMenus = (user) => {
             title: "blogs", icon: "Pocket", open: false, 
             childs: [
                 { title: "blogs", icon: "List", href: "/blogs" },
-                { title: "comments", icon: "BookOpen", href: "/blogComments" },
+                { title: "waiting_comments", icon: "BookOpen", href: "/blogComments" },
             ]
         },
         {
