@@ -33,6 +33,9 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                 <SelectLocation needles={needles} component={parent} data={info} 
                 refProvince={`r_province_${index}`} refCitySh={`r_city_id_${index}`} 
                 refCity={`r_city_${index}`} refVillage={`r_village_${index}`} 
+                classNameCity="col-span-4"
+                classNameVillage="col-span-4"
+
                 />
 
                 {/* <Input className="col-span-4"  label="city" refItem={[parent,`r_city_${index}`]} defaultValue={info?.city}  />

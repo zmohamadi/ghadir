@@ -37,8 +37,8 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                 refCity={`tr_city_${index}`} refVillage={`tr_village_${index}`} 
                 />
 
-                <Input  label="city" refItem={[parent,`tr_city_${index}`]} defaultValue={info?.city}  />
-                <Input  label="village" refItem={[parent,`tr_village_${index}`]} defaultValue={info?.village}  />
+                {/* <Input  label="city" refItem={[parent,`tr_city_${index}`]} defaultValue={info?.city}  />
+                <Input  label="village" refItem={[parent,`tr_village_${index}`]} defaultValue={info?.village}  /> */}
                 
             
             <div className="col-span-12 flex justify-start items-start border-b-2">
