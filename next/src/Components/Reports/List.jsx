@@ -46,8 +46,9 @@ export function List({panel="admin",access=true,query=""}){
                         </span>
                     )
                 },
-                {label: "level", field: "level_id" },
-                {label: "confirm_status", jsx: (item)=><span className={"text-"+item?.confirm_repo?.color}>{item?.confirm_repo?.["title_"+local]}</span>},
+                {label: "score", field: "level_id" },
+                {label: "confirm_status", jsx: (item)=>
+                    <span className={"rounded-full py-1 px-2  text-white bg-"+item?.confirm_repo?.color}>{item?.confirm_repo?.["title_"+local]}</span>},
 
             ] : []),
             { label: "created_at", field: "created_at" },

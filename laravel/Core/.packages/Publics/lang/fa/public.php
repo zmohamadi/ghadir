@@ -113,6 +113,7 @@ $lang = [
    'filter_ticket_user' => 'لطفا بعد از وارد کردن کاربر مورد نظر، Enter بزنید.',
    'by' => 'توسط',
    'y'=>'ی',
+   'score'=>'امتیاز',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

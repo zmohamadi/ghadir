@@ -35,7 +35,7 @@ export default function List(){
             },
             {label: "mobile", field: "mobile" },
             {label: "gender", sort:false, field: "gender.title_"+local},
-            {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
            
 
             

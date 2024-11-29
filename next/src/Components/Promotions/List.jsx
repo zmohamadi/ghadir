@@ -71,7 +71,7 @@ export function List({panel,access , query}){
                 { 
                     label: "register_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_register?.color}>
+                        <span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_register?.color}>
                             {item?.active_register?.["title_" + local]}
                         </span>
                     )
@@ -79,7 +79,7 @@ export function List({panel,access , query}){
                 { 
                     label: "report_status", 
                     jsx: (item) => (
-                        <span className={"text-" + item?.active_report?.color}>
+                        <span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_report?.color}>
                             {item?.active_report?.["title_" + local]}
                         </span>
                     )

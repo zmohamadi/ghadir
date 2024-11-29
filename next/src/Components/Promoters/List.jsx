@@ -39,7 +39,7 @@ export function List({panel="admin",access=true , query=""}){
                 {label: "level", field: "level_id" },
                 {label: "last_login", field: "last_login" },
             ] : []),
-            {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
             { label: "created_at", field: "created_at" },
 
             

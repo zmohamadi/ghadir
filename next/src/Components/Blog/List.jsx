@@ -15,7 +15,7 @@ export function List({access , panel}){
             {jsx:(item)=><img src={mediaPath+"/blogs/"+item?.thumb} width={100} height={100} alt={item?.image} />},
             {label: "title", field: "title"},
             {label: "date", jsx: (item)=><span dir="ltr" className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</span>},
-            {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
             {label: "",
                 sort:false, 
                 width:"110px", 

@@ -52,7 +52,7 @@ class PromotionReport extends Model
     }
     public function confirmRepo()
     {
-        return $this->belongsTo(\Models\Base\Status::class, 'confirm_id', 'code')->where('group_id', 14);
+        return $this->belongsTo(\Models\Base\Status::class, 'confirm_id', 'code')->where('group_id', 28);
     }
     public function level()
     {

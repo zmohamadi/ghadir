@@ -58,9 +58,9 @@ export function List({ access,query,formUrl }){
             {label: "subject", field: "subject.title_"+local},
             {label: "creator_record", jsx: (item)=><span>{item?.user?.firstname + " " + item?.user?.lastname} <div className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</div> </span>},
             {label: "evaluate", field: "score"},
-            {label: "reply_status", jsx: (item)=><span className={"text-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
-            {label: "check_priority", jsx: (item)=><span className={"text-"+item?.priority_status?.color}>{item?.priority_status?.["title_"+local]}</span>},
-            // {label: "status", jsx: (item)=><span className={"text-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "reply_status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.reply_status?.color}>{item?.reply_status?.["title_"+local]}</span>},
+            {label: "check_priority", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.priority_status?.color}>{item?.priority_status?.["title_"+local]}</span>},
+            // {label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
             {label: "", sort:false, width:"110px", jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon name="Eye" url={nextAdmin+formUrl+"/"+item?.id} tooltip={Lang('public.view')} />

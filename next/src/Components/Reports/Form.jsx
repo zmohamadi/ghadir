@@ -91,17 +91,12 @@ export function Form({ id, panel }) {
                             <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
                             {
                                 panel=="admin" &&<>
-                                <Radio type="col" label="star"     
-                                    refItem={[component, `level_id`]}
-                                    data={needles?.level}  
-                                    key={"level_id"+data?.level_id} 
-                                        /> 
-                                
+                                <Input label="score" refItem={[component, `level_id`]} /> 
                                 <Radio
                                     type="col" 
                                     label="confirm_status" 
                                     refItem={[component, `confirm_id`]}
-                                    data={needles?.status?.filter(item => item.group_id === 14)}
+                                    data={needles?.status?.filter(item => item.group_id === 28)}
                                     valueKey="code" titleKey={"title_"+local}  
                                     key={"confirm_id"+data?.confirm_id}
                                     /> 
