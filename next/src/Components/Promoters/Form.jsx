@@ -8,7 +8,7 @@ import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea,Frame,Radio }
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
@@ -22,8 +22,6 @@ export function Form({id,panel,access}){
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    let [provinceId, setProvinceId] = useState(null);
-    const pathname = usePathname();
     const {user} = useAuth();
     
     let uploadUrl = laraAdmin+"/upload/.-media-users";
@@ -47,15 +45,6 @@ export function Form({id,panel,access}){
         if(finalId != 0 && finalId != undefined) get(url, component, "info");
     }, [url]);
 
-    useEffect(()=>{
-        
-        if(component?.state.info["city_id"]) setProvinceId(component?.state.info?.city_user?.province_id);
-       
-    }, [component?.state?.info]);
-
-    const filterCity = (e)=>{
-        setProvinceId(e.value);
-    };
 
     const saveItem = ()=>save(url, component, method, nextUrl);
     const back = ()=>router.back();
@@ -64,6 +53,39 @@ export function Form({id,panel,access}){
     const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
     const otherProps2 = (component?.state?.info?.notes?.length)? { count_data: component.state.info.notes.length } : {};
     const otherProps3 = (component?.state?.info?.promotion_infos?.length)? { count_data: component.state.info.promotion_infos.length } : {};
+    
+    const [starRating, setStarRating] = useState(data?.level_id || 0);
+
+    const renderStars = (level) => {
+        if (level === undefined || level === 0) {
+            level = data?.level_id || 0;
+        }
+
+        const stars = [];
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <span
+                    key={i}
+                    style={{
+                        color: i <= level ? "#FFD700" : "#e4e5e9",
+                        fontSize: "20px",
+                        marginRight: "5px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => handleStarClick(i)}
+                >
+                    {i <= level ? "★" : "☆"}
+                </span>
+            );
+        }
+        return stars;
+    };
+    
+
+
+    const handleStarClick = (rating) => {
+        setStarRating(rating);
+    };
 
     return(
         
@@ -84,7 +106,7 @@ export function Form({id,panel,access}){
                                 <Input  className="col-span-4" label="name" refItem={[component, "firstname"]} required="true" />
                                 <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
                                 <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
-                                <SelectTail defaultValue={data?.is_not_citizen==true ? 1: 0} key={"is_not_citizen"+2} className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
+                                <SelectTail key={"is_not_citizen"+2} className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('public.im_citizen')}</option>
                                     <option value="1">{Lang('public.not_citizen')}</option>
@@ -102,20 +124,7 @@ export function Form({id,panel,access}){
                                     classNameCity="col-span-3"
                                     classNameVillage="col-span-3"
                                     needles={needles} component={component} data={data} />
-                                {/* <SelectTail defaultValue={data?.city_id ? data?.city_user?.province_id: provinceId} 
-                                className="col-span-4" label="province" refItem={[component, "province_id"]} 
-                                    key={"province"+needles?.province?.length}
-                                    data={needles?.province} titleKey={"name_fa"}
-                                    onChange={(e) => filterCity(e)}
-                                />
-                                <SelectTail  className="col-span-3" label="city_sh" refItem={[component, "city_id"]} 
-                                    key={"city" + provinceId}
-                                    data={provinceId>0 ?  needles?.city?.filter(item => item.province_id == provinceId) :  needles?.city} 
-                                    titleKey={"name_fa"}
-                                /> */}
-                                {/* <Input className="col-span-3" label="city" refItem={[component, "city"]}  />
-                                <Input className="col-span-3" label="village" refItem={[component, "village"]}  /> */}
-
+                               
                                 
                                 <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
 
@@ -127,13 +136,12 @@ export function Form({id,panel,access}){
                                 />
                                 
                                 {
-                                    user?.role_id==1 && <>
-                                        <Radio className="col-span-4" type="col" label="star"     
-                                            refItem={[component, `level_id`]}
-                                            data={needles?.level}  
-                                            key={"level_id"+data?.level_id} 
-                                        
-                                        /> 
+                                     user?.role_id==1 && <>
+                                        <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
+                                        <div className="col-span-4">
+                                                <label>{Lang("public.star")}</label>
+                                                <div className="flex space-x-1">{renderStars(starRating)}</div>
+                                            </div>
                                         <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
                                             type="col" label="status" refItem={[component, `status_id`]}
                                             data={needles?.status?.filter(item => item.group_id === 1)} 

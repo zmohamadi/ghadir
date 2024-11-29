@@ -57,7 +57,7 @@ export const icons = {
     </svg>,
 }
 export const loadingIcons = {
-    audio: <svg width="15" viewBox="0 0 55 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    audio: <svg width="15" viewBox="0 0 55 80" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <g transform="matrix(1 0 0 -1 0 80)">
                 <rect width="10" height="20" rx="3">
                     <animate attributeName="height" begin="0s" dur="4.3s" values="20;45;57;80;64;32;66;45;64;23;66;13;64;56;34;34;2;23;76;79;20" calcMode="linear" repeatCount="indefinite"></animate>
@@ -73,7 +73,7 @@ export const loadingIcons = {
                 </rect>
             </g>
         </svg>,
-    ballTriangle: <svg width="20" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+    ballTriangle: <svg width="20" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
             <g fill="none" fill-rule="evenodd">
                 <g transform="translate(1 1)">
                     <circle cx="5" cy="50" r="5" fill="rgb(45, 55, 72)">
@@ -91,7 +91,7 @@ export const loadingIcons = {
                 </g>
             </g>
         </svg>,
-    bars: <svg width="20" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    bars: <svg width="20" viewBox="0 0 135 140" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <rect y="10" width="15" height="120" rx="6">
                 <animate attributeName="height" begin="0.5s" dur="1s" values="120;110;100;90;80;70;60;50;40;140;120" calcMode="linear" repeatCount="indefinite"></animate>
                 <animate attributeName="y" begin="0.5s" dur="1s" values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear" repeatCount="indefinite"></animate>
@@ -113,7 +113,7 @@ export const loadingIcons = {
                 <animate attributeName="y" begin="0.5s" dur="1s" values="10;15;20;25;30;35;40;45;50;0;10" calcMode="linear" repeatCount="indefinite"></animate>
             </rect>
         </svg>,
-    circles: <svg width="20" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    circles: <svg width="20" viewBox="0 0 135 135" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <path d="M67.447 58c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm9.448 9.447c0 5.523 4.477 10 10 10 5.522 0 10-4.477 10-10s-4.478-10-10-10c-5.523 0-10 4.477-10 10zm-9.448 9.448c-5.523 0-10 4.477-10 10 0 5.522 4.477 10 10 10s10-4.478 10-10c0-5.523-4.477-10-10-10zM58 67.447c0-5.523-4.477-10-10-10s-10 4.477-10 10 4.477 10 10 10 10-4.477 10-10z">
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="-360 67 67" dur="2.5s" repeatCount="indefinite"></animateTransform>
             </path>
@@ -121,7 +121,7 @@ export const loadingIcons = {
                 <animateTransform attributeName="transform" type="rotate" from="0 67 67" to="360 67 67" dur="8s" repeatCount="indefinite"></animateTransform>
             </path>
         </svg>,
-    grid: <svg width="20" viewBox="0 0 105 105" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    grid: <svg width="20" viewBox="0 0 105 105" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <circle cx="12.5" cy="12.5" r="12.5">
                 <animate attributeName="fill-opacity" begin="0s" dur="1s" values="1;.2;1" calcMode="linear" repeatCount="indefinite"></animate>
             </circle>
@@ -150,7 +150,7 @@ export const loadingIcons = {
                 <animate attributeName="fill-opacity" begin="200ms" dur="1s" values="1;.2;1" calcMode="linear" repeatCount="indefinite"></animate>
             </circle>
         </svg>,
-    hearts: <svg width="30" viewBox="0 0 140 64" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    hearts: <svg width="30" viewBox="0 0 140 64" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <path d="M30.262 57.02L7.195 40.723c-5.84-3.976-7.56-12.06-3.842-18.063 3.715-6 11.467-7.65 17.306-3.68l4.52 3.76 2.6-5.274c3.717-6.002 11.47-7.65 17.305-3.68 5.84 3.97 7.56 12.054 3.842 18.062L34.49 56.118c-.897 1.512-2.793 1.915-4.228.9z" fill-opacity=".5">
                 <animate attributeName="fill-opacity" begin="0s" dur="1.4s" values="0.5;1;0.5" calcMode="linear" repeatCount="indefinite"></animate>
             </path>
@@ -159,7 +159,7 @@ export const loadingIcons = {
             </path>
             <path d="M67.408 57.834l-23.01-24.98c-5.864-6.15-5.864-16.108 0-22.248 5.86-6.14 15.37-6.14 21.234 0L70 16.168l4.368-5.562c5.863-6.14 15.375-6.14 21.235 0 5.863 6.14 5.863 16.098 0 22.247l-23.007 24.98c-1.43 1.556-3.757 1.556-5.188 0z"></path>
         </svg> ,
-    oval: <svg width="25" viewBox="-2 -2 42 42" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" class="w-8 h-8">
+    oval: <svg width="25" viewBox="-2 -2 42 42" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" className="w-8 h-8">
             <g fill="none" fill-rule="evenodd">
                 <g transform="translate(1 1)" stroke-width="4">
                     <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>
@@ -169,7 +169,7 @@ export const loadingIcons = {
                 </g>
             </g>
         </svg>,
-    puff: <svg width="25" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" class="w-8 h-8">
+    puff: <svg width="25" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" className="w-8 h-8">
             <g fill="none" fill-rule="evenodd" stroke-width="4">
                 <circle cx="22" cy="22" r="1">
                     <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate>
@@ -181,7 +181,7 @@ export const loadingIcons = {
                 </circle>
             </g>
         </svg>,
-    rings: <svg width="30" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" class="w-8 h-8">
+    rings: <svg width="30" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg" stroke="rgb(45, 55, 72)" className="w-8 h-8">
             <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="3">
                 <circle cx="22" cy="22" r="6" stroke-opacity="0">
                     <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite"></animate>
@@ -198,7 +198,7 @@ export const loadingIcons = {
                 </circle>
             </g>
         </svg>,
-    spinningCircles: <svg width="20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+    spinningCircles: <svg width="20" viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
             <g fill="none" fill-rule="evenodd">
                 <g transform="translate(2 1)" stroke="rgb(45, 55, 72)" stroke-width="1.5">
                     <circle cx="42.601" cy="11.462" r="5" fill-opacity="1" fill="rgb(45, 55, 72)">
@@ -228,8 +228,8 @@ export const loadingIcons = {
                 </g>
             </g>
         </svg>,
-    tailSpin: <i data-loading-icon="tail-spin" class="w-8 h-8"></i>,
-    threeDots: <svg width="25" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" class="w-8 h-8">
+    tailSpin: <i data-loading-icon="tail-spin" className="w-8 h-8"></i>,
+    threeDots: <svg width="25" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="rgb(45, 55, 72)" className="w-8 h-8">
             <circle cx="15" cy="15" r="15">
                 <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
                 <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>

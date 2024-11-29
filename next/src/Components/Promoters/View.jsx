@@ -62,7 +62,7 @@ export function View({ id, panel = "admin" }) {
                                     </div>
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.citizen")}</label>
-                                        <div className="p-2 border rounded">{data?.citizen==1 ? Lang('public.im_citizen') : Lang('public.not_citizen')}</div>
+                                        <div className="p-2 border rounded">{data?.is_not_citizen==1 ? Lang('public.im_citizen') : Lang('public.not_citizen')}</div>
                                     </div>
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.codemeli")}</label>
