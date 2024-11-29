@@ -96,6 +96,7 @@ export function Form({ id, panel }) {
                                     data={needles?.level}  
                                     key={"level_id"+data?.level_id} 
                                         /> 
+                                
                                 <Radio
                                     type="col" 
                                     label="confirm_status" 
