@@ -4,6 +4,7 @@ namespace Admin\Controllers;
 
 use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
+use Models\Person\Promoter;
 
 class SupportController extends BaseAbstract
 {
@@ -44,4 +45,45 @@ class SupportController extends BaseAbstract
 
         };
     }
+    public function searchPromoter($text,$support)
+    {
+        $users = Promoter::where('mobile', 'like', '%' . $text . '%')
+            ->orWhere('firstname', 'like', '%' . $text . '%')
+            ->orWhere('lastname', 'like', '%' . $text . '%')
+            ->select('id','firstname','lastname',"mobile","level_id")
+            ->get();
+        // بررسی وضعیت هر پروموتر
+        foreach ($users as $value) {
+            $value->userInSupport = \DB::table("support_users")
+                ->where(["support_id" => $support, "promoter_id" => $value->id])
+                ->exists(); // بررسی وجود رکورد
+        }
+            
+        return response()->json($users);
+    }
+    public function promoterList($support)
+    {
+        // استفاده از رابطه برای فیلتر داده‌ها
+        $collection = Promoter::whereHas('supports', function ($query) use ($support) {
+            $query->where('support_id', $support);
+        }); // گرفتن مجموعه داده‌ها
+
+        // بازگرداندن داده‌ها به همراه فیلدهای انتخابی
+        return $this->grid($collection, ['firstname', 'lastname']);
+    }
+
+    public function newPromoter($id, Request $request) {
+        $validatedData = $request->validate([
+            'promoter_id' => 'required',
+            'support_id' => 'required',
+        ]);
+    
+        $data = [
+            'promoter_id' => $request->promoter_id,
+            'support_id' => $request->support_id,
+            ];
+        $newRecord = \DB::table("support_users")->insert($data);
+        return response()->json($newRecord);
+    }
+
 }

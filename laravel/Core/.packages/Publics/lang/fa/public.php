@@ -114,6 +114,9 @@ $lang = [
    'by' => 'توسط',
    'y'=>'ی',
    'score'=>'امتیاز',
+   'register_to_support'=>'افزودن به حمایت',
+   'registered'=>'ثبت نام شده',
+   'search_promoter_for_new_support'=>'برای سرچ میتوانید وارد کنید : نام  یا نام خانوادگی یا شماره موبایل'
 ];
 
 $menus = include(__DIR__.'/./menus.php');

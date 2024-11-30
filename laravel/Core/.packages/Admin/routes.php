@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get("search-promoter/{promoter}/{course}", "SupportController@searchPromoter");
+Route::get("promoters/in-support/{support}", "SupportController@promoterList");
+Route::post("supports/{support}/promoters/new", "SupportController@newPromoter");
 
 Route::get("supports/get-needles", "SupportController@getNeedles");
 Route::resource("supports", "SupportController");

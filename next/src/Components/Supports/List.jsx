@@ -43,7 +43,7 @@ export function List({panel="admin",access=true , query=""}){
                 jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon access={access} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        {/* <FeatherIcon name="Users" url={nextAdmin+"/supports/"+item?.id+"/promoters"} tooltip={Lang('public.promoters')} /> */}
+                        <FeatherIcon name="Users" url={formUrl+"/"+item?.id+"/promoters"} tooltip={Lang('public.promoters')} />
                         <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
                         <FeatherIcon access={access} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/supports"+"/"+item?.id)} />
                     </div>
