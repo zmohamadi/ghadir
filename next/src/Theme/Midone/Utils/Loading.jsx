@@ -16,7 +16,7 @@ export const Loading = ({ className = "", displayText = undefined, displayIcon =
                 }
             >
                 <div className="text-blue-500">{displayIcon}</div>
-                <div className="text-center text-xs mt-2 text-blue-500">{displayText}</div>
+                <div className="text-center text-xs mt-2 text-blue-500" style={{color:"rgb(0, 0, 139)"}}>{displayText}</div>
             </div>
         </div>
     );
