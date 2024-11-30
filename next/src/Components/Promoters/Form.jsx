@@ -13,6 +13,7 @@ import { Notes } from "./Notes";
 import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import { SelectLocation } from "../Public/SelectLocation";
+import { Notif } from "./Notif";
 
 export function Form({id,panel,access}){
     const link = "/promoters";
@@ -53,6 +54,7 @@ export function Form({id,panel,access}){
     const otherProps = (component?.state?.info?.cultural_users?.length)? { count_data: component.state.info.cultural_users.length } : {};
     const otherProps2 = (component?.state?.info?.notes?.length)? { count_data: component.state.info.notes.length } : {};
     const otherProps3 = (component?.state?.info?.promotion_infos?.length)? { count_data: component.state.info.promotion_infos.length } : {};
+    const otherProps4 = (component?.state?.info?.notif?.length)? { count_data: component.state.info.notif.length } : {};
     
     const [starRating, setStarRating] = useState(data?.level_id || 0);
 
@@ -87,6 +89,8 @@ export function Form({id,panel,access}){
         setStarRating(rating);
     };
 
+    console.log(data?.is_not_citizen);
+
     return(
         
             <>
@@ -99,14 +103,20 @@ export function Form({id,panel,access}){
                             <TabList href="tab-first" title={Lang('public.personal_info')} active={"true"}>{Lang("public.personal_info")}</TabList>
                             <TabList href="tab-second" title={Lang('public.promotion_info')}>{Lang("public.promotion_info")}</TabList>
                             <TabList href="tab-third" title={Lang('public.cultural_users')}>{Lang("public.cultural_users")}</TabList>
-                            {user?.role_id==1 &&<TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>}
+                            {user?.role_id==1 &&<>
+                                <TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>
+                                <TabList href="tab-notif" title={Lang('public.notif')}>{Lang("public.notif")}</TabList>
+                            </>
+                            }
                         </TabHeader>
                         <TabBody>
                             <TabPanel id="tab-first" active={"true"}>
                                 <Input  className="col-span-4" label="name" refItem={[component, "firstname"]} required="true" />
                                 <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
                                 <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
-                                <SelectTail key={"is_not_citizen"+2} className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
+                                <SelectTail key={"is_not_citizen"+2} 
+                                defaultValue={data?.is_not_citizen} 
+                                className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('public.im_citizen')}</option>
                                     <option value="1">{Lang('public.not_citizen')}</option>
@@ -162,6 +172,13 @@ export function Form({id,panel,access}){
                                 {
                                     user?.role_id==1 && <>
                                         <Repeat {...otherProps2} child={Notes} parent={component} />
+                                    </>
+                                }
+                            </TabPanel>
+                            <TabPanel id="tab-notif">
+                                {
+                                    user?.role_id==1 && <>
+                                        <Repeat {...otherProps4} child={Notif} parent={component} />
                                     </>
                                 }
                             </TabPanel>

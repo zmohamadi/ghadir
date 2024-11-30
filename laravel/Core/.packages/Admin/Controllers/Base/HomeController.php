@@ -6,6 +6,7 @@ use Models\Course;
 use Models\Tribune;
 use Models\Ritual;
 use Models\Promotion;
+use Models\Notif;
 
 class HomeController extends Controller
 {
@@ -96,18 +97,24 @@ class HomeController extends Controller
     }
 
 
-    public function home()
+    public function home($panel,$user)
     {
-        return;
-        $collection = [
-                    'counts' => \DB::table('base_counts')->orderBy('id')->get(),
-                    'teachers' => Teacher::active()->orderBy('id','desc')->select('id','firstname','lastname','photo')->limit(5)->get(),
-                    'students' => Student::active()->orderBy('id','desc')->select('id','firstname','lastname','photo')->limit(5)->get(),
-                    'courses' => Course::active()->orderBy('id','desc')->select('code','thumbnail','title','category_id','status_id')->with('category','activeStatus')->limit(5)->get(),
-                    
-                    ];
+        $notif="";
+        if($panel=="promoter"){
+            $notif = Notif::where(['promoter_id'=>$user,'display'=>1])->get();
+        }
+       
+        $collection['notif'] = $notif;
 
         return response()->json($collection);
 
     }
+    public function closeAlert($id)
+    {
+        // پیدا کردن و به‌روزرسانی هشدار مورد نظر
+        $update = Notif::where('id', $id)->update(['display' => 0]);
+
+        return response()->json(['message'=>$update , 'success'=>200]);
+    }
+
 }

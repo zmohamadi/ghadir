@@ -48,4 +48,8 @@ class Promoter extends User
     {
         return $this->hasMany(\Models\Note::class, 'promoter_id');
     }
+    public function notif()
+    {
+        return $this->hasMany(\Models\Notif::class, 'promoter_id');
+    }
 }

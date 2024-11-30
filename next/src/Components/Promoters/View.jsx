@@ -40,6 +40,7 @@ export function View({ id, panel = "admin" }) {
                         <TabList href="tab-second" title={Lang('public.promotion_info')}>{Lang("public.promotion_info")}</TabList>
                         <TabList href="tab-third" title={Lang('public.cultural_users')}>{Lang("public.cultural_users")}</TabList>
                         {user?.role_id == 1 && <TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>}
+                        {user?.role_id == 1 && <TabList href="tab-notif" title={Lang('public.notif')}>{Lang("public.notif")}</TabList>}
                         <TabList href="tab-fifth" title={Lang('public.reports')}>{Lang("public.reports")}</TabList>
                         <TabList href="tab-sixth" title={Lang('public.promotions')}>{Lang("public.promotions")}</TabList>
                         <TabList href="tab-seventh" title={Lang('public.supports')}>{Lang("public.supports")}</TabList>
@@ -260,6 +261,26 @@ export function View({ id, panel = "admin" }) {
                                     <div className="flex">
                                         <span className="font-medium ml-1"> {Lang('public.creator')}: </span>
                                         <span>{note?.creator?.firstname} {note?.creator?.lastname} </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </TabPanel>
+                        <TabPanel id="tab-notif">
+                            {/* بخش notif */}
+                            {data?.notif?.map((notif, index) => (
+                                <div key={index} className="col-span-12 space-y-4 grid grid-cols-1 border-b-2 pb-2">
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.notif')} {index+1} : </span>
+                                        <span> {notif?.content || "-"} </span>
+                                        
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.created_at')}: </span>
+                                        <span>{notif?.created_at || "-"} </span>
+                                    </div>
+                                    <div className="flex">
+                                        <span className="font-medium ml-1"> {Lang('public.creator')}: </span>
+                                        <span>{notif?.creator?.firstname} {notif?.creator?.lastname} </span>
                                     </div>
                                 </div>
                             ))}

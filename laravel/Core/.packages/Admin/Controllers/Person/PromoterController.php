@@ -4,6 +4,7 @@ namespace Admin\Controllers\Person;
 use Admin\Controllers\Public\BaseAbstract;
 use Models\Person\CulturalUser;
 use Models\Note;
+use Models\Notif;
 use Models\UserPromotion;
 
 class PromoterController extends BaseAbstract
@@ -12,7 +13,7 @@ class PromoterController extends BaseAbstract
     protected $request = "Publics\Requests\PromoterRequest";
     protected $with = ["role", "gender", "activeStatus", "cityUser", 'level', "education"];
     protected $showWith = ["role", "gender", "activeStatus", "cityUser", 'level', "education", "culturalUsers",
-     "notes.creator","promotionInfos","supports.promotion","agrees.promotion","agrees.rituals","reports.promotion"];
+     "notes.creator","notif.creator","promotionInfos","supports.promotion","agrees.promotion","agrees.rituals","reports.promotion"];
     protected $needles = ["Base\City", "Base\Province", "Base\Gender", "Level", "Education", 'Base\Status', "PromotionPosition"];
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
     protected $files = ["photo"];
@@ -47,6 +48,27 @@ class PromoterController extends BaseAbstract
             if (!empty($notesArray)) {
                 Note::where('promoter_id', $query->id)->forceDelete();
                 Note::insert($notesArray);
+            }
+            // ************************************ Notif ************************************
+            // Retrieve repeated 'notif' values from the request input and prepare for insertion
+            $notifArray = [];
+            $notif = $this->getRepeatValues(['notif']);
+            // dd($notif);
+
+            foreach ($notif as $value) {
+                $notifArray[] = [
+                    'content' => $value['notif'] ?? null,
+                    'promoter_id' => $query->id,
+                    'creator_id' => $this->user_id,
+                    'created_at' => now(),
+                ];
+            }
+            // dd($notifArray);
+
+            // Delete existing notif for this promoter and insert the new notif, if any
+            if (!empty($notifArray)) {
+                Notif::where('promoter_id', $query->id)->forceDelete();
+                Notif::insert($notifArray);
             }
 
             // ************************************ Cultural Users ************************************

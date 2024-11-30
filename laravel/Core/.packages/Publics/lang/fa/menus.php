@@ -23,7 +23,7 @@ return [
     'mySupports'=>'حمایتهای من',
     'promoters'=>'مبلّغین',
     'personnels'=>'پرسنل',
-    'active_promotions'=>'ماموریتهای تبلیغی فعال',
+    'active_promotions'=>'ماموریتهای تبلیغی',
     'statistics'=>'آمار و ارقام',
     'waiting_tickets'=>'تیکت های نیاز به بررسی',
     'waiting_comments'=>'پیام های نیاز به بررسی',

@@ -39,7 +39,7 @@ class PromoterRequest extends FormRequest
                 'required_if:is_not_citizen,0', // اگر is_not_citizen برابر 0 باشد، کدملی الزامی است
                 Rule::unique('users', 'codemeli')->ignore($id)->whereNull('deleted_at'),
                 ],
-             'is_not_citizen' => 'required_without:codemeli|boolean',
+             'is_not_citizen' => 'required_without:codemeli',
              'mobile' => "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL",
          ];
      
