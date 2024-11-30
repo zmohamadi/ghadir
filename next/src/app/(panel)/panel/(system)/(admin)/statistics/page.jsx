@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useConfig, useLang } from "@/lib";
-import { Box, Button, ButtonContainer, Frame, Input, useData, useFormRefs } from "@/Theme/Midone";
+import { Box, Button, ButtonContainer, Frame, Input, Loading, useData, useFormRefs } from "@/Theme/Midone";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export default function page(){
-
-    const { Lang, local } = useLang();
+export default function page() {
+  const { Lang, local } = useLang();
   const { laraAdmin } = useConfig();
   const component = useFormRefs();
   const { get, getNeedles } = useData();
@@ -15,11 +14,12 @@ export default function page(){
   const [needles, setNeedles] = useState(null);
   const [filters, setFilters] = useState({ city: "", province: "", year: "" });
   const [url, setUrl] = useState(`${laraAdmin}/statistics`);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch initial data
     getNeedles(`${laraAdmin}/promoters/get-needles`, setNeedles);
-    get(url, component, "info");
+    fetchData();
   }, [url]);
 
   useEffect(() => {
@@ -35,6 +35,13 @@ export default function page(){
 
     setUrl(updatedUrl);
   }, [filters, laraAdmin]);
+
+  const fetchData = () => {
+    setLoading(true); // Set loading to true before fetching data
+    get(url, component, "info", () => {
+      setLoading(false); // Set loading to false after fetching data
+    });
+  };
 
   const handleFilterChange = (e, filterKey) => {
     setFilters((prevFilters) => ({ ...prevFilters, [filterKey]: e.target.value }));
@@ -84,7 +91,9 @@ return (
           />
         </ButtonContainer>
       </Box>
-
+      {loading ? (
+        <Loading />
+      ) : (<>
       {/* Statistics */}
       {statistics && (
         <>
@@ -137,6 +146,7 @@ return (
           ))}
         </>
       )}
+      </>)}
     </Frame>
   );
 }
