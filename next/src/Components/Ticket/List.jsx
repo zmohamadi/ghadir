@@ -10,7 +10,7 @@ import { Select } from "@/Theme/Midone/Forms/Select";
 export function List({ access,query,formUrl }){
     const {local,Lang} = useLang();
     const { mediaPath,laraAdmin,nextAdmin } = useConfig();
-    const {destroy,getNeedles} = useData();
+    const {getNeedles} = useData();
     const laravelUrl = "/tickets"; 
     const formUrlNext = nextAdmin+"/"+formUrl;
     const [ needles, setNeedles ] = useState();
@@ -47,10 +47,7 @@ export function List({ access,query,formUrl }){
     };
 
     let info = {
-        // insertLink: (!access) && nextAdmin+"/"+formUrl+"/new",
-        // url: laraAdmin+laravelUrl+"?"+query,
-        // insertLabel:"new_ticket",
-        insertLink: (!access) && formUrl+"/new",
+        insertLink: (!access) && nextAdmin+formUrl+"/new",
         url: url,
         columns: [
             {label: "", jsx: (item)=>(<Pic src={mediaPath + "/users/" + item?.user?.photo} defaultImg={`${mediaPath}/public/default/avatar.png`} classImg="user-avatar rounded-full" key={"img" + item?.user?.photo} />),},

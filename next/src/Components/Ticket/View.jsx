@@ -7,7 +7,7 @@ import { useData,useFormRefs,Frame } from "@/Theme/Midone/Forms";
 import { UserInfo,TicketInfo,List,FormReply,SendScore } from '@/Components/Ticket/Details';
 
 export default function View({ id,formUrl,filterStatus }){
-    const {Lang} = useLang();
+    const {Lang,local} = useLang();
     const {laraAdmin,mediaPath} = useConfig();
     let component = useFormRefs();
     let {get} = useData();
@@ -24,17 +24,17 @@ export default function View({ id,formUrl,filterStatus }){
     let ticket = data?.ticket;
     let ticketItems = data?.ticketItems;
     let replyStatus = data?.replyStatus;
-
+    
     return(
         <>
             <Frame title={Lang(["public.tickets"])} key={infoServer}>
-            {(data == undefined)?
+            {(Object.keys(data)?.length == 0)?
                 <Loading  />
             :
                 <>
                     <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">
                         <UserInfo item={user} />
-                        <TicketInfo item={ticket} useLang={useLang()} />
+                        <TicketInfo item={ticket} local={local} Lang={Lang} />
                         {(filterStatus)? <SendScore item={ticket} Lang={Lang} /> : ""}
                     </div>
                     <div className="col-span-12 lg:col-span-8 xxl:col-span-10 ">
