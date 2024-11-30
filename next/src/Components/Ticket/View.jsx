@@ -35,7 +35,7 @@ export default function View({ id,formUrl,filterStatus }){
                     <div className="col-span-12 lg:col-span-4 xxl:col-span-10 ">
                         <UserInfo item={user} />
                         <TicketInfo item={ticket} local={local} Lang={Lang} />
-                        {(filterStatus)? <SendScore item={ticket} Lang={Lang} /> : ""}
+                        {(filterStatus && ticket?.reply_status_id == 3)? <SendScore item={ticket} Lang={Lang} /> : ""}
                     </div>
                     <div className="col-span-12 lg:col-span-8 xxl:col-span-10 ">
                         <List id={id} laraAdmin={laraAdmin} mediaPath={mediaPath} laravelUrl="/ticket-items" Lang={Lang} />

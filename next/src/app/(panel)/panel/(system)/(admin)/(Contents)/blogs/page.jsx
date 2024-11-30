@@ -1,14 +1,13 @@
 "use client";
 
-import {List as Items} from '@/Components/Blog/List';
 import { useAuth } from '@/lib';
+import {List as Items} from '@/Components/Blog/List';
 
 export default function List(){
     const {user} = useAuth();
-    const panel = user?.role_id == 1 ?  "admin" : "promoter";
-    const access = user?.role_id == 1 ?  true : false;
+    const access = user?.role_id == 1 ? true : false;
 
     return(
-        <Items panel={panel} access={access} />
+        <Items access={access} />
     );
 }
