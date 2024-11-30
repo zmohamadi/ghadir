@@ -28,6 +28,7 @@ return [
     'waiting_tickets'=>'تیکت های نیاز به بررسی',
     'waiting_comments'=>'پیام های نیاز به بررسی',
     'myTickets'=>'تیکت های من',
+    'home'=>'صفحه اصلی'
 
 ];
 ?>

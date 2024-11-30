@@ -70,23 +70,25 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                                         {Lang('public.home')} 
                                 </Link>
                                 {/* <Link href={prefix+"/editProfile"}  */}
-                                <Link href={prefix+"/viewProfile"} 
+                                <Link href={prefix+"/profile"} 
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'>
                                         <Icon.User className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                         {Lang('public.profile')} 
                                 </Link>
-                                <Link href={prefix+"/changePassword"} 
+                                <Link href={prefix+"/change-password"} 
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'> 
                                     <Icon.Lock className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                     {Lang('public.change_password')} 
                                 </Link>
                                 <span onClick={changeMenu}
+                                style={{cursor:"pointer"}}
                                     href=""
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'> 
                                     <Icon.Menu className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                     {adminMenuType == "top"? Lang('public.side-menu'): Lang('public.top-menu')} 
                                 </span>
                                 <span onClick={changeMode}
+                                style={{cursor:"pointer"}}
                                     className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'> 
                                     <Icon.Moon className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                     {Lang('public.dark_mode')} 
@@ -94,9 +96,10 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
                                 
                             </div>
                             <div className='p-2 border-t border-theme-12 dark:border-dark-3'>
-                                <a onClick={logout} className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'> 
+                                <a style={{cursor:"pointer"}} onClick={logout} className='flex items-center p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md'> 
                                     <Icon.ToggleRight className={'w-4 h-4 ' +(dir == "ltr"? "mr-2": "ml-2")}/>
                                      {Lang('public.logout')}
+                                     
                                 </a>
                             </div>
                         </div>

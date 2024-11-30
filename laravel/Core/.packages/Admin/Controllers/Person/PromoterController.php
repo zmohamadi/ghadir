@@ -117,10 +117,29 @@ class PromoterController extends BaseAbstract
         };
 
         // Uncomment and modify the below indexQuery if additional filtering by role_id is needed for listing
-        /*
+        
         $this->indexQuery = function ($query) {
-            $query->where('role_id', 2);
+            if(request()->gender != null)
+            {
+                $gender = request()->gender;
+                $query->where('gender_id', $gender);
+            };
+            if(request()->city != null)
+            {
+                $city = request()->city;
+                $query->where('city_id', $city);
+            };
+            if(request()->province != null)
+            {
+                $province = request()->province;
+                $query->where('province_id', $province);
+            };
+            if(request()->status != null)
+            {
+                $status = request()->status;
+                $query->where('status_id', $status);
+            };
         };
-        */
+        
     }
 }
