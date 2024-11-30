@@ -305,5 +305,11 @@ return [
         'codemeli' => 'کد ملی',
         'username' => 'نام کاربری',
         'priority_status_id' => 'اولویت تیکت',
+        'is_not_citizen'=>'تابعیت',
+        'education_id'=>'تحصیلات',
+        'comments'=>'توضیحات',
+        'bank_account_number'=>'شماره حساب بانکی',
+        'promotion_id'=>'مامورتیهای تبلیفی',
+        'type_id'=>'نوع',
     ],
 ];

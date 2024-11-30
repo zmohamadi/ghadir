@@ -23,7 +23,9 @@ class SupportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'promotion_id'=>'required',
+            'type_id'=>'required',
+            'description'=>'required',
         ];
     }
 }

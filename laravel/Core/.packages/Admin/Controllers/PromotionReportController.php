@@ -30,18 +30,26 @@ class PromotionReportController extends BaseAbstract
         };
 
         $this->storeQuery = function ($query) {
+            $method = request()->_method; //PUT
             $promotion = request()->promotion_id;
             $user_id = $this->user_id;
-            $query->promoter_id = $this->user_id;
+            $role_id = $this->role_id;
+        
+            if ($role_id == 2) {
+                $query->promoter_id = $this->user_id;
+            }
             $query->save();
         
             // ************************************ Course ************************************
-            $courses = $this->getRepeatValues(['c_province', 'c_city_id', 'c_city', 'c_village',
-                'c_subject', 'c_place_name','c_duration','c_people_count','c_audiencetype_id']);            
+            $courses = $this->getRepeatValues([
+                'c_province', 'c_city_id', 'c_city', 'c_village',
+                'c_subject', 'c_place_name', 'c_duration', 'c_people_count', 'c_audiencetype_id'
+            ]);
+        
             if (!empty($courses)) {
                 $coursesArray = [];
                 foreach ($courses as $value) {
-                    $coursesArray[] = [
+                    $course = [
                         'city_id' => $value['c_city_id'] ?? null,
                         'city' => $value['c_city'] ?? null,
                         'province_id' => $value['c_province'] ?? null,
@@ -53,35 +61,37 @@ class PromotionReportController extends BaseAbstract
                         'audiencetype_id' => $value['c_audiencetype_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
-                        'promoter_id' => $user_id,
                     ];
+        
+                    if ($role_id == 2) {
+                        $course['promoter_id'] = $user_id;
+                    }
+        
+                    $coursesArray[] = $course;
                 }
         
-                if (!empty($coursesArray)) {
-                    // حذف داده‌ها به‌صورت تکی با delete
-                    Course::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                        ->each(function ($course) {
-                            $course->forceDelete(); // یا از forceDelete() استفاده کنید اگر نیازی به soft delete نباشد
-                        });
+                Course::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
+                    ->each(function ($course) {
+                        $course->forceDelete(); // یا از delete() استفاده کنید
+                    });
         
-                    // اضافه کردن داده‌ها
-                    try {
-                        Course::insert($coursesArray);
-                    } catch (\Exception $e) {
-                        Log::error('Error inserting courses: ' . $e->getMessage());
-                    }
+                try {
+                    Course::insert($coursesArray);
+                } catch (\Exception $e) {
+                    Log::error('Error inserting courses: ' . $e->getMessage());
                 }
             }
         
             // ************************************ Tribune ************************************
-            $tribune = $this->getRepeatValues(['tr_province', 'tr_city_id', 'tr_city', 'tr_village',
-                'tr_subject', 'tr_place_name','tr_duration','tr_people_count','tr_audiencetype_id']);
+            $tribune = $this->getRepeatValues([
+                'tr_province', 'tr_city_id', 'tr_city', 'tr_village',
+                'tr_subject', 'tr_place_name', 'tr_duration', 'tr_people_count', 'tr_audiencetype_id'
+            ]);
         
             if (!empty($tribune)) {
                 $tribuneArray = [];
-        
                 foreach ($tribune as $value) {
-                    $tribuneArray[] = [
+                    $tribuneData = [
                         'city_id' => $value['tr_city_id'] ?? null,
                         'city' => $value['tr_city'] ?? null,
                         'province_id' => $value['tr_province'] ?? null,
@@ -93,35 +103,36 @@ class PromotionReportController extends BaseAbstract
                         'audiencetype_id' => $value['tr_audiencetype_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
-                        'promoter_id' => $user_id,
                     ];
+        
+                    if ($role_id == 2) {
+                        $tribuneData['promoter_id'] = $user_id;
+                    }
+        
+                    $tribuneArray[] = $tribuneData;
                 }
         
-                if (!empty($tribuneArray)) {
-                    // حذف داده‌ها به‌صورت تکی با delete
-                    Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                        ->each(function ($tribune) {
-                            $tribune->forceDelete(); // یا از forceDelete() استفاده کنید اگر نیازی به soft delete نباشد
-                        });
+                Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
+                    ->each(function ($tribune) {
+                        $tribune->forceDelete();
+                    });
         
-                    // اضافه کردن داده‌ها
-                    try {
-                        Tribune::insert($tribuneArray);
-                    } catch (\Exception $e) {
-                        Log::error('Error inserting tribunes: ' . $e->getMessage());
-                    }
+                try {
+                    Tribune::insert($tribuneArray);
+                } catch (\Exception $e) {
+                    Log::error('Error inserting tribunes: ' . $e->getMessage());
                 }
             }
         
             // ************************************ Ritual ************************************
-            $ritualArray = [];
-            $ritual = $this->getRepeatValues(['r_province', 'r_city_id', 'r_city', 'r_village',
-                'ritual_id', 'r_description', "r_place_name"]);
+            $ritual = $this->getRepeatValues([
+                'r_province', 'r_city_id', 'r_city', 'r_village', 'ritual_id', 'r_description', 'r_place_name'
+            ]);
         
-            // بررسی داده‌های برگشتی از متد getRepeatValues
             if (!empty($ritual)) {
+                $ritualArray = [];
                 foreach ($ritual as $value) {
-                    $ritualArray[] = [
+                    $ritualData = [
                         'city_id' => $value['r_city_id'] ?? null,
                         'city' => $value['r_city'] ?? null,
                         'province_id' => $value['r_province'] ?? null,
@@ -131,30 +142,32 @@ class PromotionReportController extends BaseAbstract
                         'ritual_id' => $value['ritual_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
-                        'promoter_id' => $user_id,
                     ];
-                }
         
-                if (!empty($ritualArray)) {
-                    // حذف داده‌ها به‌صورت تکی با delete
-                    RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                        ->each(function ($ritual) {
-                            $ritual->forceDelete(); // یا از forceDelete() استفاده کنید اگر نیازی به soft delete نباشد
-                        });
-        
-                    // اضافه کردن داده‌ها
-                    try {
-                        RitualReport::insert($ritualArray);
-                    } catch (\Exception $e) {
-                        Log::error('Error inserting rituals: ' . $e->getMessage());
+                    if ($role_id == 2) {
+                        $ritualData['promoter_id'] = $user_id;
                     }
+        
+                    $ritualArray[] = $ritualData;
                 }
-
-                $promotionCount = $this->model::where('promotion_id', $promotion)->count();
-                $update = \Models\Promotion::where('id', $promotion)->update(['report_count' => $promotionCount]);
-
+        
+                RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
+                    ->each(function ($ritual) {
+                        $ritual->forceDelete();
+                    });
+        
+                try {
+                    RitualReport::insert($ritualArray);
+                } catch (\Exception $e) {
+                    Log::error('Error inserting rituals: ' . $e->getMessage());
+                }
             }
+        
+            // به‌روزرسانی تعداد گزارش‌ها
+            $promotionCount = $this->model::where('promotion_id', $promotion)->count();
+            \Models\Promotion::where('id', $promotion)->update(['report_count' => $promotionCount]);
         };
+        
         
     }
 }
