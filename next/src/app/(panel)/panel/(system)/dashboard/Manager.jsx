@@ -26,9 +26,9 @@ export default function Manager() {
   let { get } = useData();
   let component = useFormRefs();
 
-  useEffect(() => {
-    get(laraAdmin + "/home", component, "info");
-  }, []);
+  // useEffect(() => {
+  //   get(laraAdmin + "/home", component, "info");
+  // }, []);
 
   let info = component?.state?.info;
 

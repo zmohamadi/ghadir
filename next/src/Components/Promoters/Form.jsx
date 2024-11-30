@@ -115,7 +115,7 @@ export function Form({id,panel,access}){
                                 <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
                                 <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
                                 <SelectTail key={"is_not_citizen"+2} 
-                                defaultValue={data?.is_not_citizen} 
+                                    defaultValue={data?.is_not_citizen == false ? 0 : 1} 
                                 className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('public.im_citizen')}</option>

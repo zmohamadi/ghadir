@@ -82,7 +82,7 @@ Route::post('ckupload/{dir}', 'Public\Upload@ckUpload');
 Route::get('deleteFile/{dir}/{file}', 'Public\Upload@deleteFile');
 // ================ End Routes Uploads =========================================
 
-Route::get('/home/{pane}/{user}', 'Base\HomeController@home');
+Route::get('/home/{panel}/{user}', 'Base\HomeController@home');
 
 Route::post('/breadcrumb', 'Public\Breadcrumb@getItems');
 

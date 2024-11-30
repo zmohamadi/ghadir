@@ -4,6 +4,7 @@ namespace Admin\Controllers;
 
 use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
+use Models\Promotion;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
@@ -27,11 +28,17 @@ class PromotionReportController extends BaseAbstract
             {
                 $query->where('promoter_id', $this->user_id);
             };
+            if(request()->status != null)
+            {
+                $status = request()->status;
+                $query->where('confirm_id', $status);
+            };
         };
 
         $this->storeQuery = function ($query) {
             $method = request()->_method; //PUT
             $promotion = request()->promotion_id;
+            $promotionRecord = Promotion::find($promotion);
             $user_id = $this->user_id;
             $role_id = $this->role_id;
         
@@ -61,6 +68,7 @@ class PromotionReportController extends BaseAbstract
                         'audiencetype_id' => $value['c_audiencetype_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
+                        'year' => $promotionRecord->year,
                     ];
         
                     if ($role_id == 2) {
@@ -78,7 +86,7 @@ class PromotionReportController extends BaseAbstract
                 try {
                     Course::insert($coursesArray);
                 } catch (\Exception $e) {
-                    Log::error('Error inserting courses: ' . $e->getMessage());
+                    \Log::error('Error inserting courses: ' . $e->getMessage());
                 }
             }
         
@@ -103,6 +111,7 @@ class PromotionReportController extends BaseAbstract
                         'audiencetype_id' => $value['tr_audiencetype_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
+                        'year' => $promotionRecord->year,
                     ];
         
                     if ($role_id == 2) {
@@ -120,7 +129,7 @@ class PromotionReportController extends BaseAbstract
                 try {
                     Tribune::insert($tribuneArray);
                 } catch (\Exception $e) {
-                    Log::error('Error inserting tribunes: ' . $e->getMessage());
+                    \Log::error('Error inserting tribunes: ' . $e->getMessage());
                 }
             }
         
@@ -142,6 +151,7 @@ class PromotionReportController extends BaseAbstract
                         'ritual_id' => $value['ritual_id'] ?? null,
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
+                        'year' => $promotionRecord->year,
                     ];
         
                     if ($role_id == 2) {
@@ -159,7 +169,7 @@ class PromotionReportController extends BaseAbstract
                 try {
                     RitualReport::insert($ritualArray);
                 } catch (\Exception $e) {
-                    Log::error('Error inserting rituals: ' . $e->getMessage());
+                    \Log::error('Error inserting rituals: ' . $e->getMessage());
                 }
             }
         
