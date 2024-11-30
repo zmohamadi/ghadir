@@ -18,7 +18,7 @@ export const InfoHead = ({ item,mediaPath,Lang }) => {
             <div className="intro-y flex relative pt-16 sm:pt-6 items-center pb-6">
                 <div className="absolute sm:relative -mt-12 sm:mt-0 w-full flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm">
                     <div className="intro-x mr-auto">{Lang("public.view")+" : "}<span className="font-medium">{item?.count_view}</span> </div>
-                    <div className="intro-x mr-1 sm:mr-3 sm:ml-3">{Lang("public.comments")+" : "}<span className="font-medium">{item?.count_comment}</span> </div>
+                    <div className="intro-x mr-1 sm:mr-3 sm:ml-3">{Lang("public.comments")+" : "}<span className="font-medium">{item?.count_comment_confirmed}</span> </div>
                 </div>
             </div>
         </>

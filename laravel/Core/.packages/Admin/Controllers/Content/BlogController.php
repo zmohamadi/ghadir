@@ -16,6 +16,9 @@ class BlogController extends BaseAbstract
 
     public function init()
     {
+        $this->indexQuery = function ($query) {
+            if($this->role_id != 1) $query->active();
+        };
         $this->storeQuery = function ($query)
         {
             $query = $this->setOperator($query);
@@ -35,13 +38,13 @@ class BlogController extends BaseAbstract
         if($this->role_id == 1)
         {
             $access = true;
-            $comments = BlogComment::ParentComment()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
-            $waiting_comments = BlogComment::Waiting()->where("blog_id",$item->id)->with("creator","editor")->get();
+            $comments = BlogComment::where("blog_id",$item->id)->ParentComment()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $waiting_comments = BlogComment::where("blog_id",$item->id)->Waiting()->with("creator","editor")->get();
         }
         else
         {    
-            $comments = BlogComment::ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
-            $waiting_comments = BlogComment::Waiting()->active()->where("blog_id",$item->id)->with("creator","editor")->get();
+            $comments = BlogComment::where("blog_id",$item->id)->ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
+            $waiting_comments = BlogComment::where("blog_id",$item->id)->Waiting()->active()->with("creator","editor")->get();
         }
         $data = [
             "item"=>$item,

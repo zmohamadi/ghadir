@@ -22,7 +22,7 @@ export const SendScore = ({ item,Lang }) => {
 
     return(
         <>
-            {(item?.score > 0 && item?.reply_status_id != 3)?
+            {(item?.score > 0)?
                 <div className="box p-5 mt-6 bg-theme-10 intro-x">
                     <div className="flex flex-wrap gap-3">
                         <div className="mr-auto">
