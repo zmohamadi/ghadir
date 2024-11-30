@@ -86,6 +86,7 @@ class TicketController extends BaseAbstract
     {
 		\DB::beginTransaction();
 		try{
+            $updateCount = new PublicController();
             $ticket_info = $this->model::find($id);
             $reply_status_id = request()->reply_status_id;
             $text = request()->text;
@@ -102,7 +103,7 @@ class TicketController extends BaseAbstract
                 {
                     $ticket_user = User::find($ticket_info["user_id"]);
                     $reply_status_id = 2;
-                    // $this->sendMessage($ticket_info["user_id"], "پاسخ تیکت برای شما ثبت شده است.");
+                    $this->sendMessage($ticket_info["user_id"], "در سامانه غدیریه برای شما تیکت ارسال شده است.");
                     $updateCount->updateCountTicketAnswered();
                 }
             }
