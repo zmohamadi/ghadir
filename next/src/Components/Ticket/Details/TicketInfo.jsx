@@ -2,8 +2,7 @@
 
 import { Tools } from "@/Theme/Midone/Utils";
 
-export function TicketInfo({ item,useLang }){
-    const {Lang,local} = useLang;
+export function TicketInfo({ item,Lang,local }){
 
     return(
         <>

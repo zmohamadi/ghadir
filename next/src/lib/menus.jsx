@@ -35,7 +35,7 @@ export const getMenus = (user) => {
         { title: "myReports", icon: "List", href: "/myReports" },
         { title: "mySupports", icon: "PenTool", href: "/mySupports" },
         { title: "myTickets", icon: "Tag", href: "/myTickets" },
-        { title: "new_ticket", icon: "Pocket", href: "/tickets/new" },
+        { title: "new_ticket", icon: "Pocket", href: "/myTickets/new" },
         { title: "blogs", icon: "Framer", href: "/blogs" },
     ];
     const commonMenus = [

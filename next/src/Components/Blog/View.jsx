@@ -49,7 +49,7 @@ export default function View({ id }){
     return(
         <>
             <Frame title={Lang(["public.blogs"])} key={infoServer}>
-                {(data == undefined)?
+                {(Object.keys(data)?.length == 0)?
                     <Loading  />
                 :
                     <>
