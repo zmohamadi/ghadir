@@ -17,7 +17,8 @@ class HomeController extends Controller
         $province_id = request()->province;
         $year = request()->year;
 
-        $years = Promotion::select('year')->groupBy("year")->get();
+        // Fetch unique years
+        $years = Promotion::select('year')->groupBy('year')->get();
 
         // Filter and fetch aggregated data for courses
         $courseStats = Course::selectRaw('COUNT(*) as count, SUM(people_count) as total_people, SUM(duration) as total_duration')
@@ -41,10 +42,10 @@ class HomeController extends Controller
                 ->when($year, fn($query) => $query->where('year', $year));
         }])->get();
 
-
         // Total values for percentage calculations
         $totalPeople = ($courseStats->total_people ?? 0) + ($tribuneStats->total_people ?? 0);
         $totalTime = ($courseStats->total_duration ?? 0) + ($tribuneStats->total_duration ?? 0);
+        $totalCount = ($courseStats->count ?? 0) + ($tribuneStats->count ?? 0);
         $totalRitualReport = RitualReport::count();
 
         // Calculate the statistics
@@ -54,11 +55,11 @@ class HomeController extends Controller
             'tribune_count' => intval($tribuneStats->count ?? 0),
 
             // Percentages for counts
-            'course_percent' => ($courseStats->count ?? 0) + ($tribuneStats->count ?? 0) > 0
-                ? intval(($courseStats->count ?? 0) * 100 / (($courseStats->count ?? 0) + ($tribuneStats->count ?? 0)))
+            'course_percent' => $totalCount > 0
+                ? intval(($courseStats->count ?? 0) * 100 / $totalCount)
                 : 0,
-            'tribune_percent' => ($courseStats->count ?? 0) + ($tribuneStats->count ?? 0) > 0
-                ? intval(($tribuneStats->count ?? 0) * 100 / (($courseStats->count ?? 0) + ($tribuneStats->count ?? 0)))
+            'tribune_percent' => $totalCount > 0
+                ? intval(($tribuneStats->count ?? 0) * 100 / $totalCount)
                 : 0,
 
             // Total people
@@ -74,8 +75,8 @@ class HomeController extends Controller
                 : 0,
 
             // Total time (converted to hours)
-            'time_course' => intval(($courseStats->total_duration ?? 0) / 60), // Convert minutes to hours
-            'time_tribune' => intval(($tribuneStats->total_duration ?? 0) / 60), // Convert minutes to hours,
+            'time_course' => intval(floor(($courseStats->total_duration ?? 0) / 60)), // Convert minutes to hours
+            'time_tribune' => intval(floor(($tribuneStats->total_duration ?? 0) / 60)), // Convert minutes to hours
 
             // Percentages for time
             'time_course_percent' => $totalTime > 0
@@ -90,15 +91,19 @@ class HomeController extends Controller
                 'id' => $ritual->id,
                 'label' => $ritual->title,
                 'color' => $ritual->color,
-                'count' => $ritual->reports_count,
-                'percent' => $ritual->reports_count * 100 / $totalRitualReport,
+                'count' => intval($ritual->reports_count ?? 0),
+                'percent' => $totalRitualReport > 0
+                    ? intval(($ritual->reports_count ?? 0) * 100 / $totalRitualReport)
+                    : 0,
             ]),
 
-            'years'=>$years
+            // Available years
+            'years' => $years,
         ];
 
         return response()->json($collection);
     }
+
 
 
     public function home($panel,$user)

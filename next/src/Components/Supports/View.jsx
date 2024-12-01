@@ -5,7 +5,7 @@ import { useConfig } from "@/lib/config";
 import { Frame, useData, useFormRefs } from "@/Theme/Midone/Forms";
 import { Loading } from "@/Theme/Midone/Utils/Loading";
 
-export function View({ id }) {
+export function View({ id,panel,access }) {
     const { Lang } = useLang();
     const { laraAdmin } = useConfig();
     const { get } = useData();
@@ -47,19 +47,21 @@ export function View({ id }) {
                             <h2 className="text-lg font-medium text-gray-700">{data?.amount || "-"}</h2>
                         </div>
 
-                        {/* Included Users */}
-                        <div className="lg:col-span-2">
-                            <p className="text-sm text-gray-500">{Lang(["public.included_users"])}</p>
-                            <ul className="list-disc list-inside text-gray-700">
-                                {data?.promoters?.length
-                                    ? data.promoters.map((user, index) => (
-                                          <li key={index}>
-                                              {user.firstname} {user.lastname}
-                                          </li>
-                                      ))
-                                    : <li>{Lang(["public.no_data"])}</li>}
-                            </ul>
-                        </div>
+                        {panel=="admin"&&<>
+                            {/* Included Users */}
+                            <div className="lg:col-span-2">
+                                <p className="text-sm text-gray-500">{Lang(["public.included_users"])}</p>
+                                <ul className="list-disc list-inside text-gray-700">
+                                    {data?.promoters?.length
+                                        ? data.promoters.map((user, index) => (
+                                            <li key={index}>
+                                                {user.firstname} {user.lastname}
+                                            </li>
+                                        ))
+                                        : <li>{Lang(["public.no_data"])}</li>}
+                                </ul>
+                            </div>
+                        </>}
 
                         {/* Pack Items */}
                         <div className="lg:col-span-2">

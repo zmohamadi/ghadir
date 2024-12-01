@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Loading } from "@/Theme/Midone";
+import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Form({id,panel}){
     const link = "/supports";
@@ -33,16 +34,17 @@ export function Form({id,panel}){
         
             <>
                 <Frame title={Lang(["public.support"])}>
-                    <Box>
+                    
                 {(data==undefined || needles==null)?
                     <Loading  />
                 :<>
-                        <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
+                <Box>
+                        <Select label="occasion" refItem={[component, "promotion_id"]} 
                             // key={"occasion" + needles?.promotion?.lenght} 
                             required="true"
                             data={needles?.promotion} 
                         />
-                        <SelectTail label="type" refItem={[component, "type_id"]} 
+                        <Select label="type" refItem={[component, "type_id"]} 
                             // key={"type" + needles?.supporttype?.lenght} 
                             required="true"
                             data={needles?.supporttype} 
@@ -60,7 +62,8 @@ export function Form({id,panel}){
                         </SelectTail>
                         <Textarea label="pack_items"  refItem={[component, "pack_items"]}  />
                         <Textarea label="description" required="true" refItem={[component, "description"]}  />
-                    </>}</Box>
+                    </Box>
+                    </>}
                 </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} />

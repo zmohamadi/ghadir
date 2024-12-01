@@ -14,6 +14,7 @@ import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
+import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Form({id,panel,access}){
     const link = "/promoters";
@@ -114,20 +115,20 @@ export function Form({id,panel,access}){
                                 <Input  className="col-span-4" label="name" refItem={[component, "firstname"]} required="true" />
                                 <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
                                 <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
-                                <SelectTail key={"is_not_citizen"+2} 
+                                <Select key={"is_not_citizen"+2} 
                                     defaultValue={data?.is_not_citizen == false ? 0 : 1} 
                                 className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('public.im_citizen')}</option>
                                     <option value="1">{Lang('public.not_citizen')}</option>
-                                </SelectTail>
+                                </Select>
                                 <Input dir="ltr" className="col-span-4" label="codemeli" refItem={[component, "codemeli"]} />
                                 <Input className="col-span-4" dir="ltr" label="khadamat_code" refItem={[component, "khadamat_code"]}  />
                                 <Input className="col-span-4" dir="ltr" label="tablighat_office_code" refItem={[component, "tablighat_office_code"]} />
                                 <Input className="col-span-4" dir="ltr" label="tablighat_organization_code" refItem={[component, "tablighat_organization_code"]} />
                                 <Input className="col-span-4" dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]}  />
                                 <Input className="col-span-4" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
-                                <SelectTail className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
+                                <Select className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
                                 <SelectLocation 
                                     classNameProvince="col-span-4" 
                                     classNameCitySh="col-span-3"

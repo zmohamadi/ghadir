@@ -3,6 +3,7 @@
 import { useLang } from "@/lib";
 import { Input, Textarea, Box, Radio, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
+import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Course({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
@@ -15,7 +16,7 @@ export function Course({ index, parent, addIcon, closeIcon,needles }) {
                 {closeIcon}
             </div>
                 <Input className="col-span-12" label="subject" refItem={[parent, `c_subject_${index}`]} defaultValue={info?.subject}  />
-                <SelectTail label="audiencetype" refItem={[parent,`c_audiencetype_id_${index}`]} 
+                <Select label="audiencetype" refItem={[parent,`c_audiencetype_id_${index}`]} 
                     key={"audiencetype"+needles?.audiencetype?.length} defaultValue={info?.audiencetype_id}
                     data={needles?.audiencetype}
                 />

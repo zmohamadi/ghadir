@@ -52,7 +52,7 @@ class LoginRequest extends FormRequest
         }
 
         // ثبت ساعت ورود کاربر
-        User::where('mobile', $this->mobile)->update(['last_login' => now()]);
+        $last_login = User::where('mobile', $this->mobile)->update(['last_login' => now()]);
 
         RateLimiter::clear($this->throttleKey());
     }

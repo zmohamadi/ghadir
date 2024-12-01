@@ -12,6 +12,7 @@ import { Course } from "./Course";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
+import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Form({ id, panel }) {
     const link = "/reports";
@@ -82,7 +83,7 @@ export function Form({ id, panel }) {
                     </TabHeader>
                     <TabBody>
                         <TabPanel id="tab-first" active={"true"}>
-                            <SelectTail
+                            <Select
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
                                 required="true"

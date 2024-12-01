@@ -109,8 +109,8 @@ class AuthenticatedController extends Controller
         $this->verifyValidator($request->all())->validate();
         
         // وارد شدن به سایت
-        $last_login = User::where('mobile', $request['mobile'])->update(['last_login',now()]);
+        $last_login = User::where('mobile', $request['mobile'])->update(['last_login' => now()]);
+
         \Auth::guard('admin')->login($user, true);
-        // return redirect()->route('panel');
     }
 }

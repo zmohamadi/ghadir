@@ -3,6 +3,7 @@
 import { useLang } from "@/lib";
 import { Input, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
+import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function InfoPromotions({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
@@ -12,7 +13,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon,needles }) {
             <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
-                <SelectTail label="promotion_position" refItem={[parent, `promotion_position_${index}`]} 
+                <Select label="promotion_position" refItem={[parent, `promotion_position_${index}`]} 
                     key={"promotion_position"+needles?.promotionposition?.length}
                     data={needles?.promotionposition}  defaultValue={info?.position_id}
                 />
