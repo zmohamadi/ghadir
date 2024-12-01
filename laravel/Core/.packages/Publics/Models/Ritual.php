@@ -24,4 +24,8 @@ class Ritual extends Model
     {
         return $this->belongsToMany(Promotion::class, 'promotion_ritual','ritual_id', 'promotion_id');
     }
+    public function reports()
+    {
+        return $this->hasMany(RitualReport::class,"ritual_id");
+    }
 }

@@ -7,6 +7,7 @@ use Models\Tribune;
 use Models\Ritual;
 use Models\Promotion;
 use Models\Notif;
+use Models\RitualReport;
 
 class HomeController extends Controller
 {
@@ -33,16 +34,18 @@ class HomeController extends Controller
             ->first();
 
         // Ritual statistics with promotion count
-        $rituals = Ritual::withCount(['promotions' => function ($query) use ($city_id, $province_id, $year) {
-            // $query
-            //     ->when($city_id, fn($query) => $query->where('city_id', $city_id))
-            //     ->when($province_id, fn($query) => $query->where('province_id', $province_id))
-            //     ->when($year, fn($query) => $query->whereYear('created_at', $year));
+        $rituals = Ritual::withCount(['reports' => function ($query) use ($city_id, $province_id, $year) {
+            $query
+                ->when($city_id, fn($query) => $query->where('city_id', $city_id))
+                ->when($province_id, fn($query) => $query->where('province_id', $province_id))
+                ->when($year, fn($query) => $query->where('year', $year));
         }])->get();
+
 
         // Total values for percentage calculations
         $totalPeople = ($courseStats->total_people ?? 0) + ($tribuneStats->total_people ?? 0);
         $totalTime = ($courseStats->total_duration ?? 0) + ($tribuneStats->total_duration ?? 0);
+        $totalRitualReport = RitualReport::count();
 
         // Calculate the statistics
         $collection = [
@@ -87,7 +90,8 @@ class HomeController extends Controller
                 'id' => $ritual->id,
                 'label' => $ritual->title,
                 'color' => $ritual->color,
-                'count' => $ritual->promotions_count,
+                'count' => $ritual->reports_count,
+                'percent' => $ritual->reports_count * 100 / $totalRitualReport,
             ]),
 
             'years'=>$years
