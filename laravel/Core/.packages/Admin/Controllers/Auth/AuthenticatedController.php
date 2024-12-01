@@ -105,12 +105,13 @@ class AuthenticatedController extends Controller
     }
     public function verifyCheck(Request $request)
     {
+        // جستجوی کاربر
+        $user = User::where('mobile', $request['mobile'])->first();
         // اعتبارسنجی کد تایید
         $this->verifyValidator($request->all())->validate();
         
         // وارد شدن به سایت
         $last_login = User::where('mobile', $request['mobile'])->update(['last_login' => now()]);
-
         \Auth::guard('admin')->login($user, true);
     }
 }
