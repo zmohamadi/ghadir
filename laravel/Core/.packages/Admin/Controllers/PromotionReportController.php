@@ -39,12 +39,8 @@ class PromotionReportController extends BaseAbstract
             $method = request()->_method; //PUT
             $promotion = request()->promotion_id;
             $promotionRecord = Promotion::find($promotion);
-            $user_id = $this->user_id;
-            $role_id = $this->role_id;
-        
-            if ($role_id == 2) {
-                $query->promoter_id = $this->user_id;
-            }
+            $promoter_id = request()->promoter_id;
+
             $query->save();
         
             // ************************************ Course ************************************
@@ -67,28 +63,17 @@ class PromotionReportController extends BaseAbstract
                         'people_count' => $value['c_people_count'] ?? null,
                         'audiencetype_id' => $value['c_audiencetype_id'] ?? null,
                         'promotion_id' => $promotion,
+                        'promoter_id' => $promoter_id,
                         'promotion_report_id' => $query->id,
                         'year' => $promotionRecord->year,
                     ];
-        
-                    if ($role_id == 2) {
-                        $course['promoter_id'] = $user_id;
-                    }
-        
                     $coursesArray[] = $course;
                 }
-        
-                Course::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                    ->each(function ($course) {
-                        $course->forceDelete(); // یا از delete() استفاده کنید
-                    });
-        
-                try {
-                    Course::insert($coursesArray);
-                } catch (\Exception $e) {
-                    \Log::error('Error inserting courses: ' . $e->getMessage());
-                }
+                
             }
+            Course::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+            if (!empty($coursesArray)) Course::insert($coursesArray);
+                
         
             // ************************************ Tribune ************************************
             $tribune = $this->getRepeatValues([
@@ -112,26 +97,17 @@ class PromotionReportController extends BaseAbstract
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
                         'year' => $promotionRecord->year,
+                        'promoter_id' => $promoter_id,
                     ];
-        
-                    if ($role_id == 2) {
-                        $tribuneData['promoter_id'] = $user_id;
-                    }
         
                     $tribuneArray[] = $tribuneData;
                 }
         
-                Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                    ->each(function ($tribune) {
-                        $tribune->forceDelete();
-                    });
-        
-                try {
-                    Tribune::insert($tribuneArray);
-                } catch (\Exception $e) {
-                    \Log::error('Error inserting tribunes: ' . $e->getMessage());
-                }
+                
             }
+            Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+            if (!empty($tribuneArray))    Tribune::insert($tribuneArray);
+                
         
             // ************************************ Ritual ************************************
             $ritual = $this->getRepeatValues([
@@ -152,26 +128,17 @@ class PromotionReportController extends BaseAbstract
                         'promotion_id' => $promotion,
                         'promotion_report_id' => $query->id,
                         'year' => $promotionRecord->year,
+                        'promoter_id' => $promoter_id,
                     ];
-        
-                    if ($role_id == 2) {
-                        $ritualData['promoter_id'] = $user_id;
-                    }
         
                     $ritualArray[] = $ritualData;
                 }
         
-                RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $user_id])
-                    ->each(function ($ritual) {
-                        $ritual->forceDelete();
-                    });
-        
-                try {
-                    RitualReport::insert($ritualArray);
-                } catch (\Exception $e) {
-                    \Log::error('Error inserting rituals: ' . $e->getMessage());
-                }
+                
             }
+            RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+            if (!empty($ritualArray))    RitualReport::insert($ritualArray);
+                
         
             // به‌روزرسانی تعداد گزارش‌ها
             $promotionCount = $this->model::where('promotion_id', $promotion)->count();

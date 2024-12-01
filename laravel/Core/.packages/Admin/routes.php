@@ -30,6 +30,7 @@ Route::put("users/change-password", "Person\UserController@changePassword");
 
 Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
 Route::resource("promoters", "Person\PromoterController");
+Route::get("personnels/get-needles", "Person\PersonnelController@getNeedles");
 Route::resource("personnels", "Person\PersonnelController");
 // Route::resource("users", "Person\UserController");
 // Route::resource("roles", "Person\RoleController");

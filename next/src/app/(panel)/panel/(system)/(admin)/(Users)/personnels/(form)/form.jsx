@@ -39,12 +39,14 @@ export default function Form({ id }) {
     }
 
     useEffect(() => {
+        getNeedles(laraAdmin+link+'/get-needles', setNeedles);
         get(url, component, "info");
     }, [url]);
 
     const saveItem = () => save(url, component, method, nextUrl);
     const back = () => router.back();
-
+    let data = component?.state?.info;
+    
     return (
         <>
             <Frame title={Lang(["public.personnel"])}>
@@ -53,6 +55,12 @@ export default function Form({ id }) {
                     <Input label="family" refItem={[component, "lastname"]} required="true" />
                     <Input dir="ltr" label="mobile" refItem={[component, "mobile"]} required="true" />
                     <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} required="true" />
+                    <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
+                        type="col" label="status" refItem={[component, `status_id`]}
+                        data={needles?.status?.filter(item => item.group_id == 1)} 
+                        valueKey="code" titleKey={"title_"+local}  
+                        key={"status_id"+data?.status_id}
+                    /> 
                 </Box>
             </Frame>
             <ButtonContainer>

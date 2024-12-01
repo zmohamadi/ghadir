@@ -35,7 +35,7 @@ export function Form({id,panel,access,query}){
     let finalId = panel=="admin" ? user?.id : id;
     let url = laraAdmin + link;
     let method = "new";
-    let nextUrl = panel!="admin" ? link : "/";
+    let nextUrl = panel =="admin" ? link : "/";
     
     if (finalId !== 0 && finalId !== undefined) {
         url = `${laraAdmin + link}/${finalId}`;

@@ -11,7 +11,7 @@ class PersonnelController extends UserController
     protected $request = "Publics\Requests\PersonnelRequest";
     // protected $with = ["role","gender", "activeStatus","cityUser",'level',"education"];
     // protected $showWith = ["role", "gender", "activeStatus","cityUser",'level',"education"];
-    // protected $needles = ["Base\City","Base\Province","Base\Gender","Level","Education",'Base\Status'];
+    protected $needles = ['Base\Status'];
     protected $searchFilter = ["firstname", "lastname", "mobile"];
     protected $files = ["photo"];
 

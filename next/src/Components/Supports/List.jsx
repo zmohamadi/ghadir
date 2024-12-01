@@ -34,7 +34,7 @@ export function List({panel,access , query}){
                 ),
             },
            
-            {label: "promotion", field: "promotion.title" },
+            {label: "promotion", jsx: (item) => (<span>{item?.promotion?.title}-{item?.promotion?.year}</span>), },
             {label: "type", field: "type.title" },
             {label: "amount", field: "amount" },
             {label: "pack_items", field: "pack_items" },

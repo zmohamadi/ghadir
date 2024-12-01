@@ -118,6 +118,7 @@ $lang = [
    'registered'=>'ثبت نام شده',
    'search_promoter_for_new_support'=>'برای سرچ میتوانید وارد کنید : نام  یا نام خانوادگی یا شماره موبایل',
    'notif'=>'اطلاعیه',
+   'save_score'=>'ثبت امتیاز',
 ];
 
 $menus = include(__DIR__.'/./menus.php');

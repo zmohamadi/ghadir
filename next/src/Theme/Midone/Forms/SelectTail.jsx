@@ -20,6 +20,11 @@ const SelectTail = (props)=>{
     });
 
     const createSelect = () => {
+        // const selectElement = document.querySelector(`#${id}`);
+        if (window?.tail?.select('#'+id)==undefined) {
+            console.warn("Select element not found in the DOM.");
+            return null;
+        }
         return window?.tail?.select('#'+id, {
         // tail('#'+id, {
             animate: true,              // [0.3.0]      Boolean

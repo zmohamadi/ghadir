@@ -31,7 +31,7 @@ export function Form({ id, panel }) {
 
     const url = id != 0 && id != undefined ? `${laraAdmin}${link}/${id}` : `${laraAdmin}${link}`;
     const method = id != 0 && id != undefined ? "edit" : "new";
-    const nextUrl = "/reports";
+    const nextUrl = panel=="admin"  ? "/reports" : "/myReports";
 // console.log(panel);
 
     useEffect(() => {
@@ -49,6 +49,7 @@ export function Form({ id, panel }) {
     const saveItem = () => save(url, component, method, nextUrl);
     const back = () => router.back();
     const data = component?.state?.info;
+// console.log(component?.state?.info?.courses?.length);
 
     const otherProps = component?.state?.info?.courses?.length
         ? { count_data: component.state.info.courses.length }
@@ -63,6 +64,8 @@ export function Form({ id, panel }) {
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
+                <Input label="promoter_id" type="hidden" defaultValue={panel=="admin" ? data?.promoter_id : user?.id} refItem={[component, `promoter_id`]} /> 
+
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>

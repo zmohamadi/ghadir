@@ -37,7 +37,7 @@ class PromoterController extends BaseAbstract
             $notes = $this->getRepeatValues(['note']);
             foreach ($notes as $value) {
                 $notesArray[] = [
-                    'content' => $value['note'] ?? null,
+                    'content' => $value['note'] ,
                     'promoter_id' => $query->id,
                     'creator_id' => $this->user_id,
                     'created_at' => now(),
@@ -57,7 +57,7 @@ class PromoterController extends BaseAbstract
 
             foreach ($notif as $value) {
                 $notifArray[] = [
-                    'content' => $value['notif'] ?? null,
+                    'content' => $value['notif'],
                     'promoter_id' => $query->id,
                     'creator_id' => $this->user_id,
                     'created_at' => now(),
@@ -77,12 +77,12 @@ class PromoterController extends BaseAbstract
             $cusers = $this->getRepeatValues(['c_name', 'c_family', 'c_phone', 'c_gender_id', 'c_comments', 'c_job_position']);
             foreach ($cusers as $value) {
                 $culturalUsers[] = [
-                    'name' => $value['c_name'] ?? null,
-                    'family' => $value['c_family'] ?? null,
-                    'phone' => $value['c_phone'] ?? null,
-                    'job_position' => $value['c_job_position'] ?? null,
-                    'gender_id' => $value['c_gender_id'] ?? null,
-                    'comments' => $value['c_comments'] ?? null,
+                    'name' => $value['c_name'],
+                    'family' => $value['c_family'] ,
+                    'phone' => $value['c_phone'] ,
+                    'job_position' => $value['c_job_position'] ,
+                    'gender_id' => $value['c_gender_id'] ,
+                    'comments' => $value['c_comments'] ,
                     'promoter_id' => $query->id,
                 ];
             }
@@ -99,12 +99,12 @@ class PromoterController extends BaseAbstract
             $positions = $this->getRepeatValues(['pos_province', 'pos_city_id', 'pos_city', 'pos_village', 'promotion_position', 'place_name']);
             foreach ($positions as $value) {
                 $positionsArray[] = [
-                    'city_id' => $value['pos_city_id'] ?? null,
-                    'province_id' => $value['pos_province'] ?? null,
-                    'city' => $value['pos_city'] ?? null,
-                    'village' => $value['pos_village'] ?? null,
-                    'position_id' => $value['promotion_position'] ?? null,
-                    'place_name' => $value['place_name'] ?? null,
+                    'city_id' => $value['pos_city_id'] ,
+                    'province_id' => $value['pos_province'] ,
+                    'city' => $value['pos_city'] ,
+                    'village' => $value['pos_village'] ,
+                    'position_id' => $value['promotion_position'] ,
+                    'place_name' => $value['place_name'] ,
                     'promoter_id' => $query->id,
                 ];
             }
