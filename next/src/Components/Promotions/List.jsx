@@ -133,7 +133,7 @@ export function List({panel,access , query}){
     return(
         <>
             <Frame title={Lang(["public.promotions"])}>
-                {panel=="admin"&&<>
+                {access &&<>
                     <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
                         <Select
                             defaultValue={params.register_status}

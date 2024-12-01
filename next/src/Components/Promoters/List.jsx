@@ -161,7 +161,7 @@ export function List({ panel, access, query }) {
     return (
         <>
             <Frame title={Lang(["public.promoters"])}>
-                {panel == "admin" && (
+                {panel === "admin" && (
                     <>
                         {/* فیلترهای مربوط به استان، شهر و جنسیت */}
                         <Box shadow={false} minIcon={true} min={true} cols="grid-cols-10">
@@ -199,7 +199,7 @@ export function List({ panel, access, query }) {
                                 onChange={(e) => handleFilterChange(e, "status")}
                                 className="col-span-2"
                                 label="status"
-                                data={needles?.status?.filter(item => item.group_id == 1)} 
+                                data={needles?.status?.filter(item => item.group_id === 1)} 
                                 valueKey="code" titleKey={"title_"+local}  
                             />
                             <ButtonContainer className="mt-7 md:mt-6 text-right">
