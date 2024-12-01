@@ -31,7 +31,7 @@ export default function Main() {
     const [showSecondForm, setShowSecondForm] = useState(false); // وضعیت فرم دوم
 
     useEffect(() => {
-        if (timer === 0) {
+        if (timer == 0) {
             setIsTimerActive(false); // غیرفعال کردن تایمر پس از پایان
             return;
         }
@@ -123,7 +123,7 @@ export default function Main() {
     
         } catch (error) {
             // If a 422 error is returned, set the errors
-            if (error.response?.status === 422) {
+            if (error.response?.status == 422) {
                 setErrors(error.response?.data.errors);
             } else {
                 // Re-throw unexpected errors to handle elsewhere if needed

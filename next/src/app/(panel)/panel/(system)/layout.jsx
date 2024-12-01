@@ -19,7 +19,7 @@ export default function Panel({children}){
     const router = useRouter();
 
     useEffect(() => {
-        if (typeof user === "object") {
+        if (typeof user == "object") {
             window.document.body.style.padding = "15px 28px";
             utility.addScriptFile(
                 'appScriptFile', 

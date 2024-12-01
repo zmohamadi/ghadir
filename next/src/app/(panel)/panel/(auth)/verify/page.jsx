@@ -49,7 +49,7 @@ export default function Main() {
     };
 
     useEffect(() => {
-        if (timeLeft === 0) return;
+        if (timeLeft == 0) return;
 
         const timer = setInterval(() => {
             setTimeLeft((prevTime) => {
@@ -91,8 +91,8 @@ export default function Main() {
                 <div className="intro-x mt-5 xl:mt-8 text-left xl:text-left flex justify-between gap-4 items-center">
                     <button
                         onClick={handleSubmit}
-                        disabled={isSubmitting || timeLeft === 0}
-                        className={`btn btn-primary py-3 px-4 w-full xl:w-32 align-top ${isSubmitting || timeLeft === 0 ? "opacity-50 cursor-not-allowed" : ""}`}
+                        disabled={isSubmitting || timeLeft == 0}
+                        className={`btn btn-primary py-3 px-4 w-full xl:w-32 align-top ${isSubmitting || timeLeft == 0 ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         {isSubmitting ? Lang("public.processing") : Lang("public.send_confirm_code")}
                     </button>
