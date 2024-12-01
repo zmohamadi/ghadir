@@ -6,7 +6,8 @@ import { useAuth } from "@/lib/auth";
 import { useState } from "react";
 import Link from "next/link";
 
-export function Login({ Lang }) {
+export function Login() {
+    const { Lang } = useLang();
     const { nextDomain, nextAdmin } = useConfig();
     const redirectIfAuthenticated = `${nextDomain}${nextAdmin}/dashboard`;
     const { login, user } = useAuth({ // اضافه کردن user
