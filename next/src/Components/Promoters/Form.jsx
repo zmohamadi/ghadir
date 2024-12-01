@@ -16,7 +16,7 @@ import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export function Form({id,panel,access}){
+export function Form({id,panel,access,query}){
     const link = "/promoters";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
@@ -25,6 +25,7 @@ export function Form({id,panel,access}){
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
     const {user} = useAuth();
+    // console.log(user);
     
     let uploadUrl = laraAdmin+"/upload/.-media-users";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-users";
@@ -35,7 +36,6 @@ export function Form({id,panel,access}){
     let url = laraAdmin + link;
     let method = "new";
     let nextUrl = panel!="admin" ? link : "/";
-
     
     if (finalId !== 0 && finalId !== undefined) {
         url = `${laraAdmin + link}/${finalId}`;
@@ -83,14 +83,14 @@ export function Form({id,panel,access}){
         }
         return stars;
     };
-    
+    // console.log(component?.state);
 
 
     const handleStarClick = (rating) => {
         setStarRating(rating);
     };
 
-    console.log(data?.is_not_citizen);
+    // console.log(data?.is_not_citizen);
 
     return(
         

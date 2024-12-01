@@ -2,7 +2,6 @@
 
 import { useAuth } from "@/lib/auth";
 import PersonnelForm from "@/app/(panel)/panel/(system)/(admin)/(Users)/personnels/(form)/form";
-// import PromoterForm from "@/app/(panel)/panel/(system)/(admin)/(Users)/promoters/(form)/form";
 import { Form } from "@/Components/Promoters/Form";
 
 export default function page()
@@ -13,8 +12,9 @@ export default function page()
     const access = user?.role_id == 1 ?  true : false;
 
     const query = `promoter=${user?.id}`;
-
+    
     return <>
-            {role_id==1 ? <PersonnelForm panel={panel} access={access} />: <Form /> }
+            {role_id==1 ? <PersonnelForm id={user?.id} query={query} panel={panel} access={access} />: 
+                            <Form id={user?.id} query={query} panel={panel} access={access} /> }
             </>;
 }

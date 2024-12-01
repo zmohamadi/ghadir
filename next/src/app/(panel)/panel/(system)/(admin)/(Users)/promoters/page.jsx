@@ -9,6 +9,7 @@ export default function page(){
     const panel = user?.role_id == 1 ?  "admin" : "promoter";
     const access = user?.role_id == 1 ?  true : false;
     // const query = user?.role_id == 2 &&`register_status=1`;
+    
 
     return(
         <List panel={panel} access={access} />
