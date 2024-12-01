@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation';
 import { useConfig } from "@/lib/config";
 
-export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
+export function useAuth ({ middleware, redirectIfAuthenticated, guard = "admin" } = {}) {
     const router = useRouter()
     const {laraAdmin, nextAdmin} = useConfig();
     const csrf = () => axios.get('/sanctum/csrf-cookie')

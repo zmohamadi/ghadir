@@ -100,7 +100,7 @@ export function Menu({prefix, menus})
                         let ICN = Icon[item.icon];
                         if(item.childs?.length > 0)
                             return (<li key={index}>
-                                        <a href='#' className={adminMenuType+"-menu"+(item.open?adminMenuType+'-menu--open': '')}>
+                                        <a href='#' onClick={(e)=>e.preventDefault() } className={adminMenuType+"-menu"+(item.open?adminMenuType+'-menu--open': '')}>
                                             <div className={adminMenuType+'-menu__icon'}> 
                                                 <ICN className="px-auto inline" />
                                             </div>

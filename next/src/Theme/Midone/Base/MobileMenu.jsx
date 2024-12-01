@@ -79,11 +79,11 @@ export function MobileMenu({prefix, menus}){
     return (
         <div className='mobile-menu md:hidden'>
             <div className='mobile-menu-bar'>
-                <a href='' className={'flex '+(dir == "ltr"?"mr-auto":"ml-auto")}>
+                <a href='#' onClick={(e)=>e.preventDefault() } className={'flex '+(dir == "ltr"?"mr-auto":"ml-auto")}>
                     <img alt='Icewall Tailwind HTML Admin Template' style={{maxHeight:"70px"}} className='w-full' src={laraDomain+'/media/logo/light-logo.png'} />
                     <span className='text-white text-lg mr-3 adjust '><b>  </b></span>
                 </a>
-                <a href='#' id='mobile-menu-toggler'> 
+                <a href='#' onClick={(e)=>e.preventDefault() } id='mobile-menu-toggler'> 
                     {/* <i dataFeather='bar-chart-2' className='w-8 h-8 text-white transform-rotate-90'></i> */}
                     <Icon.BarChart2 color='#FFF' />
                 </a>
@@ -94,7 +94,7 @@ export function MobileMenu({prefix, menus}){
                         let ICN = Icon[item.icon];
                         if(item.childs?.length > 0)
                             return (<li key={index}>
-                                        <a href='#' className={item.open?'menu menu--open': 'menu'}>
+                                        <a href='#' onClick={(e)=>e.preventDefault() } className={item.open?'menu menu--open': 'menu'}>
                                             <div className='menu__icon'>
                                                 <ICN className="px-auto inline" size='18' />
                                             </div>
