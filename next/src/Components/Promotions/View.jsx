@@ -235,10 +235,10 @@ export function View({ id ,panel,access}) {
                                                 <span className="p-1 m-1">( {Lang("public.created_at")} : {agree?.created_at} )</span>
                                             </span>
                                             <ul className="list-disc list-inside ml-5 text-gray-600">
-                                                {agree?.has_course === 1 && (
+                                                {agree?.has_course == 1 && (
                                                     <li>{Lang("public.course")}</li>
                                                 )}
-                                                {agree?.has_tribune === 1 && (
+                                                {agree?.has_tribune == 1 && (
                                                     <li>{Lang("public.tribune")}</li>
                                                 )}
                                                 {agree?.rituals?.length > 0 &&
@@ -303,7 +303,7 @@ export function View({ id ,panel,access}) {
                 agree ? (
                     <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
                 ) : (
-                    (data?.register_status === 1 && panel === "promoter") && 
+                    (data?.register_status == 1 && panel == "promoter") && 
                     <Button label="register" onClick={saveItem} />
                 )
             }

@@ -104,7 +104,7 @@ export function List({panel,access , query}){
                             onChange={(e) => handleFilterChange(e, "status")}
                             className="col-span-5 md:col-span-3"
                             label="status"
-                            data={needles?.status?.filter(item => item.group_id === 28)}
+                            data={needles?.status?.filter(item => item.group_id == 28)}
                             titleKey={"title_" + local} valueKey="code"
                         />
                         

@@ -97,7 +97,7 @@ export function Form({ id, panel }) {
                                     type="col" 
                                     label="confirm_status" 
                                     refItem={[component, `confirm_id`]}
-                                    data={needles?.status?.filter(item => item.group_id === 28)}
+                                    data={needles?.status?.filter(item => item.group_id == 28)}
                                     valueKey="code" titleKey={"title_"+local}  
                                     key={"confirm_id"+data?.confirm_id}
                                     /> 

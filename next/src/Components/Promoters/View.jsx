@@ -85,7 +85,7 @@ export function View({ id, panel = "admin" }) {
                                         <div className="p-2 border rounded">
                                              {
                                                     data?.city_user?.province_id
-                                                        ? needles?.province?.find(item => item.id === data?.city_user?.province_id)?.["name_fa"]
+                                                        ? needles?.province?.find(item => item.id == data?.city_user?.province_id)?.["name_fa"]
                                                         : "-"
                                                 }
                                            </div>
@@ -141,7 +141,7 @@ export function View({ id, panel = "admin" }) {
                                             <span>
                                                 {
                                                     info?.position_id
-                                                        ? needles?.promotionposition?.find(item => item.id === info.position_id)?.[`title`]
+                                                        ? needles?.promotionposition?.find(item => item.id == info.position_id)?.[`title`]
                                                         : "-"
                                                 }
                                             </span>
@@ -159,7 +159,7 @@ export function View({ id, panel = "admin" }) {
                                             <span>
                                                 {
                                                     info?.province_id
-                                                        ? needles?.province?.find(item => item.id === info.province_id)?.["name_fa"]
+                                                        ? needles?.province?.find(item => item.id == info.province_id)?.["name_fa"]
                                                         : "-"
                                                 }
                                             </span>
@@ -171,7 +171,7 @@ export function View({ id, panel = "admin" }) {
                                             <span>
                                                 {
                                                     info?.city_id
-                                                        ? needles?.city?.find(item => item.id === info.city_id)?.["name_fa"]
+                                                        ? needles?.city?.find(item => item.id == info.city_id)?.["name_fa"]
                                                         : "-"
                                                 }
                                             </span>
@@ -234,7 +234,7 @@ export function View({ id, panel = "admin" }) {
                                             <span>
                                                 {
                                                     culturalUser?.gender_id
-                                                        ? needles?.gender?.find(gender => gender.id === culturalUser.gender_id)?.[`title_${local}`]
+                                                        ? needles?.gender?.find(gender => gender.id == culturalUser.gender_id)?.[`title_${local}`]
                                                         : "-"
                                                 }
                                             </span>
@@ -313,10 +313,10 @@ export function View({ id, panel = "admin" }) {
                                                     <span className="p-1 m-1">( {Lang("public.created_at")} : {agree?.created_at} )</span>
                                                 </span>
                                                 <ul className="list-disc list-inside ml-5 text-gray-600">
-                                                    {agree?.has_course === 1 && (
+                                                    {agree?.has_course == 1 && (
                                                         <li>{Lang("public.course")}</li>
                                                     )}
-                                                    {agree?.has_tribune === 1 && (
+                                                    {agree?.has_tribune == 1 && (
                                                         <li>{Lang("public.tribune")}</li>
                                                     )}
                                                     {agree?.rituals?.length > 0 &&

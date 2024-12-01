@@ -78,11 +78,11 @@ export function List({ access,query,formUrl }){
                         data={needles?.subject} titleKey={"title_" + local} onChange={(e) => handleFilterChange(e, "subject")}
                     />
                     <Select label="reply_status" className="col-span-3 md:col-span-3" defaultValue={params.replyStatus}
-                        data={needles?.statuses?.filter(reply => reply.group_id === 19)} titleKey={"title_" + local} valueKey="code"
+                        data={needles?.statuses?.filter(reply => reply.group_id == 19)} titleKey={"title_" + local} valueKey="code"
                         onChange={(e) => handleFilterChange(e, "replyStatus")}   
                     />
                     <Select label="check_priority" className="col-span-3 md:col-span-3" defaultValue={params.priorityStatus}
-                        data={needles?.statuses?.filter(priority => priority.group_id === 24)} titleKey={"title_" + local} valueKey="code"
+                        data={needles?.statuses?.filter(priority => priority.group_id == 24)} titleKey={"title_" + local} valueKey="code"
                         onChange={(e) => handleFilterChange(e, "priorityStatus")}
                     />
                     <ButtonContainer className="mt-7 md:mt-6 text-right ">

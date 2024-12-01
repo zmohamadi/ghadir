@@ -113,13 +113,13 @@ export function View({id }) {
                                     <div className="p-4 border rounded-lg bg-gray-50">
                                         <p className="text-sm text-gray-700">
                                             {
-                                                info?.province_id && needles?.province?.find(item => item.id === info.province_id)
-                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id === info.province_id)?.name_fa} - `
+                                                info?.province_id && needles?.province?.find(item => item.id == info.province_id)
+                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id == info.province_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
-                                                info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                info?.city_id && needles?.city?.find(item => item.id == info.city_id)
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id == info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
@@ -169,13 +169,13 @@ export function View({id }) {
                                     <div className="p-4 border rounded-lg bg-gray-50">
                                         <p className="text-sm text-gray-700">
                                             {
-                                                info?.province_id && needles?.province?.find(item => item.id === info.province_id)
-                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id === info.province_id)?.name_fa} -`
+                                                info?.province_id && needles?.province?.find(item => item.id == info.province_id)
+                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id == info.province_id)?.name_fa} -`
                                                     : ""
                                             }
                                             {
-                                                info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                info?.city_id && needles?.city?.find(item => item.id == info.city_id)
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id == info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
@@ -216,13 +216,13 @@ export function View({id }) {
                                     <div className="p-4 border rounded-lg bg-gray-50">
                                         <p className="text-sm text-gray-700">
                                             {
-                                                info?.province_id && needles?.province?.find(item => item.id === info.province_id)
-                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id === info.province_id)?.name_fa} - `
+                                                info?.province_id && needles?.province?.find(item => item.id == info.province_id)
+                                                    ? `${Lang('public.province')}: ${needles.province.find(item => item.id == info.province_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {
-                                                info?.city_id && needles?.city?.find(item => item.id === info.city_id)
-                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id === info.city_id)?.name_fa} - `
+                                                info?.city_id && needles?.city?.find(item => item.id == info.city_id)
+                                                    ? `${Lang('public.city_sh')}: ${needles.city.find(item => item.id == info.city_id)?.name_fa} - `
                                                     : ""
                                             }
                                             {

@@ -62,14 +62,14 @@ export function Form({id,panel}){
                                 <Radio className="mt-5 border-b-2" 
                                     type="col" label="register" 
                                     refItem={[component, `register_status`]}
-                                    data={needles?.status?.filter(item => item.group_id === 11)} 
+                                    data={needles?.status?.filter(item => item.group_id == 11)} 
                                     valueKey="code" titleKey={"title_"+local}  
                                     key={"register_status"+data?.register_status}
                                 />
                                 <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status} type="col" label="report" 
                                     
                                     refItem={[component, `report_status`]}
-                                    data={needles?.status?.filter(item => item.group_id === 8)} valueKey="code" 
+                                    data={needles?.status?.filter(item => item.group_id == 8)} valueKey="code" 
                                     titleKey={"title_"+local}  
                                     key={"report_status"+data?.report_status}
                                 />

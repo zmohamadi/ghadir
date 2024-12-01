@@ -60,7 +60,7 @@ export function Form({id,panel,access}){
     const [starRating, setStarRating] = useState(data?.level_id || 0);
 
     const renderStars = (level) => {
-        if (level === undefined || level === 0) {
+        if (level == undefined || level == 0) {
             level = data?.level_id || 0;
         }
 
@@ -155,7 +155,7 @@ export function Form({id,panel,access}){
                                             </div>
                                         <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
                                             type="col" label="status" refItem={[component, `status_id`]}
-                                            data={needles?.status?.filter(item => item.group_id === 1)} 
+                                            data={needles?.status?.filter(item => item.group_id == 1)} 
                                             valueKey="code" titleKey={"title_"+local}  
                                             key={"status_id"+data?.status_id}
                                         /> 

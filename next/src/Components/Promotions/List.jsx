@@ -140,7 +140,7 @@ export function List({panel,access , query}){
                             onChange={(e) => handleFilterChange(e, "register_status")}
                             className="col-span-5 md:col-span-3"
                             label="register_status"
-                            data={needles?.status?.filter(item => item.group_id === 11)}
+                            data={needles?.status?.filter(item => item.group_id == 11)}
                             titleKey={"title_" + local} valueKey="code"
                         />
                         <Select
@@ -148,7 +148,7 @@ export function List({panel,access , query}){
                             onChange={(e) => handleFilterChange(e, "report_status")}
                             className="col-span-5 md:col-span-3"
                             label="report_status"
-                            data={needles?.status?.filter(item => item.group_id === 8)}
+                            data={needles?.status?.filter(item => item.group_id == 8)}
                             titleKey={"title_" + local} valueKey="code"
                         />
                         
