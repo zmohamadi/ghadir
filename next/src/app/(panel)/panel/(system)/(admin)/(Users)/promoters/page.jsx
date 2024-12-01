@@ -3,7 +3,7 @@ import { List } from "@/Components/Promoters/List";
 import { useAuth } from "@/lib";
 
 export default function page(){
-    const {user} = useAuth();
+    const { user } = useAuth({ guard: "admin" });
     console.log("user");
     console.log(user);
     const panel = user?.role_id == 1 ?  "admin" : "promoter";
