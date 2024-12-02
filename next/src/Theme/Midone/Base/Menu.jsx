@@ -101,7 +101,7 @@ export function Menu({prefix, menus})
         let path;
         menus.map((menu, index) => {
             path = prefix + menu.href;
-            console.log("childs: ", menu.childs?.length);
+            // console.log("childs: ", menu.childs?.length);
             if(!menu.childs?.length) {
                 if(pathname.lastIndexOf(path) == 0) 
                     setActive(index);

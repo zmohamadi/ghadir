@@ -4,8 +4,8 @@ import { useAuth } from "@/lib";
 
 export default function page(){
     const {user} = useAuth();
-    const panel = user?.role_id == 1 ?  "admin" : "promoter";
-    const access = user?.role_id == 1 ?  true : false;
+    const panel = "admin";
+    const access = true;
 
     return(
         <Form panel={panel} access={access} />

@@ -49,7 +49,7 @@ export function Login() {
         </>
     );
 
-    console.log(user); // نمایش user در کنسول
+    // console.log(user); // نمایش user در کنسول
 
     return (
         <>

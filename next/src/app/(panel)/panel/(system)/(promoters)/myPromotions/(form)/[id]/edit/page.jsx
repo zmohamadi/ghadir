@@ -3,8 +3,9 @@ import { Form } from "@/Components/Promotions/Form";
 
 export default function page({params}){
     const panel = "promoter";
-
+    const access = false;
+    
     return(
-        <Form id={params?.id} panel={panel} />
+        <Form access={access} id={params?.id} panel={panel} />
     );
 }
