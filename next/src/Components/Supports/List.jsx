@@ -5,11 +5,11 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { useAuth } from "@/lib/auth";
 
-export function List({panel,access , query}){
-    
-    // var access = panel == "admin";
-    // const {user} = useAuth();
-    const {Lang, local} = useLang();
+export function List(){
+    const {user} = useAuth();
+    const query = user?.role_id == 2 &&`promoter=${user?.id}`;
+    const access = user?.role_id == 1 ?  true : false;
+    const {Lang} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
 

@@ -28,11 +28,11 @@ class PromoterRequest extends FormRequest
          $id = $url[2] ?? null;
      
          $item = [
+             'c_name_0' => 'required',
              'firstname' => 'required',
              'lastname' => 'required',
              'gender_id' => 'required',
              'education_id' => 'required',
-            //  'level_id' => 'required',
              'bank_account_number' => 'required',
              'photo' => 'required',
              'codemeli' => [

@@ -9,8 +9,11 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
+import { useAuth } from "@/lib";
 
-export function View({ id ,panel,access}) {
+export function View({id}) {
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
     const { Lang, local } = useLang();
     const { laraAdmin, mediaPath,nextAdmin } = useConfig();
     const { save,get } = useData();
@@ -35,7 +38,7 @@ export function View({ id ,panel,access}) {
 
 
     let agree ="";
-    if(panel=="promoter") agree = component?.state?.info?.agrees?.[0];
+    if(access) agree = component?.state?.info?.agrees?.[0];
     // console.log(agree);
     // console.log(data?.register_status);
 
@@ -90,7 +93,7 @@ export function View({ id ,panel,access}) {
                                 </div>
                                 {/* Ritual */}
                             
-                                    {panel == "admin" || (data?.register_status !== 1) ? (
+                                    {access || (data?.register_status !== 1) ? (
                                         // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
                                         <>
                                         {data?.rituals?.length>0&&
@@ -137,7 +140,7 @@ export function View({ id ,panel,access}) {
                                 {/* <div className="flex justify-between"> */}
                                     
                                 <div className="lg:col-span-2">
-                                {panel == "admin" || (data?.has_course && data?.register_status !== 1) ? (
+                                {access || (data?.has_course && data?.register_status !== 1) ? (
                                             // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
                                             <>
                                                 <p className="text-sm text-gray-500">{Lang(["public.has_course"])}</p>
@@ -168,7 +171,7 @@ export function View({ id ,panel,access}) {
                                         )}
                                     </div>
                                     <div className="lg:col-span-2">
-                                    {panel == "admin" || (data?.has_tribune && data?.register_status !== 1) ? (
+                                    {access || (data?.has_tribune && data?.register_status !== 1) ? (
                                             // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
                                             <>
                                                 <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
@@ -200,7 +203,7 @@ export function View({ id ,panel,access}) {
                                         )}
                                     </div>
                                     {
-                                        panel=="admin" &&<>
+                                        access &&<>
                                             <div className="lg:col-span-2">
 
                                             <p className="text-sm text-gray-500">{Lang(["public.register_status"])} : </p>
@@ -303,11 +306,11 @@ export function View({ id ,panel,access}) {
                 agree ? (
                     <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
                 ) : (
-                    (data?.register_status == 1 && panel == "promoter") && 
+                    (data?.register_status == 1 && !access) && 
                     <Button label="register" onClick={saveItem} />
                 )
             }
-            {data?.report_status == 1 && panel=="promoter" && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new`}>{Lang('public.report')}</Link>}
+            {data?.report_status == 1 && !access && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new`}>{Lang('public.report')}</Link>}
             <Button label="back" onClick={back} />
         </ButtonContainer>
         

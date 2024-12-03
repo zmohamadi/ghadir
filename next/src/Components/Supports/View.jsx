@@ -4,8 +4,11 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Frame, useData, useFormRefs } from "@/Theme/Midone/Forms";
 import { Loading } from "@/Theme/Midone/Utils/Loading";
+import { useAuth } from "@/lib";
 
-export function View({ id,panel,access }) {
+export function View({ id }) {
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
     const { Lang } = useLang();
     const { laraAdmin } = useConfig();
     const { get } = useData();
@@ -47,7 +50,7 @@ export function View({ id,panel,access }) {
                             <h2 className="text-lg font-medium text-gray-700">{data?.amount || "-"}</h2>
                         </div>
 
-                        {panel=="admin"&&<>
+                        {access&&<>
                             {/* Included Users */}
                             <div className="lg:col-span-2">
                                 <p className="text-sm text-gray-500">{Lang(["public.included_users"])}</p>

@@ -1,10 +1,8 @@
 "use client";
 
-import { useLang } from "@/lib";
 import {Textarea } from "@/Theme/Midone/Forms";
 
 export function Notes({ index, parent, addIcon, closeIcon,needles }) {
-    const { Lang,local } = useLang();
     const note = parent?.state?.info?.notes?.[index];
 
     return (

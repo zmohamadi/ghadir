@@ -6,9 +6,12 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
+import { useAuth } from "@/lib";
 
-export function List({panel,access , query}){
-
+export function List(){
+    const {user} = useAuth();
+    const query = user?.role_id == 2 &&`promoter=${user?.id}`;
+    const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
@@ -97,7 +100,7 @@ export function List({panel,access , query}){
     return(
         <>
             <Frame title={Lang(["public.reports"])}>
-            {panel=="admin"&&<>
+            {access&&<>
                     <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
                         <Select
                             defaultValue={params.status}

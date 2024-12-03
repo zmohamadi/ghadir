@@ -5,7 +5,6 @@ import { useConfig } from "@/lib/config";
 import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
 import { useRouter } from 'next/navigation';
@@ -16,15 +15,18 @@ import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export function Form({id,panel,access,query}){
-    const link = "/promoters";
+export function Form({id}){
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
+    const query = `?promoter=${user?.id}`;
+    // console.log(query);
+    const link =access ? "/promoters" :"/promoters"+query ;
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
     const router = useRouter();
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    const {user} = useAuth();
     // console.log(user);
     
     let uploadUrl = laraAdmin+"/upload/.-media-users";
@@ -32,13 +34,14 @@ export function Form({id,panel,access,query}){
     let uploadDir = 'media/users/';
     
     // اگر روت پروفایل باشد، از user.id استفاده می‌شود
-    let finalId = panel=="admin" ? user?.id : id;
-    let url = laraAdmin + link;
+    let finalId = !access ? user?.id : id;
+    
+    let url = laraAdmin + "/promoters";
     let method = "new";
-    let nextUrl = panel =="admin" ? link : "/";
+    let nextUrl = access? link : "/";
     
     if (finalId !== 0 && finalId !== undefined) {
-        url = `${laraAdmin + link}/${finalId}`;
+        url = `${laraAdmin + "/promoters"}/${finalId}`;
         method = "edit";
     }
 
@@ -83,14 +86,9 @@ export function Form({id,panel,access,query}){
         }
         return stars;
     };
-    // console.log(component?.state);
-
-
     const handleStarClick = (rating) => {
         setStarRating(rating);
     };
-
-    // console.log(data?.is_not_citizen);
 
     return(
         

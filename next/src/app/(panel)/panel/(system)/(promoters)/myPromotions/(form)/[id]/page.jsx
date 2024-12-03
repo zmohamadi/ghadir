@@ -9,9 +9,7 @@ export default function View({params}){
     const {laraAdmin,mediaPath } = useConfig();
     const {Lang,local} = useLang();
     const { getRelation } = useUtility();
-    const formUrl = "/promoters"; 
     const title = "personnel" ; 
-    // let id = params.id , url = laraAdmin+formUrl+"/"+id;
     let id = params.id , url = `${laraAdmin}/users/${id}`;
     let component = useFormRefs();
     let {get} = useData();

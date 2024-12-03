@@ -6,7 +6,7 @@ import { useMemo } from "react";
 export function TabList({children, active, href, title, items = []}){
     const errorCount = useMemo(()=>{
         let count = 0;
-        let [component, elements] = items;
+        let [component, elements,repeatCount] = items;
         elements?.map(elem => {
             component?.state?.errors[elem] && count++;
         });

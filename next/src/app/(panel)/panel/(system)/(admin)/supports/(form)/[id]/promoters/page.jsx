@@ -2,12 +2,11 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
-import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
+import { Grid, Frame, Pic } from "@/Theme/Midone/Utils";
 import Link from "next/link";
-import { ButtonContainer } from "@/Theme/Midone";
 
 export default function List({params}){
-    const {Lang, local} = useLang();
+    const {Lang} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
     let support= params?.id ;

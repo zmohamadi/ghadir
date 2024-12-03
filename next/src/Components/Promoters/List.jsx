@@ -7,8 +7,12 @@ import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
 import Link from "next/link";
+import { useAuth } from "@/lib";
 
-export function List({ panel, access, query }) {
+export function List() {
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
+    const query = user?.role_id == 2 &&`promoter=${user?.id}`;
     // استفاده از context ها و متغیرهای پیکربندی
     const { Lang, local } = useLang();
     const { mediaPath, laraAdmin, nextAdmin } = useConfig();
@@ -161,7 +165,7 @@ export function List({ panel, access, query }) {
     return (
         <>
             <Frame title={Lang(["public.promoters"])}>
-                {panel === "admin" && (
+                {access && (
                     <>
                         {/* فیلترهای مربوط به استان، شهر و جنسیت */}
                         <Box shadow={false} minIcon={true} min={true} cols="grid-cols-10">

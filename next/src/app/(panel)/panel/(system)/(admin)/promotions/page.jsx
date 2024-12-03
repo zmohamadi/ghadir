@@ -5,11 +5,7 @@ import { useAuth } from "@/lib";
 
 export default function Page() {
     const {user} = useAuth();
-    const panel = user?.role_id == 1 ?  "admin" : "promoter";
-    const access = user?.role_id == 1 ?  true : false;
-
     const query = user?.role_id == 2 &&`register_status=1`;
 
-
-    return <List panel={panel} query={query} access={access} />;
+    return <List query={query} />;
 }

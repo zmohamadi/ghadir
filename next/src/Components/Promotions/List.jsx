@@ -6,8 +6,11 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
+import { useAuth } from "@/lib";
 
-export function List({panel,access , query}){
+export function List({query}) {
+    const { user } = useAuth();
+    const access = user?.role_id == 1 ? true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
@@ -16,8 +19,6 @@ export function List({panel,access , query}){
     const [ url, setUrl ] = useState(`${laraAdmin}/promotions?${query}`);
     const effectRan = useRef(false);
     const formUrl = nextAdmin+"/promotions";
-    // const url = `${laraAdmin}/promotions?${query}`;
-    // const formUrl = "/promotions";
 
     useEffect(() => {
         if (!effectRan.current) {

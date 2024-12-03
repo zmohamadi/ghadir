@@ -2,10 +2,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
 import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { useRouter } from "next/navigation";
 import { Course } from "./Course";
@@ -13,8 +11,11 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 import { Select } from "@/Theme/Midone/Forms/Select";
+import { useAuth } from "@/lib";
 
-export function Form({ id, panel,access,user="" }) {
+export function Form({ id,promoter="" }) {
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
     const link = "/reports";
     const { Lang, local } = useLang();
     const { laraAdmin } = useConfig();
@@ -31,8 +32,7 @@ export function Form({ id, panel,access,user="" }) {
 
     const url = id != 0 && id != undefined ? `${laraAdmin}${link}/${id}` : `${laraAdmin}${link}`;
     const method = id != 0 && id != undefined ? "edit" : "new";
-    const nextUrl = panel=="admin"  ? "/reports" : "/myReports";
-// console.log(panel);
+    const nextUrl = access  ? "/reports" : "/myReports";
 
     useEffect(() => {
         if (!fetchNeedlesRef.current) {
@@ -49,7 +49,6 @@ export function Form({ id, panel,access,user="" }) {
     const saveItem = () => save(url, component, method, nextUrl);
     const back = () => router.back();
     const data = component?.state?.info;
-// console.log(component?.state?.info?.courses?.length);
 
     const otherProps = component?.state?.info?.courses?.length
         ? { count_data: component.state.info.courses.length }
@@ -60,30 +59,27 @@ export function Form({ id, panel,access,user="" }) {
     const otherProps3 = component?.state?.info?.ritual_reports?.length
         ? { count_data: component.state.info.ritual_reports.length }
         : {};
-console.log(panel);
-
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
-                <Input label="promoter_id" type="hidden" defaultValue={panel=="admin" ? data?.promoter_id : user} refItem={[component, `promoter_id`]} /> 
+                <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} /> 
 
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>
                 <Tab className="col-span-12">
                     <TabHeader>
-                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}>
-                            {Lang("public.select_promotion")}
-                        </TabList>
-                        <TabList href="tab-second" title={Lang("public.courses")}>
-                            {Lang("public.courses")}
-                        </TabList>
-                        <TabList href="tab-third" title={Lang("public.tribunes")}>
-                            {Lang("public.tribunes")}
-                        </TabList>
-                        <TabList href="tab-fourth" title={Lang("public.ritual")}>
-                            {Lang("public.ritual")}
-                        </TabList>
+                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}/>
+                        <TabList href="tab-second" title={Lang("public.courses")} 
+                            items = {[component, ['c_subject_','c_people_count_','c_duration_','c_province_','c_city_id_', 
+                            'c_city_','c_village_'],component?.state?.info?.courses?.length]} />
+                        <TabList href="tab-third" title={Lang("public.tribunes")}  
+                        items = {[component, ['tr_subject_','tr_people_count_','tr_duration_','tr_province_','tr_city_id_', 
+                            'tr_city_','tr_village_'],component?.state?.info?.tribunes?.length]}/>
+                        <TabList href="tab-fourth" title={Lang("public.ritual")}
+                        items = {[component, ['r_province_','r_city_id_', 
+                            'r_city_','r_village_','ritual_id_'],component?.state?.info?.ritual_reports?.length]}
+                        />
                     </TabHeader>
                     <TabBody>
                         <TabPanel id="tab-first" active={"true"}>
@@ -95,7 +91,7 @@ console.log(panel);
                             />
                             <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
                             {
-                                panel=="admin" &&<>
+                                access &&<>
                                 <Input label="score" refItem={[component, `level_id`]} /> 
                                 <Radio
                                     type="col" 

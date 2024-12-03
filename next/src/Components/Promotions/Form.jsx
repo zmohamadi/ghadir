@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/lib/auth";
-import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame, Radio, CheckBox } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea, Radio, CheckBox } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 import { Loading } from "@/Theme/Midone";
 
-export function Form({id,panel}){
+export function Form({id}){
     const link = "/promotions";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
