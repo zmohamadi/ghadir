@@ -210,7 +210,7 @@ return [
     |
     */
 
-    'attributes' => [
+    'attributes' =>  array_merge([
         'name'                    => 'نام',
         'lname'                   => 'نام خانوادگی',
         'username'                => 'نام کاربری',
@@ -311,5 +311,38 @@ return [
         'bank_account_number'=>'شماره حساب بانکی',
         'promotion_id'=>'مامورتیهای تبلیفی',
         'type_id'=>'نوع',
+        'people_count' => 'تعداد مخاطب',
     ],
+        collect(range(0, 100))->mapWithKeys(function ($index) {
+            return [
+                "r_ritual_id_$index" => 'شعائر',
+
+                "c_village_$index" => 'روستا',
+                "tr_village_$index" => 'روستا',
+                "r_village_$index" => 'روستا',
+
+                "c_city_$index" => 'شهر',
+                "tr_city_$index" => 'شهر',
+                "r_city_$index" =>'شهر',
+
+                "c_city_id_$index" => 'شهرستان',
+                "tr_city_id_$index" => 'شهرستان',
+                "r_city_id_$index" => 'شهرستان',
+
+                "c_province_$index" => 'استان',
+                "tr_province_$index" => 'استان',
+                "r_province_$index" => 'استان',
+
+                "c_duration_$index" => 'مدت زمان',
+                "tr_duration_$index" => 'مدت زمان',
+
+                "c_people_count_$index" => 'تعداد مخاطب',
+                "tr_people_count_$index" => 'تعداد مخاطب',
+
+                "c_subject_$index" => 'موضوع',
+                "tr_subject_$index" => 'موضوع',
+            ];
+        })->toArray()
+    ),
+
 ];

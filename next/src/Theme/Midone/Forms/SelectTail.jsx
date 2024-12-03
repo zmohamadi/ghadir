@@ -3,6 +3,7 @@
 import {useEffect, useState} from 'react';
 import {Tools} from '../Utils/Tools';
 import {useFormElement} from './Element';
+import { useLang } from '@/lib';
 
 const SelectTail = (props)=>{      
 
@@ -98,6 +99,7 @@ const SelectTail = (props)=>{
         state.instance?.reload();
         Element.removeError();
     }, [refItem[0].state.info, defaultValue])
+    const {Lang} = useLang();
 
     return(
         <div className={className?className+' mb-3':' mb-3 col-span-12 md:col-span-6'} >
@@ -110,6 +112,7 @@ const SelectTail = (props)=>{
                 multiple={Boolean(multiple)}
             >
                 { children }
+                <option value="" >{Lang('public.select_option')}</option>
                 {
                     Tools.getArray(data).map((item, key)=><option key={key} value={item[valueKey]}>{item[titleKey]}</option>)
                 }
