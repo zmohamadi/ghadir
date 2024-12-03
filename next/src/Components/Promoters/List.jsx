@@ -171,7 +171,7 @@ export function List({ panel, access, query }) {
                                 titleKey={`name_${local}`}
                                 className="col-span-2"
                                 onChange={(e) => {
-                                    console.log(e.target.value); // مقدار انتخاب‌شده را چاپ کنید
+                                    // console.log(e.target.value); // مقدار انتخاب‌شده را چاپ کنید
                                     handleFilterChange(e, "province");
                                     setProvinceId(e.target.value); // تنظیم ID استان
                                 }}

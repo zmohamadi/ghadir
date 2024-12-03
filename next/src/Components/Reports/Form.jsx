@@ -14,7 +14,7 @@ import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export function Form({ id, panel }) {
+export function Form({ id, panel,access,user="" }) {
     const link = "/reports";
     const { Lang, local } = useLang();
     const { laraAdmin } = useConfig();
@@ -60,11 +60,12 @@ export function Form({ id, panel }) {
     const otherProps3 = component?.state?.info?.ritual_reports?.length
         ? { count_data: component.state.info.ritual_reports.length }
         : {};
+console.log(panel);
 
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
-                <Input label="promoter_id" type="hidden" defaultValue={panel=="admin" ? data?.promoter_id : user?.id} refItem={[component, `promoter_id`]} /> 
+                <Input label="promoter_id" type="hidden" defaultValue={panel=="admin" ? data?.promoter_id : user} refItem={[component, `promoter_id`]} /> 
 
             {(data==undefined || needles==null)?
                     <Loading />
