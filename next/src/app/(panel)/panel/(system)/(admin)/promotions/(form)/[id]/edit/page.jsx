@@ -1,5 +1,6 @@
 "use client";
 import { Form } from "@/Components/Promotions/Form";
+import { useAuth } from "@/lib";
 
 export default function page({params}){
     const {user} = useAuth();

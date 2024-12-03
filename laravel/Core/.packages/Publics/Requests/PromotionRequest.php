@@ -26,7 +26,7 @@ class PromotionRequest extends FormRequest
      
          $item = [
             'title' => 'required',
-            'year' => 'required|int',
+            'year' => 'required|digits:4|integer',
             'comments' => 'required',
             'photo' => 'required',
             // 'register_status' => 'required',

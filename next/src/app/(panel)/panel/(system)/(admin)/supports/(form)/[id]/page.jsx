@@ -1,5 +1,6 @@
 "use client";
 import { View } from "@/Components/Supports/View";
+import { useAuth } from "@/lib";
 
 export default function page({params}){
     const {user} = useAuth();

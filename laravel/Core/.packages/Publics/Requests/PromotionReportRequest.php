@@ -23,7 +23,9 @@ class PromotionReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-          "promotion_id"=>'required'
+          "promotion_id"=>'required',
+          'c_people_count' => 'nullable|integer',
+          'tr_people_count' => 'nullable|integer',
         ];
     }
 }
