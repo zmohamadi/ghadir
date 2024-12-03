@@ -28,12 +28,12 @@ const SelectTail = (props)=>{
         return window?.tail?.select('#'+id, {
         // tail('#'+id, {
             animate: true,              // [0.3.0]      Boolean
-            classNames: className,           // [0.2.0]      Boolean, String, Array, null
+            classNames: className,      // [0.2.0]      Boolean, String, Array, null
             csvOutput: false,           // [0.3.4]      Boolean
             csvSeparator: ',',          // [0.3.4]      String
-            descriptions: true,        // [0.3.0]      Boolean
+            descriptions: true,         // [0.3.0]      Boolean
             deselect: false,            // [0.3.0]      Boolean
-            disabled: disabled,            // [0.5.0]      Boolean
+            disabled: disabled,         // [0.5.0]      Boolean
             height: 350,                // [0.2.0]      Integer, null
             hideDisabled: false,        // [0.3.0]      Boolean
             hideSelected: false,        // [0.3.0]      Boolean
@@ -54,7 +54,7 @@ const SelectTail = (props)=>{
             multiShowLimit: false,      // [0.5.0]      Boolean
             multiSelectAll: true,       // [0.4.0]      Boolean
             multiSelectGroup: true,     // [0.4.0]      Boolean
-            openAbove: false,            // [0.3.0]      Boolean, null
+            openAbove: false,           // [0.3.0]      Boolean, null
             // placeholder: placeholder?placeholder:'انتخاب گزینه',   // [0.2.0]      String, null
             search: search?search:true,               // [0.3.0]      Boolean
             searchConfig: [             // [0.5.13]     Array

@@ -66,7 +66,7 @@ export function Input(props) {
         <div className={className || "mb-3 col-span-12 md:col-span-6"}>
             <label htmlFor={id} className="form-label font-bold">{label} {requiredDiv}</label>
             <input
-                dir={dir || 'rtl'}
+                dir = {dir || 'rtl'}
                 className={inputClassName ? inputClassName + " form-control" : "form-control"}
                 id={id}
                 name={name}
