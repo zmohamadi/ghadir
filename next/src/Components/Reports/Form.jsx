@@ -60,6 +60,7 @@ export function Form({ id, panel,access,user="" }) {
     const otherProps3 = component?.state?.info?.ritual_reports?.length
         ? { count_data: component.state.info.ritual_reports.length }
         : {};
+console.log(panel);
 
     return (
         <>

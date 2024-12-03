@@ -3,9 +3,10 @@ import { Form } from "@/Components/Reports/Form";
 import { useAuth } from "@/lib";
 
 export default function page({params}){
-    const panel = "promoter";
     const {user} = useAuth();
-    const access = false;
+    const panel = user?.role_id == 1 ?  "admin" : "promoter";
+    const access = user?.role_id == 1 ?  true : false;
+    
     return(
         <Form access={access} user={user?.id} id={params?.id} panel={panel} />
     );
