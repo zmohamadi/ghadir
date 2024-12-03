@@ -44,6 +44,11 @@ class BlogController extends BaseAbstract
         else
         {    
             $comments = BlogComment::where("blog_id",$item->id)->ParentComment()->Confirmed()->active()->with("confirmStatus","creator","editor","confirmer","childs.confirmer","childs.confirmStatus","childs.creator","childs.editor")->get();
+            // $comments = BlogComment::where("blog_id",$item->id)->ParentComment()->Confirmed()->active()
+            //     ->with(["confirmStatus","creator","editor","confirmer",
+            //             "childs"=>function($q){ $q->Confirmed()->active()->with("confirmer","confirmStatus","creator","editor"); }
+            //         ])
+            //     ->get();
             $waiting_comments = BlogComment::where("blog_id",$item->id)->Waiting()->active()->with("creator","editor")->get();
         }
         $data = [
