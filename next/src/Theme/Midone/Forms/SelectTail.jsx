@@ -33,7 +33,7 @@ const SelectTail = (props)=>{
             csvOutput: false,           // [0.3.4]      Boolean
             csvSeparator: ',',          // [0.3.4]      String
             descriptions: true,         // [0.3.0]      Boolean
-            deselect: false,            // [0.3.0]      Boolean
+            deselect: true,            // [0.3.0]      Boolean
             disabled: disabled,         // [0.5.0]      Boolean
             height: 350,                // [0.2.0]      Integer, null
             hideDisabled: false,        // [0.3.0]      Boolean
@@ -57,6 +57,7 @@ const SelectTail = (props)=>{
             multiSelectGroup: true,     // [0.4.0]      Boolean
             openAbove: false,           // [0.3.0]      Boolean, null
             // placeholder: placeholder?placeholder:'انتخاب گزینه',   // [0.2.0]      String, null
+            placeholder: 'انتخاب گزینه',   // [0.2.0]      String, null
             search: search?search:true,               // [0.3.0]      Boolean
             searchConfig: [             // [0.5.13]     Array
                 'text', 'value'
@@ -112,7 +113,8 @@ const SelectTail = (props)=>{
                 multiple={Boolean(multiple)}
             >
                 { children }
-                <option value="" >{Lang('public.select_option')}</option>
+                { placeholder !== false && <option value="" >{Lang('public.select_option')}</option>}
+                {/* <option value="" >{Lang('public.select_option')}</option> */}
                 {
                     Tools.getArray(data).map((item, key)=><option key={key} value={item[valueKey]}>{item[titleKey]}</option>)
                 }

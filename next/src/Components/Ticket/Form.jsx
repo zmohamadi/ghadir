@@ -43,8 +43,10 @@ export default function Form(){
                             <Line/>
                             <Select label="subject" data={needles?.subject} titleKey={"title_"+local} required="true"
                                 refItem={[component, "subject_id"]} defaultValue={(data?.subject_id==undefined)? "" : data?.subject_id} />
-                            <Select label="check_priority" data={(needles?.statuses	)?.filter(priority=>priority.group_id==24)} titleKey={"title_"+local} valueKey="code" required="true"
-                                refItem={[component, "priority_status_id"]} defaultValue={(data?.priority_status_id==undefined)? "" : data?.priority_status_id} />
+                            <SelectTail label="check_priority" data={(needles?.statuses	)?.filter(priority=>priority.group_id==24)} titleKey={"title_"+local} valueKey="code" required="true"
+                                refItem={[component, "priority_status_id"]} 
+                                // defaultValue={(data?.priority_status_id==undefined)? "" : data?.priority_status_id} 
+                            />
                             <Textarea label="ticket_text" refItem={[component, "text"]} required="true" />
                             <Dropzone label="media" refItem={[component, "media"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} maxFiles="50"
                                 help = {Lang("public.accept_format")+": png,jpg,tif,gif,jpeg,WebP,AVIF,jfif,pdf,doc,docx,ppt"}

@@ -95,18 +95,20 @@ export function Form({id,panel,access,query}){
     return(
         
             <>
-                <Frame title={Lang(["public.promoter"])}>
+                <Frame title={Lang(["promoter"])}>
                 {(data==undefined || needles==null)?
                     <Loading className="mt-5" />
                 :<>
                     <Tab className="col-span-12">
                         <TabHeader>
-                            <TabList href="tab-first" title={Lang('public.personal_info')} active={"true"}>{Lang("public.personal_info")}</TabList>
-                            <TabList href="tab-second" title={Lang('public.promotion_info')}>{Lang("public.promotion_info")}</TabList>
-                            <TabList href="tab-third" title={Lang('public.cultural_users')}>{Lang("public.cultural_users")}</TabList>
+                            <TabList href="tab-first" title={Lang('personal_info')} active={"true"} 
+                                items = {[component, ['firstname', 'lastname', 'mobile', 'is_not_citizen', 'codemeli', 
+                                        'khadamat_code', 'tablighat_office_code', 'tablighat_organization_code']]}  />
+                            <TabList href="tab-second" title={Lang('promotion_info')} />
+                            <TabList href="tab-third" title={Lang('cultural_users')} />
                             {user?.role_id==1 &&<>
-                                <TabList href="tab-fourth" title={Lang('public.notes')}>{Lang("public.notes")}</TabList>
-                                <TabList href="tab-notif" title={Lang('public.notif')}>{Lang("public.notif")}</TabList>
+                                <TabList href="tab-fourth" title={Lang('notes')} />
+                                <TabList href="tab-notif" title={Lang('notif')} />
                             </>
                             }
                         </TabHeader>
@@ -119,8 +121,8 @@ export function Form({id,panel,access,query}){
                                     defaultValue={data?.is_not_citizen == false ? 0 : 1} 
                                 className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
-                                    <option value="0">{Lang('public.im_citizen')}</option>
-                                    <option value="1">{Lang('public.not_citizen')}</option>
+                                    <option value="0">{Lang('im_citizen')}</option>
+                                    <option value="1">{Lang('not_citizen')}</option>
                                 </Select>
                                 <Input dir="ltr" className="col-span-4" label="codemeli" refItem={[component, "codemeli"]} />
                                 <Input className="col-span-4" dir="ltr" label="khadamat_code" refItem={[component, "khadamat_code"]}  />
@@ -150,7 +152,7 @@ export function Form({id,panel,access,query}){
                                      user?.role_id==1 && <>
                                         <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
                                         <div className="col-span-4">
-                                                <label>{Lang("public.star")}</label>
+                                                <label>{Lang("star")}</label>
                                                 <div className="flex space-x-1">{renderStars(starRating)}</div>
                                             </div>
                                         <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
