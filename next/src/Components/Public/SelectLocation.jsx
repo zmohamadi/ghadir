@@ -10,11 +10,15 @@ export function SelectLocation({
     classNameProvince = "col-span-6",
     classNameCitySh = "col-span-6",
     refProvince = "province_id",
+    lProvince = "province",
     refCitySh = "city_id",
+    lCitySh = "city_sh",
     classNameCity = "col-span-6",
     classNameVillage = "col-span-6",
     refCity = "city",
+    lCity = "city",
     refVillage = "village",
+    lVillage = "village",
 }) {
     const [provinceId, setProvinceId] = useState(null);
 
@@ -31,9 +35,9 @@ export function SelectLocation({
     return (
         <>
             <SelectTail
-                defaultValue={data?.city_id ? data?.province_id : provinceId}
+                defaultValue={data?.province_id ? data?.province_id : provinceId}
                 className={classNameProvince}
-                label="province"
+                label={lProvince}
                 refItem={[component, refProvince]}
                 key={"province" + (needles?.province?.length || 0)}
                 data={needles?.province || []}
@@ -42,7 +46,7 @@ export function SelectLocation({
             />
             <SelectTail
                 className={classNameCitySh}
-                label="city_sh"
+                label={lCitySh}
                 refItem={[component, refCitySh]}
                 key={"city" + (provinceId || 0)}
                 data={
@@ -55,13 +59,13 @@ export function SelectLocation({
             />
             <Input
                 className={classNameCity}
-                label="city"
+                label={lCity}
                 refItem={[component, refCity]}
                 defaultValue={data?.city}
             />
             <Input
                 className={classNameVillage}
-                label="village"
+                label={lVillage}
                 refItem={[component, refVillage]}
                 defaultValue={data?.village}
             />

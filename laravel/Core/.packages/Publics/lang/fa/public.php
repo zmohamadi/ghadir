@@ -11,13 +11,17 @@ $lang = [
    'bank_account_number'=>"شماره حساب شبا (ترجیحا ملی)",
    'postal_code'=>'کدپستی',
    'province'=>'استان',
+   'life_province'=>'استان(محل سکونت)',
    'city'=>'شهر',
+   'life_city'=>'شهر(محل سکونت)',
    'village'=>'روستا',
+   'life_village'=>'روستا(محل سکونت)',
    'address'=>'آدرس',
    'level'=>'سطح',
    'education'=>'تحصیلات',
    'citizen'=>'تابعیت',
    'city_sh'=>'شهرستان',
+   'life_city_sh'=>'شهرستان(محل سکونت)',
    'photo'=>'عکس',
    'promoter'=>'مبلّغ',
    'star'=>'امتیاز',
@@ -119,6 +123,10 @@ $lang = [
    'search_promoter_for_new_support'=>'برای سرچ میتوانید وارد کنید : نام  یا نام خانوادگی یا شماره موبایل',
    'notif'=>'اطلاعیه',
    'save_score'=>'ثبت امتیاز',
+   'rank'=>'رتبه',
+   'native_city'=>'شهر(بومی)',
+   'native_province'=>'استان(بومی)',
+   
 ];
 
 $menus = include(__DIR__.'/./menus.php');

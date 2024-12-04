@@ -23,7 +23,7 @@ export function Course({ index, parent, addIcon, closeIcon,needles }) {
                     refProvince={`c_province_${index}`} refCitySh={`c_city_id_${index}`} 
                     refCity={`c_city_${index}`} refVillage={`c_village_${index}`} 
                 />
-            <div className="col-span-12 flex justify-start items-start border-b-2">
+            <div className="col-span-12 flex justify-start items-start border-b-4">
                 {addIcon}
             </div>
     </>

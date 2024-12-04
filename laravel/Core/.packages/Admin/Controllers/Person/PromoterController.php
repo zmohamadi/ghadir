@@ -77,12 +77,12 @@ class PromoterController extends BaseAbstract
             $cusers = $this->getRepeatValues(['c_name', 'c_family', 'c_phone', 'c_gender_id', 'c_comments', 'c_job_position']);
             foreach ($cusers as $value) {
                 $culturalUsers[] = [
-                    'name' => $value['c_name'],
-                    'family' => $value['c_family'] ,
-                    'phone' => $value['c_phone'] ,
-                    'job_position' => $value['c_job_position'] ,
-                    'gender_id' => $value['c_gender_id'] ,
-                    'comments' => $value['c_comments'] ,
+                    'name' => $value['c_name'] ?? null,
+                    'family' => $value['c_family'] ?? null,
+                    'phone' => $value['c_phone']?? null ,
+                    'job_position' => $value['c_job_position'] ?? null,
+                    'gender_id' => $value['c_gender_id']?? null ,
+                    'comments' => $value['c_comments'] ?? null,
                     'promoter_id' => $query->id,
                 ];
             }
@@ -99,12 +99,12 @@ class PromoterController extends BaseAbstract
             $positions = $this->getRepeatValues(['pos_province', 'pos_city_id', 'pos_city', 'pos_village', 'promotion_position', 'place_name']);
             foreach ($positions as $value) {
                 $positionsArray[] = [
-                    'city_id' => $value['pos_city_id'] ,
-                    'province_id' => $value['pos_province'] ,
-                    'city' => $value['pos_city'] ,
-                    'village' => $value['pos_village'] ,
-                    'position_id' => $value['promotion_position'] ,
-                    'place_name' => $value['place_name'] ,
+                    'city_id' => $value['pos_city_id'] ?? null ,
+                    'province_id' => $value['pos_province'] ?? null,
+                    'city' => $value['pos_city']?? null ,
+                    'village' => $value['pos_village'] ?? null,
+                    'position_id' => $value['promotion_position'] ?? null,
+                    'place_name' => $value['place_name']?? null ,
                     'promoter_id' => $query->id,
                 ];
             }

@@ -24,7 +24,7 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                 refProvince={`tr_province_${index}`} refCitySh={`tr_city_id_${index}`} 
                 refCity={`tr_city_${index}`} refVillage={`tr_village_${index}`} 
                 />
-            <div className="col-span-12 flex justify-start items-start border-b-2">
+            <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>
     </>

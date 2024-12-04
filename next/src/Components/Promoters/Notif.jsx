@@ -12,7 +12,7 @@ export function Notif({ index, parent, addIcon, closeIcon }) {
             </div>
                 <Textarea className="col-span-12" label="description" refItem={[parent, `notif_${index}`]} defaultValue={notif?.content}  />
             
-            <div className="col-span-12 flex justify-start items-start">
+            <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>
         </>

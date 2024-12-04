@@ -25,7 +25,7 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                     classNameVillage="col-span-4"
                 />
                 <Input className="col-span-4" label="place_name" refItem={[parent, `r_place_name_${index}`]} defaultValue={info?.place_name}  />            
-            <div className="col-span-12 flex justify-start items-start border-b-2">
+            <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>
     </>

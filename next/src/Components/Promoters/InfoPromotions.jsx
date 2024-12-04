@@ -23,7 +23,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon,needles }) {
                     refCity={`pos_city_${index}`} refVillage={`pos_village_${index}`} 
                     />
             
-            <div className="col-span-12 flex justify-start items-start">
+            <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>
     </>
