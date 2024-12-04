@@ -129,15 +129,13 @@ export function Form({id}){
                                 <Input className="col-span-4" dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]}  />
                                 <Input className="col-span-4" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
                                 <Select className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
+                                <Input className="col-span-4" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
                                 <SelectLocation 
-                                    classNameProvince="col-span-4" 
+                                    classNameProvince="col-span-3" 
                                     classNameCitySh="col-span-3"
                                     classNameCity="col-span-3"
                                     classNameVillage="col-span-3"
                                     needles={needles} component={component} data={data} />
-                               
-                                
-                                <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
 
                                 <Textarea label="address" refItem={[component, "address"]}  />
                                 <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
