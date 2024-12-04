@@ -18,7 +18,7 @@ class PromotionReportController extends BaseAbstract
     protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
     "courses.audienceType","ritualReports.ritual","confirmRepo"];
     protected $files = ["photo"];
-    protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
+    protected $needles = ["Person\Promoter",'Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
 
 
     public function init()
@@ -33,6 +33,11 @@ class PromotionReportController extends BaseAbstract
                 $status = request()->status;
                 $query->where('confirm_id', $status);
             };
+            // if(request()->promoter != null)
+            // {
+            //     $promoter = request()->promoter;
+            //     $query->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+            // }
         };
 
         $this->storeQuery = function ($query) {

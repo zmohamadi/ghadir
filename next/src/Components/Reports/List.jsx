@@ -5,7 +5,7 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
-import { Box, Button, ButtonContainer } from "@/Theme/Midone";
+import { Box, Button, ButtonContainer, Input } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
 
 export function List(){
@@ -16,7 +16,7 @@ export function List(){
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
     const [ needles, setNeedles ] = useState();
-    const [ params, setParams ] = useState({ status: ""});
+    const [ params, setParams ] = useState({ status: "",promoter:""});
     const [ url, setUrl ] = useState(`${laraAdmin}/reports?${query}`);
     const effectRan = useRef(false);
     const formUrl = nextAdmin+"/reports";
@@ -47,11 +47,11 @@ export function List(){
       };
     
       const clearFilter = () => {
-        setParams({ status: "" });
+        setParams({ status: "",promoter:"" });
       };
 
     let info = {
-        insertLink: !access && `${formUrl}/new`,
+        insertLink:`${formUrl}/new`,
         perPage:20,
         url: url,
         columns: [
@@ -102,6 +102,9 @@ export function List(){
             <Frame title={Lang(["public.reports"])}>
             {access&&<>
                     <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
+                        {/* <Input label="promoter" className="col-span-3 md:col-span-3" defaultValue={params.promoter}
+                            onEnter={(e) => handleFilterChange(e, "promoter")} note={Lang("public.filter_ticket_user")}
+                        /> */}
                         <Select
                             defaultValue={params.status}
                             onChange={(e) => handleFilterChange(e, "status")}

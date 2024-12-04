@@ -3,9 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
-import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio } from "@/Theme/Midone/Forms";
+import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio, SelectTail } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Course } from "./Course";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import { Tribune } from "./Tribune";
@@ -13,13 +13,15 @@ import { Ritual } from "./Ritual";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useAuth } from "@/lib";
 
-export function Form({ id,promoter="" }) {
+export function Form({ id}) {
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
     const link = "/reports";
     const { Lang, local } = useLang();
     const { laraAdmin } = useConfig();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const promotion = searchParams.get("promotion"); // گرفتن id از Query Parameters
     const component = useFormRefs();
     const { save, get, getNeedles } = useData();
     const [needles, setNeedles] = useState();
@@ -62,13 +64,14 @@ export function Form({ id,promoter="" }) {
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
-                <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} /> 
+                {/* <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} />  */}
 
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>
                 <Tab className="col-span-12">
                     <TabHeader>
+                        
                         <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}/>
                         <TabList href="tab-second" title={Lang("public.courses")} 
                             items = {[component, ['c_subject_','c_people_count_','c_duration_','c_province_','c_city_id_', 
@@ -83,13 +86,30 @@ export function Form({ id,promoter="" }) {
                     </TabHeader>
                     <TabBody>
                         <TabPanel id="tab-first" active={"true"}>
+                            <SelectTail label="promoter" refItem={[component, "promoter_id"]}>
+                                {
+                                    needles?.promoter
+                                        ?.filter((item) => {
+                                            // اگر access وجود نداشته باشد، فقط user.id نمایش داده شود
+                                            return access || item.id == user?.id;
+                                        })
+                                        ?.map((item, index) => (
+                                            <option key={"p_" + index} value={item?.id}>
+                                                {item?.firstname} {item?.lastname}
+                                            </option>
+                                        ))
+                                }
+                            </SelectTail>
                             <Select
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
                                 required="true"
-                                data={needles?.promotion}
+                                defaultValue={promotion?promotion:data?.promotion_id}
+                                data={needles?.promotion?.filter((item) => 
+                                    item.report_status == 1 && (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
+                                )}
                             />
-                            <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
+
                             {
                                 access &&<>
                                 <Input label="score" refItem={[component, `level_id`]} /> 
@@ -103,6 +123,8 @@ export function Form({ id,promoter="" }) {
                                     /> 
                                 </>
                                 }
+                            <Dropzone className="col-span-12" refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
+
                         </TabPanel>
                         <TabPanel id="tab-second">
                             <Repeat needles={needles} {...otherProps} child={Course} parent={component} />
