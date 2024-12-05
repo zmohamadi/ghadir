@@ -24,20 +24,24 @@ class PromotionReportController extends BaseAbstract
     public function init()
     {
         $this->indexQuery = function ($query) {
-            if(request()->promoter)
-            {
-                $query->where('promoter_id', $this->user_id);
-            };
-            if(request()->status != null)
-            {
-                $status = request()->status;
-                $query->where('confirm_id', $status);
-            };
-            // if(request()->promoter != null)
-            // {
-            //     $promoter = request()->promoter;
-            //     $query->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
-            // }
+            
+            $query->when(request()->promoter_id != null, function ($q) {
+                $q->where('promoter_id', request()->promoter_id);
+            });
+            $query->when(request()->status != null, function ($q) {
+                $q->where('confirm_id', request()->status);
+            });
+            $query->when(request()->promotion != null, function ($q) {
+                $q->where('promotion_id', request()->promotion);
+            });
+            $query->when(request()->promoter != null, function ($q) {
+                $promoter = request()->promoter;
+                $q->whereHas('promoter',function($q) use($promoter)
+                {
+                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+                });
+            });
+          
         };
 
         $this->storeQuery = function ($query) {

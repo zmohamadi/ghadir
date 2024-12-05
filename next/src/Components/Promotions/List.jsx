@@ -7,6 +7,7 @@ import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
+import Link from "next/link";
 
 export function List({query}) {
     const { user } = useAuth();
@@ -65,7 +66,14 @@ export function List({query}) {
                     />
                 ),
             },
-            { label: "title", field: "title" },
+            {
+                label: "title",
+                jsx: (item) => (
+                    <Link href={`${formUrl}/${item.id}`}>
+                        {`${item?.title}`}
+                    </Link>
+                ),
+            },
             { label: "year", field: "year" },
             ...(access ? [
                 { 

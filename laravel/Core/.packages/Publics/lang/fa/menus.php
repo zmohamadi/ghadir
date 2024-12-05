@@ -28,7 +28,9 @@ return [
     'waiting_tickets'=>'تیکت های نیاز به بررسی',
     'waiting_comments'=>'پیام های نیاز به بررسی',
     'myTickets'=>'تیکت های من',
-    'home'=>'صفحه اصلی'
+    'home'=>'صفحه اصلی',
+    'report_agree'=>'ثبت‌نام ها در ماموریت',
+    'report_promotion'=>"گزارشهای ماموریت"
 
 ];
 ?>

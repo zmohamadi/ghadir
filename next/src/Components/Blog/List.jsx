@@ -2,6 +2,7 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Grid,Frame,useData,FeatherIcon,Tools } from "@/Theme/Midone/Utils";
+import Link from "next/link";
 
 export function List({ access }){
     const {local,Lang} = useLang();
@@ -13,7 +14,14 @@ export function List({ access }){
         url: laraAdmin+formUrl,
         columns: [
             {jsx:(item)=><img src={mediaPath+"/blogs/"+item?.thumb} width={100} height={100} alt={item?.image} />},
-            {label: "title", field: "title"},
+            {
+                label: "title",
+                jsx: (item) => (
+                    <Link href={`${nextAdmin}${formUrl}/${item.id}`}>
+                        {`${item?.title}`}
+                    </Link>
+                ),
+            },
             {label: "date", jsx: (item)=><span dir="ltr" className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</span>},
             (access)?{label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>}: "",
             {label: "",

@@ -52,7 +52,7 @@ export function Form({id}){
                         >
                             {
                                 needles?.promoter?.map((item ,index)=>{
-                                    return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname}</option>
+                                    return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
                                 })
                             }
                         </SelectTail>

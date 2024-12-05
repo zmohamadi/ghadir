@@ -41,6 +41,7 @@ $lang = [
    'has_tribune'=>'منبر دارد ؟',
    'has'=>'دارد',
    'ritual'=>'شعائر',
+   'rituals'=>'شعائر',
    'type'=>'نوع',
    'occasion'=>'مناسبت',
    'pack_items'=>'اقلام بسته',
@@ -127,6 +128,7 @@ $lang = [
    'rank'=>'رتبه',
    'native_city'=>'شهر(بومی)',
    'native_province'=>'استان(بومی)',
+   'agrees'=>'ثبت‌نام ها در ماموریت',
    
 ];
 

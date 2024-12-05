@@ -5,6 +5,7 @@ namespace Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Models\Traits\Base;
+use Morilog\Jalali\Jalalian;
 
 class Course extends Model
 {
@@ -16,13 +17,28 @@ class Course extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
-        'deleted_at' => 'timestamp',
-    ];
     public function audienceType()
     {
         return $this->belongsTo(AudienceType::class, 'audiencetype_id');
+    }
+    public function promotion()
+    {
+        return $this->belongsTo(Promotion::class,"promotion_id");
+    }
+    public function promoter()
+    {
+        return $this->belongsTo(\Models\Person\Promoter::class,"promoter_id");
+    }
+    public function province()
+    {
+        return $this->belongsTo(\Models\Base\Province::class,"province_id");
+    }
+    public function citySh()
+    {
+        return $this->belongsTo(\Models\Base\City::class,"province_id");
+    }
+    public function getCreatedAtAttribute($date)
+    {
+        return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
     }
 }

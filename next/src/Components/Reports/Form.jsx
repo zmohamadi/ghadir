@@ -95,7 +95,7 @@ export function Form({ id}) {
                                         })
                                         ?.map((item, index) => (
                                             <option key={"p_" + index} value={item?.id}>
-                                                {item?.firstname} {item?.lastname}
+                                                {item?.firstname} {item?.lastname} - {item?.mobile} 
                                             </option>
                                         ))
                                 }

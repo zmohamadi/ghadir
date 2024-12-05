@@ -12,9 +12,17 @@ Route::resource("supports", "SupportController");
 Route::get("reports/get-needles", "PromotionReportController@getNeedles");
 Route::resource("reports", "PromotionReportController");
 
-// Route::post("agree/{id}", "Person\UserController@changeRole");
 Route::get("agree/get-needles", "PromotionAgreeController@getNeedles");
 Route::resource("agree", "PromotionAgreeController");
+
+Route::get("courses/get-needles", "CourseController@getNeedles");
+Route::resource("courses", "CourseController");
+
+Route::get("rituals/get-needles", "RitualReportController@getNeedles");
+Route::resource("rituals", "RitualReportController");
+
+Route::get("tribunes/get-needles", "TribuneController@getNeedles");
+Route::resource("tribunes", "TribuneController");
 
 Route::get("promotions/get-needles", "PromotionController@getNeedles");
 Route::resource("promotions", "PromotionController");
@@ -23,23 +31,15 @@ Route::get("users/change-status/get-needles", "Person\UserController@changeRoleG
 Route::post("users/change-status/{id}", "Person\UserController@changeRole");
 Route::put("users/change-password", "Person\UserController@changePassword");
 
-// Route::put("users/edit-email/{id}", "Person\UserController@editEmail");
-// Route::get("users/{id}", "Person\UserController@showInfo");
-// Route::get("users/get-needles", "Person\UserController@getNeedles");
-
-
 Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
 Route::resource("promoters", "Person\PromoterController");
 Route::get("personnels/get-needles", "Person\PersonnelController@getNeedles");
 Route::resource("personnels", "Person\PersonnelController");
-// Route::resource("users", "Person\UserController");
-// Route::resource("roles", "Person\RoleController");
 
 // ======================================== Start Routes Content ======================================================
 Route::get("blogs/get-needles", "Content\BlogController@getNeedles");
 Route::get("blogs/details/{id}", "Content\BlogController@details");
 Route::resource("blogs", "Content\BlogController");
-// Route::resource("/blog-subjects", "Content\BlogSubjectController");
 Route::post("blog-comments/send", "Content\BlogCommentController@sendComment");
 Route::put("blog-comments/delete/{id}", "Content\BlogCommentController@deleteComment");
 Route::get("blog-comments/details/{id}", "Content\BlogCommentController@details");
@@ -65,7 +65,6 @@ Route::post('/login-check',"Auth\AuthenticatedController@verifyCheck");
 Route::post('/verify',"Auth\RegisterController@verifyCheck");
 Route::post('/register',"Auth\RegisterController@register");
 Route::get('/resend-code/{mobile}',"Auth\RegisterController@resendVerifyCode");
-// Route::get('/resend-code/{mobile}', [Auth\RegisterController::class, 'resendVerifyCode'])->name('resend.verify.code');
 Route::post('/logout',"Auth\AuthenticatedController@destroy");
 
 Route::get('/langs',function(){

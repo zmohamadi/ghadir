@@ -19,12 +19,4 @@ class City extends Model
     {
         return $this->belongsTo(\Models\Base\Province::class, 'province_id');
     }
-    function users()
-    {
-        return $this->hasMany(\Models\Person\User::class, 'city_id');
-    }
-    function advs()
-    {
-        return $this->hasMany(\Models\Advs\Adv::class, 'city_id');
-    }
 }

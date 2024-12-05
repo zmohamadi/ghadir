@@ -16,6 +16,8 @@ class HomeController extends Controller
         $city_id = request()->city;
         $province_id = request()->province;
         $year = request()->year;
+        $promotion = request()->promotion;
+        $promoter = request()->promoter;
 
         // Fetch unique years
         $years = Promotion::select('year')->groupBy('year')->get();
@@ -25,6 +27,8 @@ class HomeController extends Controller
             ->when($city_id, fn($query) => $query->where('city_id', $city_id))
             ->when($province_id, fn($query) => $query->where('province_id', $province_id))
             ->when($year, fn($query) => $query->where('year', $year))
+            ->when($promotion, fn($query) => $query->where('promotion_id', $promotion))
+            ->when($promoter, fn($query) => $query->where('promoter_id', $promoter))
             ->first();
 
         // Filter and fetch aggregated data for tribunes
@@ -32,13 +36,17 @@ class HomeController extends Controller
             ->when($city_id, fn($query) => $query->where('city_id', $city_id))
             ->when($province_id, fn($query) => $query->where('province_id', $province_id))
             ->when($year, fn($query) => $query->where('year', $year))
+            ->when($promotion, fn($query) => $query->where('promotion_id', $promotion))
+            ->when($promoter, fn($query) => $query->where('promoter_id', $promoter))
             ->first();
 
         // Ritual statistics with promotion count
-        $rituals = Ritual::withCount(['reports' => function ($query) use ($city_id, $province_id, $year) {
+        $rituals = Ritual::withCount(['reports' => function ($query) use ($city_id, $province_id, $year,$promotion,$promoter) {
             $query
                 ->when($city_id, fn($query) => $query->where('city_id', $city_id))
                 ->when($province_id, fn($query) => $query->where('province_id', $province_id))
+                ->when($promotion, fn($query) => $query->where('promotion_id', $promotion))
+                ->when($promoter, fn($query) => $query->where('promoter_id', $promoter))
                 ->when($year, fn($query) => $query->where('year', $year));
         }])->get();
 

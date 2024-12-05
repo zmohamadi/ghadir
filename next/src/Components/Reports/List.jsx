@@ -7,16 +7,17 @@ import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer, Input } from "@/Theme/Midone";
 import { useAuth } from "@/lib";
+import Link from "next/link";
 
 export function List(){
     const {user} = useAuth();
-    const query = user?.role_id == 2 &&`promoter=${user?.id}`;
+    const query = user?.role_id == 2 &&`promoter_id=${user?.id}`;
     const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
     const [ needles, setNeedles ] = useState();
-    const [ params, setParams ] = useState({ status: "",promoter:""});
+    const [ params, setParams ] = useState({ status: "",promoter:"",promoter_id:"",promotion:""});
     const [ url, setUrl ] = useState(`${laraAdmin}/reports?${query}`);
     const effectRan = useRef(false);
     const formUrl = nextAdmin+"/reports";
@@ -47,7 +48,7 @@ export function List(){
       };
     
       const clearFilter = () => {
-        setParams({ status: "",promoter:"" });
+        setParams({ status: "",promoter:"",promotion:"",promoter_id:"" });
       };
 
     let info = {
@@ -67,8 +68,14 @@ export function List(){
                 ),
             },
            
-            {label: "title", field: "promotion.title" },
-            {label: "year", field: "promotion.year" },
+            {
+                label: "title",
+                jsx: (item) => (
+                    <Link href={`${formUrl}/${item.id}`}>
+                        {`${item?.promotion?.title}-${item?.promotion?.year}`}
+                    </Link>
+                ),
+            },
             ...(access ? [
                 { 
                     label: "promoter", 
@@ -102,9 +109,16 @@ export function List(){
             <Frame title={Lang(["public.reports"])}>
             {access&&<>
                     <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
-                        {/* <Input label="promoter" className="col-span-3 md:col-span-3" defaultValue={params.promoter}
+                        <Input label="promoter" className="col-span-3 md:col-span-3" defaultValue={params.promoter}
                             onEnter={(e) => handleFilterChange(e, "promoter")} note={Lang("public.filter_ticket_user")}
-                        /> */}
+                        />
+                         <Select
+                            defaultValue={params.promotion}
+                            onChange={(e) => handleFilterChange(e,"promotion")}
+                            className="col-span-5 md:col-span-3"
+                            label="promotion"
+                            data={needles?.promotion}
+                        />
                         <Select
                             defaultValue={params.status}
                             onChange={(e) => handleFilterChange(e, "status")}
@@ -113,7 +127,6 @@ export function List(){
                             data={needles?.status?.filter(item => item.group_id == 28)}
                             titleKey={"title_" + local} valueKey="code"
                         />
-                        
                         <ButtonContainer className="mt-7 md:mt-6 text-right ">
                             <Button label="clear_filter" className="btn btn-secondary w-20" onClick={clearFilter} />
                         </ButtonContainer>

@@ -4,6 +4,7 @@ import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { useAuth } from "@/lib/auth";
+import Link from "next/link";
 
 export function List(){
     const {user} = useAuth();
@@ -34,7 +35,14 @@ export function List(){
                 ),
             },
            
-            {label: "promotion", jsx: (item) => (<span>{item?.promotion?.title}-{item?.promotion?.year}</span>), },
+            {
+                label: "promotion",
+                jsx: (item) => (
+                    <Link href={`${formUrl}/${item.id}`}>
+                        {`${item?.promotion?.title}-${item?.promotion?.year}`}
+                    </Link>
+                ),
+            },
             {label: "type", field: "type.title" },
             {label: "amount", field: "amount" },
             {label: "pack_items", field: "pack_items" },
@@ -43,7 +51,7 @@ export function List(){
                 jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon access={access} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        <FeatherIcon access={access} name="Users" url={formUrl+"/"+item?.id+"/promoters"} tooltip={Lang('public.promoters')} />
+                        {/* <FeatherIcon access={access} name="Users" url={formUrl+"/"+item?.id+"/promoters"} tooltip={Lang('public.promoters')} /> */}
                         <FeatherIcon name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
                         <FeatherIcon access={access} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/supports"+"/"+item?.id)} />
                     </div>
