@@ -68,39 +68,37 @@ export function Filtering({
     const clearFilter = () => {
         setFilters({
             city:null,
-        province: null,
-        promotion: null,
-        promoter: null,
-        reportStatus:null,
-        gender:null,
-        promoterStatus:null
+            province: null,
+            promotion: null,
+            promoter: null,
+            reportStatus:null,
+            gender:null,
+            promoterStatus:null
         });
         setProvinceId(null); // ریست کردن استان
     };
-    console.log(filters.promotion);
 
     return (
         <Box shadow={false} minIcon={true} min={true}>
             {promoter && (
                 <SelectTail label="promoter" refItem={[component, "promoter"]}
-                    defaultValue={filters.promoter}
+                defaultValue={filters.promoter ?? ""}
                     onChange={(e) => handleFilterChange(e, "promoter")}
                     className="col-span-5 md:col-span-3"
                 >
                     {
-                        needles?.promoter?.map((item ,index)=>{
+                        needles?.promoter?.map((item ,index)=> {
                             return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
                         })
                     }
                 </SelectTail>
-               
             )}
 
             {promotion && (
                 <Select
                     onChange={(e) => handleFilterChange(e, "promotion")}
+                    defaultValue={filters.promotion ?? ""}
                     refItem={[component, "promotion"]}
-                    defaultValue="4"
                     className="col-span-5 md:col-span-3"
                     label="promotion"
                     data={needles?.promotion}
@@ -110,7 +108,7 @@ export function Filtering({
             {province && (
                 <Select
                     onChange={(e) => handleFilterChange(e, "province")}
-                    defaultValue={filters.province}
+                    defaultValue={filters.province ?? ""}
                     className="col-span-5 md:col-span-3"
                     label="province"
                     data={needles?.province}
@@ -121,57 +119,57 @@ export function Filtering({
             {province && (
                 <Select
                     onChange={(e) => handleFilterChange(e, "city")}
-                    defaultValue={filters.city}
+                    defaultValue={filters.city ?? ""}
                     className="col-span-5 md:col-span-3"
                     label="city"
-                    data={
-                        provinceId
+                    data={provinceId
                             ? needles?.city?.filter((item) => item.province_id === parseInt(provinceId))
                             : []
                     }
                     titleKey={`name_${local}`}
                 />
             )}
+
             {reportStatus && (
                 <Select
-                    defaultValue={filters.status}
-                    onChange={(e) => handleFilterChange(e, "status")}
+                defaultValue={filters.reportStatus ?? ""}
+                    onChange={(e) => handleFilterChange(e, "reportStatus")}
                     className="col-span-5 md:col-span-3"
                     label="status"
                     data={needles?.status?.filter(item => item.group_id == 28)}
                     titleKey={"title_" + local} valueKey="code"
                 />
             )}
+
             {promoterStatus && (
                 <Select
-                    defaultValue={filters.status}
-                    onChange={(e) => handleFilterChange(e, "status")}
+                defaultValue={filters.promoterStatus ?? ""}
+                    onChange={(e) => handleFilterChange(e, "promoterStatus")}
                     className="col-span-2"
                     label="status"
                     data={needles?.status?.filter(item => item.group_id === 1)} 
                     valueKey="code" titleKey={"title_"+local}  
                 />
             )}
+
             {gender && (
                 <Select
-                defaultValue={filters.gender}
-                onChange={(e) => handleFilterChange(e, "gender")}
-                className="col-span-2"
-                label="gender"
-                data={needles?.gender}
-                titleKey={`title_${local}`}
-            />
+                    defaultValue={filters.gender ?? ""}
+                    onChange={(e) => handleFilterChange(e, "gender")}
+                    className="col-span-2"
+                    label="gender"
+                    data={needles?.gender}
+                    titleKey={`title_${local}`}
+                />
             )}
 
-            
-<ButtonContainer>
-
+            <ButtonContainer>
                 <Button
                     label="clear_filter"
                     className="btn btn-secondary w-20"
                     onClick={clearFilter}
                 />
-</ButtonContainer>
+            </ButtonContainer>
         </Box>
     );
 }

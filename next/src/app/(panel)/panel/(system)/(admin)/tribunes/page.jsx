@@ -10,7 +10,7 @@ export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/tribunes";
-    const [url, setUrl] = useState(`${laraAdmin}/tribunes`);
+
     // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
     const getFilterFromUrl = () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -24,6 +24,9 @@ export default function page() {
 
     // مقداردهی اولیه فیلترها از URL
     const [filters, setFilters] = useState(getFilterFromUrl);
+
+    const [url, setUrl] = useState(`${laraAdmin}/tribunes`);
+
     const info = {
         url,
         columns: [
@@ -102,7 +105,7 @@ export default function page() {
 
     return (
         <>
-            <Frame title={Lang(["public.tribunes"])}>
+            <Frame title={Lang(["public.tribunes"])} >
                 <Filtering
                     promotion={true}
                     province={true}

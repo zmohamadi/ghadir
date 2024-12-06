@@ -12,7 +12,7 @@ class TribuneController extends BaseAbstract
     protected $searchFilter = ['subject'];
     protected $showWith = ["promoter","promotion","province","citySh","audienceType"];
     protected $with = ["promoter","promotion","province","citySh","audiencetype"];
-    protected $needles = ['Base\Province',"Base\City","Promotion"];
+    protected $needles = ['Base\Province',"Base\City","Promotion","Person\Promoter"];
 
     public function init()
     {

@@ -2,25 +2,33 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
-import { Grid, Frame, FeatherIcon, Pic, useFormRefs } from "@/Theme/Midone/Utils";
-import { Select } from "@/Theme/Midone/Forms/Select";
-import { useEffect, useRef, useState } from "react";
-import { Box, Button, ButtonContainer, Input, SelectTail } from "@/Theme/Midone";
+import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/lib";
 import Link from "next/link";
 import { Filtering } from "../Public/Filtering";
 
 export function List(){
-    console.log(promotion);
-    console.log(promoter);
 
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
-    const {destroy,getNeedles} = useData();
+    const {destroy} = useData();
     const formUrl = nextAdmin+"/reports";
-    const [filters, setFilters] = useState({promotion:promotion,promoter:promoter});
+      // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+      const getFilterFromUrl = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            promoter: urlParams.get('promoter') || null,
+            promotion: urlParams.get('promotion') || null,
+            province: urlParams.get('province') || null,
+            city: urlParams.get('city') || null,
+        };
+    };
+
+    // مقداردهی اولیه فیلترها از URL
+    const [filters, setFilters] = useState(getFilterFromUrl);
     const [url, setUrl] = useState(`${laraAdmin}/reports`);
 
     useEffect(() => {
