@@ -81,9 +81,9 @@ export function Filtering({
         <Box shadow={false} minIcon={true} min={true}>
             {promoter && (
                 <SelectTail label="promoter" refItem={[component, "promoter"]}
-                defaultValue={promoter_id ? promoter_id : filters.promoter}
-                onChange={(e) => handleFilterChange(e, "promoter")}
-                className="col-span-5 md:col-span-3"
+                    defaultValue={promoter_id ? promoter_id : filters.promoter}
+                    onChange={(e) => handleFilterChange(e, "promoter")}
+                    className="col-span-5 md:col-span-3"
                 >
                     {
                         needles?.promoter?.map((item ,index)=>{
