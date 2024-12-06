@@ -6,7 +6,7 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { useAuth } from "@/lib/auth";
 import Link from "next/link";
 
-export function List(){
+export function List({promotion=""}){
     const {user} = useAuth();
     const query = user?.role_id == 2 &&`promoter=${user?.id}`;
     const access = user?.role_id == 1 ?  true : false;

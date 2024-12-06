@@ -51,9 +51,9 @@ export function View({id}) {
                 <TabHeader>
                     <TabList href="tab-first" title={Lang('public.promotion_details')} active={"true"}>{Lang("public.promotion_details")}</TabList>
                     {access&&<>
-                        <TabList href="tab-second" title={Lang('public.promoters_registered')}>{Lang("public.promoters")} ({data?.agrees?.length})</TabList>
-                        <TabList href="tab-third" title={Lang('public.promoters_reports')}>{Lang("public.reports")}  ({data?.reports?.length})</TabList>
-                        <TabList href="tab-fourth" title={Lang('public.supports_promoions')}>{Lang("public.supports")} ({data?.supports?.length})</TabList>
+                        <TabList href="tab-second" title={Lang(['public.agree'])+"("+data?.agrees?.length+")"}/>
+                        <TabList href="tab-third" title={Lang(['public.reports'])+"("+data?.reports?.length+")"}/>
+                        <TabList href="tab-fourth" title={Lang(['public.supports'])+"("+data?.supports?.length+")"}/>
                     </>}
                 </TabHeader>
                 <TabBody>
@@ -103,7 +103,7 @@ export function View({id}) {
                                                         ? data?.rituals.map((ritual, index) => (
                                                             <li key={index}>{ritual[`title`]}</li>
                                                         ))
-                                                        : <li>{Lang(["public.no_data"])}</li>}
+                                                        : ""}
                                                 </ul>
                                             </div>
                                             }
@@ -126,7 +126,7 @@ export function View({id}) {
                                                                 ? data?.rituals.map((ritual, index) => (
                                                                     <li key={index}>{ritual[`title`]}</li>
                                                                 ))
-                                                                : <li>{Lang(["public.no_data"])}</li>}
+                                                                : ""}
                                                         </ul>
                                                     </div>
                                                 }</>
@@ -252,7 +252,7 @@ export function View({id}) {
                                     ))}
                                 </ul>
                             ) : (
-                                <p>{Lang("public.no_data")}</p>
+                               ""
                             )}
                         </div>
                     </TabPanel>
@@ -273,7 +273,7 @@ export function View({id}) {
                                     ))}
                                 </ul>
                             ) : (
-                                <p>{Lang(["public.no_data"])}</p>
+                                ""
                             )}
                         </div>
                     </TabPanel>
@@ -292,7 +292,7 @@ export function View({id}) {
                                     ))}
                                 </ul>
                             ) : (
-                                <p>{Lang(["public.no_data"])}</p>
+                                ""
                             )}
                         </div>
                     </TabPanel>

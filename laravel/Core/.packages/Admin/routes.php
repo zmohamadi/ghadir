@@ -21,6 +21,8 @@ Route::resource("courses", "CourseController");
 Route::get("rituals/get-needles", "RitualReportController@getNeedles");
 Route::resource("rituals", "RitualReportController");
 
+Route::get("statistics/get-needles", "TribuneController@getNeedles");
+
 Route::get("tribunes/get-needles", "TribuneController@getNeedles");
 Route::resource("tribunes", "TribuneController");
 

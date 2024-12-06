@@ -1,36 +1,20 @@
 "use client";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid, Frame, FeatherIcon, useData } from "@/Theme/Midone/Utils";
-import { Box, Button, ButtonContainer, Input } from "@/Theme/Midone";
-import { Select } from "@/Theme/Midone/Forms/Select";
+import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Filtering } from "@/Components/Public/Filtering";
 
 export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
-    const { getNeedles } = useData();
     const formUrl = nextAdmin + "/courses";
-
-    // Parse initial filters from URL
-    const searchParams = new URLSearchParams(window.location.search);
-    
-    const initialFilters = {
-        city: searchParams.get("city") || "",
-        province: searchParams.get("province") || "",
-        promotion: searchParams.get("promotion") || "",
-        promoter: searchParams.get("promoter") || "",
-    };
-
-    const [filters, setFilters] = useState(initialFilters);
+    const [filters, setFilters] = useState({});
     const [url, setUrl] = useState(`${laraAdmin}/courses`);
-    const [needles, setNeedles] = useState(null);
-    const [provinceId, setProvinceId] = useState(initialFilters.province);
 
-    let info = {
-        perPage: 20,
-        url: url,
+    const info = {
+        url,
         columns: [
             {
                 label: "subject",
@@ -89,11 +73,6 @@ export default function page() {
     };
 
     useEffect(() => {
-        // Fetch initial data
-        getNeedles(`${laraAdmin}/courses/get-needles`, setNeedles);
-    }, []);
-
-    useEffect(() => {
         const filterParams = Object.keys(filters)
             .filter((key) => filters[key])
             .map((key) => `${key}=${filters[key]}`)
@@ -106,71 +85,21 @@ export default function page() {
         setUrl(updatedUrl);
     }, [filters, laraAdmin]);
 
-    const handleFilterChange = (e, filterKey) => {
-        const value = e.target.value;
-
-        setFilters((prevFilters) => ({
-            ...prevFilters,
-            [filterKey]: value,
-            ...(filterKey == "province" && { city: "" }), // ریست کردن شهر در صورت تغییر استان
-        }));
-
-        if (filterKey == "province") {
-            setProvinceId(value);
-        }
-    };
-
-    const clearFilter = () => {
-        setFilters({ city: "", province: "", promotion: "", promoter: "" });
+    const handleFiltersChange = (newFilters) => {
+        setFilters(newFilters);
     };
 
     return (
         <>
             <Frame title={Lang(["public.courses"])}>
-                <Box shadow={false} minIcon={true} min={true}>
-                  <Select
-                        defaultValue={initialFilters.promotion?initialFilters.promotion:filters.promotion} // Bind value to state
-                        onChange={(e) => handleFilterChange(e, "promotion")}
-                        className="col-span-5 md:col-span-3"
-                        label="promotion"
-                        data={needles?.promotion}
-                    />
-                    <Select
-                        defaultValue={initialFilters.province?initialFilters.province:filters.province} // Bind value to state
-                        onChange={(e) => handleFilterChange(e, "province")}
-                        className="col-span-5 md:col-span-3"
-                        label="province"
-                        data={needles?.province}
-                        titleKey={"name_" + local}
-                    />
-                    <Select
-                        defaultValue={initialFilters.city?initialFilters.city:filters.city} // Bind value to state
-                        onChange={(e) => handleFilterChange(e, "city")}
-                        className="col-span-5 md:col-span-3"
-                        label="city"
-                        data={
-                            provinceId
-                                ? needles?.city?.filter((item) => item.province_id == provinceId)
-                                : needles?.city
-                        }
-                        titleKey={"name_" + local}
-                    />
-                    <Input
-                        label="promoter"
-                        className="col-span-3 md:col-span-3"
-                        defaultValue={filters.promoter}
-                        onEnter={(e) => handleFilterChange(e, "promoter")}
-                        note={Lang("public.filter_ticket_user")}
-                    />
+                <Filtering
+                    promotion={true}
+                    province={true}
+                    promoter={true}
+                    url="courses"
+                    onFiltersChange={handleFiltersChange}
+                />
 
-                    <ButtonContainer className="mt-7 md:mt-6 text-right">
-                        <Button
-                            label="clear_filter"
-                            className="btn btn-secondary w-20"
-                            onClick={clearFilter}
-                        />
-                    </ButtonContainer>
-                </Box>
                 <div className="intro-y col-span-12">
                     <Grid {...info} />
                 </div>

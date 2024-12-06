@@ -52,7 +52,6 @@ export function List({query}) {
     
     let info = {
         insertLink: access ? `${formUrl}/new` : "",
-        perPage: 20,
         url: url,
         columns: [
             {
@@ -92,9 +91,9 @@ export function List({query}) {
                         </span>
                     )
                 },
-                { label: "pro_people_count", jsx: (item) => <span>{item?.user_count}</span> },
-                { label: "report_count", jsx: (item) => <span>{item?.report_count}</span> },
-                { label: "sum_support", jsx: (item) => <span>{item?.sum_support}</span> },
+                { label: "agrees", jsx: (item) => <span>{item?.user_count}</span> },
+                { label: "reports", jsx: (item) => <span>{item?.report_count}</span> },
+                { label: "supports", jsx: (item) => <span>{item?.sum_support}</span> },
             ] : []),
             { label: "created_at", field: "created_at" },
             {

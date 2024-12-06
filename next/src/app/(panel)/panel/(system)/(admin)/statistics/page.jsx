@@ -2,41 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { useConfig, useLang } from "@/lib";
-import { Box, Button, ButtonContainer, Frame, Input, Loading, SelectTail, useData, useFormRefs } from "@/Theme/Midone";
-import { Select } from "@/Theme/Midone/Forms/Select";
+import { Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
 import Link from "next/link";
+import { Filtering } from "@/Components/Public/Filtering";
 
 export default function page() {
-  const { Lang, local } = useLang();
+  const { Lang } = useLang();
   const { laraAdmin,nextAdmin } = useConfig();
   const component = useFormRefs();
-  const { get, getNeedles } = useData();
+  const { get } = useData();
 
-  const [needles, setNeedles] = useState(null);
-  const [filters, setFilters] = useState({ city: "", province: "", year: "",promotion:"",promoter:"" });
+  const [filters, setFilters] = useState({});
   const [url, setUrl] = useState(`${laraAdmin}/statistics`);
   const [loading, setLoading] = useState(true);
-  const [provinceId, setProvinceId] = useState(null);
-
-  useEffect(() => {
-    // Fetch initial data
-    getNeedles(`${laraAdmin}/courses/get-needles`, setNeedles);
-    fetchData();
-  }, [url]);
-
-  useEffect(() => {
-    // Update URL based on filters
-    const filterParams = Object.keys(filters)
-      .filter((key) => filters[key])
-      .map((key) => `${key}=${filters[key]}`)
-      .join("&");
-
-    const updatedUrl = filterParams
-      ? `${laraAdmin}/statistics?${filterParams}`
-      : `${laraAdmin}/statistics`;
-
-    setUrl(updatedUrl);
-  }, [filters, laraAdmin]);
 
   const fetchData = () => {
     setLoading(true); // Set loading to true before fetching data
@@ -45,76 +23,36 @@ export default function page() {
     });
   };
 
-  const handleFilterChange = (e, filterKey) => {
-    setFilters((prevFilters) => ({ ...prevFilters, [filterKey]:e?.target?.value != undefined ?  e.target.value : e.value }));
-    if (filterKey == "province") {
-      setProvinceId(e.target.value);
-    }
-  };
+  useEffect(() => {
+    const filterParams = Object.keys(filters)
+        .filter((key) => filters[key])
+        .map((key) => `${key}=${filters[key]}`)
+        .join("&");
 
-  const clearFilter = () => {
-    setFilters({ city: "", province: "", year: "",promotion:"",promoter:"" });
-  };
+    const updatedUrl = filterParams
+        ? `${laraAdmin}/statistics?${filterParams}`
+        : `${laraAdmin}/statistics`;
 
-  const statistics = component?.state?.info;
+    setUrl(updatedUrl);
+    fetchData();
+    
+}, [filters, laraAdmin]);
+
+const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+};
+let statistics = component?.state?.info;
 
 //   console.log(statistics);
 return (
     <Frame title={Lang("public.statistics")} className="col-span-12">
-      <Box shadow={false} minIcon={true} min={true}>
-        {/* Filter Selects */}
-       
-        <SelectTail label="promoter" refItem={[component, "promoter"]}  className="col-span-5 md:col-span-3"
-          defaultValue={filters.promoter}
-          onChange={(e) => handleFilterChange(e, "promoter")}>
-            {needles?.promoter?.map((item ,index)=>{
-              return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
-            })}
-          </SelectTail>
-        <Select
-            defaultValue={filters.promotion}
-            onChange={(e) => handleFilterChange(e,"promotion")}
-            className="col-span-5 md:col-span-3"
-            label="promotion"
-            data={needles?.promotion}
-          />
-          <Select
-            defaultValue={filters.province}
-            onChange={(e) => handleFilterChange(e, "province")}
-            className="col-span-5 md:col-span-3"
-            label="province"
-            data={needles?.province}
-            titleKey={"name_" + local}
-          />
-          <Select
-          defaultValue={filters.city}
-          onChange={(e) => handleFilterChange(e, "city")}
-          className="col-span-5 md:col-span-3"
-          label="city"
-          data={
-            provinceId
-              ? needles?.city?.filter((item) => item.province_id == provinceId)
-              : needles?.city
-          }
-          titleKey={"name_" + local}
-        />
-        {/* <Select
-          defaultValue={filters.year}
-          onChange={(e) => handleFilterChange(e, "year")}
-          className="col-span-5 md:col-span-3"
-          label="year"
-          data={statistics?.years}
-          titleKey={"year"}
-          valueKey="year"
-        /> */}
-        <ButtonContainer className="mt-7 md:mt-6 text-right">
-          <Button
-            label="clear_filter"
-            className="btn btn-secondary w-20"
-            onClick={clearFilter}
-          />
-        </ButtonContainer>
-      </Box>
+      <Filtering
+                  promotion={true}
+                  province={true}
+                  promoter={true}
+                  url="statistics"
+                  onFiltersChange={handleFiltersChange}
+              />
       {loading ? (
         <Loading />
       ) : (<>
@@ -168,21 +106,23 @@ return (
 
           {statistics?.rituals?.length > 0 && statistics.rituals.map((item, index) => (
             <div key={index} className="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-              <div className="report-box zoom-in">
-                <div className="box p-5">
-                  <div className="flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={item?.color || "currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-credit-card report-box__icon text-theme-22">
-                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                      <line x1="1" y1="10" x2="23" y2="10"></line>
-                    </svg>
-                    <div className="mr-auto">
-                      <div className="report-box__indicator bg-theme-10 tooltip cursor-pointer">{item?.percent}%</div>
+              <Link href={`${nextAdmin}/rituals`} className="block"> {/* لینک با فیلتر */}
+                <div className="report-box zoom-in">
+                  <div className="box p-5">
+                    <div className="flex">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={item?.color || "currentColor"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-credit-card report-box__icon text-theme-22">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
+                      </svg>
+                      <div className="mr-auto">
+                        <div className="report-box__indicator bg-theme-10 tooltip cursor-pointer">{item?.percent}%</div>
+                      </div>
                     </div>
+                    <div className="text-3xl font-bold leading-8 mt-6">{item?.count}</div>
+                    <div className="text-base text-gray-600 mt-1">{item?.label}</div>
                   </div>
-                  <div className="text-3xl font-bold leading-8 mt-6">{item?.count}</div>
-                  <div className="text-base text-gray-600 mt-1">{item?.label}</div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </>
