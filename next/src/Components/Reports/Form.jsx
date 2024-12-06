@@ -74,14 +74,14 @@ export function Form({ id}) {
                         
                         <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}/>
                         <TabList href="tab-second" title={Lang("public.courses")} 
-                            items = {[component, ['c_subject_','c_people_count_','c_duration_','c_province_','c_city_id_', 
-                            'c_city_','c_village_'],component?.state?.info?.courses?.length]} />
+                            items = {[component, ['c_subject_*','c_people_count_*','c_duration_*','c_province_*','c_city_id_*', 
+                            'c_city_*','c_village_*']]} />
                         <TabList href="tab-third" title={Lang("public.tribunes")}  
-                        items = {[component, ['tr_subject_','tr_people_count_','tr_duration_','tr_province_','tr_city_id_', 
-                            'tr_city_','tr_village_'],component?.state?.info?.tribunes?.length]}/>
+                        items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
+                            'tr_city_*','tr_village_*']]}/>
                         <TabList href="tab-fourth" title={Lang("public.ritual")}
-                        items = {[component, ['r_province_','r_city_id_', 
-                            'r_city_','r_village_','ritual_id_'],component?.state?.info?.ritual_reports?.length]}
+                        items = {[component, ['r_province_*','r_city_id_*', 
+                            'r_city_*','r_village_*','ritual_id_*']]}
                         />
                     </TabHeader>
                     <TabBody>

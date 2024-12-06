@@ -6,9 +6,19 @@ import { useMemo } from "react";
 export function TabList({children, active, href, title, items = []}){
     const errorCount = useMemo(()=>{
         let count = 0;
-        let [component, elements,repeatCount] = items;
+        let [component, elements] = items;
         elements?.map(elem => {
-            component?.state?.errors[elem] && count++;
+            if(elem.slice(-1) == "*"){
+                elem = elem.replace("*", "");
+                for (let key in component?.state?.errors) {
+                    if (key.lastIndexOf(elem,0) === 0) {
+                        count++;
+                        continue;
+                    }
+                }
+            }else{
+                component?.state?.errors[elem] && count++;
+            }
         });
         return count;
     }, [items])

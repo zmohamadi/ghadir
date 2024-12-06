@@ -3,6 +3,7 @@
 import {useEffect, useState} from 'react';
 import {Tools} from '../Utils/Tools';
 import {useFormElement} from './Element';
+import { useLang } from '@/lib';
 
 const SelectTail = (props)=>{      
 
@@ -13,6 +14,7 @@ const SelectTail = (props)=>{
     
     if(!titleKey) titleKey = 'title';
     if(!valueKey) valueKey = 'id';
+    const {Lang} = useLang();
     
     let [state, setState] = useState({
         value: defaultValue,
@@ -32,7 +34,7 @@ const SelectTail = (props)=>{
             height: 350,                // [0.2.0]      Integer, null
             hideDisabled: false,        // [0.3.0]      Boolean
             hideSelected: false,        // [0.3.0]      Boolean
-            items: {},                  // [0.3.0]      Object
+            // items: {},                  // [0.3.0]      Object
             locale: 'fa',               // [0.5.0]      String
             linguisticRules: {          // [0.5.9]      Object
                 'е': 'ё',
@@ -59,7 +61,7 @@ const SelectTail = (props)=>{
             searchMarked: true,         // [0.3.0]      Boolean
             searchMinLength: 1,         // [0.5.13]     Integer
             searchDisabled: true,       // [0.5.5]      Boolean
-            sortItems: false,           // [0.3.0]      String, Function, false
+            sortItems: true,           // [0.3.0]      String, Function, false
             sortGroups: false,          // [0.3.0]      String, Function, false
             sourceBind: false,          // [0.5.0]      Boolean
             sourceHide: true,           // [0.5.0]      Boolean
@@ -90,10 +92,10 @@ const SelectTail = (props)=>{
     useEffect(()=>{
         state.value = defaultValue;
         window?.$('#'+id+'').val(defaultValue);        
-        state.instance?.reload();
         Element.removeError();
-    }, [refItem[0].state.info, defaultValue])
-
+        state.instance?.reload();
+    }, [refItem[0].state.info, defaultValue, data, children])
+    
     return(
         <div className={className?className+' mb-3':' mb-3 col-span-12 md:col-span-6'} >
             <label htmlFor={id} className='form-label font-bold'>{label} {requiredDiv}</label>
@@ -104,6 +106,7 @@ const SelectTail = (props)=>{
                 tabIndex='-1'
                 multiple={Boolean(multiple)}
             >
+                { (placeholder !== false) && <option key={-1} value="" >{Lang('public.select_option')}</option>}
                 { children }
                 {
                     Tools.getArray(data).map((item, key)=><option key={key} value={item[valueKey]}>{item[titleKey]}</option>)
