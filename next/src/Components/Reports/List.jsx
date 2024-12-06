@@ -10,10 +10,10 @@ import { useAuth } from "@/lib";
 import Link from "next/link";
 import { Filtering } from "../Public/Filtering";
 
-export function List({promotion=null,promoter=null}){
+export function List(){
     console.log(promotion);
     console.log(promoter);
-    
+
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();

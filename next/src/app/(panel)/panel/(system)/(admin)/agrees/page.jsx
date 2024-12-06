@@ -9,8 +9,20 @@ import { Filtering } from "@/Components/Public/Filtering";
 export default function page(){
     const {Lang} = useLang();
     const {laraAdmin,nextAdmin} = useConfig();
-    const [filters, setFilters] = useState({});
     const [url, setUrl] = useState(`${laraAdmin}/agree`);
+    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+    const getFilterFromUrl = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            promoter: urlParams.get('promoter') || null,
+            promotion: urlParams.get('promotion') || null,
+            province: urlParams.get('province') || null,
+            city: urlParams.get('city') || null,
+        };
+    };
+
+    // مقداردهی اولیه فیلترها از URL
+    const [filters, setFilters] = useState(getFilterFromUrl);
 
     let info = {
         perPage:20,

@@ -10,7 +10,21 @@ export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/courses";
-    const [filters, setFilters] = useState({});
+
+    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+    const getFilterFromUrl = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            promoter: urlParams.get('promoter') || null,
+            promotion: urlParams.get('promotion') || null,
+            province: urlParams.get('province') || null,
+            city: urlParams.get('city') || null,
+        };
+    };
+
+    // مقداردهی اولیه فیلترها از URL
+    const [filters, setFilters] = useState(getFilterFromUrl);
+
     const [url, setUrl] = useState(`${laraAdmin}/courses`);
 
     const info = {
@@ -91,12 +105,13 @@ export default function page() {
 
     return (
         <>
-            <Frame title={Lang(["public.courses"])}>
+            <Frame title={Lang(["public.courses"])} >
                 <Filtering
                     promotion={true}
                     province={true}
                     promoter={true}
                     url="courses"
+                    filterList={filters}
                     onFiltersChange={handleFiltersChange}
                 />
 

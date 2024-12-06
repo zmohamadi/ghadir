@@ -19,14 +19,15 @@ export function Filtering({
     const { Lang, local } = useLang();
     const { laraAdmin } = useConfig();
     const [filters, setFilters] = useState({
-        city: filterList?.city?filterList?.city:null,
-        province: filterList?.province?filterList?.province:null,
-        promotion: filterList?.promotion?filterList?.promotion:null,
-        promoter: filterList?.promoter?filterList?.promoter:null,
-        reportStatus:null,
-        gender:null,
-        promoterStatus:null,
+        city: filterList?.city ?? null,          // If filterList.city exists, use it, otherwise set it to null
+        province: filterList?.province ?? null,   // Same for province
+        promotion: filterList?.promotion ?? null, // Same for promotion
+        promoter: filterList?.promoter ?? null,   // Same for promoter
+        reportStatus: null,
+        gender: null,
+        promoterStatus: null,
     });
+    
     const [needles, setNeedles] = useState(null);
     const [provinceId, setProvinceId] = useState(null);
     const { getNeedles } = useData();
@@ -76,12 +77,13 @@ export function Filtering({
         });
         setProvinceId(null); // ریست کردن استان
     };
+    console.log(filters.promotion);
 
     return (
         <Box shadow={false} minIcon={true} min={true}>
             {promoter && (
                 <SelectTail label="promoter" refItem={[component, "promoter"]}
-                    defaultValue={promoter_id ? promoter_id : filters.promoter}
+                    defaultValue={filters.promoter}
                     onChange={(e) => handleFilterChange(e, "promoter")}
                     className="col-span-5 md:col-span-3"
                 >
@@ -97,7 +99,8 @@ export function Filtering({
             {promotion && (
                 <Select
                     onChange={(e) => handleFilterChange(e, "promotion")}
-                    defaultValue={filters.promotion}
+                    refItem={[component, "promotion"]}
+                    defaultValue="4"
                     className="col-span-5 md:col-span-3"
                     label="promotion"
                     data={needles?.promotion}

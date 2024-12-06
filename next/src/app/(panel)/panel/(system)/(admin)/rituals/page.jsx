@@ -10,8 +10,20 @@ export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/rituals";
-    const [filters, setFilters] = useState({});
     const [url, setUrl] = useState(`${laraAdmin}/rituals`);
+    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+    const getFilterFromUrl = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            promoter: urlParams.get('promoter') || null,
+            promotion: urlParams.get('promotion') || null,
+            province: urlParams.get('province') || null,
+            city: urlParams.get('city') || null,
+        };
+    };
+
+    // مقداردهی اولیه فیلترها از URL
+    const [filters, setFilters] = useState(getFilterFromUrl);
 
     let info = {
         url: url,
@@ -97,6 +109,7 @@ export default function page() {
                   province={true}
                   promoter={true}
                   url="rituals"
+                  filterList={filters}
                   onFiltersChange={handleFiltersChange}
               />
                 <div className="intro-y col-span-12">
