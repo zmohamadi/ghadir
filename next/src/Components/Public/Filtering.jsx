@@ -13,15 +13,16 @@ export function Filtering({
     promoterStatus = false,
     gender = false,
     url,
+    filterList,
     onFiltersChange, // دریافت تابع برای اطلاع‌رسانی تغییرات فیلتر
 }) {
     const { Lang, local } = useLang();
     const { laraAdmin } = useConfig();
     const [filters, setFilters] = useState({
-        city:null,
-        province: null,
-        promotion: null,
-        promoter: null,
+        city: filterList?.city?filterList?.city:null,
+        province: filterList?.province?filterList?.province:null,
+        promotion: filterList?.promotion?filterList?.promotion:null,
+        promoter: filterList?.promoter?filterList?.promoter:null,
         reportStatus:null,
         gender:null,
         promoterStatus:null,

@@ -10,14 +10,17 @@ import { useAuth } from "@/lib";
 import Link from "next/link";
 import { Filtering } from "../Public/Filtering";
 
-export function List({promotion=null,promoter_id=null}){
+export function List({promotion=null,promoter=null}){
+    console.log(promotion);
+    console.log(promoter);
+    
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
     const formUrl = nextAdmin+"/reports";
-    const [filters, setFilters] = useState({});
+    const [filters, setFilters] = useState({promotion:promotion,promoter:promoter});
     const [url, setUrl] = useState(`${laraAdmin}/reports`);
 
     useEffect(() => {
@@ -27,8 +30,8 @@ export function List({promotion=null,promoter_id=null}){
             .join("&");
 
         const updatedUrl = filterParams
-            ? `${laraAdmin}/tribunes?${filterParams}`
-            : `${laraAdmin}/tribunes`;
+            ? `${laraAdmin}/reports?${filterParams}`
+            : `${laraAdmin}/reports`;
 
         setUrl(updatedUrl);
     }, [filters, laraAdmin]);
@@ -95,6 +98,7 @@ export function List({promotion=null,promoter_id=null}){
             <Frame title={Lang(["public.reports"])}>
                 {access&&<>
                     <Filtering
+                        filterList={filters}
                         promotion={true}
                         promoter={true}
                         reportStatus={true}
