@@ -119,7 +119,8 @@ export function Form({id,panel,access,query}){
                                 <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
                                 <Select key={"is_not_citizen"+2} 
                                     defaultValue={data?.is_not_citizen == false ? 0 : 1} 
-                                className="col-span-4" label="citizen" refItem={[component, "is_not_citizen"]} 
+                                    className="col-span-4" label="citizen" 
+                                    refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('im_citizen')}</option>
                                     <option value="1">{Lang('not_citizen')}</option>
