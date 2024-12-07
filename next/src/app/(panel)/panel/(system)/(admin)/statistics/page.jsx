@@ -46,6 +46,8 @@ export default function Page() {
   const router = useRouter();
   const goToReports = (href) => {
     router.push(`${nextAdmin}/${href}?promoter=${filters.promoter}&promotion=${filters.promotion}`);
+    // window.location.href = `${nextAdmin}/${href}?promoter=${filters.promoter}&promotion=${filters.promotion}`;
+
   };
 
   let statistics = component?.state?.info;

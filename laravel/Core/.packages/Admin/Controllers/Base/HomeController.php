@@ -17,6 +17,7 @@ class HomeController extends Controller
         $province_id = request()->province;
         $year = request()->year;
         $promotion = request()->promotion;
+        // dd($promotion);
         $promoter = request()->promoter;
 
         // Fetch unique years

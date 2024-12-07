@@ -22,8 +22,10 @@ export default function page() {
         };
     };
 
+    
     // مقداردهی اولیه فیلترها از URL
     const [filters, setFilters] = useState(getFilterFromUrl);
+    console.log(filters);
 
     const [url, setUrl] = useState(`${laraAdmin}/courses`);
 
@@ -97,6 +99,9 @@ export default function page() {
             : `${laraAdmin}/courses`;
 
         setUrl(updatedUrl);
+        const newQueryString = filterParams ? `?${filterParams}` : "";
+        window.history.replaceState(null, "", newQueryString);
+        
     }, [filters, laraAdmin]);
 
     const handleFiltersChange = (newFilters) => {

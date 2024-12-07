@@ -35,14 +35,14 @@ export function Filtering({
     const component = useFormRefs();
 
     useEffect(() => {
-        // Fetch initial data for filtering options only once
         if (!isNeedlesFetched) {
             getNeedles(`${laraAdmin}/${url}/get-needles`, (data) => {
                 setNeedles(data);
-                setIsNeedlesFetched(true); // مشخص کردن دریافت داده
+                setIsNeedlesFetched(true); // پس از دریافت داده‌ها مقدار true تنظیم می‌شود
             });
         }
     }, [laraAdmin, url, getNeedles, isNeedlesFetched]);
+    
 
     useEffect(() => {
         // اطلاع‌رسانی تغییرات فیلترها به کامپوننت والد
