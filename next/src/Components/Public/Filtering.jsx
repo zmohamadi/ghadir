@@ -52,7 +52,7 @@ export function Filtering({
     }, [filters, onFiltersChange]);
 
     const handleFilterChange = (e, filterKey) => {
-        const value = e.target.value;
+        const value = e?.target?.value ? e?.target?.value :e?.value;
 
         setFilters((prevFilters) => {
             const updatedFilters = { ...prevFilters, [filterKey]: value };

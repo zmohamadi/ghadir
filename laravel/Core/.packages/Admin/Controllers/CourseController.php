@@ -27,12 +27,15 @@ class CourseController extends BaseAbstract
                 $q->where('promotion_id', request()->promotion);
             });
             $query->when(request()->promoter != null, function ($q) {
-                $promoter = request()->promoter;
-                $q->whereHas('promoter',function($q) use($promoter)
-                {
-                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
-                });
+                $q->where('promoter_id', request()->promoter);
             });
+            // $query->when(request()->promoter != null, function ($q) {
+            //     $promoter = request()->promoter;
+            //     $q->whereHas('promoter',function($q) use($promoter)
+            //     {
+            //         $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+            //     });
+            // });
             $query->whereHas('promotion')->whereHas('promoter');
         };
     }
