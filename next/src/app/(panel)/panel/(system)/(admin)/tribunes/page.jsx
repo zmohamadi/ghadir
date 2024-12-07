@@ -2,18 +2,18 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
+import { useSearchParams } from 'next/navigation'
 
 export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/tribunes";
 
-    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+    const urlParams = useSearchParams()
     const getFilterFromUrl = () => {
-        const urlParams = new URLSearchParams(window.location.search);
         return {
             promoter: urlParams.get('promoter') || null,
             promotion: urlParams.get('promotion') || null,
@@ -21,83 +21,77 @@ export default function page() {
             city: urlParams.get('city') || null,
         };
     };
-
-    // مقداردهی اولیه فیلترها از URL
-    const [filters, setFilters] = useState(getFilterFromUrl);
-
-    const [url, setUrl] = useState(`${laraAdmin}/tribunes`);
-
-    const info = {
-        url,
-        columns: [
-            {
-                label: "subject",
-                jsx: (item) => (
-                    <Link href={`${formUrl}/${item.id}`}>
-                        {`${item?.subject}`}
-                    </Link>
-                ),
-            },
-            {
-                label: "promotion",
-                jsx: (item) => (
-                    <span>{item?.promotion?.title + "-" + item?.promotion?.year}</span>
-                ),
-            },
-            {
-                label: "promoter",
-                jsx: (item) => (
-                    <span>
-                        {item?.promoter?.firstname +
-                            " " +
-                            item?.promoter?.lastname +
-                            "-" +
-                            item?.promoter?.mobile}
-                    </span>
-                ),
-            },
-            { label: "province", field: `province.name_${local}` },
-            { label: "city", field: `city_sh.name_${local}` },
-            { label: "place_name", field: "place_name" },
-            { label: "people_count", field: "people_count" },
-            {
-                label: "created_at",
-                jsx: (item) => (
-                    <span dir="ltr" className="ltr">
-                        {item?.created_at}
-                    </span>
-                ),
-            },
-            {
-                label: "",
-                sort: false,
-                jsx: (item) => (
-                    <>
-                        <div className="flex justify-center ">
-                            <FeatherIcon
-                                name="Eye"
-                                url={formUrl + "/" + item?.id}
-                                tooltip={Lang("public.view")}
-                            />
-                        </div>
-                    </>
-                ),
-            },
-        ],
-    };
-
-    useEffect(() => {
+    const [filters, setFilters] = useState(getFilterFromUrl());
+    
+    let info = useMemo(()=>{
         const filterParams = Object.keys(filters)
-            .filter((key) => filters[key])
+            .filter((key) => filters[key] && filters[key] != "null")
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
 
-        const updatedUrl = filterParams
+        const url = filterParams
             ? `${laraAdmin}/tribunes?${filterParams}`
             : `${laraAdmin}/tribunes`;
 
-        setUrl(updatedUrl);
-    }, [filters, laraAdmin]);
+        return {
+            url,
+            columns: [
+                {
+                    label: "subject",
+                    jsx: (item) => (
+                        <Link href={`${formUrl}/${item.id}`}>
+                            {`${item?.subject}`}
+                        </Link>
+                    ),
+                },
+                {
+                    label: "promotion",
+                    jsx: (item) => (
+                        <span>{item?.promotion?.title + "-" + item?.promotion?.year}</span>
+                    ),
+                },
+                {
+                    label: "promoter",
+                    jsx: (item) => (
+                        <span>
+                            {item?.promoter?.firstname +
+                                " " +
+                                item?.promoter?.lastname +
+                                "-" +
+                                item?.promoter?.mobile}
+                        </span>
+                    ),
+                },
+                { label: "province", field: `province.name_${local}` },
+                { label: "city", field: `city_sh.name_${local}` },
+                { label: "place_name", field: "place_name" },
+                { label: "people_count", field: "people_count" },
+                {
+                    label: "created_at",
+                    jsx: (item) => (
+                        <span dir="ltr" className="ltr">
+                            {item?.created_at}
+                        </span>
+                    ),
+                },
+                {
+                    label: "",
+                    sort: false,
+                    jsx: (item) => (
+                        <>
+                            <div className="flex justify-center ">
+                                <FeatherIcon
+                                    name="Eye"
+                                    url={formUrl + "/" + item?.id}
+                                    tooltip={Lang("public.view")}
+                                />
+                            </div>
+                        </>
+                    ),
+                },
+            ],
+        }
+    }, [filters])
 
     const handleFiltersChange = (newFilters) => {
         setFilters(newFilters);

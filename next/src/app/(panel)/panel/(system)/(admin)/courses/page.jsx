@@ -2,7 +2,7 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
 import { useSearchParams } from 'next/navigation'
@@ -12,8 +12,6 @@ export default function page() {
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/courses";
 
-    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
-    // const urlParams = new URLSearchParams(window.location.search);
     const urlParams = useSearchParams()
     const getFilterFromUrl = () => {
         return {
@@ -23,13 +21,8 @@ export default function page() {
             city: urlParams.get('city') || null,
         };
     };
-    
-    // مقداردهی اولیه فیلترها از URL
     const [filters, setFilters] = useState(getFilterFromUrl());
-    // const [url, setUrl] = useState(`${laraAdmin}/courses`);
     
-    console.log("filters: ", filters);
-
     let info = useMemo(()=>{
         const filterParams = Object.keys(filters)
             .filter((key) => filters[key] && filters[key] != "null")
@@ -99,22 +92,6 @@ export default function page() {
             ],
         }
     }, [filters])
-
-    // useEffect(() => {
-    //     const filterParams = Object.keys(filters)
-    //         .filter((key) => filters[key])
-    //         .map((key) => `${key}=${filters[key]}`)
-    //         .join("&");
-
-    //     const updatedUrl = filterParams
-    //         ? `${laraAdmin}/courses?${filterParams}`
-    //         : `${laraAdmin}/courses`;
-
-    //     setUrl(updatedUrl);
-    //     const newQueryString = filterParams ? `?${filterParams}` : "";
-    //     window.history.replaceState(null, "", newQueryString);
-        
-    // }, [filters, laraAdmin]);
 
     const handleFiltersChange = (newFilters) => {
         setFilters(newFilters);
