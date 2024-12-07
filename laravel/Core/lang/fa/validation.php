@@ -273,6 +273,7 @@ return [
         'has_tablighat_office_code'=>'کد دفتر تبلیغات',
         'has_tablighat_organization_code'=>'کد سازمان تبلیغات',
         'has_ovghaf_code'=>'کد اوقاف',
+        'promoter_id'=>'مبلغ',
     ],
         collect(range(0, 100))->mapWithKeys(function ($index) {
             return [

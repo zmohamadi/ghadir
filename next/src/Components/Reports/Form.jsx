@@ -72,7 +72,9 @@ export function Form({ id}) {
                 <Tab className="col-span-12">
                     <TabHeader>
                         
-                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"}/>
+                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"} 
+                        items = {[component, ['promoter_id','promotion_id']]}
+                            />
                         <TabList href="tab-second" title={Lang("public.courses")} 
                             items = {[component, ['c_subject_*','c_people_count_*','c_duration_*','c_province_*','c_city_id_*', 
                             'c_city_*','c_village_*']]} />

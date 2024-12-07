@@ -46,7 +46,7 @@ class PromotionReportController extends BaseAbstract
 
         $this->storeQuery = function ($query) {
             $method = request()->_method; //PUT
-            $promotion = request()->promotion_id;
+            $promotion = $this->role_id == 2 ? $this->user_id :  request()->promotion_id;
             $promotionRecord = Promotion::find($promotion);
             $promoter_id = request()->promoter_id;
 

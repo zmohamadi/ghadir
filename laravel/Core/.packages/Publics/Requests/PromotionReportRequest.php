@@ -25,7 +25,10 @@ class PromotionReportRequest extends FormRequest
         $rules = [
             "promotion_id" => 'required',
         ];
-
+        if (auth('admin')->user()->role_id != 2) {
+            $rules["promoter_id"] = 'required';
+        }
+    
         $tools = new Tools;
 
         // دریافت داده‌ها
@@ -37,34 +40,57 @@ class PromotionReportRequest extends FormRequest
 
         // اعتبارسنجی داده‌های دوره
         foreach ($course as $key => $item) {
-            $rules["c_subject_{$key}"] = 'required';
-            $rules["c_duration_{$key}"] = 'required|integer';
-            $rules["c_province_{$key}"] = 'required';
-            $rules["c_city_id_{$key}"] = 'required';
-            $rules["c_city_{$key}"] = "required_without:c_village_{$key}";
-            $rules["c_village_{$key}"] = "required_without:c_city_{$key}";
-            $rules["c_people_count_{$key}"] = 'required|integer';
+            // $rules["c_subject_{$key}"] = 'required'; // موضوع الزامی است
+        
+            // اگر موضوع مقداردهی شده، سایر موارد الزامی هستند
+            if (!empty($item['c_subject'])) {
+                $rules["c_duration_{$key}"] = 'required|integer';
+                $rules["c_province_{$key}"] = 'required';
+                $rules["c_city_id_{$key}"] = 'required';
+                $rules["c_people_count_{$key}"] = 'required|integer';
+        
+                // شهر یا روستا: یکی باید پر شود
+                $rules["c_city_{$key}"] = "required_without:c_village_{$key}";
+                $rules["c_village_{$key}"] = "required_without:c_city_{$key}";
+            }
         }
+        
 
         // اعتبارسنجی داده‌های تریبون
         foreach ($tribune as $key => $item) {
-            $rules["tr_subject_{$key}"] = 'required';
-            $rules["tr_duration_{$key}"] = 'required|integer';
-            $rules["tr_province_{$key}"] = 'required';
-            $rules["tr_city_id_{$key}"] = 'required';
-            $rules["tr_city_{$key}"] = "required_without:tr_village_{$key}";
-            $rules["tr_village_{$key}"] = "required_without:tr_city_{$key}";
-            $rules["tr_people_count_{$key}"] = 'required|integer';
+            // موضوع الزامی است
+            // $rules["tr_subject_{$key}"] = 'required';
+        
+            // اگر موضوع مقداردهی شده باشد، اعتبارسنجی سایر فیلدها انجام می‌شود
+            if (!empty($item["tr_subject"])) {
+                $rules["tr_duration_{$key}"] = 'required|integer';
+                $rules["tr_province_{$key}"] = 'required';
+                $rules["tr_city_id_{$key}"] = 'required';
+                $rules["tr_people_count_{$key}"] = 'required|integer';
+        
+                // شهر یا روستا: یکی باید مقداردهی شود
+                $rules["tr_city_{$key}"] = "required_without:tr_village_{$key}";
+                $rules["tr_village_{$key}"] = "required_without:tr_city_{$key}";
+            }
         }
+        
 
         // اعتبارسنجی داده‌های مراسم
         foreach ($ritual as $key => $item) {
-            $rules["r_ritual_id_{$key}"] = 'required';
-            $rules["r_province_{$key}"] = 'required';
-            $rules["r_city_id_{$key}"] = 'required';
-            $rules["r_city_{$key}"] = "required_without:r_village_{$key}";
-            $rules["r_village_{$key}"] = "required_without:r_city_{$key}";
+            // فیلد اول همیشه الزامی است
+            // $rules["r_ritual_id_{$key}"] = 'required';
+        
+            // بررسی اینکه اگر فیلد اول مقداردهی شده باشد، سایر فیلدها الزامی باشند
+            if (!empty($item["r_ritual_id"])) {
+                $rules["r_province_{$key}"] = 'required';
+                $rules["r_city_id_{$key}"] = 'required';
+        
+                // شهر یا روستا: یکی باید مقداردهی شود
+                $rules["r_city_{$key}"] = "required_without:r_village_{$key}";
+                $rules["r_village_{$key}"] = "required_without:r_city_{$key}";
+            }
         }
+        
 
         return $rules;
     }
