@@ -8,7 +8,6 @@ use Verta;
 class UserController extends BaseAbstract
 {
     protected $model = "Models\User";
-    protected $request = "Publics\Requests\UserRequest";
     protected $with = ["role","gender", "activeStatus","cityUser",'level',"education"];
     protected $showWith = ["role", "gender", "activeStatus","cityUser",'level',"education"];
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
@@ -22,7 +21,6 @@ class UserController extends BaseAbstract
             if (request()->_method != "PUT") {
                 $query->password = bcrypt(request()->mobile);
             }
-
             $query->save();
         };
     }
