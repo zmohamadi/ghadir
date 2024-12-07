@@ -27,6 +27,8 @@ class PromotionReportRequest extends FormRequest
         ];
         if (auth('admin')->user()->role_id != 2) {
             $rules["promoter_id"] = 'required';
+            $rules["level_id"] = 'required';
+            $rules["confirm_id"] = 'required';
         }
     
         $tools = new Tools;

@@ -274,6 +274,7 @@ return [
         'has_tablighat_organization_code'=>'کد سازمان تبلیغات',
         'has_ovghaf_code'=>'کد اوقاف',
         'promoter_id'=>'مبلغ',
+        'level_id'=>'امتیاز',
     ],
         collect(range(0, 100))->mapWithKeys(function ($index) {
             return [
@@ -282,18 +283,22 @@ return [
                 "c_village_$index" => 'روستا',
                 "tr_village_$index" => 'روستا',
                 "r_village_$index" => 'روستا',
+                "pos_village_$index" => 'روستا',
 
                 "c_city_$index" => 'شهر',
                 "tr_city_$index" => 'شهر',
                 "r_city_$index" =>'شهر',
+                "pos_city_$index" =>'شهر',
 
                 "c_city_id_$index" => 'شهرستان',
                 "tr_city_id_$index" => 'شهرستان',
                 "r_city_id_$index" => 'شهرستان',
+                "pos_city_id_$index" => 'شهرستان',
 
                 "c_province_$index" => 'استان',
                 "tr_province_$index" => 'استان',
                 "r_province_$index" => 'استان',
+                "pos_province_$index" => 'استان',
 
                 "c_duration_$index" => 'مدت زمان',
                 "tr_duration_$index" => 'مدت زمان',
@@ -303,6 +308,13 @@ return [
 
                 "c_subject_$index" => 'موضوع',
                 "tr_subject_$index" => 'موضوع',
+
+                "place_name_$index" => 'مکان',
+
+                "c_name_$index" => 'نام',
+                "c_family_$index" => 'نام خانوادگی',
+                "c_phone_$index" => 'تلفن',
+                "c_job_position_$index" => 'مسئولیت',
             ];
         })->toArray()
     ),
