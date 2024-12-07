@@ -24,13 +24,10 @@ class PromoterController extends BaseAbstract
         $this->storeQuery = function ($query) {
             // Apply operators for filtering or modifying the query
             $query = $this->setOperator($query);
-
-            if(request()->metod=="POST"){
-
-                $query->password = brypt($query->mobile);
-                $query->save();
+            if (request()->_method != "PUT") {
+                $query->password = bcrypt(request()->mobile);
             }
-
+            $query->save();
             // ************************************ Notes ************************************
             // Retrieve repeated 'note' values from the request input and prepare for insertion
             $notesArray = [];
