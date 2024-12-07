@@ -27,6 +27,8 @@ export function Filtering({
         gender: null,
         promoterStatus: null,
     });
+
+    // console.log("filters.promotion", filters.promotion);
     
     const [needles, setNeedles] = useState(null);
     const [provinceId, setProvinceId] = useState(null);
@@ -101,6 +103,7 @@ export function Filtering({
                     refItem={[component, "promotion"]}
                     className="col-span-5 md:col-span-3"
                     label="promotion"
+                    key={"promotion-"+filters.promotion}
                     data={needles?.promotion}
                 />
             )}
