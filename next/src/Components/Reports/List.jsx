@@ -16,19 +16,9 @@ export function List(){
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
     const formUrl = nextAdmin+"/reports";
-      // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
-      const getFilterFromUrl = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        return {
-            promoter: urlParams.get('promoter') || null,
-            promotion: urlParams.get('promotion') || null,
-            province: urlParams.get('province') || null,
-            city: urlParams.get('city') || null,
-        };
-    };
-
+   
     // مقداردهی اولیه فیلترها از URL
-    const [filters, setFilters] = useState(getFilterFromUrl);
+    const [filters, setFilters] = useState({});
     const [url, setUrl] = useState(`${laraAdmin}/reports`);
 
     useEffect(() => {
@@ -51,7 +41,6 @@ export function List(){
 
     let info = {
         insertLink:`${formUrl}/new`,
-        perPage:20,
         url: url,
         columns: [
             // {
@@ -106,7 +95,6 @@ export function List(){
             <Frame title={Lang(["public.reports"])}>
                 {access&&<>
                     <Filtering
-                        filterList={filters}
                         promotion={true}
                         promoter={true}
                         reportStatus={true}

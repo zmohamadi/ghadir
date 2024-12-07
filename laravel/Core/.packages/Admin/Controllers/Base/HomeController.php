@@ -7,6 +7,7 @@ use Models\Tribune;
 use Models\Ritual;
 use Models\Promotion;
 use Models\Notif;
+use Models\Content\Blog;
 use Models\RitualReport;
 
 class HomeController extends Controller
@@ -118,11 +119,17 @@ class HomeController extends Controller
     public function home($panel,$user)
     {
         $notif="";
+        $blogs="";
+        $promotions="";
         if($panel=="promoter"){
             $notif = Notif::where(['promoter_id'=>$user,'display'=>1])->get();
+            $blogs = Blog::active()->get();
+            $promotions = Promotion::where("register_status",1)->with('rituals')->get();
         }
        
         $collection['notif'] = $notif;
+        $collection['blogs'] = $blogs;
+        $collection['promotions'] = $promotions;
 
         return response()->json($collection);
 

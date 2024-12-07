@@ -39,7 +39,7 @@ export const getMenus = (user) => {
     ];
     const promoter = [
         { title: "dashboard", icon: "Home", href: "/dashboard" },
-        { title: "active_promotions", icon: "Book", href: "/promotions" },
+        // { title: "active_promotions", icon: "Book", href: "/promotions" },
         { title: "myPromotions", icon: "Aperture", href: "/myPromotions" },
         { title: "myReports", icon: "List", href: "/myReports" },
         { title: "mySupports", icon: "PenTool", href: "/mySupports" },

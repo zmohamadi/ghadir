@@ -18,7 +18,7 @@ return [
     'base_management'=>'اطلاعات پایه',
     'register_promotions'=>'مشارکت در ماموریتهای تبلیغی',
     'reports'=>'گزارشات',
-    'myPromotions'=>'ماموریتهای تبلیغی من',
+    'myPromotions'=>'مشارکتهای من',
     'myReports'=>'گزارشات من',
     'mySupports'=>'حمایتهای من',
     'promoters'=>'مبلّغین',
