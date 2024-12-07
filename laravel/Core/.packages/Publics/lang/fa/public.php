@@ -23,6 +23,7 @@ $lang = [
    'city_sh'=>'شهرستان',
    'life_city_sh'=>'شهرستان(محل سکونت)',
    'photo'=>'عکس',
+   'photos'=>'تصاویر',
    'promoter'=>'مبلّغ',
    'star'=>'امتیاز',
    'commitments'=>'تعهدات ستاد',
@@ -130,6 +131,8 @@ $lang = [
    'native_province'=>'استان(بومی)',
    'agrees'=>'مشارکت ها',
    'agree'=>'مشارکت ها',
+   'account_status'=>'وضعیت حساب',
+   'work_status'=>'وضعیت فعالیت فرهنگی',
    
 ];
 

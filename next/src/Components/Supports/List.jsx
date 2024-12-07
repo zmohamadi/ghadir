@@ -23,17 +23,17 @@ export function List({promotion=""}){
         perPage:20,
         url: url,
         columns: [
-            {
-                label: "",
-                jsx: (item) => (
-                    <Pic 
-                        src={mediaPath + "/promotions/" +item?. promotion?.photo} 
-                        defaultImg={`${mediaPath}/public/default/avatar.png`} 
-                        classImg="user-avatar" 
-                        key={"img" + item?.promotion?.photo} 
-                    />
-                ),
-            },
+            // {
+            //     label: "",
+            //     jsx: (item) => (
+            //         <Pic 
+            //             src={mediaPath + "/promotions/" +item?. promotion?.photo} 
+            //             defaultImg={`${mediaPath}/public/default/avatar.png`} 
+            //             classImg="user-avatar" 
+            //             key={"img" + item?.promotion?.photo} 
+            //         />
+            //     ),
+            // },
            
             {
                 label: "promotion",

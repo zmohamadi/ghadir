@@ -33,35 +33,24 @@ export function View({id }) {
     const ritual_reports = component?.state?.info?.ritual_reports?.length
         ? component.state.info.ritual_reports: null;
 
+    let images = (data?.photo)? data?.item?.photo?.split("###") : [];
+    let videos = (data?.video)? data?.item?.video?.split("###") : [];
+
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
                 <Tab className="col-span-12">
                     <TabHeader>
-                        <TabList href="tab-first" title={Lang("public.promotion")} active={"true"}>
-                            {Lang("public.promotion")}
-                        </TabList>
-                        <TabList href="tab-second" title={Lang("public.user_courses")}>
-                            {Lang("public.courses")}
-                        </TabList>
-                        <TabList href="tab-third" title={Lang("public.user_tribunes")}>
-                            {Lang("public.tribunes")}
-                        </TabList>
-                        <TabList href="tab-fourth" title={Lang("public.user_ritual")}>
-                            {Lang("public.ritual")}
-                        </TabList>
+                        <TabList href="tab-first" title={Lang("public.promotion")} active={"true"} />
+                        <TabList href="tab-second" title={Lang("public.courses")} />
+                        <TabList href="tab-third" title={Lang("public.tribunes")} />
+                        <TabList href="tab-fourth" title={Lang("public.ritual")} />
+                        <TabList href="tab-media" title={Lang("public.media")} />
                     </TabHeader>
                     <TabBody>
                         <TabPanel id="tab-first" active={"true"}>
                             <div className="col-span-12 space-y-4">
-                                <div className="flex-full">
-                                    <Pic
-                                        src={mediaPath + "/reports/" + data?.photo}
-                                        defaultImg={`${mediaPath}/public/default/avatar.png`}
-                                        className="rounded-md border"
-                                        key={"img" + data?.photo}
-                                    />
-                                </div>
+                                
                                 <div className="flex gap-4">
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.promotion")}</label>
@@ -233,6 +222,30 @@ export function View({id }) {
                                 </div>
                                     </>
                                 ))}
+                        </TabPanel>
+                        <TabPanel id="tab-media">
+                            <div className="grid grid-cols-2 gap-4">
+                                {images.map((img, index) => (
+                                    <div className="flex" key={`img-${index}`}>
+                                        <Pic
+                                            src={`${mediaPath}/reports/${img}`}
+                                            defaultImg={`${mediaPath}/public/default/avatar.png`}
+                                            className="rounded-md border w-full"
+                                        />
+                                    </div>
+                                ))}
+
+                                {videos.map((video, index) => (
+                                    <div className="flex" key={`video-${index}`}>
+                                        <video
+                                            controls
+                                            className="w-full rounded-md border"
+                                            src={`${mediaPath}/reports/${video}`}
+                                        ></video>
+                                    </div>
+                                ))}
+                            </div>
+
                         </TabPanel>
                     </TabBody>
                 </Tab>

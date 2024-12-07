@@ -5,6 +5,7 @@ namespace Admin\Controllers;
 use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
 use Models\Promotion;
+use Models\Person\Promoter;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
@@ -151,7 +152,10 @@ class PromotionReportController extends BaseAbstract
         
             // به‌روزرسانی تعداد گزارش‌ها
             $promotionCount = $this->model::where('promotion_id', $promotion)->count();
-            \Models\Promotion::where('id', $promotion)->update(['report_count' => $promotionCount]);
+            Promotion::where('id', $promotion)->update(['report_count' => $promotionCount]);
+
+            $promoterCount = $this->model::where('promoter_id', $promoter_id)->count();
+            Promoter::where('id', $promoter_id)->update(['report_count' => $promoterCount]);
         };
         
         

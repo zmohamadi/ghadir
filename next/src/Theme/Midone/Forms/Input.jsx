@@ -42,6 +42,38 @@ export function Input(props) {
         keyUp = options.onKeyUp;
         delete options.onKeyUp;
     }
+    if (type == "number") {
+        const numberKeyDownHandler = (e) => {
+            // لیست کلیدهای مجاز
+            const allowedKeys = [
+                "Backspace",
+                "Tab",
+                "ArrowLeft",
+                "ArrowRight",
+                "Delete",
+                "Home",
+                "End",
+                "Enter",
+            ];
+    
+            // بررسی اعداد انگلیسی و فارسی
+            const englishNumbers = e.key >= "0" && e.key <= "9";
+            const persianNumbers = e.key >= "۰" && e.key <= "۹";
+    
+            // اجازه ورود فقط اعداد و کلیدهای ضروری
+            if (!allowedKeys.includes(e.key) && !englishNumbers && !persianNumbers) {
+                e.preventDefault();
+            }
+        };
+    
+        keyUp = keyUp || (() => {}); // اگر keyUp مقدار پیش‌فرض دارد حفظ شود
+        options = {
+            ...(options || {}),
+            onKeyDown: numberKeyDownHandler,
+        };
+    }
+    
+    
 
     const handleChange = (e) => {
         const newValue = e.target.value;

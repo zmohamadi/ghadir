@@ -7,6 +7,7 @@ use Admin\Controllers\Public\BaseAbstract;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
+use Models\Person\Promoter;
 
 class PromotionAgreeController extends BaseAbstract
 {
@@ -89,6 +90,9 @@ class PromotionAgreeController extends BaseAbstract
             }
             $promotionCount = $this->model::where('promotion_id', $promotion_id)->count();
             $update = \Models\Promotion::where('id', $promotion_id)->update(['user_count' => $promotionCount]);
+
+            $promoterCount = $this->model::where('promoter_id', $this->user_id)->count();
+            Promoter::where('id', $this->user_id)->update(['agree_count' => $promoterCount]);
 
         };
         

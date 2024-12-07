@@ -39,6 +39,8 @@ class PromoterRequest extends FormRequest
             'ovghaf_code' => 'required_if:has_ovghaf_code,1',
 
             'codemeli' => [
+                'digits:10',
+                'numeric',
                 'required_if:is_not_citizen,0', // الزامی بودن کدملی برای شهروندان
                 Rule::unique('users', 'codemeli')->ignore($id)->whereNull('deleted_at'),
             ],

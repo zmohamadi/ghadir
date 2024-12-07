@@ -147,27 +147,29 @@ export function Form({id}){
                         </TabHeader>
                         <TabBody>
                             <TabPanel id="tab-first" active={"true"}>
-                                <Input label="name" refItem={[component, "firstname"]} required="true" />
-                                <Input label="family" refItem={[component, "lastname"]} required="true" />
-                                <Input dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
-                                <Select key={"is_not_citizen"+2} 
+                                <Input className="col-span-3"  label="name" refItem={[component, "firstname"]} required="true" />
+                                <Input className="col-span-3"  label="family" refItem={[component, "lastname"]} required="true" />
+                                {
+                                    access && <Input dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
+                                }
+                                <Select key={"is_not_citizen"+2} required="true"
                                     defaultValue={data?.is_not_citizen == true ? 1 : 0} 
                                 className="col-span-3" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('im_citizen')}</option>
                                     <option value="1">{Lang('not_citizen')}</option>
                                 </Select>
-                                <Input dir="ltr" className="col-span-3" label="codemeli" refItem={[component, "codemeli"]} />
-                               <Input className="col-span-3" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
+                                <Input dir="ltr" className="col-span-3" type="number" label="codemeli" refItem={[component, "codemeli"]} />
+                               <Input className="col-span-3" dir="ltr" type="number" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
                                 <Select className="col-span-3" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
-                                <SelectTail  className="col-span-3"
+                                <SelectTail required="true"  className="col-span-3"
                                     defaultValue={data?.native_province_id ? data?.native_province_id: nativeProvinceId} 
                                     label="native_province" refItem={[component, "native_province_id"]} 
                                     key={"nativeprovince"+needles?.province?.length}
                                     data={needles?.province} titleKey={"name_fa"}
                                     onChange={(e) => filterCity(e)}
                                 />
-                                <SelectTail  className="col-span-3" label="native_city" refItem={[component, "native_city_id"]} 
+                                <SelectTail required="true"  className="col-span-3" label="native_city" refItem={[component, "native_city_id"]} 
                                     key={"city" + nativeProvinceId}
                                     data={nativeProvinceId>0 ?  needles?.city?.filter(item => item.province_id == nativeProvinceId) :  needles?.city} 
                                     titleKey={"name_fa"}
@@ -211,25 +213,32 @@ export function Form({id}){
                                 <Dropzone className="col-span-6 avatar-user"
                                  maxFiles= "1"
                                  maxFilesize= "2"
-                                 acceptType='image'
+                                 acceptType='image'required="true"
                                   refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
-                                <Radio className="col-span-4" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
+                                <Radio className="col-span-3" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
                                     data={needles?.gender} titleKey={"title_"+local}  key={"gender_id"+data?.gender_id}
                                 />
                                 
                                 {
-                                     user?.role_id==1 && <>
-                                        <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
-                                        <div className="col-span-4">
-                                                <label>{Lang("rank")}</label>
-                                                <div className="flex space-x-1">{renderStars(starRating)}</div>
-                                            </div>
-                                        <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
-                                            type="col" label="status" refItem={[component, `status_id`]}
+                                     access && <>
+                                        
+                                        <Radio className="col-span-3" defaultValue={data?.status_id ? data?.status_id: 1} 
+                                            type="col" label="account_status" refItem={[component, `status_id`]}
                                             data={needles?.status?.filter(item => item.group_id == 1)} 
-                                            valueKey="code" titleKey={"title_"+local}  
+                                            valueKey="code" titleKey={"title_"+local}  required="true"
                                             key={"status_id"+data?.status_id}
                                         /> 
+                                        <Radio className="col-span-3" defaultValue={data?.work_status ? data?.work_status: 1} 
+                                            type="col" label="work_status" refItem={[component, `work_status`]}
+                                            data={needles?.status?.filter(item => item.group_id == 33)} required="true"
+                                            valueKey="code" titleKey={"title_"+local}  
+                                            key={"work_status"+data?.work_status}
+                                        /> 
+                                        <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
+                                        <div className="col-span-3">
+                                                <label className="form-label font-bold">{Lang("rank")}</label>
+                                                <div className="flex space-x-1 form-control">{renderStars(starRating)}</div>
+                                            </div>
                                     </>
                                 }
                                 

@@ -35,6 +35,7 @@ export function SelectLocation({
     return (
         <>
             <SelectTail
+            required="true"
                 defaultValue={data?.province_id ? data?.province_id : provinceId}
                 className={classNameProvince}
                 label={lProvince}
@@ -45,6 +46,7 @@ export function SelectLocation({
                 onChange={(e) => filterCity(e)}
             />
             <SelectTail
+            required="true"
                 className={classNameCitySh}
                 label={lCitySh}
                 refItem={[component, refCitySh]}

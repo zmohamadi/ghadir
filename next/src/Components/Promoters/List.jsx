@@ -56,16 +56,16 @@ export function List() {
         insertLink: `${formUrl}/new`,
         url: url,
         columns: [
-            {
-                label: "",
-                jsx: (item) => (
-                    <Pic
-                        src={`${mediaPath}/users/${item?.photo}`}
-                        defaultImg={`${mediaPath}/public/default/avatar.png`}
-                        classImg="user-avatar rounded-full"
-                    />
-                ),
-            },
+            // {
+            //     label: "",
+            //     jsx: (item) => (
+            //         <Pic
+            //             src={`${mediaPath}/users/${item?.photo}`}
+            //             defaultImg={`${mediaPath}/public/default/avatar.png`}
+            //             classImg="user-avatar rounded-full"
+            //         />
+            //     ),
+            // },
             {
                 label: "name",
                 jsx: (item) => (
@@ -79,20 +79,21 @@ export function List() {
                 ? [
                       {
                           label: "",
+                          width:"150px",
                           jsx: (item) => <span>{renderStars(item?.level_id)}</span>,
                       },
-                      { label: "last_login", field: "last_login" },
+                    //   { label: "last_login", field: "last_login" },
                   ]
                 : []),
-            {
-                label: "gender",
-                sort: false,
-                field: `gender.title_${local}`,
-            },
+            // {
+            //     label: "gender",
+            //     sort: false,
+            //     field: `gender.title_${local}`,
+            // },
             {
                 label: "agrees",
                 jsx: (item) => (
-                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" 
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
                     href={`${nextAdmin}/agrees?promoter=${item.id}`}>
                         {`${item?.agree_count}`}
                     </Link>
@@ -101,7 +102,7 @@ export function List() {
             {
                 label: "reports",
                 jsx: (item) => (
-                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" 
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
                     href={`${nextAdmin}/reports?promoter=${item.id}`}>
                         {`${item?.report_count}`}
                     </Link>
@@ -117,7 +118,7 @@ export function List() {
                     </span>
                 ),
             },
-            { label: "created_at", field: "created_at" },
+            // { label: "created_at", field: "created_at" },
             {
                 label: "",
                 sort: false,

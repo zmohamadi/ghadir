@@ -98,7 +98,7 @@ const SelectTail = (props)=>{
     }, [refItem[0].state.info, defaultValue, data, children])
 
     return(
-        <div className={className?className+' mb-3 col-span-12 md:col-span-6':' mb-3 col-span-12 md:col-span-6'} >
+        <div className={className?className+' mb-3':' mb-3 col-span-12 md:col-span-6'} >
             <label htmlFor={id} className='form-label font-bold'>{label} {requiredDiv}</label>
             <select
                 id = {id}

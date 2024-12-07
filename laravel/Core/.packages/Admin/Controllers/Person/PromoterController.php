@@ -111,6 +111,12 @@ class PromoterController extends BaseAbstract
                 UserPromotion::where('promoter_id', $query->id)->forceDelete();
                 UserPromotion::insert($positionsArray);
             }
+
+            $countagrees = \Models\PromotionAgree::where('promoter_id', $query->id)->count();
+            $query->agree_count = $countagrees;
+            $countreports = \Models\PromotionReport::where('promoter_id', $query->id)->count();
+            $query->report_count = $countreports;
+            $query->save();
         };
 
         // Uncomment and modify the below indexQuery if additional filtering by role_id is needed for listing

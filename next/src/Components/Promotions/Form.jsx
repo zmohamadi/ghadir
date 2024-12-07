@@ -47,7 +47,7 @@ export function Form({id}){
                         <div className="intro-y col-span-12 lg:col-span-8">
                             <Input label="title" refItem={[component, "title"]} required="true" />
                             <div className="post intro-y p-3 box mt-5 ">
-                                <Input dir="ltr" label="year" refItem={[component, "year"]} required="true" />
+                                <Input type="number" dir="ltr" label="year" refItem={[component, "year"]} required="true" />
                                 <Textarea label="description" required="true" refItem={[component, "comments"]}  />
                                 <Textarea label="commitments" refItem={[component, "commitments"]}  />
                                 <Dropzone className="col-span-12" refItem={[component, "photo"]} required="true" uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />

@@ -12,13 +12,13 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                 {closeIcon}
             </div>
                 <Input className="col-span-12" label="subject" refItem={[parent, `tr_subject_${index}`]} defaultValue={info?.subject}  />
-                <Select label="audiencetype" refItem={[parent,`tr_audiencetype_id_${index}`]} 
+                <Select required="true" label="audiencetype" refItem={[parent,`tr_audiencetype_id_${index}`]} 
                     key={"audiencetype"+needles?.audiencetype?.length} defaultValue={info?.audiencetype_id}
                     data={needles?.audiencetype}
                 />
-                <Input label="people_count" refItem={[parent, `tr_people_count_${index}`]} defaultValue={info?.people_count}  />
-                <Input label="duration" refItem={[parent, `tr_duration_${index}`]} defaultValue={info?.duration}  />
-                <Input label="place_name" refItem={[parent, `tr_place_name_${index}`]} defaultValue={info?.place_name}  />
+                <Input type="number" required="true" label="people_count" refItem={[parent, `tr_people_count_${index}`]} defaultValue={info?.people_count}  />
+                <Input type="number" required="true" label="duration" refItem={[parent, `tr_duration_${index}`]} defaultValue={info?.duration}  />
+                <Input required="true" label="place_name" refItem={[parent, `tr_place_name_${index}`]} defaultValue={info?.place_name}  />
                 
                 <SelectLocation needles={needles} component={parent} data={info} 
                 refProvince={`tr_province_${index}`} refCitySh={`tr_city_id_${index}`} 

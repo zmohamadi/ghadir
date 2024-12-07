@@ -72,22 +72,28 @@ export function Form({ id}) {
                 <Tab className="col-span-12">
                     <TabHeader>
                         
-                        <TabList href="tab-first" title={Lang("public.select_promotion")} active={"true"} 
-                        items = {[component, ['promoter_id','promotion_id']]}
-                            />
-                        <TabList href="tab-second" title={Lang("public.courses")} 
+                        
+                        <TabList href="tab-second" title={Lang("public.courses")}   active={"true"} 
                             items = {[component, ['c_subject_*','c_people_count_*','c_duration_*','c_province_*','c_city_id_*', 
                             'c_city_*','c_village_*']]} />
                         <TabList href="tab-third" title={Lang("public.tribunes")}  
-                        items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
-                            'tr_city_*','tr_village_*']]}/>
+                            items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
+                            'tr_city_*','tr_village_*']]} />
                         <TabList href="tab-fourth" title={Lang("public.ritual")}
-                        items = {[component, ['r_province_*','r_city_id_*', 
-                            'r_city_*','r_village_*','ritual_id_*']]}
+                            items = {[component, ['r_province_*','r_city_id_*','r_city_*','r_village_*','ritual_id_*']]} />
+                        <TabList href="tab-media" title={Lang("public.media")}
                         />
+                        {
+                            access && <TabList href="tab-first" title={Lang("public.select_promotion")}
+                                        items = {[component, ['promoter_id','promotion_id']]} />
+                        }
                     </TabHeader>
                     <TabBody>
-                        <TabPanel id="tab-first" active={"true"}>
+                        <TabPanel id="tab-media" >
+                            <Dropzone className="col-span-6"  refItem={[component, "photos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
+                            <Dropzone className="col-span-6"  refItem={[component, "videos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
+                        </TabPanel>
+                        <TabPanel id="tab-first" >
                             <SelectTail label="promoter" refItem={[component, "promoter_id"]}>
                                 {
                                     needles?.promoter
@@ -105,7 +111,6 @@ export function Form({ id}) {
                             <Select
                                 label="promotion"
                                 refItem={[component, "promotion_id"]}
-                                required="true"
                                 defaultValue={promotion?promotion:data?.promotion_id}
                                 data={needles?.promotion?.filter((item) => 
                                     item.report_status == 1 && (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
@@ -125,10 +130,9 @@ export function Form({ id}) {
                                     /> 
                                 </>
                                 }
-                            <Dropzone className="col-span-12" refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
 
                         </TabPanel>
-                        <TabPanel id="tab-second">
+                        <TabPanel id="tab-second" active={"true"}>
                             <Repeat needles={needles} {...otherProps} child={Course} parent={component} />
                         </TabPanel>
                         <TabPanel id="tab-third">

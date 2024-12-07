@@ -54,17 +54,17 @@ export function List({query}) {
         insertLink: access ? `${formUrl}/new` : "",
         url: url,
         columns: [
-            {
-                label: "",
-                jsx: (item) => (
-                    <Pic 
-                        src={mediaPath + "/promotions/" + item?.photo} 
-                        defaultImg={`${mediaPath}/public/default/avatar.png`} 
-                        classImg="user-avatar" 
-                        key={"img" + item?.photo} 
-                    />
-                ),
-            },
+            // {
+            //     label: "",
+            //     jsx: (item) => (
+            //         <Pic 
+            //             src={mediaPath + "/promotions/" + item?.photo} 
+            //             defaultImg={`${mediaPath}/public/default/avatar.png`} 
+            //             classImg="user-avatar" 
+            //             key={"img" + item?.photo} 
+            //         />
+            //     ),
+            // },
             {
                 label: "title",
                 jsx: (item) => (
@@ -91,9 +91,33 @@ export function List({query}) {
                         </span>
                     )
                 },
-                { label: "agrees", jsx: (item) => <span>{item?.user_count}</span> },
-                { label: "reports", jsx: (item) => <span>{item?.report_count}</span> },
-                { label: "supports", jsx: (item) => <span>{item?.sum_support}</span> },
+                {
+                    label: "agrees",
+                    jsx: (item) => (
+                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        href={`${nextAdmin}/agrees?promotion=${item?.id}`}>
+                            {`${item?.user_count}`}
+                        </Link>
+                    ),
+                },
+                {
+                    label: "reports",
+                    jsx: (item) => (
+                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        href={`${nextAdmin}/reports?promotion=${item?.id}`}>
+                            {`${item?.report_count}`}
+                        </Link>
+                    ),
+                },
+                {
+                    label: "supports",
+                    jsx: (item) => (
+                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        href={`${nextAdmin}/supports?promotion=${item?.id}`}>
+                            {`${item?.sum_support}`}
+                        </Link>
+                    ),
+                },
             ] : []),
             { label: "created_at", field: "created_at" },
             {
