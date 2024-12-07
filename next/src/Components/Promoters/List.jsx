@@ -90,6 +90,22 @@ export function List() {
                 field: `gender.title_${local}`,
             },
             {
+                label: "agrees",
+                jsx: (item) => (
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" href={`${nextAdmin}/agrees/${item.id}`}>
+                        {`${item?.agree_count}`}
+                    </Link>
+                ),
+            },
+            {
+                label: "reports",
+                jsx: (item) => (
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" href={`${nextAdmin}/reports/${item.id}`}>
+                        {`${item?.report_count}`}
+                    </Link>
+                ),
+            },
+            {
                 label: "status",
                 jsx: (item) => (
                     <span
