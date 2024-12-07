@@ -92,7 +92,8 @@ export function List() {
             {
                 label: "agrees",
                 jsx: (item) => (
-                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" href={`${nextAdmin}/agrees/${item.id}`}>
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" 
+                    href={`${nextAdmin}/agrees?promoter=${item.id}`}>
                         {`${item?.agree_count}`}
                     </Link>
                 ),
@@ -100,7 +101,8 @@ export function List() {
             {
                 label: "reports",
                 jsx: (item) => (
-                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" href={`${nextAdmin}/reports/${item.id}`}>
+                    <Link className="rounded-full py-1 px-2 text-white bg-theme-10" 
+                    href={`${nextAdmin}/reports?promoter=${item.id}`}>
                         {`${item?.report_count}`}
                     </Link>
                 ),
