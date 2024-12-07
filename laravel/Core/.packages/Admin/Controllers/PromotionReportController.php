@@ -17,7 +17,7 @@ class PromotionReportController extends BaseAbstract
     protected $with = ["promotion","promoter","confirmRepo","level"];
     protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
     "courses.audienceType","ritualReports.ritual","confirmRepo"];
-    protected $files = ["photo"];
+    // protected $files = ["photo"];
     protected $needles = ["Person\Promoter",'Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
 
 
@@ -46,9 +46,9 @@ class PromotionReportController extends BaseAbstract
 
         $this->storeQuery = function ($query) {
             $method = request()->_method; //PUT
-            $promotion = request()->promotion_id;
+            $promoter_id = $this->role_id == 2 ? $this->user_id :  request()->promoter_id;
             $promotionRecord = Promotion::find($promotion);
-            $promoter_id = request()->promoter_id;
+            $promotion = request()->promotion;
 
             $query->save();
         

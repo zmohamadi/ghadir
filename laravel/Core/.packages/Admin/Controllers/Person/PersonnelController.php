@@ -14,16 +14,5 @@ class PersonnelController extends UserController
     protected $needles = ['Base\Status'];
     protected $searchFilter = ["firstname", "lastname", "mobile"];
     protected $files = ["photo"];
-
-    public function init()
-    {
-        $this->storeQuery = function ($query) {
-            $query = $this->setOperator($query);
-        };
-        // $this->indexQuery = function ($query) {
-            
-        //     $query = $query->where('role_id',2);
-        // };
-    }
 }
 
