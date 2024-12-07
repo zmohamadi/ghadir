@@ -4,8 +4,7 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useAuth } from "@/lib/auth";
 import { Loading, Repeat } from "@/Theme/Midone/Utils";
-import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea,Frame,Radio } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea,Frame,Radio, SelectTail, CheckBox } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CulturalUsers } from "./CulturalUsers";
 import { useRouter } from 'next/navigation';
@@ -16,15 +15,18 @@ import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export function Form({id,panel,access,query}){
-    const link = "/promoters";
+export function Form({id}){
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
+    const query = `?promoter=${user?.id}`;
+    // console.log(query);
+    const link =access ? "/promoters" :"/promoters"+query ;
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
     const router = useRouter();
     let component = useFormRefs();
     let {save, get, getNeedles} = useData();
     let [needles, setNeedles] = useState();
-    const {user} = useAuth();
     // console.log(user);
     
     let uploadUrl = laraAdmin+"/upload/.-media-users";
@@ -32,13 +34,14 @@ export function Form({id,panel,access,query}){
     let uploadDir = 'media/users/';
     
     // اگر روت پروفایل باشد، از user.id استفاده می‌شود
-    let finalId = panel=="admin" ? user?.id : id;
-    let url = laraAdmin + link;
+    let finalId = !access ? user?.id : id;
+    
+    let url = laraAdmin + "/promoters";
     let method = "new";
-    let nextUrl = panel =="admin" ? link : "/";
+    let nextUrl = access? link : "/profile";
     
     if (finalId !== 0 && finalId !== undefined) {
-        url = `${laraAdmin + link}/${finalId}`;
+        url = `${laraAdmin + "/promoters"}/${finalId}`;
         method = "edit";
     }
 
@@ -83,15 +86,40 @@ export function Form({id,panel,access,query}){
         }
         return stars;
     };
-    // console.log(component?.state);
-
-
     const handleStarClick = (rating) => {
         setStarRating(rating);
     };
 
-    // console.log(data?.is_not_citizen);
+    let [nativeProvinceId, setProvinceId] = useState(null);
+    useEffect(()=>{
+        
+        if(component?.state.info["native_city_id"]) setProvinceId(component?.state.info?.native_province_id);
+       
+    }, [component?.state?.info]);
 
+    const filterCity = (e)=>{
+        setProvinceId(e.value);
+    };
+    const [disabledInputs, setDisabledInputs] = useState({
+        khadamat_code: component?.state?.info["khadamat_code"] ? component?.state?.info["khadamat_code"] : true,
+        tablighat_office_code: component?.state?.info["tablighat_office_code"] ? component?.state?.info["tablighat_office_code"] : true,
+        tablighat_organization_code: component?.state?.info["tablighat_organization_code"] ? component?.state?.info["tablighat_organization_code"] : true,
+        ovghaf_code: component?.state?.info["ovghaf_code"] ? component?.state?.info["ovghaf_code"] : true,
+      });
+    
+      const toggleInput = (inputName, e) => {
+        setDisabledInputs((prev) => ({
+          ...prev,
+          [inputName]: !e, // اگر تیک زده شود، فعال و اگر برداشته شود، غیرفعال
+        }));
+      };
+      const inputsData = [
+        { name: "khadamat_code", label: "khadamat_code" },
+        { name: "tablighat_office_code", label: "tablighat_office_code" },
+        { name: "tablighat_organization_code", label: "tablighat_organization_code" },
+        { name: "ovghaf_code", label: "ovghaf_code" },
+      ];
+    
     return(
         
             <>
@@ -114,37 +142,72 @@ export function Form({id,panel,access,query}){
                         </TabHeader>
                         <TabBody>
                             <TabPanel id="tab-first" active={"true"}>
-                                <Input  className="col-span-4" label="name" refItem={[component, "firstname"]} required="true" />
-                                <Input  className="col-span-4" label="family" refItem={[component, "lastname"]} required="true" />
-                                <Input dir="ltr" className="col-span-4" label="mobile" refItem={[component, "mobile"]} required="true" />
+                                <Input label="name" refItem={[component, "firstname"]} required="true" />
+                                <Input label="family" refItem={[component, "lastname"]} required="true" />
+                                <Input dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
                                 <Select key={"is_not_citizen"+2} 
-                                    defaultValue={data?.is_not_citizen == false ? 0 : 1} 
-                                    className="col-span-4" label="citizen" 
-                                    refItem={[component, "is_not_citizen"]} 
+                                    defaultValue={data?.is_not_citizen == true ? 1 : 0} 
+                                className="col-span-3" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('im_citizen')}</option>
                                     <option value="1">{Lang('not_citizen')}</option>
                                 </Select>
-                                <Input dir="ltr" className="col-span-4" label="codemeli" refItem={[component, "codemeli"]} />
-                                <Input className="col-span-4" dir="ltr" label="khadamat_code" refItem={[component, "khadamat_code"]}  />
-                                <Input className="col-span-4" dir="ltr" label="tablighat_office_code" refItem={[component, "tablighat_office_code"]} />
-                                <Input className="col-span-4" dir="ltr" label="tablighat_organization_code" refItem={[component, "tablighat_organization_code"]} />
-                                <Input className="col-span-4" dir="ltr" label="ovghaf_code" refItem={[component, "ovghaf_code"]}  />
-                                <Input className="col-span-4" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
-                                <Select className="col-span-4" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
+                                <Input dir="ltr" className="col-span-3" label="codemeli" refItem={[component, "codemeli"]} />
+                               <Input className="col-span-3" dir="ltr" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
+                                <Select className="col-span-3" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
+                                <SelectTail  className="col-span-3"
+                                    defaultValue={data?.native_province_id ? data?.native_province_id: nativeProvinceId} 
+                                    label="native_province" refItem={[component, "native_province_id"]} 
+                                    key={"nativeprovince"+needles?.province?.length}
+                                    data={needles?.province} titleKey={"name_fa"}
+                                    onChange={(e) => filterCity(e)}
+                                />
+                                <SelectTail  className="col-span-3" label="native_city" refItem={[component, "native_city_id"]} 
+                                    key={"city" + nativeProvinceId}
+                                    data={nativeProvinceId>0 ?  needles?.city?.filter(item => item.province_id == nativeProvinceId) :  needles?.city} 
+                                    titleKey={"name_fa"}
+                                />
+                                <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
+
                                 <SelectLocation 
-                                    classNameProvince="col-span-4" 
+                                    classNameProvince="col-span-3" 
                                     classNameCitySh="col-span-3"
                                     classNameCity="col-span-3"
                                     classNameVillage="col-span-3"
+                                    lProvince="life_province"
+                                    lCitySh="life_city_sh"
+                                    lCity="life_city"
+                                    lVillage="life_village"
                                     needles={needles} component={component} data={data} />
-                               
-                                
-                                <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
 
+                                <hr 
+                                className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold"
+                                />
+                                {inputsData.map((input) => (<>
+                                    <CheckBox
+                                        onChange={(e) => toggleInput(input.name, e)}
+                                        className="col-span-2"
+                                        label={input.label}
+                                        name={Lang("public.has")}
+                                        refItem={[component, `has_${input.name}`]}
+                                    />
+                                    <Input
+                                        disabled={data?.["has_"+input.name] == 1 ?  false :  disabledInputs[input.name]}
+                                        dir="ltr"
+                                        className="col-span-4"
+                                        label={input.label}
+                                        refItem={[component, input.name]}
+                                    />
+                                </>
+       
+                                ))}
+                                <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
                                 <Textarea label="address" refItem={[component, "address"]}  />
-                                <Dropzone refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
-
+                                <Dropzone className="col-span-6 avatar-user"
+                                 maxFiles= "1"
+                                 maxFilesize= "2"
+                                 acceptType='image'
+                                  refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
                                 <Radio className="col-span-4" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
                                     data={needles?.gender} titleKey={"title_"+local}  key={"gender_id"+data?.gender_id}
                                 />
@@ -153,7 +216,7 @@ export function Form({id,panel,access,query}){
                                      user?.role_id==1 && <>
                                         <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
                                         <div className="col-span-4">
-                                                <label>{Lang("star")}</label>
+                                                <label>{Lang("rank")}</label>
                                                 <div className="flex space-x-1">{renderStars(starRating)}</div>
                                             </div>
                                         <Radio className="col-span-4" defaultValue={data?.status_id ? data?.status_id: 1} 
@@ -164,6 +227,7 @@ export function Form({id,panel,access,query}){
                                         /> 
                                     </>
                                 }
+                                
                             </TabPanel>  
                             <TabPanel id="tab-second">
                                 <Repeat needles={needles} {...otherProps3} child={InfoPromotions} parent={component} />

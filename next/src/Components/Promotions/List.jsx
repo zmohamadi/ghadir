@@ -6,8 +6,12 @@ import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useEffect, useRef, useState } from "react";
 import { Box, Button, ButtonContainer } from "@/Theme/Midone";
+import { useAuth } from "@/lib";
+import Link from "next/link";
 
-export function List({panel,access , query}){
+export function List({query}) {
+    const { user } = useAuth();
+    const access = user?.role_id == 1 ? true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy,getNeedles} = useData();
@@ -16,8 +20,6 @@ export function List({panel,access , query}){
     const [ url, setUrl ] = useState(`${laraAdmin}/promotions?${query}`);
     const effectRan = useRef(false);
     const formUrl = nextAdmin+"/promotions";
-    // const url = `${laraAdmin}/promotions?${query}`;
-    // const formUrl = "/promotions";
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -50,7 +52,6 @@ export function List({panel,access , query}){
     
     let info = {
         insertLink: access ? `${formUrl}/new` : "",
-        perPage: 20,
         url: url,
         columns: [
             {
@@ -64,7 +65,14 @@ export function List({panel,access , query}){
                     />
                 ),
             },
-            { label: "title", field: "title" },
+            {
+                label: "title",
+                jsx: (item) => (
+                    <Link href={`${formUrl}/${item.id}`}>
+                        {`${item?.title}`}
+                    </Link>
+                ),
+            },
             { label: "year", field: "year" },
             ...(access ? [
                 { 
@@ -83,9 +91,9 @@ export function List({panel,access , query}){
                         </span>
                     )
                 },
-                { label: "pro_people_count", jsx: (item) => <span>{item?.user_count}</span> },
-                { label: "report_count", jsx: (item) => <span>{item?.report_count}</span> },
-                { label: "sum_support", jsx: (item) => <span>{item?.sum_support}</span> },
+                { label: "agrees", jsx: (item) => <span>{item?.user_count}</span> },
+                { label: "reports", jsx: (item) => <span>{item?.report_count}</span> },
+                { label: "supports", jsx: (item) => <span>{item?.sum_support}</span> },
             ] : []),
             { label: "created_at", field: "created_at" },
             {

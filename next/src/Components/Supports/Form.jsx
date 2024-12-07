@@ -3,13 +3,12 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/lib/auth";
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Loading } from "@/Theme/Midone";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
-export function Form({id,panel}){
+export function Form({id}){
     const link = "/supports";
     const {Lang} = useLang();
     const {laraAdmin} = useConfig();
@@ -40,23 +39,20 @@ export function Form({id,panel}){
                 :<>
                 <Box>
                         <Select label="occasion" refItem={[component, "promotion_id"]} 
-                            // key={"occasion" + needles?.promotion?.lenght} 
                             required="true"
                             data={needles?.promotion} 
                         />
                         <Select label="type" refItem={[component, "type_id"]} 
-                            // key={"type" + needles?.supporttype?.lenght} 
                             required="true"
                             data={needles?.supporttype} 
                         />
                         <Input label="amount_if" refItem={[component, "amount"]}  />
 
                         <SelectTail multiple={true} label="included_users" refItem={[component, "promoters"]} 
-                            // key={"type" + needles?.promoter?.lenght}
                         >
                             {
                                 needles?.promoter?.map((item ,index)=>{
-                                    return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname}</option>
+                                    return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
                                 })
                             }
                         </SelectTail>

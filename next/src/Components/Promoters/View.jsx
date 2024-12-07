@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useAuth } from "@/lib/auth";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
-import { Button, ButtonContainer, Frame, useData, useFormRefs } from "@/Theme/Midone";
+import { Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
 import Link from "next/link";
 
 export function View({ id, panel = "admin" }) {
@@ -26,10 +26,7 @@ export function View({ id, panel = "admin" }) {
     const data = component?.state?.info;
     const back = () => router.back();
 
-    // console.log(data);
-    // console.log(needles);
-
-    if (!data) return <div>Loading...</div>;
+    if (!data) return <Loading />;
 
     return (
         <>

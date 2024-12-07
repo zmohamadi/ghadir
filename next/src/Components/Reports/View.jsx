@@ -2,22 +2,17 @@
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { useAuth } from "@/lib/auth";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
-import { Button, ButtonContainer, Frame, Pic, useData, useFormRefs } from "@/Theme/Midone";
-import Link from "next/link";
+import {Frame, Loading, Pic, useData, useFormRefs } from "@/Theme/Midone";
 
 export function View({id }) {
-    const { Lang,local } = useLang();
-    const { laraAdmin,nextAdmin,mediaPath  } = useConfig();
+    const { Lang } = useLang();
+    const { laraAdmin,mediaPath  } = useConfig();
     const { get,getNeedles } = useData();
     let [needles, setNeedles] = useState();
     const router = useRouter();
-    const { user } = useAuth();
-
     let url = `${laraAdmin}/reports/${id}`;
-
     let component = useFormRefs();
     useEffect(() => {
         getNeedles(laraAdmin+'/reports/get-needles', setNeedles);
@@ -26,10 +21,7 @@ export function View({id }) {
     const data = component?.state?.info;
     const back = () => router.back();
 
-    // console.log(data);
-    // console.log(needles);
-
-    if (!data) return <div>Loading...</div>;
+    if (!data) return <Loading />;
     const promotion = component?.state?.info?.promotion;
 
     const courses = component?.state?.info?.courses?.length

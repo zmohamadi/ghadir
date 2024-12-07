@@ -24,12 +24,4 @@ class Province extends Model
     {
         return $this->hasMany(\Models\Base\City::class, 'province_id');
     }
-    function users()
-    {
-        return $this->hasMany(\Models\Person\User::class, 'province_id');
-    }
-    function advs()
-    {
-        return $this->hasMany(\Models\Advs\Adv::class, 'province_id');
-    }
 }

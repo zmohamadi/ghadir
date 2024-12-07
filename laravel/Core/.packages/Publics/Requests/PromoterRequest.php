@@ -28,13 +28,18 @@ class PromoterRequest extends FormRequest
          $id = $url[2] ?? null;
      
          $item = [
+            //  'c_name_0' => 'required',
              'firstname' => 'required',
              'lastname' => 'required',
              'gender_id' => 'required',
              'education_id' => 'required',
-            //  'level_id' => 'required',
              'bank_account_number' => 'required',
              'photo' => 'required',
+             'khadamat_code' => 'required_if:has_khadamat_code,1',
+             'tablighat_office_code' => 'required_if:has_tablighat_office_code,1',
+             'tablighat_organization_code' => 'required_if:has_tablighat_organization_code,1',
+             'ovghaf_code' => 'required_if:has_ovghaf_code,1',
+
              'codemeli' => [
                 'required_if:is_not_citizen,0', // اگر is_not_citizen برابر 0 باشد، کدملی الزامی است
                 Rule::unique('users', 'codemeli')->ignore($id)->whereNull('deleted_at'),

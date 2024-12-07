@@ -11,19 +11,32 @@ use Models\RitualReport;
 class PromotionAgreeController extends BaseAbstract
 {
     protected $model = 'Models\PromotionAgree';
-    // protected $request = 'Publics\Requests\PromotionReportRequest';
-    // protected $searchFilter = ['title'];
-    // protected $with = ["promotion"];
-    // protected $showWith = ["promotion","tribunes","courses","ritualReports"];
-    // protected $files = ["photo"];
-    // protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType"];
+    protected $with = ["promotion","promoter"];
+    protected $showWith = ["promotion","promoter"];
+    protected $needles = ["Person\Promoter","Promotion"];
 
 
     public function init()
     {
-        // $this->indexQuery = function ($query) {
-        //     $query->where('promoter_id', $this->user_id);
-        // };
+        $this->indexQuery = function ($query) {
+            // $query->when(request()->province != null, function ($q) {
+            //     $q->where('province_id', request()->province);
+            // });
+            // $query->when(request()->city != null, function ($q) {
+            //     $q->where('city_id', request()->city);
+            // });
+            $query->when(request()->promotion != null, function ($q) {
+                $q->where('promotion_id', request()->promotion);
+            });
+            $query->when(request()->promoter != null, function ($q) {
+                $promoter = request()->promoter;
+                $q->whereHas('promoter',function($q) use($promoter)
+                {
+                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+                });
+            });
+            $query->whereHas('promotion')->whereHas('promoter');
+        };
 
         $this->storeQuery = function ($query) {
             $promotion_id = request()->promotion_id;

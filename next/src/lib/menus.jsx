@@ -8,8 +8,17 @@ export const getMenus = (user) => {
         { title: "promoters", icon: "Shield", href: "/promoters" },
         { title: "promotions", icon: "Book", href: "/promotions" },
         { title: "supports", icon: "List", href: "/supports" },
-        { title: "reports", icon: "PenTool", href: "/reports" },
-        { title: "statistics", icon: "Calendar", href: "/statistics" },
+        {
+            title: "reports", icon: "Calendar", open: false, 
+            childs: [
+                { title: "report_agree", icon: "Users", href: "/agrees" },
+                { title: "report_promotion", icon: "PenTool", href: "/reports" },
+                { title: "courses", icon: "List", href: "/courses" },
+                { title: "tribunes", icon: "Tag", href: "/tribunes" },
+                { title: "ritual", icon: "Aperture", href: "/rituals" },
+                { title: "statistics", icon: "Calendar", href: "/statistics" },
+            ]
+        },
         {
             title: "blogs", icon: "Pocket", open: false, 
             childs: [

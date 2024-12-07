@@ -1,15 +1,11 @@
 "use client";
 
-import { useLang } from "@/lib";
-import { Input, Textarea, Box, Radio, SelectTail } from "@/Theme/Midone/Forms";
+import { Input } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Course({ index, parent, addIcon, closeIcon,needles }) {
-    const { Lang,local } = useLang();
     const info = parent?.state?.info?.courses?.[index];
-    // console.log(culturalUser?.gender_id);
-
 
     return (<>
             <div className="col-span-12 flex justify-end items-end">
@@ -27,22 +23,7 @@ export function Course({ index, parent, addIcon, closeIcon,needles }) {
                     refProvince={`c_province_${index}`} refCitySh={`c_city_id_${index}`} 
                     refCity={`c_city_${index}`} refVillage={`c_village_${index}`} 
                 />
-
-                {/* <SelectTail label="province" refItem={[parent,`c_province_${index}`]} 
-                    key={"province"+needles?.province?.length}
-                    data={needles?.province} titleKey={"name_fa"} 
-                    defaultValue={info?.province_id}
-                />
-                <SelectTail label="city_sh" refItem={[parent,`c_city_id_${index}`]} 
-                    key={"city_sh"+needles?.city?.length}
-                    data={needles?.city} 
-                    titleKey={"name_fa"} defaultValue={info?.city_id}
-                /> */}
-                {/* <Input  label="city" refItem={[parent,`c_city_${index}`]} defaultValue={info?.city}  />
-                <Input  label="village" refItem={[parent,`c_village_${index}`]} defaultValue={info?.village}  /> */}
-                
-            
-            <div className="col-span-12 flex justify-start items-start border-b-2">
+            <div className="col-span-12 flex justify-start items-start border-b-4">
                 {addIcon}
             </div>
     </>

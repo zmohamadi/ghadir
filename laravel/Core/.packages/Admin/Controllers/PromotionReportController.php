@@ -18,21 +18,30 @@ class PromotionReportController extends BaseAbstract
     protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
     "courses.audienceType","ritualReports.ritual","confirmRepo"];
     protected $files = ["photo"];
-    protected $needles = ['Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
+    protected $needles = ["Person\Promoter",'Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
 
 
     public function init()
     {
         $this->indexQuery = function ($query) {
-            if(request()->promoter)
-            {
-                $query->where('promoter_id', $this->user_id);
-            };
-            if(request()->status != null)
-            {
-                $status = request()->status;
-                $query->where('confirm_id', $status);
-            };
+            
+            $query->when(request()->promoter_id != null, function ($q) {
+                $q->where('promoter_id', request()->promoter_id);
+            });
+            $query->when(request()->status != null, function ($q) {
+                $q->where('confirm_id', request()->status);
+            });
+            $query->when(request()->promotion != null, function ($q) {
+                $q->where('promotion_id', request()->promotion);
+            });
+            $query->when(request()->promoter != null, function ($q) {
+                $promoter = request()->promoter;
+                $q->whereHas('promoter',function($q) use($promoter)
+                {
+                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+                });
+            });
+          
         };
 
         $this->storeQuery = function ($query) {

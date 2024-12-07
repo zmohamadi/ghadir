@@ -15,6 +15,8 @@ class Breadcrumb extends Controller
         'promotions' => [\Models\Promotion::class, 'title'],
         'blogs' => [\Models\Content\Blog::class, 'title'],
         'tickets' => [\Models\Ticket\Ticket::class, 'title'],
+        'courses' => [\Models\Course::class, 'subject'],
+        'tribunes' => [\Models\Tribune::class, 'subject'],
     ];
 
     public function getItems(Request $request)

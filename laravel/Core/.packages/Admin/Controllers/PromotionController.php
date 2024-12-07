@@ -51,27 +51,27 @@ class PromotionController extends BaseAbstract
         };
         
         $this->indexQuery = function ($query) {
-            if(request()->register_status!=null)
-            {
-                $register_status = request()->register_status;
-                $query->where('register_status', $register_status);
-            };
-            if(request()->report_status!=null)
-            {
-                $report_status = request()->report_status;
-                $query->where('report_status', $report_status);
-            };
-            if(request()->promoter)
-            {
-                // dd(request()->promoter);
-
+            $query->when(request()->register_status != null, function ($q) {
+                $q->where('register_status', request()->register_status);
+            });
+        
+            $query->when(request()->report_status != null, function ($q) {
+                $q->where('report_status', request()->report_status);
+            });
+            $query->when(request()->promoter != null, function ($q) {
                 $promoter = request()->promoter;
-
-                $query->whereHas('agreePromoters', function ($q) use ($promoter) {
-                   $q->where('promoter_id', $promoter);
+                $q->whereHas('agreePromoters',function($q) use($promoter)
+                {
+                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
                 });
-            };
+            });
+            // $query->when(request()->promoter, function ($q) {
+            //     $q->whereHas('agreePromoters', function ($subQuery) {
+            //         $subQuery->where('promoter_id', request()->promoter);
+            //     });
+            // });
         };
+        
         $this->storeQuery = function ($query) {
             $query = $this->setOperator($query);
         

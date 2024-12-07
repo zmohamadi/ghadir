@@ -22,7 +22,7 @@ export function CulturalUsers({ index, parent, addIcon, closeIcon,needles }) {
                 data={needles?.gender} titleKey={"title_"+local}  
                 key={"c_gender_id_"+index}
             />
-            <div className="col-span-12 flex justify-start items-start">
+            <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>
     </>

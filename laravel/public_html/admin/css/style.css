@@ -172,6 +172,9 @@ tr {
 .dropzone .dz-preview.dz-image-preview {
   background-color: transparent !important;
 }
+.avatar-user .dropzone{
+  min-height: 120px !important;
+}
 
 .box11::before {
   content: "";

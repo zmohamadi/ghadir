@@ -3,52 +3,54 @@ import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
-import { Select } from "@/Theme/Midone/Forms/Select";
-import { useEffect, useRef, useState } from "react";
-import { Box, Button, ButtonContainer } from "@/Theme/Midone";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/lib";
+import Link from "next/link";
+import { Filtering } from "../Public/Filtering";
 
-export function List({panel,access , query}){
+export function List(){
 
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
     const {Lang, local} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
-    const {destroy,getNeedles} = useData();
-    const [ needles, setNeedles ] = useState();
-    const [ params, setParams ] = useState({ status: ""});
-    const [ url, setUrl ] = useState(`${laraAdmin}/reports?${query}`);
-    const effectRan = useRef(false);
+    const {destroy} = useData();
     const formUrl = nextAdmin+"/reports";
+      // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+      const getFilterFromUrl = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            promoter: urlParams.get('promoter') || null,
+            promotion: urlParams.get('promotion') || null,
+            province: urlParams.get('province') || null,
+            city: urlParams.get('city') || null,
+        };
+    };
+
+    // مقداردهی اولیه فیلترها از URL
+    const [filters, setFilters] = useState(getFilterFromUrl);
+    const [url, setUrl] = useState(`${laraAdmin}/reports`);
 
     useEffect(() => {
-        if (!effectRan.current) {
-          getNeedles(`${laraAdmin}/reports/get-needles`, setNeedles);
-          effectRan.current = true;
-        }
-      }, [getNeedles, laraAdmin, formUrl]);
-    
-      useEffect(() => {
-        // ساختن query string از params
-        const urlItems = Object.keys(params)
-            .filter(key => params[key] !== "")
-            .map(key => `${key}=${params[key]}`)
+        const filterParams = Object.keys(filters)
+            .filter((key) => filters[key])
+            .map((key) => `${key}=${filters[key]}`)
             .join("&");
-    
-        // ادغام query و urlItems با در نظر گرفتن شرایط
-        const combinedQuery = [query, urlItems].filter(Boolean).join("&");
-    
-        // تنظیم URL نهایی
-        setUrl(`${laraAdmin}/reports?${combinedQuery}`);
-    }, [params, query, laraAdmin]);
-    
-    const handleFilterChange = (e, filter) => {
-        setParams((prevParams) => ({ ...prevParams, [filter]: e.target.value }));
-      };
-    
-      const clearFilter = () => {
-        setParams({ status: "" });
-      };
+
+        const updatedUrl = filterParams
+            ? `${laraAdmin}/reports?${filterParams}`
+            : `${laraAdmin}/reports`;
+
+        setUrl(updatedUrl);
+    }, [filters, laraAdmin]);
+
+    const handleFiltersChange = (newFilters) => {
+        setFilters(newFilters);
+    };
+
 
     let info = {
-        insertLink: !access && `${formUrl}/new`,
+        insertLink:`${formUrl}/new`,
         perPage:20,
         url: url,
         columns: [
@@ -64,8 +66,14 @@ export function List({panel,access , query}){
                 ),
             },
            
-            {label: "title", field: "promotion.title" },
-            {label: "year", field: "promotion.year" },
+            {
+                label: "title",
+                jsx: (item) => (
+                    <Link href={`${formUrl}/${item.id}`}>
+                        {`${item?.promotion?.title}-${item?.promotion?.year}`}
+                    </Link>
+                ),
+            },
             ...(access ? [
                 { 
                     label: "promoter", 
@@ -93,25 +101,18 @@ export function List({panel,access , query}){
             }, 
         ],
     }
-
     return(
         <>
             <Frame title={Lang(["public.reports"])}>
-            {panel=="admin"&&<>
-                    <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-10"}>
-                        <Select
-                            defaultValue={params.status}
-                            onChange={(e) => handleFilterChange(e, "status")}
-                            className="col-span-5 md:col-span-3"
-                            label="status"
-                            data={needles?.status?.filter(item => item.group_id == 28)}
-                            titleKey={"title_" + local} valueKey="code"
-                        />
-                        
-                        <ButtonContainer className="mt-7 md:mt-6 text-right ">
-                            <Button label="clear_filter" className="btn btn-secondary w-20" onClick={clearFilter} />
-                        </ButtonContainer>
-                        </Box>
+                {access&&<>
+                    <Filtering
+                        filterList={filters}
+                        promotion={true}
+                        promoter={true}
+                        reportStatus={true}
+                        url="reports"
+                        onFiltersChange={handleFiltersChange}
+                    />
                 </>}
                 <div className="intro-y col-span-12">
                     <Grid {...info} />

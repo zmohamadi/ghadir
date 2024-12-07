@@ -16,7 +16,7 @@ return [
     'tickets'=>'تیکت ها',
     'ticket_subjects'=>'موضوعات تیکت',
     'base_management'=>'اطلاعات پایه',
-    'register_promotions'=>'ثبت نام در ماموریتهای تبلیغی',
+    'register_promotions'=>'مشارکت در ماموریتهای تبلیغی',
     'reports'=>'گزارشات',
     'myPromotions'=>'ماموریتهای تبلیغی من',
     'myReports'=>'گزارشات من',
@@ -28,7 +28,9 @@ return [
     'waiting_tickets'=>'تیکت های نیاز به بررسی',
     'waiting_comments'=>'پیام های نیاز به بررسی',
     'myTickets'=>'تیکت های من',
-    'home'=>'صفحه اصلی'
+    'home'=>'صفحه اصلی',
+    'report_agree'=>"مشارکت ها",
+    'report_promotion'=>"گزارشات"
 
 ];
 ?>

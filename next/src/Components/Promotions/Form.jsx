@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/lib/auth";
-import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame, Radio, CheckBox } from "@/Theme/Midone/Forms";
-import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea, Radio, CheckBox } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 import { Loading } from "@/Theme/Midone";
 
-export function Form({id,panel}){
+export function Form({id}){
     const link = "/promotions";
     const {Lang, local} = useLang();
     const {laraAdmin} = useConfig();
@@ -60,13 +58,13 @@ export function Form({id,panel}){
                         <div className="col-span-12 lg:col-span-4">
                             <div className="intro-y box p-5">
                                 <Radio className="mt-5 border-b-2" 
-                                    type="col" label="register" 
+                                    type="col" label="register_status" 
                                     refItem={[component, `register_status`]}
                                     data={needles?.status?.filter(item => item.group_id == 11)} 
                                     valueKey="code" titleKey={"title_"+local}  
                                     key={"register_status"+data?.register_status}
                                 />
-                                <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status} type="col" label="report" 
+                                <Radio className="mt-5 border-b-2"  defaultValue={data?.report_status} type="col" label="report_status" 
                                     
                                     refItem={[component, `report_status`]}
                                     data={needles?.status?.filter(item => item.group_id == 8)} valueKey="code" 
@@ -76,6 +74,8 @@ export function Form({id,panel}){
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_course')} 
                                 refItem={[component, `has_course`]} />
                                 <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_tribune')} refItem={[component, `has_tribune`]} />
+                                <CheckBox name={Lang('public.has')} className="mt-5" label={Lang('public.has_commitment')} 
+                                refItem={[component, `has_commitment`]} />
                                 <CheckBoxGroup defaultValue={data?.rituals} className="mt-5 pt-5 border-t-2"  data={needles?.ritual} key={"ritual" + data?.ritual?.length} label={Lang('public.ritual')}  id="ritual" refItem={[component, `ritual`]} />
                                 
 

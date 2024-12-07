@@ -8,7 +8,17 @@ export function TabList({children, active, href, title, items = []}){
         let count = 0;
         let [component, elements] = items;
         elements?.map(elem => {
-            component?.state?.errors[elem] && count++;
+            if(elem.slice(-1) == "*"){
+                elem = elem.replace("*", "");
+                for (let key in component?.state?.errors) {
+                    if (key.lastIndexOf(elem,0) === 0) {
+                        count++;
+                        continue;
+                    }
+                }
+            }else{
+                component?.state?.errors[elem] && count++;
+            }
         });
         return count;
     }, [items])

@@ -71,7 +71,7 @@ export function List({ access,query,formUrl }){
         <Frame title={Lang(["public.tickets"])}>
             {(access) &&
                 <Box shadow={false} minIcon={true} min={true} cols={"grid-cols-12"}>
-                    <Input label="user" className="col-span-3 md:col-span-3" defaultValue={params.userInfo}
+                    <Input label="promoter" className="col-span-3 md:col-span-3" defaultValue={params.userInfo}
                         onEnter={(e) => handleFilterChange(e, "userInfo")} note={Lang("public.filter_ticket_user")}
                     />
                     <Select label="subject" className="col-span-3 md:col-span-3" defaultValue={params.subject}

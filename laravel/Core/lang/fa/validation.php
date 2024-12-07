@@ -131,72 +131,25 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        // 'attribute-name' => [
+        //     'rule-name' => 'custom-message',
+        // ],
+        'codemeli' => [
+            'required_if' => "کدملی الزامیست",
         ],
-        'title_fa' => [
-            'required' => 'عنوان الزامیست',
+        'khadamat_code' => [
+            'required_if' => "کد مرکز خدمات الزامیست",
         ],
-        'title_ar' => [
-            'required' => 'العنوان اجباری',
+        'tablighat_office_code' => [
+            'required_if' => "کد دفتر تبلیغات الزامیست",
         ],
-        'title_en' => [
-            'required' => 'title required',
+        'tablighat_organization_code' => [
+            'required_if' => "کد سازمان تبلیغات الزامیست",
         ],
-        'name_fa' => [
-            'required' => 'نام الزامیست',
+        'ovghaf_code' => [
+            'required_if' => "کد اوقاف الزامیست",
         ],
-        'name_ar' => [
-            'required' => 'الاسم اجباری',
-        ],
-        'name_en' => [
-            'required' => 'name required',
-        ],
-        'lname_fa' => [
-            'required' => 'نام خانوادگی الزامیست',
-        ],
-        'lname_ar' => [
-            'required' => 'الكنية اجباری',
-        ],
-        'lname_en' => [
-            'required' => 'last name required',
-        ],
-        'nationality_fa' => [
-            'required' => 'ملیت الزامیست',
-        ],
-        'nationality_ar' => [
-            'required' => 'الملیت اجباری',
-        ],
-        'nationality_en' => [
-            'required' => 'nationality required',
-        ],
-        'text_fa' => [
-            'required' => 'متن الزامیست',
-        ],
-        'text_ar' => [
-            'required' => 'نص اجباری',
-        ],
-        'text_en' => [
-            'required' => 'text required',
-        ],
-        'description_fa' => [
-            'required' => 'توضیح الزامیست',
-        ],
-        'description_ar' => [
-            'required' => 'وصف اجباری',
-        ],
-        'description_en' => [
-            'required' => 'description required',
-        ],
-        'summary_fa' => [
-            'required' => 'خلاصه الزامیست',
-        ],
-        'summary_ar' => [
-            'required' => 'ملخص اجباری',
-        ],
-        'summary_en' => [
-            'required' => 'summary required',
-        ],
+        
     ],
 
     /*
@@ -312,6 +265,14 @@ return [
         'promotion_id'=>'مامورتیهای تبلیفی',
         'type_id'=>'نوع',
         'people_count' => 'تعداد مخاطب',
+        'khadamat_code'=>'کد مرکز خدمات',
+        'tablighat_office_code'=>'کد دفتر تبلیغات',
+        'tablighat_organization_code'=>'کد سازمان تبلیغات',
+        'ovghaf_code'=>'کد اوقاف',
+        'has_khadamat_code'=>'کد مرکز خدمات',
+        'has_tablighat_office_code'=>'کد دفتر تبلیغات',
+        'has_tablighat_organization_code'=>'کد سازمان تبلیغات',
+        'has_ovghaf_code'=>'کد اوقاف',
     ],
         collect(range(0, 100))->mapWithKeys(function ($index) {
             return [
