@@ -103,7 +103,7 @@ export function Filtering({
                     refItem={[component, "promotion"]}
                     className="col-span-5 md:col-span-3"
                     label="promotion"
-                    key={"promotion-"+filters.promotion}
+                    // key={"promotion-"+filters.promotion}
                     data={needles?.promotion}
                 />
             )}

@@ -3,9 +3,7 @@
 import { useState, useEffect } from "react";
 import { useConfig, useLang } from "@/lib";
 import { Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
-import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
-import { List as Reports } from "@/Components/Reports/List";
 import { useRouter } from "next/navigation"; // تغییر این خط به هوک correct router
 
 export default function Page() {
@@ -46,7 +44,6 @@ export default function Page() {
   const router = useRouter();
   const goToReports = (href) => {
     router.push(`${nextAdmin}/${href}?promoter=${filters.promoter}&promotion=${filters.promotion}`);
-    // window.location.href = `${nextAdmin}/${href}?promoter=${filters.promoter}&promotion=${filters.promotion}`;
 
   };
 
