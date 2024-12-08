@@ -23,12 +23,14 @@ class PromotionReportRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            "promotion_id" => 'required',
+            
         ];
         if (auth('admin')->user()->role_id != 2) {
             $rules["promoter_id"] = 'required';
             $rules["level_id"] = 'required';
             $rules["confirm_id"] = 'required';
+            $rules["promotion_id"] = 'required';
+
         }
     
         $tools = new Tools;

@@ -118,13 +118,25 @@ class HomeController extends Controller
 
     public function home($panel,$user)
     {
+        $user = auth("admin")->user()->id;
+
         $notif="";
         $blogs="";
         $promotions="";
-        if($panel=="promoter"){
+        if($panel=="promoter")
+        {
             $notif = Notif::where(['promoter_id'=>$user,'display'=>1])->get();
             $blogs = Blog::active()->get();
-            $promotions = Promotion::where("register_status",1)->with('rituals')->get();
+            $promotions = Promotion::where("register_status",1)
+            ->with(['agrees' => function ($q) use ($user) {
+                $q->where('promoter_id', $user);
+                
+                // بارگذاری rituals برای هر agree
+                $q->with(['rituals' => function ($q) use ($user) {
+                    $q->where('promoter_id', $user);
+                }]);
+            }])
+            ->with('rituals')->get();
         }
        
         $collection['notif'] = $notif;

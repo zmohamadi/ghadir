@@ -16,7 +16,7 @@ export default function Promotion({promotions}) {
     let component = useFormRefs();
 
 
-    const agreeItem = ()=>save(`${laraAdmin}/agree/1`, component, "new", `/promotions`);
+    const agreeItem = ()=>save(`${laraAdmin}/agree`, component, "new", `/promotions`);
 
     return (
        <>
@@ -24,9 +24,13 @@ export default function Promotion({promotions}) {
             <>
                 <Box title={Lang('public.promotion')} cols={"col-6"}>
                     {promotions.map((promotion, index) => {
+                        let agree = promotion?.agrees[0];
+
                         return (
                             <>
-                            <Input type="hidden" defualtValue={promotion.id} />
+                            <Input type="hidden" defaultValue={promotion.id} refItem={[component, "promotion_id"]} />
+                            {/* <Input type="hidden" defaultValue={user.id} refItem={[component, "promoter_id"]} /> */}
+
                             <div class="alert alert-secondary show mb-2" role="alert">
                                 <div class="flex items-center">
                                     <div class="font-medium text-lg">{promotion?.title}</div>
@@ -39,32 +43,32 @@ export default function Promotion({promotions}) {
                                 />
                                 {
                                     promotion?.has_tribune&& <CheckBox 
-                                    name={Lang("public.ready")} 
-                                    className="mt-5" 
-                                    label={Lang("public.holding_course")} 
-                                    refItem={[component, "agree_has_tribune"]} 
-
+                                        name={Lang("public.ready")} 
+                                        className="mt-5" 
+                                        label={Lang("public.holding_course")} 
+                                        refItem={[component, "agree_has_tribune"]}
+                                        defaultValue={agree?.has_tribune}
                                     />
                                 }
                                 {
                                     promotion?.has_course&&  <CheckBox
-                                    name={Lang("public.ready")} 
-                                    className="mt-5" 
-                                    label={Lang("public.holding_course")} 
-                                    refItem={[component, "agree_has_course"]}
+                                        name={Lang("public.ready")} 
+                                        className="mt-5" 
+                                        label={Lang("public.holding_course")} 
+                                        refItem={[component, "agree_has_course"]}
+                                        defaultValue={agree?.has_course}
                                     />
                                 }
                                 {
                                     promotion?.rituals&&  <CheckBoxGroup  data={promotion?.rituals} 
                                             key={"ritual" + promotion?.rituals?.length} label={Lang('public.ritual')}  
-                                            id="ritual" refItem={[component, `agree_ritual`]} />
+                                            id="ritual" refItem={[component, `agree_ritual`]}
+                                            defaultValue={agree?.rituals}
+                                     />
                                 }
-
-
-                              
                                 </div>
                                 <ButtonContainer>
-                                    <Button label="register" onClick={agreeItem()} />
+                                    <Button label="register" onClick={agreeItem} />
                                     <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>
                                 </ButtonContainer>
                             </>
