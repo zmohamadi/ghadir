@@ -56,7 +56,7 @@ export function List(){
             // },
            
             {
-                label: "title",
+                label: "promotion",
                 jsx: (item) => (
                     <Link href={`${formUrl}/${item.id}`}>
                         {`${item?.promotion?.title}-${item?.promotion?.year}`}

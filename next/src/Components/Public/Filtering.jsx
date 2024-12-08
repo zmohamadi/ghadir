@@ -97,7 +97,7 @@ export function Filtering({
             )}
 
             {promotion && (
-                <Select
+                <SelectTail
                     onChange={(e) => handleFilterChange(e, "promotion")}
                     defaultValue={filters.promotion ?? ""}
                     refItem={[component, "promotion"]}
@@ -109,8 +109,9 @@ export function Filtering({
             )}
 
             {province && (
-                <Select
+                <SelectTail
                     onChange={(e) => handleFilterChange(e, "province")}
+                    refItem={[component, "province"]}
                     defaultValue={filters.province ?? ""}
                     className="col-span-5 md:col-span-3"
                     label="province"
@@ -120,8 +121,10 @@ export function Filtering({
             )}
 
             {province && (
-                <Select
+                <SelectTail
                     onChange={(e) => handleFilterChange(e, "city")}
+                    refItem={[component, "city"]}
+
                     defaultValue={filters.city ?? ""}
                     className="col-span-5 md:col-span-3"
                     label="city"
@@ -134,7 +137,7 @@ export function Filtering({
             )}
 
             {reportStatus && (
-                <Select
+                <SelectTail
                 defaultValue={filters.reportStatus ?? ""}
                     onChange={(e) => handleFilterChange(e, "reportStatus")}
                     className="col-span-5 md:col-span-3"
@@ -145,7 +148,7 @@ export function Filtering({
             )}
 
             {promoterStatus && (
-                <Select
+                <SelectTail
                 defaultValue={filters.promoterStatus ?? ""}
                     onChange={(e) => handleFilterChange(e, "promoterStatus")}
                     className="col-span-2"
@@ -156,7 +159,7 @@ export function Filtering({
             )}
 
             {gender && (
-                <Select
+                <SelectTail
                     defaultValue={filters.gender ?? ""}
                     onChange={(e) => handleFilterChange(e, "gender")}
                     className="col-span-2"
