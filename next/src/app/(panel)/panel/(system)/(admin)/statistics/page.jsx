@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useConfig, useLang } from "@/lib";
 import { Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
 import { Filtering } from "@/Components/Public/Filtering";
-import { useRouter } from "next/navigation"; // تغییر این خط به هوک correct router
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const { Lang } = useLang();
@@ -13,29 +13,31 @@ export default function Page() {
   const { get } = useData();
 
   const [filters, setFilters] = useState({});
-  const [url, setUrl] = useState(`${laraAdmin}/statistics`);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = () => {
-    setLoading(true); // Set loading to true before fetching data
-    get(url, component, "info", () => {
-      setLoading(false); // Set loading to false after fetching data
-    });
-  };
-
-  useEffect(() => {
+  // محاسبه URL با استفاده از useMemo
+  const url = useMemo(() => {
     const filterParams = Object.keys(filters)
       .filter((key) => filters[key])
       .map((key) => `${key}=${filters[key]}`)
       .join("&");
 
-    const updatedUrl = filterParams
+    return filterParams
       ? `${laraAdmin}/statistics?${filterParams}`
       : `${laraAdmin}/statistics`;
-
-    setUrl(updatedUrl);
-    fetchData();
   }, [filters, laraAdmin]);
+
+  const fetchData = () => {
+    setLoading(true); // فعال کردن حالت لودینگ
+    get(url, component, "info", () => {
+      setLoading(false); // غیرفعال کردن لودینگ پس از دریافت داده‌ها
+    });
+  };
+
+  // فراخوانی دوباره لاراول زمانی که URL تغییر کند
+  useMemo(() => {
+    fetchData();
+  }, [url]);
 
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
@@ -44,7 +46,6 @@ export default function Page() {
   const router = useRouter();
   const goToReports = (href) => {
     router.push(`${nextAdmin}/${href}?promoter=${filters.promoter}&promotion=${filters.promotion}`);
-
   };
 
   let statistics = component?.state?.info;
