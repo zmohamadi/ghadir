@@ -13,7 +13,7 @@ use Models\Person\Promoter;
 class PromotionAgreeController extends BaseAbstract
 {
     protected $model = 'Models\PromotionAgree';
-    protected $request = 'Publics\Requests\PromotionAgreeRequest';
+    // protected $request = 'Publics\Requests\PromotionAgreeRequest';
     protected $with = ["promotion", "promoter"];
     protected $showWith = ["promotion", "promoter"];
     protected $needles = ["Person\Promoter", "Promotion"];

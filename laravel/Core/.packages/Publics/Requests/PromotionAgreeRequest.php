@@ -16,7 +16,7 @@ class PromotionAgreeRequest extends FormRequest
         return [
             'agree_has_tribune' => 'nullable|integer',
             'agree_has_course' => 'nullable|integer',
-            // 'agree_ritual' => 'nullable|array',
+            'agree_ritual' => 'nullable|array',
         ];
     }
 

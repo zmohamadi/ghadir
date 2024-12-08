@@ -47,11 +47,22 @@ class PromotionReportController extends BaseAbstract
 
         $this->storeQuery = function ($query) {
             $method = request()->_method; //PUT
-            $promoter_id = $this->role_id == 2 ? $this->user_id :  request()->promoter_id;
-            $promotionRecord = Promotion::find($promotion);
-            $promotion = request()->promotion;
+            $promoter_id = request()->promoter_id;
+            $promotion_id = request()->promotion_id;
+            if($promotion_id==0){
+                $latestRecord = Promotion::where("report_status", 1)->orderBy('id', 'desc')->first();
+                $query->promotion_id = $latestRecord->id;
+                $promotion = $latestRecord->id;
+                $promotionRecord = $latestRecord;
+            }
+            else{
 
+                $promotion = request()->promotion_id;
+                $promotionRecord = Promotion::find($promotion_id);
+            }
+           
             $query->save();
+
         
             // ************************************ Course ************************************
             $courses = $this->getRepeatValues([
