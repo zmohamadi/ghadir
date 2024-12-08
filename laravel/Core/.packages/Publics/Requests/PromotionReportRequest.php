@@ -40,7 +40,7 @@ class PromotionReportRequest extends FormRequest
             'c_subject', 'c_place_name', 'c_duration', 'c_people_count', 'c_audiencetype_id']);
         $tribune = $tools->getRepeatValues(['tr_province', 'tr_city_id', 'tr_city', 'tr_village',
             'tr_subject', 'tr_place_name', 'tr_duration', 'tr_people_count', 'tr_audiencetype_id']);
-        $ritual = $tools->getRepeatValues(['r_province', 'r_city_id', 'r_city', 'r_village', 'ritual_id', 'r_description', 'r_place_name']);
+        $ritual = $tools->getRepeatValues(['r_province', 'r_city_id', 'r_city', 'r_village', 'r_ritual_id', 'r_description', 'r_place_name']);
 
         // اعتبارسنجی داده‌های دوره
         foreach ($course as $key => $item) {

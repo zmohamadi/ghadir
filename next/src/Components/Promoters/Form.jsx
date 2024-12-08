@@ -152,16 +152,16 @@ export function Form({id}){
                                 {
                                     access && <Input dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
                                 }
-                                <Select key={"is_not_citizen"+2} required="true"
+                                <SelectTail key={"is_not_citizen"+2} required="true"
                                     defaultValue={data?.is_not_citizen == true ? 1 : 0} 
                                 className="col-span-3" label="citizen" refItem={[component, "is_not_citizen"]} 
                                 >
                                     <option value="0">{Lang('im_citizen')}</option>
                                     <option value="1">{Lang('not_citizen')}</option>
-                                </Select>
+                                </SelectTail>
                                 <Input dir="ltr" className="col-span-3" type="number" label="codemeli" refItem={[component, "codemeli"]} />
                                <Input className="col-span-3" dir="ltr" type="number" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
-                                <Select className="col-span-3" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
+                                <SelectTail className="col-span-3" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
                                 <SelectTail required="true"  className="col-span-3"
                                     defaultValue={data?.native_province_id ? data?.native_province_id: nativeProvinceId} 
                                     label="native_province" refItem={[component, "native_province_id"]} 

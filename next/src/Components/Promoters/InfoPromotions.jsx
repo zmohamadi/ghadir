@@ -2,7 +2,7 @@
 
 import { useState } from "react"; // اضافه کردن useState
 import { useLang } from "@/lib";
-import { Input } from "@/Theme/Midone/Forms";
+import { Input, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
@@ -14,7 +14,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon, needles }) {
     const changeLabel = (e) => {
     
         // مقدار انتخاب‌شده از سلکت
-        const selectedValue = e.target.value;
+        const selectedValue = e?.target?.value ? e?.target?.value : e?.value;
         // جستجو در آرایه needles?.promotionposition
         const selectedItem = needles?.promotionposition?.find(
             (item) => item.id == selectedValue // فرض کنید "id" کلید مرتبط با مقدار است
@@ -34,7 +34,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon, needles }) {
             <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
-            <Select
+            <SelectTail
                 label="promotion_position"
                 refItem={[parent, `promotion_position_${index}`]}
                 key={"promotion_position" + needles?.promotionposition?.length}

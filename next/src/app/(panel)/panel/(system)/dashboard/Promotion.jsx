@@ -16,7 +16,7 @@ export default function Promotion({promotions}) {
     let component = useFormRefs();
 
 
-    const agreeItem = ()=>save(`${laraAdmin}/agree`, component, "new", `/promotions`);
+    const agreeItem = ()=>save(`${laraAdmin}/agree`, component, "new", `/`);
 
     return (
        <>

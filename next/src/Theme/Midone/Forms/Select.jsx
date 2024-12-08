@@ -41,7 +41,7 @@ const Select = (props)=>{
                 defaultValue={state?.value}
                 style = {{fontHeight: "1.65rem"}}
             >
-                <option value="" >{Lang('public.select_option')} {state?.value ?? 0}</option>
+                <option value="" >{Lang('public.select_option')} {state?.value ?? ""}</option>
                 { children }
                 {
                     Tools.getArray(data).map((item, key)=><option key={key} value={item[valueKey]}>{item[titleKey]}</option>)

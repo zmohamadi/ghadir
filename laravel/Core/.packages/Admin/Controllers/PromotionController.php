@@ -58,13 +58,13 @@ class PromotionController extends BaseAbstract
             $query->when(request()->report_status != null, function ($q) {
                 $q->where('report_status', request()->report_status);
             });
-            $query->when(request()->promoter != null, function ($q) {
-                $promoter = request()->promoter;
-                $q->whereHas('agreePromoters',function($q) use($promoter)
-                {
-                    $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
-                });
-            });
+            // $query->when(request()->promoter != null, function ($q) {
+            //     $promoter = request()->promoter;
+            //     $q->whereHas('agreePromoters',function($q) use($promoter)
+            //     {
+            //         $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
+            //     });
+            // });
             // $query->when(request()->promoter, function ($q) {
             //     $q->whereHas('agreePromoters', function ($subQuery) {
             //         $subQuery->where('promoter_id', request()->promoter);

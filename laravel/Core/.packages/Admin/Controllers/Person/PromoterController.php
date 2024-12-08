@@ -122,26 +122,42 @@ class PromoterController extends BaseAbstract
         // Uncomment and modify the below indexQuery if additional filtering by role_id is needed for listing
         
         $this->indexQuery = function ($query) {
-            if(request()->gender != null)
-            {
-                $gender = request()->gender;
-                $query->where('gender_id', $gender);
-            };
-            if(request()->city != null)
-            {
-                $city = request()->city;
-                $query->where('city_id', $city);
-            };
-            if(request()->province != null)
-            {
-                $province = request()->province;
-                $query->where('province_id', $province);
-            };
-            if(request()->status != null)
-            {
-                $status = request()->status;
-                $query->where('status_id', $status);
-            };
+            $query->when(request()->province != null, function ($q) {
+                $q->where('province_id', request()->province);
+            });
+            $query->when(request()->city != null, function ($q) {
+                $q->where('city_id', request()->city);
+            });
+            $query->when(request()->gender != null, function ($q) {
+                $q->where('gender_id', request()->gender);
+            });
+            $query->when(request()->promoterStatus != null, function ($q) {
+                $q->where('status_id', request()->promoterStatus);
+            });
+            $query->when(request()->promoterWorkStatus != null, function ($q) {
+                $q->where('work_status', request()->promoterWorkStatus);
+            });
+            $query->when(request()->acoountPromoter != null, function ($q) {
+                
+                $acoountPromoter = request()->acoountPromoter;
+
+                switch ($acoountPromoter) {
+                    case 1:
+                        $field="has_khadamat_code";
+                        break;
+                    case 2:
+                        $field="has_tablighat_office_code";
+                        break;
+                    case 3:
+                        $field="has_tablighat_organization_code";
+                        break;
+                    case 4:
+                        $field="has_ovghaf_code";
+                        break;
+                }
+                $q->where($field,1);
+            });
+            
         };
         
     }

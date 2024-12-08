@@ -1,7 +1,7 @@
 "use client";
 
 import { useLang } from "@/lib";
-import { Input, Textarea} from "@/Theme/Midone/Forms";
+import { Input, SelectTail, Textarea} from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
@@ -13,7 +13,7 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
             <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}
             </div>
-                <Select className="col-span-12" label="ritual" refItem={[parent, `r_ritual_id_${index}`]} 
+                <SelectTail className="col-span-12" label="ritual" refItem={[parent, `r_ritual_id_${index}`]} 
                     key={"ritual"+needles?.ritual?.length} 
                     data={needles?.ritual}  defaultValue={info?.ritual_id}
                 />

@@ -133,6 +133,8 @@ $lang = [
    'agree'=>'مشارکت ها',
    'account_status'=>'وضعیت حساب',
    'work_status'=>'وضعیت فعالیت فرهنگی',
+   'acoountPromoter'=>'پرونده ها',
+   'has_acoount'=>'دارای',
    
 ];
 

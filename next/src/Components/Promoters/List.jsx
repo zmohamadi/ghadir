@@ -159,8 +159,7 @@ export function List() {
                 {access && (
                     <>
                         <Filtering
-                        promoterStatus={true}
-                        gender={true}
+                        province={true}
                         url="promoters"
                         onFiltersChange={handleFiltersChange}
                     />

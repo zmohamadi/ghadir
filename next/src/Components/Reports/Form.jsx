@@ -85,7 +85,7 @@ export function Form({ id}) {
                         />
                         {
                             access && <TabList href="tab-first" title={Lang("public.select_promotion")}
-                                        items = {[component, ['promoter_id','promotion_id']]} />
+                            items = {[component, ['promoter_id','promotion_id','confirm_id','level_id']]} />
                         }
                     </TabHeader>
                     <TabBody>

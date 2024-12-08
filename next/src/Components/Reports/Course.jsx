@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@/Theme/Midone/Forms";
+import { Input, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Select } from "@/Theme/Midone/Forms/Select";
 
@@ -12,7 +12,7 @@ export function Course({ index, parent, addIcon, closeIcon,needles }) {
                 {closeIcon}
             </div>
                 <Input className="col-span-12" label="subject" refItem={[parent, `c_subject_${index}`]} defaultValue={info?.subject}  />
-                <Select required="true" label="audiencetype" refItem={[parent,`c_audiencetype_id_${index}`]} 
+                <SelectTail required="true" label="audiencetype" refItem={[parent,`c_audiencetype_id_${index}`]} 
                     key={"audiencetype"+needles?.audiencetype?.length} defaultValue={info?.audiencetype_id}
                     data={needles?.audiencetype}
                 />
