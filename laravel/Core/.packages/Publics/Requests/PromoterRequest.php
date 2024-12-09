@@ -51,7 +51,8 @@ class PromoterRequest extends FormRequest
         ];
         if($role_id==1){
 
-            $rules['mobile'][] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
+            $rules['mobile'] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
+            // $rules['mobile'][] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
         }
 
         // اگر is_not_citizen برابر با 1 باشد، کدملی می‌تواند خالی باشد
