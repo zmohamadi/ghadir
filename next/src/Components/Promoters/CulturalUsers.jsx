@@ -7,8 +7,8 @@ export function CulturalUsers({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
     let culturalUser = parent?.state?.info?.cultural_users?.[index];
 
-    console.log("needles?.gender");
-    console.log("c_gender_id_"+index+"_"+needles?.gender?.length+"_"+culturalUser?.gender_id);
+    // console.log("needles?.gender");
+    // console.log("c_gender_id_"+index+"_"+needles?.gender?.length+"_"+culturalUser?.gender_id);
     return (<>
     <div className="col-span-12 flex justify-end items-end">
                 {closeIcon}

@@ -20,7 +20,7 @@ const Select = (props)=>{
         value: defaultValue,
     });
 
-    console.log("defaultValue is:", defaultValue, children, data);
+    // console.log("defaultValue is:", defaultValue, children, data);
 
     useEffect(()=> {
             setState({value: defaultValue});

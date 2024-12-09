@@ -94,14 +94,14 @@ const SelectTail = (props)=>{
         state.value = defaultValue;
         window?.$('#'+id+'').val(defaultValue);        
         state.instance?.reload();
-        console.log("tail value is: ", defaultValue)
+        // console.log("tail value is: ", defaultValue)
         if(defaultValue != "")
             Element.removeError();
     }, [defaultValue])
 
     useEffect(()=>{
         state.instance?.reload();
-        console.log("tail value is: ", state.value)
+        // console.log("tail value is: ", state.value)
         if(state.value && state.value != "")
             Element.removeError();
     }, [data, children])

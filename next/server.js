@@ -14,7 +14,7 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
     createServer(async (req, res) => {
-        console.log("Start server!!", req.url);
+        // console.log("Start server!!", req.url);
         try {
             const parsedUrl = parse(req.url, true)
             const { pathname, query } = parsedUrl

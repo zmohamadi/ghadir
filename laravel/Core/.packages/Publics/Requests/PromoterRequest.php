@@ -25,6 +25,8 @@ class PromoterRequest extends FormRequest
     {
         $url = explode("/", request()->path());
         $id = $url[2] ?? null;
+        // dd($url);
+        $role_id = auth("admin")->user()->role_id;
 
         $rules = [
             'firstname' => 'required',
@@ -45,8 +47,12 @@ class PromoterRequest extends FormRequest
                 Rule::unique('users', 'codemeli')->ignore($id)->whereNull('deleted_at'),
             ],
             'is_not_citizen' => 'required_without:codemeli',
-            'mobile' => "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL",
+            // 'mobile' => "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL",
         ];
+        if($role_id==1){
+
+            $rules['mobile'][] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
+        }
 
         // اگر is_not_citizen برابر با 1 باشد، کدملی می‌تواند خالی باشد
         if (request()->input('is_not_citizen') == 1) {

@@ -38,7 +38,7 @@ export function Form({id}){
     
     let url = laraAdmin + "/promoters";
     let method = "new";
-    let nextUrl = access? link : "/profile";
+    let nextUrl = access? link : "/";
     
     if (finalId !== 0 && finalId !== undefined) {
         url = `${laraAdmin + "/promoters"}/${finalId}`;

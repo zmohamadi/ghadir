@@ -64,7 +64,7 @@ export default function Promoter() {
                     {Lang('public.promotions')}
                 </Link> */}
                 
-                <img className="hidden sm:block absolute top-0 left-0 w-2/5 -mt-3 ml-2" 
+                <img className="hidden sm:block absolute top-0 left-0 w-2/5 mt-3 ml-5" 
                 alt="logo"  src={mediaPath+'/logo/light-logo1.png'}
                 style={{width:"130px"}}
                 />
