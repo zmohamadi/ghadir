@@ -111,10 +111,9 @@ const Data = {
                             method = 'error';
                             break;
                     }
-                    console.log("error", error.response.data.errors);
 
                     setState((oldState)=>{
-                        return {...oldState, errors: error.response.data.errors, status: "error"}
+                        return {...oldState, errors: error.response?.data?.errors, status: "error"}
                     });
 
                     Toast[method](message, title, 3000);
@@ -171,9 +170,6 @@ const Data = {
                 if (nextUrl) {
                     router.push(Data.getSystemPrefix() + nextUrl);
                 }
-                // console.log("router.push(Data.getSystemPrefix() + nextUrl)");
-                // console.log(router);
-                // console.log(router.push(Data.getSystemPrefix() + nextUrl));
 
                 callback(data, response.data);
             })
@@ -194,6 +190,10 @@ const Data = {
                             break;
                         case 501:
                             message = Lang('public.error-501');
+                            method = 'error';
+                            break;
+                        case 500:
+                            message = Lang('public.error-500');
                             method = 'error';
                             break;
                     }
