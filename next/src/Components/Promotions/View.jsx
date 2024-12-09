@@ -308,7 +308,7 @@ export function View({id}) {
                     <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
                 ) : (
                     (data?.register_status == 1 && !access) && 
-                    <Button label="register" onClick={saveItem} />
+                    <Button label="register" onClick={saveItem} component={component} />
                 )
             }
             {

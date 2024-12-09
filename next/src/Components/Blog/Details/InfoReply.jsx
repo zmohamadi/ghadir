@@ -10,7 +10,7 @@ export const InfoReply = ({ sendKeyServer,laraAdmin,blogId,parentId=0 }) => {
     return(
         <>
             <Textarea placeholder="پیام خود را بنویسید..." refItem={[component, "comment"]} required="true" />
-            <Button className="btn btn-primary w-20 m-3" label="send" onClick={saveItem} />
+            <Button className="btn btn-primary w-20 m-3" label="send" onClick={saveItem} component={component} />
         </>
     );
 }

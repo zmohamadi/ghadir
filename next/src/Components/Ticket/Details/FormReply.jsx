@@ -34,7 +34,7 @@ export function FormReply({ keyServer,id,replyStatus,formUrl }) {
                             help = {Lang("public.accept_format")+": png,jpg,tif,gif,jpeg,WebP,AVIF,jfif,pdf,doc,docx,ppt"}
                         />
                         <ButtonContainer className="col-span-12">
-                            <Button label="save" onClick={saveItem} />
+                            <Button label="save" onClick={saveItem} component={component} />
                             <Button label="back" onClick={back} />
                         </ButtonContainer>
                     </div>

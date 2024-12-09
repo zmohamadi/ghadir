@@ -57,7 +57,7 @@ export default function Form({ id }) {
             </Box> */}
 
             <ButtonContainer>
-                <Button label="save" onClick={saveItem} />
+                <Button label="save" onClick={saveItem} component={component} />
                 <Button label="back" onClick={back} />
             </ButtonContainer>
         </>

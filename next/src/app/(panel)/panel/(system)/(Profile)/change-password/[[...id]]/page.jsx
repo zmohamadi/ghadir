@@ -32,7 +32,7 @@ export default function Page({ params }){
                 <Input required="true" type="password" label="new_password_confirmation" refItem={[component, "new_password_confirmation"]} />
             </Box>
             <ButtonContainer>
-                <Button label="save" onClick={saveItem} />
+                <Button label="save" onClick={saveItem} component={component} />
                 <Button label="back" onClick={back} />
             </ButtonContainer>
         </>
