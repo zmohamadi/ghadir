@@ -35,7 +35,7 @@ class SupportController extends BaseAbstract
 
             $data = $this->model::find($query->id);
 
-            if (!empty($promoters)) {
+            if (!empty($promoters) && $promoters[0] !== null) {
                 $data->promoters()->detach();
                 $data->promoters()->sync($promoters);
             }

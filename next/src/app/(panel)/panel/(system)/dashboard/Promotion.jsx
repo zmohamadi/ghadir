@@ -34,7 +34,7 @@ export default function Promotion({promotions}) {
 
                             <div class="alert alert-secondary show mb-2" role="alert">
                                 <div class="flex items-center">
-                                    <div class="font-medium text-lg">{promotion?.title}</div>
+                                    <Link href={`${nextAdmin}/promotions/${promotion?.id}`}><div class="font-medium text-lg">{promotion?.title}</div></Link>
                                     <div class="text-xs bg-gray-600 px-1 rounded-md text-white mr-auto">{promotion?.year}</div>
                                 </div>
                                 <div className="mt-3" 

@@ -150,7 +150,7 @@ export function Form({id}){
                                 <Input className="col-span-3"  label="name" refItem={[component, "firstname"]} required="true" />
                                 <Input className="col-span-3"  label="family" refItem={[component, "lastname"]} required="true" />
                                 {
-                                    access && <Input dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
+                                    access && <Input type="mobile" dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
                                 }
                                 <SelectTail key={"is_not_citizen"+2} required="true"
                                     defaultValue={data?.is_not_citizen == true ? 1 : 0} 

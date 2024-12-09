@@ -3,7 +3,7 @@
 import { useConfig, useLang } from "@/lib";
 import Link from "next/link";
 import { useAuth } from "@/lib/auth";
-import { Box } from "@/Theme/Midone";
+import { Box, ButtonContainer } from "@/Theme/Midone";
 
 export default function Blog({blogs}) {
     const { Lang } = useLang();
@@ -15,10 +15,10 @@ export default function Blog({blogs}) {
             <>
                 <Box  title={Lang('public.blog')}  cols={"col-6"}>
                     {blogs.map((blog, index) => {
-                        return (
+                        return (<>
                             <div class="alert alert-success-soft show mb-2" role="alert">
                                 <div class="flex items-center">
-                                    <div class="font-medium text-lg">{blog?.title}</div>
+                                    <Link href={`${nextAdmin}/blogs/${blog?.id}`}> <div class="font-medium text-lg">{blog?.title}</div> </Link>
                                     <div class="text-xs bg-white px-1 rounded-md text-gray-800 mr-auto">{blog?.subject?.title ? blog?.subject?.title : Lang('public.new')}</div>
                                 </div>
                                 <div className="mt-3" 
@@ -26,7 +26,12 @@ export default function Blog({blogs}) {
                                         __html: blog?.summary || blog?.text || ""
                                     }} 
                                 />
+                                <ButtonContainer>
+                                    <Link className="btn btn-success" href={`${nextAdmin}/blogs/${blog?.id}`}>{Lang('public.view')}</Link>
+                                </ButtonContainer>
                                 </div>
+                        </>
+                                
                         );
                     })}
                 </Box>

@@ -42,7 +42,7 @@ export function Input(props) {
         keyUp = options.onKeyUp;
         delete options.onKeyUp;
     }
-    if (type == "number") {
+    if (type == "number" || type == "mobile") {
         const numberKeyDownHandler = (e) => {
             // لیست کلیدهای مجاز
             const allowedKeys = [
