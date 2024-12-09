@@ -37,7 +37,9 @@ export function View({id}) {
     const saveItem = ()=>save(`${laraAdmin}/agree`, component, "new", `/promotions`);
 
     let agree ="";
-    if(access) agree = component?.state?.info?.agrees?.[0];
+    let report ="";
+    agree = component?.state?.info?.agrees?.[0];
+    report = component?.state?.info?.reports?.[0];
     // console.log(agree);
     // console.log(data?.register_status);
 
@@ -309,8 +311,14 @@ export function View({id}) {
                     <Button label="register" onClick={saveItem} />
                 )
             }
-            {data?.report_status == 1 && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${id}`}>{Lang('public.report')}</Link>}
-
+            {
+                report ? (
+                    <span className='btn btn-primary ml-1'>{Lang('public.you_reported')}</span>
+                ) : (
+                    (data?.report_status == 1 && !access) && 
+                    <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${id}`}>{Lang('public.report')}</Link>
+                )
+            }
             <Button label="back" onClick={back} />
         </ButtonContainer>
         

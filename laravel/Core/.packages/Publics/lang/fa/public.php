@@ -77,6 +77,7 @@ $lang = [
    'holding_course'=>'برگزاری دوره',
    'register_promotion'=>'ثبتنام در تبلیغ',
    'you_registered'=>'شما قبلا ثبتنام کرده اید !',
+   'you_reported'=>'شما قبلا گزارش داده اید !',
    'created_at'=>'تاریخ ثبت',
    'promoters_registered'=>'مبلّغ هایی که مشارکت کرده اند !',
    'promoters_reports'=>'گزارش هایی که مبلّغین ثبت کرده اند !',

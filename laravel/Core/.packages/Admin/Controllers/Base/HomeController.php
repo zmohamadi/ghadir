@@ -126,15 +126,17 @@ class HomeController extends Controller
         if($panel=="promoter")
         {
             $notif = Notif::where(['promoter_id'=>$user,'display'=>1])->get();
-            $blogs = Blog::active()->get();
+            $blogs = Blog::active()->orderBy('id','desc')->get();
             $promotions = Promotion::where("register_status",1)
             ->with(['agrees' => function ($q) use ($user) {
                 $q->where('promoter_id', $user);
-                
-                // بارگذاری rituals برای هر agree
                 $q->with(['rituals' => function ($q) use ($user) {
                     $q->where('promoter_id', $user);
                 }]);
+            }])
+            ->with(['reports' => function ($q) use ($user) {
+                $q->where('promoter_id', $user);
+                
             }])
             ->with('rituals')->get();
         }

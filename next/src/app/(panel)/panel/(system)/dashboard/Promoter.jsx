@@ -66,7 +66,7 @@ export default function Promoter() {
                 
                 <img className="hidden sm:block absolute top-0 left-0 w-2/5 -mt-3 ml-2" 
                 alt="logo"  src={mediaPath+'/logo/light-logo1.png'}
-                style={{width:"220px"}}
+                style={{width:"130px"}}
                 />
             </div>
         </div>

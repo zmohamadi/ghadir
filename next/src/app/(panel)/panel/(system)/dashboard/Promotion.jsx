@@ -25,6 +25,7 @@ export default function Promotion({promotions}) {
                 <Box title={Lang('public.promotion')} cols={"col-6"}>
                     {promotions.map((promotion, index) => {
                         let agree = promotion?.agrees[0];
+                        let report = promotion?.reports[0];
 
                         return (
                             <>
@@ -68,8 +69,23 @@ export default function Promotion({promotions}) {
                                 }
                                 </div>
                                 <ButtonContainer>
-                                    <Button label="register" onClick={agreeItem} />
-                                    <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>
+                                    {
+                                        agree ? (
+                                            <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
+                                        ) : (
+                                           
+                                            <Button label="register" onClick={agreeItem} />
+                                        )
+                                    }
+                                    {
+                                        report ? (
+                                            <span className='btn btn-primary ml-1'>{Lang('public.you_reported')}</span>
+                                        ) : (
+                                           
+                                            <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>
+
+                                        )
+                                    }
                                 </ButtonContainer>
                             </>
                         );
