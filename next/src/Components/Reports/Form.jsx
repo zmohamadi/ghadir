@@ -149,7 +149,7 @@ export function Form({ id}) {
                 </Tab> </>}
             </Frame>
             <ButtonContainer>
-                <Button label="save" onClick={saveItem} />
+                <Button label="save" onClick={saveItem} component={component} />
                 <Button label="back" onClick={back} />
             </ButtonContainer>
         </>

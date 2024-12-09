@@ -106,6 +106,10 @@ const Data = {
                             message = Lang('public.error-501');
                             method = 'error';
                             break;
+                        case 500:
+                            message = Lang('public.error-500');
+                            method = 'error';
+                            break;
                     }
                     console.log("error", error.response.data.errors);
 

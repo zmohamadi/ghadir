@@ -43,7 +43,7 @@ export const SendScore = ({ item,Lang }) => {
                             <Radio label="evaluate" type="col" data={options} titleKey="id" titleValue="value" defaultValue={3} refItem={[component, "score"]} />
                         </div>
                         <ButtonContainer>
-                            <Button label="save_score" onClick={saveItem} />
+                            <Button label="save_score" onClick={saveItem} component={component} />
                         </ButtonContainer>
                     </div>
                 </>
