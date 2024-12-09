@@ -30,7 +30,7 @@ class PromotionReportController extends BaseAbstract
                 $q->where('promoter_id', request()->promoter);
             });
             $query->when(request()->reportStatus != null, function ($q) {
-                $q->where('confirm_id', request()->status);
+                $q->where('confirm_id', request()->reportStatus);
             });
             $query->when(request()->promotion != null, function ($q) {
                 $q->where('promotion_id', request()->promotion);
