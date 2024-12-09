@@ -70,17 +70,20 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
     };
     
 
-    const login = async ({ setErrors, ...props }) => {
+    const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf();
 
         setErrors([]);
+        setStatus("loading")
 
         try {
             await axios.post(loginUrl, props);
+            setStatus("success")
             mutate();
         } catch (error) {
             if (error.response?.status !== 422) throw error;
             setErrors(error.response?.data.errors);
+            setStatus("error")
         }
     };
 

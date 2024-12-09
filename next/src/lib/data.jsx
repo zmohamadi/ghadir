@@ -62,6 +62,10 @@ const Data = {
             }
         });
 
+        setState((oldState)=>{
+            return {...oldState, errors:[], status: "loading"}
+        });
+
         state.errors = [];
         axios.post(url, data)
             .then(response => {
@@ -69,7 +73,9 @@ const Data = {
                 const message = Lang('public.save_message');
 
                 if (result) {
-                    setState({ ...state, lastId: response.data });
+                    setState((oldState)=>{
+                        return {...oldState, errors:[], status: "success", lastId: response.data}
+                    });
                 }
 
                 Toast.success(message, Lang('public.dear_user'), 3000);
@@ -88,15 +94,12 @@ const Data = {
 
                     switch (error.response.status) {
                         case 422:
-                            setState({ ...state, errors: error.response.data.errors });
                             message = Lang('public.error-422');
                             break;
                         case 401:
-                            setState({ ...state, errors: error.response.data.errors });
                             message = Lang('public.error-401');
                             break;
                         case 403:
-                            setState({ ...state, errors: error.response.data.errors });
                             message = Lang('public.error-403');
                             break;
                         case 501:
@@ -104,6 +107,10 @@ const Data = {
                             method = 'error';
                             break;
                     }
+
+                    setState((oldState)=>{
+                        return {...oldState, errors: error.response?.data?.errors, status: "error"}
+                    });
 
                     Toast[method](message, title, 3000);
                 } else {
