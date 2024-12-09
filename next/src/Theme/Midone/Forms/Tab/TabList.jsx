@@ -17,7 +17,7 @@ export function TabList({children, active, href, title, items = []}){
                     }
                 }
             }else{
-                component?.state?.errors[elem] && count++;
+                component?.state?.errors && component?.state?.errors[elem] && count++;
             }
         });
         return count;

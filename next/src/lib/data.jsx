@@ -107,9 +107,10 @@ const Data = {
                             method = 'error';
                             break;
                     }
+                    console.log("error", error.response.data.errors);
 
                     setState((oldState)=>{
-                        return {...oldState, errors: error.response?.data?.errors, status: "error"}
+                        return {...oldState, errors: error.response.data.errors, status: "error"}
                     });
 
                     Toast[method](message, title, 3000);
