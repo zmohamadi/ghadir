@@ -65,11 +65,11 @@ class PromotionController extends BaseAbstract
             //         $q->where("firstname", 'like', "%$promoter%")->orWhere("lastname", 'like', "%$promoter%");
             //     });
             // });
-            // $query->when(request()->promoter, function ($q) {
-            //     $q->whereHas('agreePromoters', function ($subQuery) {
-            //         $subQuery->where('promoter_id', request()->promoter);
-            //     });
-            // });
+            $query->when(request()->promoter, function ($q) {
+                $q->whereHas('agreePromoters', function ($subQuery) {
+                    $subQuery->where('promoter_id', request()->promoter);
+                });
+            });
         };
         
         $this->storeQuery = function ($query) {
@@ -93,4 +93,19 @@ class PromotionController extends BaseAbstract
         
         
     }
+    // public function destroy($id)
+    // {
+    //     $record=$this->model::find($id);
+    //     $record->delete();
+        
+    //     if ($promotionId) {
+    //         $promotionCount = $this->model::where('promotion_id', $promotionId)->count();
+    //         Promotion::where("id", $promotionId)->update(['report_count' => $promotionCount]);
+    //     }
+    //     if ($promoterId) {
+    //         $promoterCount = $this->model::where('promoter_id', $promoterId)->count();
+    //         \Models\Person\Promoter::where("id", $promoterId)->update(['report_count' => $promoterCount]);
+    //     }
+        
+    // }
 }

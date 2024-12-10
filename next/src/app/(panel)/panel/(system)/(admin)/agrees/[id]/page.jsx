@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { Box, Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
+import { Box, CheckBox, Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
 
 export default function page({params}){
 
@@ -13,7 +13,7 @@ export default function page({params}){
     const { get,getNeedles } = useData();
     let [needles, setNeedles] = useState();
     const router = useRouter();
-
+    
     let url = `${laraAdmin}/agree/${id}`;
 
     let component = useFormRefs();
@@ -30,69 +30,30 @@ export default function page({params}){
 
     return (
         <>
-            <Frame title={Lang(["public.course"])}>
+            <Frame title={Lang(["public.agree"])}>
                 <Box>
                 <div className="col-span-12 space-y-4">
                     <div className="flex gap-4">
                         <div className="w-1/3">
-                            <label className="block">{Lang("public.promotion")}</label>
-                            <div className="p-2 border rounded">{promotion?.title} - {promotion?.year}</div>
+                            <label className="block">{Lang("public.promotion")} :</label>
+                            <div className="p-2">{promotion?.title} - {promotion?.year}</div>
                         </div>
                         <div className="w-1/3">
-                            <label className="block">{Lang("public.name")} {Lang("public.promoter")}</label>
-                            <div className="p-2 border rounded">{promoter?.firstname} {promoter?.lastname} - {promoter?.mobile}</div>
+                            <label className="block">{Lang("public.name")} {Lang("public.promoter")} :</label>
+                            <div className="p-2">{promoter?.firstname} {promoter?.lastname} - {promoter?.mobile}</div>
                         </div>
-                        <div className="w-1/3">
-                            <label className="block">{Lang("public.subject")} {Lang("public.course")}</label>
-                            <div className="p-2 border rounded">{data?.subject}</div>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                       
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.province")}</label>
-                            <div className="p-2 border rounded">
-                                    {
-                                        data?.city_user?.province_id
-                                            ? needles?.province?.find(item => item.id == data?.city_user?.province_id)?.["name_fa"]
-                                            : "-"
-                                    }
-                                </div>
-                        </div>
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.city_sh")}</label>
-                            <div className="p-2 border rounded">{data?.city_sh?.["name_fa"]}</div>
-                        </div>
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.city")}</label>
-                            <div className="p-2 border rounded">{data?.city}</div>
-                        </div>
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.village")}</label>
-                            <div className="p-2 border rounded">{data?.village}</div>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.duration")}</label>
-                            <div className="p-2 border rounded">{data?.duration}</div>
-                        </div>
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.people_count")}</label>
-                            <div className="p-2 border rounded">{data?.people_count}</div>
-                        </div>
-                        
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.place_name")}</label>
-                            <div className="p-2 border rounded">{data?.place_name}</div>
-                        </div>
-                        <div className="w-1/4">
-                            <label className="block">{Lang("public.audiencetype")}</label>
-                            <div className="p-2 border rounded">{data?.audience_type?.title}</div>
-                        </div>
-                       
+                        <ul className="list-disc list-inside ml-5 text-gray-600">
+                            {data?.has_course == 1 && (
+                                <li>{Lang("public.course")}</li>
+                            )}
+                            {data?.has_tribune == 1 && (
+                                <li>{Lang("public.tribune")}</li>
+                            )}
+                            {data?.rituals?.length > 0 &&
+                                data.rituals.map((ritual, ritualIndex) => (
+                                    <li key={ritualIndex}>{ritual?.title}</li>
+                                ))}
+                        </ul>
                     </div>
                 </div>
                 </Box>

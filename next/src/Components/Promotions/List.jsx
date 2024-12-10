@@ -54,17 +54,17 @@ export function List({query}) {
         insertLink: access ? `${formUrl}/new` : "",
         url: url,
         columns: [
-            // {
-            //     label: "",
-            //     jsx: (item) => (
-            //         <Pic 
-            //             src={mediaPath + "/promotions/" + item?.photo} 
-            //             defaultImg={`${mediaPath}/public/default/avatar.png`} 
-            //             classImg="user-avatar" 
-            //             key={"img" + item?.photo} 
-            //         />
-            //     ),
-            // },
+            {
+                label: "",
+                jsx: (item) => (
+                    <Pic 
+                        src={mediaPath + "/promotions/" + item?.photo} 
+                        defaultImg={`${mediaPath}/public/default/avatar.png`} 
+                        classImg="user-avatar" 
+                        key={"img" + item?.photo} 
+                    />
+                ),
+            },
             {
                 label: "title",
                 jsx: (item) => (
@@ -78,7 +78,7 @@ export function List({query}) {
                 { 
                     label: "register_status", 
                     jsx: (item) => (
-                        <span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_register?.color}>
+                        <span className={" inline-flex items-center rounded-full py-1 px-2  text-white bg-"+item?.active_register?.color}>
                             {item?.active_register?.["title_" + local]}
                         </span>
                     )
@@ -86,7 +86,7 @@ export function List({query}) {
                 { 
                     label: "report_status", 
                     jsx: (item) => (
-                        <span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_report?.color}>
+                        <span className={" inline-flex items-center rounded-full py-1 px-2  text-white bg-"+item?.active_report?.color}>
                             {item?.active_report?.["title_" + local]}
                         </span>
                     )
@@ -94,7 +94,7 @@ export function List({query}) {
                 {
                     label: "agrees",
                     jsx: (item) => (
-                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        <Link className=" rounded-full py-1 px-2 text-white bg-theme-17" 
                         href={`${nextAdmin}/agrees?promotion=${item?.id}`}>
                             {`${item?.user_count}`}
                         </Link>
@@ -103,7 +103,7 @@ export function List({query}) {
                 {
                     label: "reports",
                     jsx: (item) => (
-                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        <Link className=" rounded-full py-1 px-2 text-white bg-theme-17" 
                         href={`${nextAdmin}/reports?promotion=${item?.id}`}>
                             {`${item?.report_count}`}
                         </Link>
@@ -112,7 +112,7 @@ export function List({query}) {
                 {
                     label: "supports",
                     jsx: (item) => (
-                        <Link className="rounded-full py-1 px-2 text-white bg-theme-17" 
+                        <Link className=" rounded-full py-1 px-2 text-white bg-theme-17" 
                         href={`${nextAdmin}/supports?promotion=${item?.id}`}>
                             {`${item?.sum_support}`}
                         </Link>
@@ -148,7 +148,8 @@ export function List({query}) {
                             url={formUrl + "/" + item?.id} 
                             tooltip={Lang('public.view')} 
                         />
-                        <FeatherIcon 
+                        <FeatherIcon
+                            displayIf={item?.user_count== 0 && item?.report_count == 0 }
                             access={access} 
                             name="XOctagon" 
                             tooltip={Lang('public.delete')} 

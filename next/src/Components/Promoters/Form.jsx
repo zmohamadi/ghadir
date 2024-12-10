@@ -14,6 +14,7 @@ import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms
 import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
 import { Select } from "@/Theme/Midone/Forms/Select";
+import { SetStars } from "../Public/SetStars";
 
 export function Form({id}){
     const {user} = useAuth();
@@ -60,35 +61,6 @@ export function Form({id}){
     const otherProps3 = (component?.state?.info?.promotion_infos?.length)? { count_data: component.state.info.promotion_infos.length } : {};
     const otherProps4 = (component?.state?.info?.notif?.length)? { count_data: component.state.info.notif.length } : {};
     
-    const [starRating, setStarRating] = useState(data?.level_id || 0);
-
-    const renderStars = (level) => {
-        if (level == undefined || level == 0) {
-            level = data?.level_id || 0;
-        }
-
-        const stars = [];
-        for (let i = 1; i <= 5; i++) {
-            stars.push(
-                <span
-                    key={i}
-                    style={{
-                        color: i <= level ? "#FFD700" : "#e4e5e9",
-                        fontSize: "20px",
-                        marginRight: "5px",
-                        cursor: "pointer",
-                    }}
-                    onClick={() => handleStarClick(i)}
-                >
-                    {i <= level ? "★" : "☆"}
-                </span>
-            );
-        }
-        return stars;
-    };
-    const handleStarClick = (rating) => {
-        setStarRating(rating);
-    };
 
     let [nativeProvinceId, setProvinceId] = useState(null);
     useEffect(()=>{
@@ -131,7 +103,7 @@ export function Form({id}){
                         <TabHeader>
                             <TabList href="tab-first" title={Lang('personal_info')} active={"true"} 
                                 items = {[component, ['firstname', 'lastname', 'mobile', 'is_not_citizen', 'codemeli', 
-                                        'khadamat_code', 'tablighat_office_code', 'tablighat_organization_code']]}  />
+                                        'khadamat_code', 'tablighat_office_code', 'tablighat_organization_code',"bank_account_number","education_id"]]}  />
                             <TabList href="tab-second" title={Lang('promotion_info')}
                             items = {[component, ['promotion_position_*','place_name_*','pos_province_*','pos_city_id_*', 
                                 'pos_city_*','pos_village_*']]}
@@ -211,9 +183,10 @@ export function Form({id}){
                                 <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
                                 <Textarea label="address" refItem={[component, "address"]}  />
                                 <Dropzone className="col-span-6 avatar-user"
-                                 maxFiles= "1"
-                                 maxFilesize= "2"
-                                 acceptType='image'required="true"
+                                //  maxFiles= "1"
+                                //  maxFilesize= "2"
+                                //  acceptType='image'
+                                  required="true"
                                   refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
                                 <Radio className="col-span-3" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
                                     data={needles?.gender} titleKey={"title_"+local}  key={"gender_id"+data?.gender_id}
@@ -234,11 +207,8 @@ export function Form({id}){
                                             valueKey="code" titleKey={"title_"+local}  
                                             key={"work_status"+data?.work_status}
                                         /> 
-                                        <Input type="hidden" defaultValue={starRating} refItem={[component, `level_id`]}/>
-                                        <div className="col-span-3">
-                                                <label className="form-label font-bold">{Lang("rank")}</label>
-                                                <div className="flex space-x-1 form-control">{renderStars(starRating)}</div>
-                                            </div>
+                                        <SetStars defaultValue={data?.level_id || 0} component={component} />
+                                        
                                     </>
                                 }
                                 

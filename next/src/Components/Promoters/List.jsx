@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib";
 import { Filtering } from "../Public/Filtering";
+import { Stars } from "../Public/Stars";
 
 export function List() {
     const {user} = useAuth();
@@ -36,36 +37,21 @@ export function List() {
         setFilters(newFilters);
     };
 
-    // تابع رندر ستاره‌ها براساس سطح (level)
-    const renderStars = (level = 0) => {
-        return Array.from({ length: 5 }, (_, i) => (
-            <span
-                key={i}
-                style={{
-                    color: i + 1 <= level ? "#FFD700" : "#e4e5e9", // رنگ ستاره‌ها
-                    fontSize: "18px",
-                }}
-            >
-                {i + 1 <= level ? "★" : "☆"} {/* ستاره پر یا خالی */}
-            </span>
-        ));
-    };
-
     // تنظیم اطلاعات جدول (grid)
     let info = {
         insertLink: `${formUrl}/new`,
         url: url,
         columns: [
-            // {
-            //     label: "",
-            //     jsx: (item) => (
-            //         <Pic
-            //             src={`${mediaPath}/users/${item?.photo}`}
-            //             defaultImg={`${mediaPath}/public/default/avatar.png`}
-            //             classImg="user-avatar rounded-full"
-            //         />
-            //     ),
-            // },
+            {
+                label: "",
+                jsx: (item) => (
+                    <Pic
+                        src={`${mediaPath}/users/${item?.photo}`}
+                        defaultImg={`${mediaPath}/public/default/avatar.png`}
+                        classImg="user-avatar rounded-full"
+                    />
+                ),
+            },
             {
                 label: "name",
                 jsx: (item) => (
@@ -79,8 +65,8 @@ export function List() {
                 ? [
                       {
                           label: "",
-                          width:"150px",
-                          jsx: (item) => <span>{renderStars(item?.level_id)}</span>,
+                        //   width:"150px",
+                          jsx: (item) => <Stars level={item?.level_id} />,
                       },
                     //   { label: "last_login", field: "last_login" },
                   ]
@@ -112,7 +98,7 @@ export function List() {
                 label: "status",
                 jsx: (item) => (
                     <span
-                        className={`rounded-full py-1 px-2 text-white bg-${item?.active_status?.color}`}
+                    className={`inline-flex items-center rounded-full py-1 px-2 text-white bg-${item?.active_status?.color} whitespace-nowrap`}
                     >
                         {item?.active_status?.[`title_${local}`]}
                     </span>
@@ -140,6 +126,7 @@ export function List() {
                             tooltip={Lang("public.view")}
                         />
                         <FeatherIcon
+                        displayIf={item?.agree_count==0 && item?.report_count==0}
                             name="XOctagon"
                             tooltip={Lang("public.delete")}
                             color="darkred"

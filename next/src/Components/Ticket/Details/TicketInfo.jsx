@@ -6,24 +6,26 @@ export function TicketInfo({ item,Lang,local }){
 
     return(
         <>
-            <div className="intro-y box p-5 bg-theme-17 text-white mt-5">
-                <div className="flex items-center">
-                    {/* <div className="font-medium">{item?.title}</div> */}
-                    <h2 className="text-2xl font-medium leading-none mt-3">{item?.title}</h2>
-                </div>
-                <div className="mt-4">
-                    <h4 className="text-xl font-medium leading-none mt-4">
-                        {Lang("public.subject")+" : "}<span>{item?.subject?.["title_"+local]}</span>
-                    </h4>
-                    <h6 className="text-sm font-medium leading-none mt-4">
-                        {Lang("public.reply_status")+" : "}<span>{item?.reply_status?.["title_"+local]}</span>
-                    </h6>
-                    <h6 className="text-sm font-medium leading-none mt-5">
-                        {Lang("public.check_priority")+" : "}<span >{item?.priority_status?.["title_"+local]}</span>
-                    </h6>
-                    <div className="mt-5 ltr">{Tools?.toJalaliDateString(item?.created_at)}</div>
-                </div>
+            <div className="alert alert-success show mb-2 mt-5">
+                {[
+                { label: Lang("public.title"), value: item?.title },
+                { label: Lang("public.subject"), value: item?.subject?.["title_" + local] },
+                { label: Lang("public.reply_status"), value: item?.reply_status?.["title_" + local] },
+                { label: Lang("public.check_priority"), value: item?.priority_status?.["title_" + local] },
+                { label: Lang("public.created_at"), value: Tools?.toJalaliDateString(item?.created_at) },
+                ].map((row, index) => (
+                    <div
+                    key={index}
+                    className="flex items-center mt-4 text-sm font-medium "
+                    
+                  >
+                      <h4 className="ml-auto">{row.label}:</h4>
+                      <span className={` ${index === 4 ? "ltr" : ""}`}>{row.value}</span>
+                  </div>
+                  
+                ))}
             </div>
+
         </>
     );
 }

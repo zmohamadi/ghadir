@@ -13,6 +13,15 @@ class Support extends Model
     use HasFactory,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($record) {
+            $record->promoters()->delete();
+           
+        });
+    }
 
     /**
      * The attributes that should be cast to native types.

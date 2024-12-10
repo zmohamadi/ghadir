@@ -9,6 +9,7 @@ Route::post("supports/{support}/promoters/new", "SupportController@newPromoter")
 Route::get("supports/get-needles", "SupportController@getNeedles");
 Route::resource("supports", "SupportController");
 
+Route::get("get-report", "PromotionReportController@getReportForLastPromotion");
 Route::get("reports/get-needles", "PromotionReportController@getNeedles");
 Route::resource("reports", "PromotionReportController");
 

@@ -22,6 +22,16 @@ class PromotionReport extends Model
         'deleted_at' => 'timestamp','created_at' => 'datetime',
 
     ];
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($record) {
+            $record->ritualReports()->delete();
+            $record->tribunes()->delete();
+            $record->courses()->delete();
+        });
+    }
 
     /**
      * Relationships

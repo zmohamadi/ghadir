@@ -8,6 +8,7 @@ use Admin\Controllers\Public\BaseAbstract;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
+use Models\Promotion;
 use Models\Person\Promoter;
 
 class PromotionAgreeController extends BaseAbstract
@@ -15,7 +16,7 @@ class PromotionAgreeController extends BaseAbstract
     protected $model = 'Models\PromotionAgree';
     // protected $request = 'Publics\Requests\PromotionAgreeRequest';
     protected $with = ["promotion", "promoter"];
-    protected $showWith = ["promotion", "promoter"];
+    protected $showWith = ["promotion", "promoter","rituals"];
     protected $needles = ["Person\Promoter", "Promotion"];
 
     public function init()

@@ -8,7 +8,7 @@ import { useAuth } from "@/lib";
 import Link from "next/link";
 import { Filtering } from "../Public/Filtering";
 
-export function List(){
+export function List({query}){
 
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
@@ -19,7 +19,7 @@ export function List(){
    
     // مقداردهی اولیه فیلترها از URL
     const [filters, setFilters] = useState({});
-    const [url, setUrl] = useState(`${laraAdmin}/reports`);
+    const [url, setUrl] = useState(`${laraAdmin}/reports?${query}`);
 
     useEffect(() => {
         const filterParams = Object.keys(filters)
@@ -76,13 +76,12 @@ export function List(){
                 
             ] : []),
             {label: "confirm_status", jsx: (item)=>
-                <span className={"rounded-full py-1 px-2  text-white bg-"+item?.confirm_repo?.color}>{item?.confirm_repo?.["title_"+local]}</span>},
+                <span className={" inline-flex items-center rounded-full py-1 px-2  text-white bg-"+item?.confirm_repo?.color}>{item?.confirm_repo?.["title_"+local]}</span>},
             { label: "created_at", field: "created_at" },
             {label: "", sort:false, 
                 jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon displayIf={item?.confirm_id != 1} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
-                        {/* <FeatherIcon name="Lock" url={nextAdmin+"/changePassword/"+item?.id} tooltip={Lang('public.change_password')} /> */}
                         <FeatherIcon  name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
                         <FeatherIcon displayIf={item?.confirm_id != 1} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/reports"+"/"+item?.id)} />
                     </div>

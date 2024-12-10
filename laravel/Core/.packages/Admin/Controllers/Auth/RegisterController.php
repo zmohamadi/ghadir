@@ -92,13 +92,20 @@ class RegisterController extends Controller
 
     public function verifyCheck(Request $request)
     {
+        $user = User::where('mobile', $request['mobile'])->first();
+
         // اعتبارسنجی کد تایید
         $this->verifyValidator($request->all())->validate();
 
+        $last_login = User::where('mobile', $request['mobile'])->update(['last_login' => now()]);
+        \Auth::guard('admin')->login($user, true);
+        
         return response()->json([
             'redirect' => true,
             'url' => 'login'
         ]);
+
+        
     }
 
 
