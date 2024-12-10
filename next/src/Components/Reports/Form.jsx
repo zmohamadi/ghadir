@@ -53,16 +53,23 @@ export function Form({ id}) {
 
 
     const saveItem = () => {
-        const refs = component?.state?.refs?.current;
+        const refsData = component?.state?.refs?.current;
     
         // گرفتن تمامی مقادیر مرتبط
-        const cSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('c_subject')).map(ref => ref?.value);
-        const tSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('tr_subject')).map(ref => ref?.value);
-        const rSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('r_ritual_id')).map(ref => ref?.value);
+        // const cSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('c_subject')).map(ref => ref?.value);
+        // const tSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('tr_subject')).map(ref => ref?.value);
+        // const rSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('r_ritual_id')).map(ref => ref?.value);
+
+        const cSubjects = refsData?.c_subject_0?.value;
+        const tSubjects = refsData?.tr_subject_0?.value;
+        const rSubjects = refsData?.r_ritual_id_0?.value;
     
+        // console.log(component?.state?.refs?.current?.r_ritual_id_0?.value);
+
         // بررسی اینکه آیا حداقل یکی از مقادیر پر است
         const hasValidValue = [...cSubjects, ...tSubjects, ...rSubjects].some(value => value?.trim() !== '');
     
+        
         if (!hasValidValue) {
             Toast.error('لطفاً حداقل یکی از موارد دوره، منبر، یا شعائر را وارد نمایید!', Lang('public.dear_user'), 3000);
             return;

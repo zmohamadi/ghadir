@@ -6,12 +6,15 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
 import { useSearchParams } from 'next/navigation'
+import { useAuth } from "@/lib";
 
 export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/agree";
-
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
+    
     const urlParams = useSearchParams()
     const getFilterFromUrl = () => {
         return {
@@ -64,13 +67,16 @@ export default function page() {
     return (
         <>
             <Frame title={Lang(["public.agrees"])} >
-                <Filtering
-                    promotion={true}
-                    promoter={true}
-                    url="agree"
-                    filterList={filters}
-                    onFiltersChange={handleFiltersChange}
-                />
+                {
+                    access &&
+                    <Filtering
+                        promotion={true}
+                        promoter={true}
+                        url="agree"
+                        filterList={filters}
+                        onFiltersChange={handleFiltersChange}
+                    />
+                }
 
                 <div className="intro-y col-span-12">
                     <Grid {...info} />
