@@ -2,17 +2,21 @@
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
+import { useSearchParams } from 'next/navigation'
+import { useAuth } from "@/lib";
 
-export default function page(){
-    const {Lang} = useLang();
-    const {laraAdmin,nextAdmin} = useConfig();
-    const [url, setUrl] = useState(`${laraAdmin}/agree`);
-    // استفاده از URLSearchParams برای گرفتن مقادیر فیلترها از URL
+export default function page() {
+    const { Lang, local } = useLang();
+    const { laraAdmin, nextAdmin } = useConfig();
+    const formUrl = nextAdmin + "/agree";
+    const {user} = useAuth();
+    const access = user?.role_id == 1 ?  true : false;
+    
+    const urlParams = useSearchParams()
     const getFilterFromUrl = () => {
-        const urlParams = new URLSearchParams(window.location.search);
         return {
             promoter: urlParams.get('promoter') || null,
             promotion: urlParams.get('promotion') || null,
@@ -20,61 +24,60 @@ export default function page(){
             city: urlParams.get('city') || null,
         };
     };
+    const [filters, setFilters] = useState(getFilterFromUrl());
+    
+    let info = useMemo(()=>{
+        const filterParams = Object.keys(filters)
+            .filter((key) => filters[key] && filters[key] != "null")
+            .map((key) => `${key}=${filters[key]}`)
+            .join("&");
 
-    // مقداردهی اولیه فیلترها از URL
-    const [filters, setFilters] = useState(getFilterFromUrl);
+        const url = filterParams
+            ? `${laraAdmin}/agree?${filterParams}`
+            : `${laraAdmin}/agree`;
 
-    let info = {
-        perPage:20,
-        url: url,
-        columns: [
-          {
-            label: "promotion",
-            jsx: (item) => (
-                <Link href={`${nextAdmin}/promotions/${item.promotion_id}`}>
-                    {`${item?.promotion?.title}-${item?.promotion?.year}`}
-                </Link>
-            ),
-          },
-            { label: "promoter",jsx: (item) => <span>{item?.promoter?.firstname + " " + item?.promoter?.lastname+"-"+item?.promoter?.mobile}</span>},        
-            { label: "created_at", jsx: (item)=><span dir="ltr" className="ltr">{(item?.created_at)}</span>},
-            { label: "", sort:false, 
-                jsx:(item)=><>
-                    <div className='flex justify-center '>
-                        <FeatherIcon name="Eye" url={nextAdmin+"/promotions/"+item?.promotion_id} tooltip={Lang('public.view')} />
-                    </div>
-                </>
-            }, 
-        ],
-    }
-  
-    useEffect(() => {
-      const filterParams = Object.keys(filters)
-          .filter((key) => filters[key])
-          .map((key) => `${key}=${filters[key]}`)
-          .join("&");
+        return {
+            url,
+            columns: [
+                {
+                  label: "promotion",
+                  jsx: (item) => (
+                      <Link href={`${nextAdmin}/promotions/${item.promotion_id}`}>
+                          {`${item?.promotion?.title}-${item?.promotion?.year}`}
+                      </Link>
+                  ),
+                },
+                  { label: "promoter",jsx: (item) => <span>{item?.promoter?.firstname + " " + item?.promoter?.lastname+"-"+item?.promoter?.mobile}</span>},        
+                  { label: "created_at", jsx: (item)=><span dir="ltr" className="ltr">{(item?.created_at)}</span>},
+                  { label: "", sort:false, 
+                      jsx:(item)=><>
+                          <div className='flex justify-center '>
+                              <FeatherIcon name="Eye" url={nextAdmin+"/agrees/"+item?.id} tooltip={Lang('public.view')} />
+                          </div>
+                      </>
+                  }, 
+              ],
+        }
+    }, [filters])
 
-      const updatedUrl = filterParams
-          ? `${laraAdmin}/courses?${filterParams}`
-          : `${laraAdmin}/courses`;
+    const handleFiltersChange = (newFilters) => {
+        setFilters(newFilters);
+    };
 
-      setUrl(updatedUrl);
-  }, [filters, laraAdmin]);
-
-  const handleFiltersChange = (newFilters) => {
-      setFilters(newFilters);
-  };
-
-
-    return(
+    return (
         <>
-            <Frame title={Lang(["public.agree"])}>
-            <Filtering
-                  promotion={true}
-                  promoter={true}
-                  url="agree"
-                  onFiltersChange={handleFiltersChange}
-              />
+            <Frame title={Lang(["public.agrees"])} >
+                {
+                    access &&
+                    <Filtering
+                        promotion={true}
+                        promoter={true}
+                        url="agree"
+                        filterList={filters}
+                        onFiltersChange={handleFiltersChange}
+                    />
+                }
+
                 <div className="intro-y col-span-12">
                     <Grid {...info} />
                 </div>

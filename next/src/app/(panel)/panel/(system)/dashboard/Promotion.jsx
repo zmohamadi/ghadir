@@ -71,7 +71,9 @@ export default function Promotion({promotions}) {
                                 <ButtonContainer>
                                     {
                                         agree ? (
-                                            <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
+                                            
+                                            <Link className="btn btn-primary ml-1" href={`${nextAdmin}/promotions/${promotion?.id}`}>{Lang('public.view')} {Lang('public.agree')}</Link>
+
                                         ) : (
                                            
                                             <Button label="register" onClick={agreeItem} />
@@ -79,7 +81,7 @@ export default function Promotion({promotions}) {
                                     }
                                     {
                                         report ? (
-                                            <span className='btn btn-primary ml-1'>{Lang('public.you_reported')}</span>
+                                            <Link className="btn btn-primary" href={`${nextAdmin}/reports/${report?.id}`}>{Lang('public.view')} {Lang('public.report')}</Link>
                                         ) : (
                                            
                                             <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>

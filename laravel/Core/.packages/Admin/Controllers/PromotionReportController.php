@@ -24,13 +24,13 @@ class PromotionReportController extends BaseAbstract
 
     public function init()
     {
-        $this->indexQuery = function ($query) {
-            
+        $this->indexQuery = function ($query) 
+        {
             $query->when(request()->promoter != null, function ($q) {
                 $q->where('promoter_id', request()->promoter);
             });
-            $query->when(request()->status != null, function ($q) {
-                $q->where('confirm_id', request()->status);
+            $query->when(request()->reportStatus != null, function ($q) {
+                $q->where('confirm_id', request()->reportStatus);
             });
             $query->when(request()->promotion != null, function ($q) {
                 $q->where('promotion_id', request()->promotion);
@@ -170,5 +170,30 @@ class PromotionReportController extends BaseAbstract
         };
         
         
+    }
+    public function destroy($id)
+    {
+        $record=$this->model::find($id);
+        $promotionId = $record->promotion_id;
+        $promoterId = $record->promoter_id;
+        $record->delete();
+        
+        if ($promotionId) {
+            $promotionCount = $this->model::where('promotion_id', $promotionId)->count();
+            Promotion::where("id", $promotionId)->update(['report_count' => $promotionCount]);
+        }
+        if ($promoterId) {
+            $promoterCount = $this->model::where('promoter_id', $promoterId)->count();
+            \Models\Person\Promoter::where("id", $promoterId)->update(['report_count' => $promoterCount]);
+        }
+        
+    }
+    public function getReportForLastPromotion(){
+        $role_id = $this->role_id;
+        $latestRecord = Promotion::where("report_status", 1)->orderBy('id', 'desc')->first();
+        $userReport = $this->model::where('promotion_id',$latestRecord->id)->where('promoter_id',$this->user_id)->first();
+        return response()->json(
+            $userReport
+        );
     }
 }

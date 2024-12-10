@@ -30,9 +30,10 @@ class PromotionReportRequest extends FormRequest
             $rules["level_id"] = 'required';
             $rules["confirm_id"] = 'required';
             $rules["promotion_id"] = 'required';
-
+            
         }
-    
+
+        
         $tools = new Tools;
 
         // دریافت داده‌ها

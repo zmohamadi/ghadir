@@ -234,10 +234,11 @@ export function View({id}) {
                                 <ul className="">
                                     {data.agrees.map((agree, index) => (
                                         <li className="border-b-2 pb-2 mb-2" key={index}>
-                                            <span className="font-bold text-gray-700">
-                                                {index + 1}. {agree?.promoter?.firstname} {agree?.promoter?.lastname} 
-                                                <span className="p-1 m-1">( {Lang("public.created_at")} : {agree?.created_at} )</span>
-                                            </span>
+                                            <Link href={`${nextAdmin}/agrees/${agree.id}`} className="text-blue-600">
+                                                
+                                                    {index + 1}. {agree?.promoter?.firstname} {agree?.promoter?.lastname} 
+                                                    <span className="p-1 m-1">( {Lang("public.created_at")} : {agree?.created_at} )</span>
+                                            </Link>
                                             <ul className="list-disc list-inside ml-5 text-gray-600">
                                                 {agree?.has_course == 1 && (
                                                     <li>{Lang("public.course")}</li>
@@ -304,20 +305,10 @@ export function View({id}) {
         </Frame>
         <ButtonContainer>
             {
-                agree ? (
-                    <span className='btn btn-primary ml-1'>{Lang('public.you_registered')}</span>
-                ) : (
-                    (data?.register_status == 1 && !access) && 
-                    <Button label="register" onClick={saveItem} component={component} />
-                )
-            }
-            {
-                report ? (
-                    <span className='btn btn-primary ml-1'>{Lang('public.you_reported')}</span>
-                ) : (
-                    (data?.report_status == 1 && !access) && 
-                    <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${id}`}>{Lang('public.report')}</Link>
-                )
+                !access &&<>
+                    {!agree && data?.register_status == 1 && <Button label="register" onClick={saveItem} component={component} />}
+                    {!report && data?.report_status == 1 && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${id}`}>{Lang('public.report')}</Link>}
+                </>
             }
             <Button label="back" onClick={back} />
         </ButtonContainer>

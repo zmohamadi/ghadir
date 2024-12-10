@@ -13,7 +13,7 @@ export default function Blog({blogs}) {
         <>
         {blogs?.length > 0 && (
             <>
-                <Box  title={Lang('public.blog')}  cols={"col-6"}>
+                <Box  title={Lang('public.blog')}  cols={"cols-12"}>
                     {blogs.map((blog, index) => {
                         return (<>
                             <div class="alert alert-success-soft show mb-2" role="alert">

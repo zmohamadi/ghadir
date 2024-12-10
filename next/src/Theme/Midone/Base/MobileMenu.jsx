@@ -80,7 +80,7 @@ export function MobileMenu({prefix, menus}){
         <div className='mobile-menu md:hidden'>
             <div className='mobile-menu-bar'>
                 <a href='#' onClick={(e)=>e.preventDefault() } className={'flex '+(dir == "ltr"?"mr-auto":"ml-auto")}>
-                    <img alt='Icewall Tailwind HTML Admin Template' style={{maxHeight:"70px"}} className='w-full' src={laraDomain+'/media/logo/light-logo.png'} />
+                    <img alt='Icewall Tailwind HTML Admin Template' style={{maxHeight:"40px"}} className='w-full' src={laraDomain+'/media/logo/light-logo.png'} />
                     <span className='text-white text-lg mr-3 adjust '><b>  </b></span>
                 </a>
                 <a href='#' onClick={(e)=>e.preventDefault() } id='mobile-menu-toggler'> 

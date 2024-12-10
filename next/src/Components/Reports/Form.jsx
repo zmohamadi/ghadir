@@ -2,8 +2,8 @@
 import { useEffect, useState, useRef } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Loading, Repeat } from "@/Theme/Midone/Utils";
-import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio, SelectTail } from "@/Theme/Midone/Forms";
+import { Loading, Repeat, Toast } from "@/Theme/Midone/Utils";
+import { useData, useFormRefs, Input, Button, ButtonContainer, Frame, Radio, SelectTail, Box } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Course } from "./Course";
@@ -12,13 +12,15 @@ import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useAuth } from "@/lib";
+import { Notif } from "@/Theme/Midone/Utils/Notif";
+import { Link } from "react-feather";
 
 export function Form({ id}) {
     const {user} = useAuth();
     const access = user?.role_id == 1 ?  true : false;
     const link = "/reports";
     const { Lang, local } = useLang();
-    const { laraAdmin } = useConfig();
+    const { laraAdmin,nextAdmin } = useConfig();
     const router = useRouter();
     const searchParams = useSearchParams();
     const promotion = searchParams.get("promotion"); // گرفتن id از Query Parameters
@@ -40,6 +42,7 @@ export function Form({ id}) {
         if (!fetchNeedlesRef.current) {
             fetchNeedlesRef.current = true;
             getNeedles(`${laraAdmin}/reports/get-needles`, setNeedles);
+            !access&& get(`${laraAdmin}/get-report`, component, "info");
         }
 
         if (id != 0 && id != undefined && !fetchDataRef.current) {
@@ -48,7 +51,33 @@ export function Form({ id}) {
         }
     }, [id, url]);
 
-    const saveItem = () => save(url, component, method, nextUrl);
+
+    const saveItem = () => {
+        const refsData = component?.state?.refs?.current;
+    
+        // گرفتن تمامی مقادیر مرتبط
+        // const cSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('c_subject')).map(ref => ref?.value);
+        // const tSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('tr_subject')).map(ref => ref?.value);
+        // const rSubjects = Object.values(refs).filter(ref => ref?.name?.startsWith('r_ritual_id')).map(ref => ref?.value);
+
+        const cSubjects = refsData?.c_subject_0?.value;
+        const tSubjects = refsData?.tr_subject_0?.value;
+        const rSubjects = refsData?.r_ritual_id_0?.value;
+    
+        // console.log(component?.state?.refs?.current?.r_ritual_id_0?.value);
+
+        // بررسی اینکه آیا حداقل یکی از مقادیر پر است
+        const hasValidValue = [...cSubjects, ...tSubjects, ...rSubjects].some(value => value?.trim() !== '');
+    
+        
+        if (!hasValidValue) {
+            Toast.error('لطفاً حداقل یکی از موارد دوره، منبر، یا شعائر را وارد نمایید!', Lang('public.dear_user'), 3000);
+            return;
+        }
+    
+        save(url, component, method, nextUrl);
+    };
+    
     const back = () => router.back();
     const data = component?.state?.info;
 
@@ -61,11 +90,22 @@ export function Form({ id}) {
     const otherProps3 = component?.state?.info?.ritual_reports?.length
         ? { count_data: component.state.info.ritual_reports.length }
         : {};
+
+        // console.log(data?.id);
     return (
         <>
             <Frame title={Lang(["public.promoter"])}>
                 {/* <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} />  */}
-
+            {(!access&& data!=undefined && data?.id != null)?
+                <Box cols={"cols-12"}>
+                    <div className="alert alert-primary-soft show">
+                    <div class="font-medium text-lg">{Lang('you_reported')}</div>
+                        <ButtonContainer >
+                            <a className="btn btn-primary" href={`${nextAdmin}/reports/${data?.id}`}>{Lang('public.view')}</a>
+                        </ButtonContainer>
+                    </div>
+                </Box>
+                :<>
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>
@@ -80,7 +120,7 @@ export function Form({ id}) {
                             items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
                             'tr_city_*','tr_village_*']]} />
                         <TabList href="tab-fourth" title={Lang("public.ritual")}
-                            items = {[component, ['r_province_*','r_city_id_*','r_city_*','r_village_*','ritual_id_*']]} />
+                            items = {[component, ['r_province_*','r_city_id_*','r_city_*','r_village_*','r_ritual_id_*']]} />
                         <TabList href="tab-media" title={Lang("public.media")}
                         />
                         {
@@ -147,11 +187,14 @@ export function Form({ id}) {
                         </TabPanel>
                     </TabBody>
                 </Tab> </>}
+                </>}
             </Frame>
-            <ButtonContainer>
+            {
+                !access&& data?.id == null && <ButtonContainer>
                 <Button label="save" onClick={saveItem} component={component} />
                 <Button label="back" onClick={back} />
             </ButtonContainer>
+            }
         </>
     );
 }

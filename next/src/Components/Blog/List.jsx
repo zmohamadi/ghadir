@@ -23,7 +23,7 @@ export function List({ access }){
                 ),
             },
             {label: "date", jsx: (item)=><span dir="ltr" className="ltr">{Tools?.toJalaliDateString(item?.created_at)}</span>},
-            (access)?{label: "status", jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>}: "",
+            (access)?{label: "status", jsx: (item)=><span className={" inline-flex items-center rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>}: "",
             {label: "",
                 sort:false, 
                 width:"110px", 

@@ -427,8 +427,9 @@ abstract class BaseAbstract extends Controller
                     $index = explode('\\', $value);
                     $attr = strtolower($index[count($index) - 1]);
 
+                    if($value=="Person\Promoter") $info[$attr] = $modelObj->get();
                     // دریافت داده‌ها با متد active
-                    $info[$attr] = $modelObj->active()->get();
+                    else $info[$attr] = $modelObj->active()->get();
                 } else if ($value instanceof \Closure) {
                     // وقتی $value یک Closure باشد
                     $className = 'Models\\' . $key; // در این حالت $key آدرس کلاس است
@@ -443,6 +444,8 @@ abstract class BaseAbstract extends Controller
                     $attr = strtolower($index[count($index) - 1]);
 
                     // دریافت داده‌ها با متد active
+                    if($value=="Person\Promoter") $info[$attr] = $modelObj->get();
+
                     $info[$attr] = $modelObj->active()->get();
                 }
             }

@@ -8,6 +8,26 @@ class Promoter extends User
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
     protected $attributes = ['role_id' => 2];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($record) {
+            $record->culturalUsers()->delete();
+            $record->promotionInfos()->delete();
+            
+            $record->reports->each(function ($report) {
+                $report->delete();
+            });
+            $record->agrees->each(function ($agree) {
+                $agree->delete();
+            });
+            $record->supports()->delete();
+            $record->notes()->delete();
+            $record->notif()->delete();
+        });
+    }
     
     public function newQuery($excludeDeleted = true)
     {

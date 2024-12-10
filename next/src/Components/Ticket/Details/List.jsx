@@ -12,12 +12,9 @@ export const List = ({ id,laraAdmin,laravelUrl,mediaPath,Lang }) => {
 
     return(
         <>
-            <div className="col-span-12 md:col-span-12 xxl:col-span-12 mt-3 xxl:mt-6">
-                <div className="intro-x flex items-center h-10">
-                    {/* <FeatherIcon spanWrapperClass="text-left" name="ArrowDownCircle" onClick={() => Tools?.scrollPage(true,"")} /> */}
-                    <h2 className="text-lg font-medium truncate mr-3">{Lang("public.tickets")}</h2>
-                </div>
-                <div className="report-timeline mt-5 relative">
+            <div className="col-span-12 md:col-span-12 xxl:col-span-12 xxl:mt-6">
+                
+                <div className="report-timeline relative">
                     <Grid {...info} activeSearch={false} key={"table key"} />
                 </div>
                 {/* <FeatherIcon name="ArrowUpCircle" onClick={() => Tools?.scrollPage(false,"")} /> */}
