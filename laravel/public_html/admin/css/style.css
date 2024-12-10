@@ -1,6 +1,10 @@
 @import url(./fonts/YekanBakh/style.css);
 @import url(./jalalidatepicker.min.css);
 
+body{
+  position: relative;
+}
+
 div,
 span,
 td,
