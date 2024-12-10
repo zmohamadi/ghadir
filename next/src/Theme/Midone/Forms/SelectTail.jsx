@@ -100,6 +100,7 @@ const SelectTail = (props)=>{
     }, [defaultValue])
 
     useEffect(()=>{
+        window?.$('#'+id+'').val(state.value);
         state.instance?.reload();
         // console.log("tail value is: ", state.value)
         if(state.value && state.value != "")
