@@ -76,15 +76,14 @@ export default function Promotion({promotions}) {
 
                                         ) : (
                                            
-                                            <Button label="register" onClick={agreeItem} />
+                                            promotion?.register_status == 1 && <Button label="register" onClick={agreeItem} />
                                         )
                                     }
                                     {
                                         report ? (
                                             <Link className="btn btn-primary" href={`${nextAdmin}/reports/${report?.id}`}>{Lang('public.view')} {Lang('public.report')}</Link>
                                         ) : (
-                                           
-                                            <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>
+                                            promotion?.report_status == 1 && <Link className="btn btn-primary" href={`${nextAdmin}/reports/new?promotion=${promotion?.id}`}>{Lang('public.report')}</Link>
 
                                         )
                                     }

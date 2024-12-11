@@ -17,7 +17,7 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                     key={"ritual"+needles?.ritual?.length} 
                     data={needles?.ritual}  defaultValue={info?.ritual_id}
                 />
-                <Textarea required="true" className="col-span-12" label="description" refItem={[parent, `r_description_${index}`]} defaultValue={info?.description}  />
+                <Textarea className="col-span-12" label="description" refItem={[parent, `r_description_${index}`]} defaultValue={info?.description}  />
                 <SelectLocation needles={needles} component={parent} data={info} 
                     refProvince={`r_province_${index}`} refCitySh={`r_city_id_${index}`} 
                     refCity={`r_city_${index}`} refVillage={`r_village_${index}`} 

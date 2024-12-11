@@ -1,7 +1,7 @@
 "use client";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
+import { Grid, Frame, FeatherIcon, useData } from "@/Theme/Midone/Utils";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
@@ -11,6 +11,7 @@ import { useAuth } from "@/lib";
 export function List({query}){
 
     const { Lang, local } = useLang();
+    const {destroy} = useData();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/reports";
     const {user} = useAuth();

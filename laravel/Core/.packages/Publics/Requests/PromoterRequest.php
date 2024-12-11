@@ -41,6 +41,7 @@ class PromoterRequest extends FormRequest
             'ovghaf_code' => 'required_if:has_ovghaf_code,1',
 
             'codemeli' => [
+                'bail',
                 'digits:10',
                 'numeric',
                 'required_if:is_not_citizen,0', // الزامی بودن کدملی برای شهروندان
@@ -51,7 +52,7 @@ class PromoterRequest extends FormRequest
         ];
         if($role_id==1){
 
-            $rules['mobile'] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
+            $rules['mobile'] = "bail|required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
             // $rules['mobile'][] = "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL";
         }
 

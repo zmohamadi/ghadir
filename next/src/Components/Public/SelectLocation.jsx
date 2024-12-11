@@ -5,8 +5,8 @@ import { Input } from "@/Theme/Midone";
 
 export function SelectLocation({
     needles,
-    component = { state: { info: {} } }, // مقدار پیش‌فرض برای جلوگیری از undefined
-    data = {}, // مقدار پیش‌فرض برای data
+    component = { state: { info: {} } },
+    data = {},
     classNameProvince = "col-span-6",
     classNameCitySh = "col-span-6",
     refProvince = "province_id",
@@ -20,45 +20,59 @@ export function SelectLocation({
     refVillage = "village",
     lVillage = "village",
 }) {
-    const [provinceId, setProvinceId] = useState(null);
+    const [provinceId, setProvinceId] = useState(data?.province_id || null);
+    const [selectedCityId, setSelectedCityId] = useState(data?.city_id || null);
 
     useEffect(() => {
         if (component?.state?.info?.city_id) {
             setProvinceId(component.state.info.city_user?.province_id || null);
+            setSelectedCityId(component.state.info.city_id);
         }
     }, [component?.state?.info]);
 
     const filterCity = (e) => {
         setProvinceId(e.value);
+        setSelectedCityId(null); // ریست کردن شهر هنگام تغییر استان
+    };
+
+    const handleCityChange = (e) => {
+        setSelectedCityId(e.value); // ذخیره شهر انتخاب شده
     };
 
     return (
         <>
             <SelectTail
-            required="true"
-                defaultValue={data?.province_id ? data?.province_id : provinceId}
+                required="true"
+                defaultValue={provinceId}
                 className={classNameProvince}
                 label={lProvince}
                 refItem={[component, refProvince]}
-                // key={"province" + (needles?.province?.length || 0)}
                 data={needles?.province || []}
                 titleKey={"name_fa"}
                 onChange={(e) => filterCity(e)}
             />
             <SelectTail
-            required="true"
+                required="true"
                 className={classNameCitySh}
                 label={lCitySh}
                 refItem={[component, refCitySh]}
-                // key={"city" + (provinceId || 0)}
-                data={
-                    provinceId > 0
-                        ? needles?.city?.filter((item) => item.province_id == provinceId)
-                        : needles?.city || []
-                }
-                titleKey={"name_fa"}
-                defaultValue={data?.city_id}
-            />
+                defaultValue={selectedCityId} // مقدار کنترل‌شده
+                onChange={handleCityChange} // مدیریت تغییر شهر
+            >
+                {provinceId > 0
+                    ? needles?.city
+                        ?.filter((item) => item.province_id == provinceId)
+                        .map((item) => (
+                            <option key={item.id} value={item.id}>
+                                {item.name_fa}
+                            </option>
+                        ))
+                    : needles?.city?.map((item) => (
+                        <option key={item.id} value={item.id}>
+                            {item.name_fa}
+                        </option>
+                    ))}
+            </SelectTail>
             <Input
                 className={classNameCity}
                 label={lCity}

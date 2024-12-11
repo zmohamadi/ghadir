@@ -309,6 +309,9 @@ return [
                 "c_subject_$index" => 'موضوع',
                 "tr_subject_$index" => 'موضوع',
 
+                "c_place_name_$index" => 'مکان',
+                "tr_place_name_$index" => 'مکان',
+                "r_place_name_$index" => 'مکان',
                 "place_name_$index" => 'مکان',
 
                 "c_name_$index" => 'نام',

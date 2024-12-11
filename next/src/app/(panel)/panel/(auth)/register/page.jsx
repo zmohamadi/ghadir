@@ -15,6 +15,8 @@ export default function Main() {
         guard: "admin",
         redirectIfAuthenticated,
     });
+    let [status, setStatus] = useState(null);
+
 
     const [formData, setFormData] = useState({
         firstname: '',
@@ -32,7 +34,8 @@ export default function Main() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        register({ ...formData, setErrors });
+        register({ ...formData, setErrors,setStatus });
+
     };
 
     const renderInput = (name, type = "text") => (

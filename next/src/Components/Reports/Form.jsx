@@ -42,7 +42,7 @@ export function Form({ id}) {
         if (!fetchNeedlesRef.current) {
             fetchNeedlesRef.current = true;
             getNeedles(`${laraAdmin}/reports/get-needles`, setNeedles);
-            !access&& get(`${laraAdmin}/get-report`, component, "info");
+            !access&& get(`${laraAdmin}/get-report`, component, "oldReport");
         }
 
         if (id != 0 && id != undefined && !fetchDataRef.current) {
@@ -87,6 +87,7 @@ export function Form({ id}) {
     
     const back = () => router.back();
     const data = component?.state?.info;
+    const oldReport = component?.state?.oldReport;
 
     const otherProps = component?.state?.info?.courses?.length
         ? { count_data: component.state.info.courses.length }
@@ -103,7 +104,7 @@ export function Form({ id}) {
         <>
             <Frame title={Lang(["public.promoter"])}>
                 {/* <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} />  */}
-            {(!access&& data!=undefined && data?.id != null)?
+            {(!access&& oldReport!=undefined && oldReport?.id != null)?
                 <Box cols={"cols-12"}>
                     <div className="alert alert-primary-soft show">
                     <div class="font-medium text-lg">{Lang('you_reported')}</div>
@@ -197,11 +198,11 @@ export function Form({ id}) {
                 </>}
             </Frame>
             {
-                // !access&& data?.id == null && 
+                !access&& oldReport?.id == null && 
                 <ButtonContainer>
-                <Button label="save" onClick={saveItem} component={component} />
-                <Button label="back" onClick={back} />
-            </ButtonContainer>
+                    <Button label="save" onClick={saveItem} component={component} />
+                    <Button label="back" onClick={back} />
+                </ButtonContainer>
             }
         </>
     );
