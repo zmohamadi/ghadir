@@ -1,12 +1,9 @@
 "use client";
 
 import { useConfig, useLang } from "@/lib";
-import Link from "next/link";
 import { useAuth } from "@/lib/auth";
-import * as Icon from "react-feather";
-import { Box, Button, ButtonContainer, CheckBox, useData, useFormRefs } from "@/Theme/Midone";
+import { Pic, useData, useFormRefs } from "@/Theme/Midone";
 import { useEffect } from "react";
-import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 import Promotion from "./Promotion";
 import MenusItem from "./MenusItem";
 import Notif from "./Notif";
@@ -27,15 +24,12 @@ export default function Promoter() {
     const { Lang } = useLang();
     const { laraAdmin, mediaPath, nextAdmin } = useConfig();
     const {user} = useAuth({guard: "admin"});
-    let {get,save} = useData();
+    let {get} = useData();
     let component = useFormRefs();
 
     useEffect(() => {
         get(laraAdmin+"/home/promoter/"+user?.id, component, "info");
     }, []);
-
-    const saveItem = (alert) => save(`${laraAdmin}/closeAlert/${alert}`, component, "save");
-    const agreeItem = (promotion)=>save(`${laraAdmin}/agree/${promotion}`, component, "new", `/promotions`);
 
     let data = component?.state?.info;
     let notifs = data?.notif;
@@ -51,10 +45,12 @@ export default function Promoter() {
                 <div className="ads-box__title w-full sm:w-72 text-xl -mt-3 flex items-center space-x-4 rtl:space-x-reverse">
                     <div className="w-12 h-12 ml-5 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110">
                         {
-                            user?.photo ?
-                            <img alt="user" src={`${mediaPath}/users/${user.photo}`} />
-                            :
-                            <img alt="user" src={`${mediaPath}/users/avatar.png`} />
+                            <Pic
+                                src={`${mediaPath}/users/${user?.photo}`}
+                                defaultImg={`${mediaPath}/public/default/avatar.png`}
+                                classImg="user-avatar rounded-full"
+                            />
+
                         }
                     </div>
                     <span>{user?.firstname} {user?.lastname} {Lang('public.wellcome')}!</span>

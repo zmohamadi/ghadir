@@ -2,12 +2,7 @@
 
 import { useConfig, useLang } from "@/lib";
 import Link from "next/link";
-import { useAuth } from "@/lib/auth";
 import * as Icon from "react-feather";
-import { Box, Button, ButtonContainer, CheckBox, useData, useFormRefs } from "@/Theme/Midone";
-import { useEffect } from "react";
-import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
-import Promotion from "./Promotion";
 
 const menuItems = [
 
