@@ -38,18 +38,17 @@ export function Form({id}){
                     <Loading  />
                 :<>
                 <Box>
-                        <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
+                        <Select label="occasion" refItem={[component, "promotion_id"]} 
                             required="true"
                             data={needles?.promotion} 
                         />
-                        <SelectTail label="type" refItem={[component, "type_id"]} 
+                        <Select label="type" refItem={[component, "type_id"]} 
                             required="true"
                             data={needles?.supporttype} 
                         />
                         <Input label="amount_if" refItem={[component, "amount"]}  />
 
-                        <SelectTail  multiple={true} label="included_users" refItem={[component, "promoters"]} 
-                         defaultValue={data?.promoters}
+                        <SelectTail multiple={true} label="included_users" refItem={[component, "promoters"]} 
                         >
                             {
                                 needles?.promoter?.map((item ,index)=>{

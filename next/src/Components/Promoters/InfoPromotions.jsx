@@ -4,7 +4,7 @@ import { useState } from "react"; // اضافه کردن useState
 import { useLang } from "@/lib";
 import { Input, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
-import { Select } from "@/Theme/Midone/Forms/Select";
+// import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function InfoPromotions({ index, parent, addIcon, closeIcon, needles }) {
     const { Lang } = useLang();
@@ -55,6 +55,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon, needles }) {
                 refCitySh={`pos_city_id_${index}`}
                 refCity={`pos_city_${index}`}
                 refVillage={`pos_village_${index}`}
+                obj={info}
             />
             <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}

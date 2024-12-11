@@ -19,15 +19,16 @@ export function SelectLocation({
     lCity = "city",
     refVillage = "village",
     lVillage = "village",
+    obj=null
 }) {
-    const [provinceId, setProvinceId] = useState(data?.province_id || null);
-    const [selectedCityId, setSelectedCityId] = useState(data?.city_id || null);
+    const [provinceId, setProvinceId] = useState(null);
+    const [selectedCityId, setSelectedCityId] = useState(null);
 
     useEffect(() => {
-        if (component?.state?.info?.city_id) {
-            setProvinceId(component.state.info.city_user?.province_id || null);
-            setSelectedCityId(component.state.info.city_id);
-        }
+        let data = obj ? obj : component?.state?.info
+        setProvinceId(data?.province_id);
+        setSelectedCityId(data?.city_id);
+        
     }, [component?.state?.info]);
 
     const filterCity = (e) => {
@@ -38,6 +39,8 @@ export function SelectLocation({
     const handleCityChange = (e) => {
         setSelectedCityId(e.value); // ذخیره شهر انتخاب شده
     };
+    // console.log(provinceId);
+
 
     return (
         <>
@@ -47,7 +50,7 @@ export function SelectLocation({
                 className={classNameProvince}
                 label={lProvince}
                 refItem={[component, refProvince]}
-                data={needles?.province || []}
+                data={needles?.province}
                 titleKey={"name_fa"}
                 onChange={(e) => filterCity(e)}
             />
@@ -56,6 +59,7 @@ export function SelectLocation({
                 className={classNameCitySh}
                 label={lCitySh}
                 refItem={[component, refCitySh]}
+
                 defaultValue={selectedCityId} // مقدار کنترل‌شده
                 onChange={handleCityChange} // مدیریت تغییر شهر
             >

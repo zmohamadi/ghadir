@@ -12,8 +12,8 @@ import { Tribune } from "./Tribune";
 import { Ritual } from "./Ritual";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { useAuth } from "@/lib";
-import { Notif } from "@/Theme/Midone/Utils/Notif";
-import { Link } from "react-feather";
+// import { Notif } from "@/Theme/Midone/Utils/Notif";
+// import { Link } from "react-feather";
 
 export function Form({ id}) {
     const {user} = useAuth();
@@ -88,6 +88,7 @@ export function Form({ id}) {
     const back = () => router.back();
     const data = component?.state?.info;
     const oldReport = component?.state?.oldReport;
+    console.log(oldReport);
 
     const otherProps = component?.state?.info?.courses?.length
         ? { count_data: component.state.info.courses.length }
@@ -99,17 +100,16 @@ export function Form({ id}) {
         ? { count_data: component.state.info.ritual_reports.length }
         : {};
 
-        // console.log(data?.id);
+        // console.log(oldReport);
     return (
         <>
-            <Frame title={Lang(["public.promoter"])}>
                 {/* <Input label="promoter_id" type="hidden" defaultValue={access ? data?.promoter_id : promoter} refItem={[component, `promoter_id`]} />  */}
             {(!access&& oldReport!=undefined && oldReport?.id != null)?
                 <Box cols={"cols-12"}>
                     <div className="alert alert-primary-soft show">
                     <div class="font-medium text-lg">{Lang('you_reported')}</div>
                         <ButtonContainer >
-                            <a className="btn btn-primary" href={`${nextAdmin}/reports/${data?.id}`}>{Lang('public.view')}</a>
+                            <a className="btn btn-primary" href={`${nextAdmin}/reports/${oldReport?.id}`}>{Lang('public.view')}</a>
                         </ButtonContainer>
                     </div>
                 </Box>
@@ -117,93 +117,95 @@ export function Form({ id}) {
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>
-                <Tab className="col-span-12">
-                    <TabHeader>
-                        
-                        
-                        <TabList href="tab-second" title={Lang("public.courses")}   active={"true"} 
-                            items = {[component, ['c_subject_*','c_people_count_*','c_duration_*','c_province_*','c_city_id_*', 
-                            'c_city_*','c_village_*']]} />
-                        <TabList href="tab-third" title={Lang("public.tribunes")}  
-                            items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
-                            'tr_city_*','tr_village_*']]} />
-                        <TabList href="tab-fourth" title={Lang("public.ritual")}
-                            items = {[component, ['r_province_*','r_city_id_*','r_city_*','r_village_*','r_ritual_id_*']]} />
-                        <TabList href="tab-media" title={Lang("public.media")}
-                        />
-                        {
-                            access && <TabList href="tab-first" title={Lang("public.select_promotion")}
-                            items = {[component, ['promoter_id','promotion_id','confirm_id','level_id']]} />
-                        }
-                    </TabHeader>
-                    <TabBody>
-                        <TabPanel id="tab-media" >
-                            <Dropzone className="col-span-6"  refItem={[component, "photos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
-                            <Dropzone className="col-span-6"  refItem={[component, "videos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
-                        </TabPanel>
-                        <TabPanel id="tab-first" >
-                            { access ? <><SelectTail label="promoter" refItem={[component, "promoter_id"]}>
-                                {
-                                    needles?.promoter
-                                        ?.filter((item) => {
-                                            // اگر access وجود نداشته باشد، فقط user.id نمایش داده شود
-                                            return access || item.id == user?.id;
-                                        })
-                                        ?.map((item, index) => (
-                                            <option key={"p_" + index} value={item?.id}>
-                                                {item?.firstname} {item?.lastname} - {item?.mobile} 
-                                            </option>
-                                        ))
-                                }
-                            </SelectTail>
-                            <Select
-                                label="promotion"
-                                refItem={[component, "promotion_id"]}
-                                defaultValue={promotion?promotion:data?.promotion_id}
-                                data={needles?.promotion?.filter((item) => 
-                                    item.report_status == 1 && (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
-                                )}
-                            /> </>:<>
-                                    <Input type="hidden" defaultValue="-1" refItem={[component, `confirm_id`]} /> 
-                                    <Input type="hidden" defaultValue={user?.id} refItem={[component, `promoter_id`]} /> 
-                                    <Input type="hidden" defaultValue={promotion?promotion:0} refItem={[component, `promotion_id`]} /> 
-                            </>}
-
+                <Frame title={Lang(["public.promoter"])}>
+                    <Tab className="col-span-12">
+                        <TabHeader>
+                            
+                            
+                            <TabList href="tab-second" title={Lang("public.courses")}   active={"true"} 
+                                items = {[component, ['c_subject_*','c_people_count_*','c_duration_*','c_province_*','c_city_id_*', 
+                                'c_city_*','c_village_*']]} />
+                            <TabList href="tab-third" title={Lang("public.tribunes")}  
+                                items = {[component, ['tr_subject_*','tr_people_count_*','tr_duration_*','tr_province_*','tr_city_id_*', 
+                                'tr_city_*','tr_village_*']]} />
+                            <TabList href="tab-fourth" title={Lang("public.ritual")}
+                                items = {[component, ['r_province_*','r_city_id_*','r_city_*','r_village_*','r_ritual_id_*']]} />
+                            <TabList href="tab-media" title={Lang("public.media")}
+                            />
                             {
-                                access &&<>
-                                <Input label="score" refItem={[component, `level_id`]} /> 
-                                <Radio
-                                    type="col" 
-                                    label="confirm_status" 
-                                    refItem={[component, `confirm_id`]}
-                                    data={needles?.status?.filter(item => item.group_id == 28)}
-                                    valueKey="code" titleKey={"title_"+local}  
-                                    key={"confirm_id"+data?.confirm_id}
-                                    /> 
-                                </>
-                                }
+                                access && <TabList href="tab-first" title={Lang("public.select_promotion")}
+                                items = {[component, ['promoter_id','promotion_id','confirm_id','level_id']]} />
+                            }
+                        </TabHeader>
+                        <TabBody>
+                            <TabPanel id="tab-media" >
+                                <Dropzone className="col-span-6"  refItem={[component, "photos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
+                                <Dropzone className="col-span-6"  refItem={[component, "videos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
+                            </TabPanel>
+                            <TabPanel id="tab-first" >
+                                { access ? <><SelectTail label="promoter" refItem={[component, "promoter_id"]}>
+                                    {
+                                        needles?.promoter
+                                            ?.filter((item) => {
+                                                // اگر access وجود نداشته باشد، فقط user.id نمایش داده شود
+                                                return access || item.id == user?.id;
+                                            })
+                                            ?.map((item, index) => (
+                                                <option key={"p_" + index} value={item?.id}>
+                                                    {item?.firstname} {item?.lastname} - {item?.mobile} 
+                                                </option>
+                                            ))
+                                    }
+                                </SelectTail>
+                                <SelectTail
+                                    label="promotion"
+                                    refItem={[component, "promotion_id"]}
+                                    defaultValue={promotion?promotion:data?.promotion_id}
+                                    data={needles?.promotion?.filter((item) => 
+                                        item.report_status == 1 && (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
+                                    )}
+                                /> </>:<>
+                                        <Input type="hidden" defaultValue="-1" refItem={[component, `confirm_id`]} /> 
+                                        <Input type="hidden" defaultValue={user?.id} refItem={[component, `promoter_id`]} /> 
+                                        <Input type="hidden" defaultValue={promotion?promotion:0} refItem={[component, `promotion_id`]} /> 
+                                </>}
 
-                        </TabPanel>
-                        <TabPanel id="tab-second" active={"true"}>
-                            <Repeat needles={needles} {...otherProps} child={Course} parent={component} />
-                        </TabPanel>
-                        <TabPanel id="tab-third">
-                            <Repeat needles={needles} {...otherProps2} child={Tribune} parent={component} />
-                        </TabPanel>
-                        <TabPanel id="tab-fourth">
-                            <Repeat needles={needles} {...otherProps3} child={Ritual} parent={component} />
-                        </TabPanel>
-                    </TabBody>
-                </Tab> </>}
-                </>}
-            </Frame>
-            {
-                !access&& oldReport?.id == null && 
-                <ButtonContainer>
-                    <Button label="save" onClick={saveItem} component={component} />
-                    <Button label="back" onClick={back} />
-                </ButtonContainer>
-            }
+                                {
+                                    access &&<>
+                                    <Input label="score" refItem={[component, `level_id`]} /> 
+                                    <Radio
+                                        type="col" 
+                                        label="confirm_status" 
+                                        refItem={[component, `confirm_id`]}
+                                        data={needles?.status?.filter(item => item.group_id == 28)}
+                                        valueKey="code" titleKey={"title_"+local}  
+                                        key={"confirm_id"+data?.confirm_id}
+                                        /> 
+                                    </>
+                                    }
+
+                            </TabPanel>
+                            <TabPanel id="tab-second" active={"true"}>
+                                <Repeat needles={needles} {...otherProps} child={Course} parent={component} />
+                            </TabPanel>
+                            <TabPanel id="tab-third">
+                                <Repeat needles={needles} {...otherProps2} child={Tribune} parent={component} />
+                            </TabPanel>
+                            <TabPanel id="tab-fourth">
+                                <Repeat needles={needles} {...otherProps3} child={Ritual} parent={component} />
+                            </TabPanel>
+                        </TabBody>
+                    </Tab>
+                    
+            
+                </Frame>
+                    <ButtonContainer>
+                        <Button label="save" onClick={saveItem} component={component} />
+                        <Button label="back" onClick={back} />
+                    </ButtonContainer>
+                    </>}
+                    </>
+                }
         </>
     );
 }

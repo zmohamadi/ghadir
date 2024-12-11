@@ -13,7 +13,7 @@ import { InfoPromotions } from "./InfoPromotions";
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import { SelectLocation } from "../Public/SelectLocation";
 import { Notif } from "./Notif";
-import { Select } from "@/Theme/Midone/Forms/Select";
+// import { Select } from "@/Theme/Midone/Forms/Select";
 import { SetStars } from "../Public/SetStars";
 
 export function Form({id}){

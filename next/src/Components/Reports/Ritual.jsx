@@ -3,7 +3,7 @@
 import { useLang } from "@/lib";
 import { Input, SelectTail, Textarea} from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
-import { Select } from "@/Theme/Midone/Forms/Select";
+// import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
@@ -23,6 +23,8 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                     refCity={`r_city_${index}`} refVillage={`r_village_${index}`} 
                     classNameCity="col-span-4"
                     classNameVillage="col-span-4"
+                    obj={info}
+
                 />
                 <Input required="true" className="col-span-4" label="place_name" refItem={[parent, `r_place_name_${index}`]} defaultValue={info?.place_name}  />            
             <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
