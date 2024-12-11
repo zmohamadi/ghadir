@@ -40,7 +40,7 @@ export function SelectLocation({
                 className={classNameProvince}
                 label={lProvince}
                 refItem={[component, refProvince]}
-                key={"province" + (needles?.province?.length || 0)}
+                // key={"province" + (needles?.province?.length || 0)}
                 data={needles?.province || []}
                 titleKey={"name_fa"}
                 onChange={(e) => filterCity(e)}
@@ -50,7 +50,7 @@ export function SelectLocation({
                 className={classNameCitySh}
                 label={lCitySh}
                 refItem={[component, refCitySh]}
-                key={"city" + (provinceId || 0)}
+                // key={"city" + (provinceId || 0)}
                 data={
                     provinceId > 0
                         ? needles?.city?.filter((item) => item.province_id == provinceId)

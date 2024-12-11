@@ -37,7 +37,7 @@ export function InfoPromotions({ index, parent, addIcon, closeIcon, needles }) {
             <SelectTail
                 label="promotion_position"
                 refItem={[parent, `promotion_position_${index}`]}
-                key={"promotion_position" + needles?.promotionposition?.length}
+                // key={"promotion_position" + needles?.promotionposition?.length}
                 data={needles?.promotionposition}
                 defaultValue={info?.position_id}
                 onChange={changeLabel} // تغییر مقدار با changeLabel

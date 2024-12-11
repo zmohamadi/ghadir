@@ -90,7 +90,7 @@ export function Filtering({
                 >
                     {
                         needles?.promoter?.map((item ,index)=> {
-                            return <option key={"p_"+index} value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
+                            return <option value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
                         })
                     }
                 </SelectTail>

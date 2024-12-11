@@ -137,12 +137,13 @@ export function Form({id}){
                                 <SelectTail required="true"  className="col-span-3"
                                     defaultValue={data?.native_province_id ? data?.native_province_id: nativeProvinceId} 
                                     label="native_province" refItem={[component, "native_province_id"]} 
-                                    key={"nativeprovince"+needles?.province?.length}
+                                    // key={"nativeprovince"+needles?.province?.length}
                                     data={needles?.province} titleKey={"name_fa"}
                                     onChange={(e) => filterCity(e)}
                                 />
-                                <SelectTail required="true"  className="col-span-3" label="native_city" refItem={[component, "native_city_id"]} 
-                                    key={"city" + nativeProvinceId}
+                                <SelectTail required="true"  className="col-span-3" label="native_city" 
+                                refItem={[component, "native_city_id"]} 
+                                    // key={"city" + nativeProvinceId}
                                     data={nativeProvinceId>0 ?  needles?.city?.filter(item => item.province_id == nativeProvinceId) :  needles?.city} 
                                     titleKey={"name_fa"}
                                 />
