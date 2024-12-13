@@ -5,6 +5,7 @@ namespace Admin\Controllers;
 use Illuminate\Http\Request;
 use Admin\Controllers\Public\BaseAbstract;
 use Models\Person\Promoter;
+use Models\Promotion;
 
 class SupportController extends BaseAbstract
 {
@@ -26,6 +27,9 @@ class SupportController extends BaseAbstract
                    $q->where('promoter_id', $promoter);
                 });
             };
+            $query->when(request()->promotion != null, function ($q) {
+                $q->where('promotion_id', request()->promotion);
+            });
         };
         $this->storeQuery = function ($query) {
             $query = $this->setOperator($query);
@@ -41,7 +45,7 @@ class SupportController extends BaseAbstract
             }
             $promotionId = request()->promotion_id;
             $promotionCount = $this->model::where('promotion_id', $promotionId)->count();
-            $update = \Models\Promotion::where('id', $promotionId)->update(['sum_support' => $promotionCount]);
+            $update = Promotion::where('id', $promotionId)->update(['sum_support' => $promotionCount]);
 
         };
     }
@@ -84,6 +88,18 @@ class SupportController extends BaseAbstract
             ];
         $newRecord = \DB::table("support_users")->insert($data);
         return response()->json($newRecord);
+    }
+    public function destroy($id)
+    {
+        $record=$this->model::find($id);
+        $promotionId = $record->promotion_id;
+        $record->promoters()->delete();
+        $record->delete();
+        
+        if ($promotionId) {
+            $promotionCount = $this->model::where('promotion_id', $promotionId)->count();
+            Promotion::where("id", $promotionId)->update(['sum_support' => $promotionCount]);
+        }
     }
 
 }

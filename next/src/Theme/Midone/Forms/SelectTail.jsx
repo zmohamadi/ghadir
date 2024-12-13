@@ -110,7 +110,7 @@ const SelectTail = (props)=>{
     return(
         <div className={className?className+' mb-3':' mb-3 col-span-12 md:col-span-6'} >
             <label htmlFor={id} className='form-label font-bold'>{label} {requiredDiv}</label>
-            <select
+            {/* <select
                 id = {id}
                 ref={Element.createRef(refItem)}
                 className='tail-select w-full'
@@ -122,6 +122,21 @@ const SelectTail = (props)=>{
                 {
                     Tools.getArray(data).map((item, key)=><option key={key} value={item[valueKey]}>{item[titleKey]}</option>)
                 }
+            </select> */}
+             <select
+                id={id}
+                ref={Element.createRef(refItem)}
+                className='tail-select w-full'
+                tabIndex='-1'
+                multiple={multiple} // یا !!multiple
+            >
+                {!multiple && (placeholder !== false) && <option key={-1} value="">{Lang('public.select_option')}</option>}
+                {children}
+                {Tools.getArray(data).map((item, key) => (
+                    <option key={key} value={item[valueKey]}>
+                        {item[titleKey]}
+                    </option>
+                ))}
             </select>
             <span>
                 {helpDiv}

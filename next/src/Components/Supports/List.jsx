@@ -5,14 +5,19 @@ import { useData } from "@/Theme/Midone/Utils/Data";
 import { Grid, Frame, FeatherIcon, Pic } from "@/Theme/Midone/Utils";
 import { useAuth } from "@/lib/auth";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export function List({promotion=""}){
+export function List(){
     const {user} = useAuth();
-    const query = user?.role_id == 2 &&`promoter=${user?.id}`;
+    let query = user?.role_id == 2 &&`promoter=${user?.id}`;
     const access = user?.role_id == 1 ?  true : false;
     const {Lang} = useLang();
     const {mediaPath,laraAdmin,nextAdmin} = useConfig();
     const {destroy} = useData();
+    const urlParams = useSearchParams()
+    const  promotion = urlParams.get('promotion') || null;
+
+    access==true && promotion!= null ? query = "promotion="+promotion : query;
 
     const formUrl = nextAdmin+"/supports";
     const url = laraAdmin+"/supports?"+query;

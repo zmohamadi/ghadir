@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useData,useFormRefs,Input,Button,ButtonContainer,Box,Textarea,Frame } from "@/Theme/Midone/Forms";
 import { SelectTail } from "@/Theme/Midone/Forms/SelectTail";
 import { Loading } from "@/Theme/Midone";
-import { Select } from "@/Theme/Midone/Forms/Select";
+// import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Form({id}){
     const link = "/supports";
@@ -38,11 +38,11 @@ export function Form({id}){
                     <Loading  />
                 :<>
                 <Box>
-                        <Select label="occasion" refItem={[component, "promotion_id"]} 
+                        <SelectTail label="occasion" refItem={[component, "promotion_id"]} 
                             required="true"
                             data={needles?.promotion} 
                         />
-                        <Select label="type" refItem={[component, "type_id"]} 
+                        <SelectTail label="type" refItem={[component, "type_id"]} 
                             required="true"
                             data={needles?.supporttype} 
                         />
