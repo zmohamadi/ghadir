@@ -11,6 +11,7 @@ import { useUtility } from '@/lib/utility';
 const Data = {
     getRefValue(ref, parent) {
         const refs = parent.current;
+        
         if(!refs) return "";
         const element = refs[ref];
         let value = '';
