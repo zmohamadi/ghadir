@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 12, 2024 at 12:45 AM
+-- Generation Time: Dec 14, 2024 at 08:32 PM
 -- Server version: 10.6.20-MariaDB
 -- PHP Version: 8.3.14
 
@@ -725,10 +725,10 @@ CREATE TABLE `blogs` (
 INSERT INTO `blogs` (`id`, `title`, `subject_id`, `creator_id`, `editor_id`, `thumb`, `img`, `video`, `document`, `summary`, `text`, `count_comment`, `count_comment_waiting`, `count_comment_confirmed`, `count_comment_rejected`, `count_view`, `lang`, `status_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'مقدمات و سیر غدیر', NULL, 1, 2, 'image74221732958564.jpg', 'image90461732958815.jpg###image9361732958824.jpg###', 'video91831732958810.mp4###', 'application69991732958890.docx###', NULL, '<p><span style=\"background-color:hsl(0, 0%, 100%);\">پرداختن به مفهوم ولایت، ناب ترین مفهومی است که می تواند ضمن تحکیم مبانی حکومت دینی و </span><a href=\"https://civilica.com/search/paper/k-%D9%81%D9%84%D8%B3%D9%81%D9%87%20%D8%B3%DB%8C%D8%A7%D8%B3%DB%8C%20%D8%A7%D8%B3%D9%84%D8%A7%D9%85/\"><span style=\"background-color:hsl(0, 0%, 100%);\">فلسفه سیاسی اسلام</span></a><span style=\"background-color:hsl(0, 0%, 100%);\"> و یز اثبات بطلان سفسطه جدایی دین از سیاست،</span> چراغی فراروی جامعه اسلامی باشد. <a href=\"https://civilica.com/search/paper/k-%D8%AD%D8%B6%D8%B1%D8%AA%20%D8%B9%D9%84%DB%8C%20(%D8%B9)/\">حضرت علی (ع)</a> همچون ستاره ای درخشان در آسمان بود که نماد قرآن مجسم و همه کمالاتی که بشریت همواره در آرزوی آن بود، محسوب می شود. انقلابیبودن و داشتن بصیرت دینی را از دو ویژگی مهم امام زمانی بودن است اگر هرکدام را نداشته باشیم و یا یکی قوی و دیگری ضعیف باشد قطعا راه را به انحراف خواهیم رفت. در روز عید غدیر تمام مسلمین به حضرت علی(ع)بیعت نمودند طوری که مردان با حضرت دست می دادند و زنان دست خود را در تشت پر از آب می کردند و به این طریق بیعت می نمودند. بعد از حادثه غدیر پیامبر همیشه علی را امیرالمومنین خطاب میکردند در حالیکه قبلا به نام ابوالحسن صدایش می کرد. طبق روایت از <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85/\">امامان معصوم</a> لقب امیرالمومنین خاص برای علی (ع) است.در سال دهم هجرت 70 هزار حاجی از مدینه منوره و تعدادی زیادی هم از یمن و دیگر مناطق که تعداد مجموعی شان بیشتر از 120 هزار نفر می رسید، برای ادای فریضه الهی حج در مکه حضور یافتند که در برگشت از خانه خداوند در <a href=\"https://civilica.com/search/paper/k-%D9%85%D9%86%D8%B7%D9%82%D9%87%20%D8%BA%D8%AF%DB%8C%D8%B1%20%D8%AE%D9%85/\">منطقه غدیر خم</a> پیامبر حضرت علی ابن ابی طالب را به عنوان وصی و جانشین خود به مسلمین معرفی نمود. غربی ها از زنان استفاده ابزاری می کنند و آنچه را که اسلام برای زنان داده است دیگر ادیان نداده است و حرکت <a href=\"https://civilica.com/search/paper/k-%D8%B2%D9%86%D8%A7%D9%86%20%D8%AF%D8%B1%20%D8%A7%D8%B3%D9%84%D8%A7%D9%85/\">زنان در اسلام</a> تاثیر گذار بوده است. ما هرچه داریم از زنان تاریخ ساز اسلام داریم و مانند زنان صدر اسلام در هیچ جای دنیا هیچ زنی نتوانسته است که اثر گذار باشد.</p>', 0, 0, 0, 0, 16, 'fa', 1, NULL, '2024-11-30 10:58:13', '2024-12-09 00:35:33'),
 (2, 'مباحث تخصصی', NULL, 1, 2, 'image30611732958911.webp', 'image30191732958932.jpg###image36231732958935.jpg###', 'video80811732958925.mp4###', 'application99741732958928.docx###', NULL, '<p>قاله ی حاضر با نگاهی به آموزه های فرهنگی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> از منظر امامان معصوم(ع)، با تبیین مفهوم مدیریت فرهنگی در غدیر، ابعاد و ویژگی های واقعه ی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> و ضرورت ترویج سبک زندگی اسلامی بر اساس روایات اهل بیت(ع)، برآنیم تا قدمی برای معرفی ابعاد گوناگون واقعه ی فرهنگی و اجتماعی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> برداریم. بی تردید نقش گسترده ی <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85(%D8%B9)/\">امامان معصوم(ع)</a> در حوزه ی تبیین دین و فرهنگ، غیرقابل انکار است؛ بدین رو اهل بیت(ع) اهمیت ویژه ای به واقعه ی تمدن ساز <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> مبذول می داشتند و در هر فرصتی برای نهادینه کردن فرهنگ ولایت و رهبری بر اساس واقعه ی غدیر، ضرورت تبیین جایگاه <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> در اسلام را بازگو می کردند. این پژوهش به دنبال بررسی این مساله است که آیا حادثه ی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> می تواند به عنوان الگوی فرهنگ ساز در راستای تمدن اسلامی مطرح شود! و اهل بیت(ع) با توجه به اهمیت غدیر، در برابر این واقعه ی مهم و عظیم، چگونه موضع گیری کردند! بدین رو هدف از این مقاله، بررسی و تبیین آموزه های فرهنگی واقعه ی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> از منظر <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85(%D8%B9)/\">امامان معصوم(ع)</a> است؛ هدف این است که با بررسی روایات اهل بیت(ع)، کارکرد فرهنگی و اجتماعی آموزه های <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> را استخراج نموده، تا در جهت الگوسازی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> برای تمدنسازی اسلامی در عصر حاضر، گامی برداریم. در این مقاله، با بهره گیری از روش توصیف و تحلیل و بر اساس منابع کتابخانه ای، تلاش شده است، الگوی تمدن ساز <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> در روایات <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85(%D8%B9)/\">امامان معصوم(ع)</a> را استخراج کنیم. یکی از نتایج و دستاوردهای این پژوهش، تبیین معیارها و ملاک های فرهنگی نهفته در آموزه های اهل بیت(ع) در مورد واقعه ی <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> است. بررسی و تبیین آموزه های فرهنگ ساز <a href=\"https://civilica.com/search/paper/k-%D8%BA%D8%AF%DB%8C%D8%B1/\">غدیر</a> از منظر <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85(%D8%B9)/\">امامان معصوم(ع)</a> در ابعاد اخلاق فردی، اجتماعی، الاهی و سیاسی، در قالبی جدید از جنبه های نوآوری این مقاله شمرده می شود.</p>', 3, 0, 3, 0, 14, 'fa', 1, NULL, '2024-11-30 10:59:13', '2024-12-10 09:37:51'),
-(3, 'اهمیت بیعت در غدیر', NULL, 1, 1, 'image59041732962705.jpg', 'image99441732962748.webp###image13741732962751.jpg###image27701732962757.jpg###', NULL, 'application25031732962754.docx###', NULL, '<p>بعد از حادثه غدیر پیامبر همیشه علی را امیرالمومنین خطاب میکردند در حالیکه قبلا به نام ابوالحسن صدایش می کرد. طبق روایت از <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85/\">امامان معصوم</a> لقب امیرالمومنین خاص برای علی (ع) است.در سال دهم هجرت 70 هزار حاجی از مدینه منوره و تعدادی زیادی هم از یمن و دیگر مناطق که تعداد مجموعی شان بیشتر از 120 هزار نفر می رسید، برای ادای فریضه الهی حج در مکه حضور یافتند که در برگشت از خانه خداوند در <a href=\"https://civilica.com/search/paper/k-%D9%85%D9%86%D8%B7%D9%82%D9%87%20%D8%BA%D8%AF%DB%8C%D8%B1%20%D8%AE%D9%85/\">منطقه غدیر خم</a> پیامبر حضرت علی ابن ابی طالب را به عنوان وصی و جانشین خود به مسلمین معرفی نمود. غربی ها از زنان استفاده ابزاری می کنند و آنچه را که اسلام برای زنان داده است دیگر ادیان نداده است و حرکت <a href=\"https://civilica.com/search/paper/k-%D8%B2%D9%86%D8%A7%D9%86%20%D8%AF%D8%B1%20%D8%A7%D8%B3%D9%84%D8%A7%D9%85/\">زنان در اسلام</a> تاثیر گذار بوده است. ما هرچه داریم از زنان تاریخ ساز اسلام داریم و مانند زنان صدر اسلام در هیچ جای دنیا هیچ زنی نتوانسته است که اثر گذار باشد.</p>', 1, 1, 0, 0, 13, 'fa', 1, NULL, '2024-11-30 12:04:09', '2024-12-11 08:40:50'),
+(3, 'اهمیت بیعت در غدیر', NULL, 1, 1, 'image59041732962705.jpg', 'image99441732962748.webp###image13741732962751.jpg###image27701732962757.jpg###', NULL, 'application25031732962754.docx###', NULL, '<p>بعد از حادثه غدیر پیامبر همیشه علی را امیرالمومنین خطاب میکردند در حالیکه قبلا به نام ابوالحسن صدایش می کرد. طبق روایت از <a href=\"https://civilica.com/search/paper/k-%D8%A7%D9%85%D8%A7%D9%85%D8%A7%D9%86%20%D9%85%D8%B9%D8%B5%D9%88%D9%85/\">امامان معصوم</a> لقب امیرالمومنین خاص برای علی (ع) است.در سال دهم هجرت 70 هزار حاجی از مدینه منوره و تعدادی زیادی هم از یمن و دیگر مناطق که تعداد مجموعی شان بیشتر از 120 هزار نفر می رسید، برای ادای فریضه الهی حج در مکه حضور یافتند که در برگشت از خانه خداوند در <a href=\"https://civilica.com/search/paper/k-%D9%85%D9%86%D8%B7%D9%82%D9%87%20%D8%BA%D8%AF%DB%8C%D8%B1%20%D8%AE%D9%85/\">منطقه غدیر خم</a> پیامبر حضرت علی ابن ابی طالب را به عنوان وصی و جانشین خود به مسلمین معرفی نمود. غربی ها از زنان استفاده ابزاری می کنند و آنچه را که اسلام برای زنان داده است دیگر ادیان نداده است و حرکت <a href=\"https://civilica.com/search/paper/k-%D8%B2%D9%86%D8%A7%D9%86%20%D8%AF%D8%B1%20%D8%A7%D8%B3%D9%84%D8%A7%D9%85/\">زنان در اسلام</a> تاثیر گذار بوده است. ما هرچه داریم از زنان تاریخ ساز اسلام داریم و مانند زنان صدر اسلام در هیچ جای دنیا هیچ زنی نتوانسته است که اثر گذار باشد.</p>', 1, 0, 1, 0, 13, 'fa', 1, NULL, '2024-11-30 12:04:09', '2024-12-11 08:40:50'),
 (4, 'ایده های برگزاری جشن های ولادت حضرت زهرا سلام الله علیها', NULL, 2, 1, 'image14101733716898.jpg', 'image84101733760141.jpg###image77561733760169.png###', 'video21131733762792.mp4###', NULL, NULL, '<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد</p><p>&nbsp;</p><p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.<br>&nbsp;</p>', 0, 0, 0, 0, 13, 'fa', 1, NULL, '2024-12-09 00:34:49', '2024-12-11 08:06:37'),
 (5, 'کتاب مادران اهلبیت علیهم السلام', NULL, 1, 1, 'image28591733918143.png', 'image63341733918166.png###image98031733918168.png###', NULL, NULL, NULL, '<p>مت ممخشست شاسذ/م ذش ماسذ/سم /ش</p>', 1, 0, 1, 0, 4, 'fa', 1, NULL, '2024-12-11 08:26:12', '2024-12-11 08:55:33'),
-(6, 'یس ثفثص فث', NULL, 1, 1, 'image12851733922642.png', NULL, NULL, NULL, NULL, '<p>ی یبایایس اسیا سیایدزدز &nbsp;دزز رد رئر &nbsp;رئرئ ئرزئزئزئ ئزرئز&nbsp;</p>', 1, 0, 1, 0, 3, 'fa', 1, NULL, '2024-12-11 09:41:32', '2024-12-11 09:42:43');
+(6, 'یس ثفثص فث', NULL, 1, 1, 'image12851733922642.png', NULL, NULL, NULL, NULL, '<p>ی یبایایس اسیا سیایدزدز &nbsp;دزز رد رئر &nbsp;رئرئ ئرزئزئزئ ئزرئز&nbsp;</p>', 6, 0, 5, 1, 10, 'fa', 1, NULL, '2024-12-11 09:41:32', '2024-12-12 07:00:35');
 
 -- --------------------------------------------------------
 
@@ -761,8 +761,13 @@ INSERT INTO `blog_comments` (`id`, `creator_id`, `editor_id`, `blog_id`, `parent
 (2, 1, NULL, 2, 0, 'پاسخ', 1, 1, 'fa', 1, NULL, '2024-12-10 09:37:04', '2024-12-10 09:37:04'),
 (3, 1, NULL, 2, 0, 'تست', 1, 1, 'fa', 1, NULL, '2024-12-10 09:37:51', '2024-12-10 09:37:51'),
 (4, 7, NULL, 5, 0, 'خیلی عالی', 1, 1, 'fa', 1, NULL, '2024-12-11 08:26:55', '2024-12-11 08:33:34'),
-(5, 7, NULL, 3, 0, 'خیلی خوب', NULL, 2, 'fa', 1, NULL, '2024-12-11 08:40:50', '2024-12-11 08:40:50'),
-(6, 3, NULL, 6, 0, 'دیدیسد', 1, 1, 'fa', 1, NULL, '2024-12-11 09:42:14', '2024-12-11 09:42:31');
+(5, 7, NULL, 3, 0, 'خیلی خوب', 1, 1, 'fa', 1, NULL, '2024-12-11 08:40:50', '2024-12-12 06:58:04'),
+(6, 3, NULL, 6, 0, 'دیدیسد', 1, 1, 'fa', 1, NULL, '2024-12-11 09:42:14', '2024-12-11 09:42:31'),
+(7, 3, NULL, 6, 0, 'efegfewger', 1, 1, 'fa', 1, NULL, '2024-12-12 06:58:58', '2024-12-12 07:00:10'),
+(8, 3, NULL, 6, 0, 'geeeeeeeeeeeeeeeee', 1, 1, 'fa', 1, NULL, '2024-12-12 06:59:01', '2024-12-12 07:00:07'),
+(9, 3, NULL, 6, 0, 'ddddddddddddddddddddddddddd', 1, 1, 'fa', 1, NULL, '2024-12-12 06:59:07', '2024-12-12 07:00:01'),
+(10, 3, NULL, 6, 6, 'swvvvvvvww', 1, 1, 'fa', 1, NULL, '2024-12-12 07:00:29', '2024-12-12 07:02:22'),
+(11, 3, 1, 6, 8, 'wwwwwwwwwwwwwwww', 1, 0, 'fa', 1, NULL, '2024-12-12 07:00:35', '2024-12-12 07:01:45');
 
 -- --------------------------------------------------------
 
@@ -792,6 +797,14 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('|5.212.162.44', 'i:1;', 1733997950),
+('|5.212.162.44:timer', 'i:1733997950;', 1733997950);
 
 -- --------------------------------------------------------
 
@@ -841,8 +854,12 @@ INSERT INTO `courses` (`id`, `promotion_id`, `promoter_id`, `promotion_report_id
 (8, 2, 8, 11, 'فاطمیه', '1403', '3', 1, 100, 'مسجد', 37, 4, 'اصفهان', NULL, 1, NULL, NULL, NULL),
 (9, 2, 6, 10, 'دوره جدید', '1403', '33', 3, 23, 'مسجد', 36, 2, 'مسجدی', 'ّتست', 1, NULL, NULL, NULL),
 (11, 2, 7, 12, 'لزانبلغن', '1403', '55', 1, 55, 'طبلتطبلت', 5, 1, 'سیلبسیل', NULL, 1, NULL, NULL, NULL),
-(13, 3, 3, 13, 'نقشه خوانی غدیر', '1403', '60', 3, 50, 'تالار شهر', 72, 9, 'بوجن', NULL, 1, NULL, NULL, NULL),
-(16, 3, 6, 15, 'fdgfg', '1403', '43', 2, 4, 'dfgdgd', 23, 9, 'fddfh', NULL, 1, NULL, NULL, NULL);
+(28, 3, 3, 25, 'grh', '1403', '44', 1, 44, '44', 26, 2, 't4t', NULL, 1, NULL, NULL, NULL),
+(20, 3, 6, 18, 'courses', '1403', '34', 1, 34, 'school', 21, 4, 'city', NULL, 1, NULL, NULL, NULL),
+(22, 3, 4, 13, 'نقشه خوانی غدیر', '1403', '60', 3, 50, 'تالار شهر', 72, 9, 'بوجن', NULL, 1, NULL, NULL, NULL),
+(32, 3, 5, 27, 'طا', '1403', '548', 2, 80, 'اتم', 124, 7, 'بیت', NULL, 1, NULL, NULL, NULL),
+(36, 4, 5, 28, 'یهیط', '1403', '60', 4, 79, 'قردز', 177, 15, 'بتیب', NULL, 1, NULL, NULL, NULL),
+(38, 4, 3, 29, 'طبت', '1403', '80', 2, 60, 'عبتر', 64, 11, 'لنز', NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -870,7 +887,7 @@ CREATE TABLE `cultural_users` (
 --
 
 INSERT INTO `cultural_users` (`id`, `promoter_id`, `name`, `family`, `job_position`, `gender_id`, `phone`, `comments`, `status_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(7, 6, 'محدثه', 'عبادی', 'همکار فرهنگی', 2, '353546', 'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند', NULL, NULL, NULL, NULL);
+(11, 6, 'محدثه', 'عبادی', 'همکار فرهنگی', 2, '353546', 'افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند افرادی که با شما در امور فرهنگی همکاری سازنده دارند یا در محل تبلیغ شما تاثیر گزارند', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -974,9 +991,10 @@ CREATE TABLE `promotions` (
 --
 
 INSERT INTO `promotions` (`id`, `title`, `year`, `photo`, `comments`, `commitments`, `has_commitment`, `register_status`, `report_status`, `has_course`, `has_tribune`, `status_id`, `user_count`, `report_count`, `sum_support`, `sum_score`, `course_count`, `tribun_count`, `creator_id`, `editor_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'فاطمیه', 1403, 'image38751733683779.jpg', 'در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.', '\'تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.', 1, 0, 0, 1, 1, 1, 4, 4, 1, NULL, 0, 0, 2, 1, NULL, '2024-12-08 15:19:42', '2024-12-11 08:53:48'),
-(2, 'تبلیغ نیمه شعبان', 1403, 'image6891733916776.png', 'توضیحات اینجا نوشته می شود', 'بسته فرهنگی\nثبت سابقه تبلیغی', 1, 0, 0, 1, 1, 1, 3, 3, 0, NULL, 0, 0, 1, 1, NULL, '2024-12-11 08:03:50', '2024-12-11 09:24:36'),
-(3, 'ایام غدیر یه', 1403, 'image14661733921765.png', 'زذیدید', NULL, 0, 1, 1, 1, 1, 1, 1, 2, 1, NULL, 0, 0, 1, 1, NULL, '2024-12-11 09:26:08', '2024-12-11 17:43:09');
+(1, 'فاطمیه', 1403, 'image38751733683779.jpg', 'در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.', '\'تعهدات ستاد دارای این مواردمیباشد.در فرهنگ عامه، به دهه دوم جمادی‌الاول، از دهم تا بیستم آن ماه که بر اساس روایت ۷۵ روز درگذشت فاطمه در میان آن روزها واقع شده‌است، «دهه اول فاطمیه» و به دهه اول جمادی‌الثانی، از اول تا دهم جمادی‌الثانی که بنا به روایت ۹۵ روز، درگذشت فاطمه در میان این روزها اتفاق افتاده «دهه دوم فاطمیه» می‌گویند.', 1, 0, 0, 1, 1, 1, 4, 0, 1, NULL, 0, 0, 2, 1, NULL, '2024-12-08 15:19:42', '2024-12-12 06:36:55'),
+(2, 'تبلیغ نیمه شعبان', 1403, 'image6891733916776.png', 'توضیحات اینجا نوشته می شود', 'بسته فرهنگی\nثبت سابقه تبلیغی', 1, 0, 0, 1, 1, 1, 3, 3, 2, NULL, 0, 0, 1, 1, NULL, '2024-12-11 08:03:50', '2024-12-13 14:14:37'),
+(3, 'ایام غدیر یه', 1403, 'image14661733921765.png', 'زذیدید', NULL, 0, 0, 0, 1, 1, 1, 3, 7, 1, NULL, 0, 0, 1, 11, NULL, '2024-12-11 09:26:08', '2024-12-14 08:27:22'),
+(4, 'فاطمیه دوم', 1403, 'image30341734177687.jpg', 'سیباتسطعظثقعئتمنیط', 'رعنزفععط', 1, 1, 1, 1, 1, 1, 2, 2, 1, NULL, 0, 0, 11, NULL, NULL, '2024-12-14 08:31:45', '2024-12-14 09:03:54');
 
 -- --------------------------------------------------------
 
@@ -1007,7 +1025,11 @@ INSERT INTO `promotion_agree` (`id`, `promoter_id`, `promotion_id`, `has_course`
 (12, 8, 2, 1, 1, NULL, '2024-12-11 11:35:04', '2024-12-11 08:05:04'),
 (13, 9, 2, 1, 1, NULL, '2024-12-11 11:35:24', '2024-12-11 08:05:24'),
 (14, 7, 2, 1, 1, NULL, '2024-12-11 11:35:38', '2024-12-11 08:05:38'),
-(15, 3, 3, 1, 1, NULL, '2024-12-11 12:57:01', '2024-12-11 09:27:01');
+(15, 3, 3, 1, 1, NULL, '2024-12-11 12:57:01', '2024-12-11 09:27:01'),
+(16, 6, 3, 0, 1, NULL, '2024-12-11 21:33:22', '2024-12-11 18:03:22'),
+(17, 5, 3, 1, 1, NULL, '2024-12-14 11:46:39', '2024-12-14 08:16:39'),
+(18, 5, 4, 1, 1, NULL, '2024-12-14 12:02:45', '2024-12-14 08:32:45'),
+(19, 3, 4, 1, 1, NULL, '2024-12-14 12:17:17', '2024-12-14 08:47:17');
 
 -- --------------------------------------------------------
 
@@ -1054,7 +1076,17 @@ INSERT INTO `promotion_agree_item` (`id`, `agree_id`, `ritual_id`, `promotion_id
 (31, 15, 4, 3, 3),
 (32, 15, 3, 3, 3),
 (33, 15, 2, 3, 3),
-(34, 15, 6, 3, 3);
+(34, 15, 6, 3, 3),
+(35, 16, 1, 3, 6),
+(36, 17, 3, 3, 5),
+(37, 18, 4, 4, 5),
+(38, 18, 2, 4, 5),
+(39, 18, 6, 4, 5),
+(40, 19, 4, 4, 3),
+(41, 19, 5, 4, 3),
+(42, 19, 2, 4, 3),
+(43, 19, 1, 4, 3),
+(44, 19, 6, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -1113,15 +1145,29 @@ INSERT INTO `promotion_reports` (`id`, `promotion_id`, `promoter_id`, `photos`, 
 (4, 1, 4, NULL, NULL, 0, -1, 0, '2024-12-09 12:12:17', '2024-12-09 04:00:07', '2024-12-09 12:12:17'),
 (5, 1, 6, 'image44571733745623.jpg###', NULL, 0, -1, 0, '2024-12-09 12:12:23', '2024-12-09 08:30:26', '2024-12-09 12:12:23'),
 (6, 1, 3, NULL, NULL, 0, -1, 0, '2024-12-09 12:12:32', '2024-12-09 08:53:09', '2024-12-09 12:12:32'),
-(7, 1, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-09 11:42:38', '2024-12-09 11:42:38'),
-(8, 1, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-09 11:42:39', '2024-12-09 11:42:39'),
-(9, 1, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-09 11:42:39', '2024-12-09 11:53:07'),
+(7, 1, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:36:55', '2024-12-09 11:42:38', '2024-12-12 06:36:55'),
+(8, 1, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:36:51', '2024-12-09 11:42:39', '2024-12-12 06:36:51'),
+(9, 1, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:36:47', '2024-12-09 11:42:39', '2024-12-12 06:36:47'),
 (10, 2, 6, NULL, NULL, 0, 1, 33, NULL, '2024-12-10 10:47:25', '2024-12-11 08:28:11'),
 (11, 2, 8, NULL, NULL, 0, 1, 50, NULL, '2024-12-11 08:04:04', '2024-12-11 08:19:40'),
 (12, 2, 7, NULL, NULL, 0, 1, 60, NULL, '2024-12-11 08:39:35', '2024-12-11 08:56:05'),
-(13, 3, 3, NULL, NULL, 0, 1, 10, NULL, '2024-12-11 09:31:42', '2024-12-11 09:35:53'),
+(13, 3, 4, NULL, NULL, 0, 0, 10, NULL, '2024-12-11 09:31:42', '2024-12-12 06:38:00'),
 (14, 3, 6, NULL, NULL, 0, -1, 0, '2024-12-11 17:39:34', '2024-12-11 16:52:25', '2024-12-11 17:39:34'),
-(15, 3, 6, NULL, NULL, 0, -1, 0, NULL, '2024-12-11 17:43:09', '2024-12-11 17:43:09');
+(15, 3, 6, NULL, NULL, 0, -1, 0, '2024-12-11 18:02:29', '2024-12-11 17:43:09', '2024-12-11 18:02:29'),
+(16, 3, 6, NULL, NULL, 0, -1, 0, '2024-12-11 18:06:07', '2024-12-11 18:04:29', '2024-12-11 18:06:07'),
+(17, 3, 6, NULL, NULL, 0, -1, 0, '2024-12-11 18:12:42', '2024-12-11 18:07:09', '2024-12-11 18:12:42'),
+(18, 3, 6, NULL, NULL, 0, -1, 0, NULL, '2024-12-11 18:15:09', '2024-12-11 18:15:09'),
+(19, 3, 4, NULL, NULL, 0, -1, 111, NULL, '2024-12-12 06:35:56', '2024-12-12 06:35:56'),
+(20, 3, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:40:12', '2024-12-12 06:39:32', '2024-12-12 06:40:12'),
+(21, 3, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:40:09', '2024-12-12 06:39:33', '2024-12-12 06:40:09'),
+(22, 3, 3, NULL, NULL, 0, -1, 0, '2024-12-12 06:40:05', '2024-12-12 06:39:33', '2024-12-12 06:40:05'),
+(23, 3, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-12 06:40:43', '2024-12-12 06:40:43'),
+(24, 3, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-12 06:40:45', '2024-12-12 06:40:45'),
+(25, 3, 3, NULL, NULL, 0, -1, 0, NULL, '2024-12-12 06:40:45', '2024-12-12 06:40:45'),
+(26, 3, 5, NULL, NULL, 0, -1, 0, '2024-12-14 08:21:49', '2024-12-14 08:19:04', '2024-12-14 08:21:49'),
+(27, 3, 5, NULL, NULL, 0, 1, 30, NULL, '2024-12-14 08:23:03', '2024-12-14 08:24:57'),
+(28, 4, 5, 'application68411734178408.pdf###image11341734178463.jpg###', 'image85131734178382.jpg###', 0, -1, 0, NULL, '2024-12-14 08:34:52', '2024-12-14 08:44:32'),
+(29, 4, 3, 'image95331734178741.jpg###', 'image35301734178756.jpg###', 0, -1, 0, NULL, '2024-12-14 08:48:07', '2024-12-14 08:49:28');
 
 -- --------------------------------------------------------
 
@@ -1153,7 +1199,12 @@ INSERT INTO `promotion_ritual` (`id`, `ritual_id`, `promotion_id`) VALUES
 (11, 2, 3),
 (12, 3, 3),
 (13, 4, 3),
-(14, 6, 3);
+(14, 6, 3),
+(15, 4, 4),
+(16, 5, 4),
+(17, 2, 4),
+(18, 1, 4),
+(19, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -1243,7 +1294,10 @@ CREATE TABLE `supports` (
 
 INSERT INTO `supports` (`id`, `title`, `pack_items`, `amount`, `type_id`, `promotion_id`, `description`, `creator_id`, `editor_id`, `status_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'کتاب\nبروشور', NULL, 1, 1, 'به ضورت پستی ارسال شد', NULL, NULL, 1, NULL, '2024-12-11 08:53:05', '2024-12-11 08:53:05'),
-(2, NULL, NULL, '500000 تومان', 2, 3, 'زذزذز', NULL, NULL, 1, NULL, '2024-12-11 09:45:39', '2024-12-11 09:45:39');
+(2, NULL, NULL, '500000 تومان', 2, 3, 'زذزذز', NULL, NULL, 1, NULL, '2024-12-11 09:45:39', '2024-12-11 09:45:39'),
+(3, NULL, 'vdbvdbd', NULL, 1, 2, 'v svs', NULL, NULL, 1, NULL, '2024-12-12 03:48:23', '2024-12-12 03:48:23'),
+(4, NULL, NULL, NULL, 2, 2, 'e34e4er', NULL, NULL, 1, NULL, '2024-12-12 04:47:29', '2024-12-12 04:47:29'),
+(5, NULL, NULL, '200000', 2, 4, 'عهلهع', NULL, NULL, 1, NULL, '2024-12-14 09:03:54', '2024-12-14 09:03:54');
 
 -- --------------------------------------------------------
 
@@ -1294,7 +1348,10 @@ INSERT INTO `support_users` (`id`, `promoter_id`, `support_id`, `deleted_at`, `c
 (3, 5, 1, NULL, NULL, NULL),
 (4, 7, 1, NULL, NULL, NULL),
 (5, 3, 2, NULL, NULL, NULL),
-(6, 5, 2, NULL, NULL, NULL);
+(6, 5, 2, NULL, NULL, NULL),
+(7, 4, 4, NULL, NULL, NULL),
+(8, 5, 4, NULL, NULL, NULL),
+(9, 8, 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1420,7 +1477,8 @@ CREATE TABLE `tribunes` (
 
 INSERT INTO `tribunes` (`id`, `subject`, `promotion_report_id`, `promoter_id`, `promotion_id`, `year`, `duration`, `audiencetype_id`, `people_count`, `place_name`, `city_id`, `province_id`, `city`, `village`, `status_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'فاطمیه', 4, 4, 1, '1403', '45', 1, 150, 'حسینیه', 99, 10, 'بیرجند', NULL, 1, '2024-12-09 12:12:17', '2024-12-09 15:42:17', '2024-12-09 12:12:17'),
-(3, 'تست منبر', 10, 6, 2, '1403', '43', 3, 45, 'تست مکان', 21, 4, 'اردستانی', 'اردستان روستا', 1, NULL, NULL, NULL);
+(3, 'تست منبر', 10, 6, 2, '1403', '43', 3, 45, 'تست مکان', 21, 4, 'اردستانی', 'اردستان روستا', 1, NULL, NULL, NULL),
+(7, NULL, 28, 5, 4, '1403', '808', 1, 79, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1478,17 +1536,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `mobile`, `firstname`, `lastname`, `role_id`, `gender_id`, `is_not_citizen`, `codemeli`, `khadamat_code`, `tablighat_office_code`, `tablighat_organization_code`, `ovghaf_code`, `bank_account_number`, `city_id`, `province_id`, `city`, `village`, `native_province_id`, `native_city_id`, `address`, `postal_code`, `photo`, `education_id`, `status_id`, `level_id`, `confirm_code`, `confirm_time`, `password`, `last_login`, `creator_id`, `remember_token`, `editor_id`, `has_khadamat_code`, `has_tablighat_office_code`, `has_tablighat_organization_code`, `has_ovghaf_code`, `report_count`, `agree_count`, `work_status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '09191964745', 'پرسنل', 'غدیر', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image49351733838074.png', NULL, 1, NULL, NULL, NULL, '$2y$12$MF4toQZLv5.DSupBLZ00FOYJdeg3LFnVPSbuJNMF52UNGY07pCOX2', '2024-12-11 15:29:38', NULL, NULL, 1, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-11 18:59:38', '2024-12-11 15:29:38'),
-(2, '09198111102', 'صادق', 'شیری', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image79261733768422.jpg', NULL, 1, NULL, NULL, NULL, '$2y$12$9l/.qnK2iRrIxvNbRecvguUNI3pV0Abtjxpu6hmjh/PC.ciqzgYf6', '2024-12-11 04:42:51', NULL, NULL, 2, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-11 08:12:51', '2024-12-11 04:42:51'),
-(3, '09189062676', 'مبلغ', 'غدیر', 2, 1, 0, '4032228035', '434', NULL, '5566', NULL, '0132324234', 36, 2, '434', '434', 1, 31, NULL, '434343434', 'avatar.png', 2, 1, '0', '5121', '1733919257', '$2y$12$SbbHP/kZ6s17SKSiYImeJunolUdAuYxsaBvtn2SlAG0nqTAE/ocwi', '2024-12-11 08:42:35', NULL, 'Dt6b7uy86RdbAdD8VIBQEKGOF58QajLAPBftG9P8nIxMInw3EcW3YXNkGfZT', 1, 1, 0, 1, 0, 4, 2, 1, NULL, '2024-12-11 13:24:55', '2024-12-11 09:54:55'),
-(4, '09361022252', 'ابوعلی', 'براتی', 2, 1, 0, '1234567654', NULL, NULL, NULL, NULL, '344', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', 1, -1, '0', '6046', '1733729073', '$2y$12$mpLc206u.H5AHC2hHc85X.V/P8N6wDsngiOJHr3pdg.HysRuX5nJS', '2024-12-09 03:53:10', NULL, NULL, 1, 0, 0, 0, 0, 0, 1, 1, NULL, '2024-12-09 15:42:17', '2024-12-09 12:12:17'),
-(5, '09196660562', 'مقداد', 'براتی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '6411', '1733741246', '$2y$12$cH0xJJ73AZMyJnucgOe11eK4X4Ln2cEkpiF0OB8exrF0DxtU38pn6', '2024-12-11 10:59:38', NULL, NULL, NULL, 0, 0, 0, 0, 0, 1, 1, NULL, '2024-12-11 14:29:38', '2024-12-11 10:59:38'),
-(6, '09198526839', 'مریم', 'عبادی راد', 2, 2, 0, '2134543265', '546457474', NULL, NULL, '4645775757', '126754356', 94, 8, 'پردیس', NULL, 5, 304, 'تهران پردیس فاز 3 بلوک 453 پلاک 436', '65438754', 'image61021733763411.jpg', 4, 1, '0', '9302', '1733744741', '$2y$12$qsApw3I3RCqw5zE0KexRVOoO4BXOGOzmoVke81dOCVdkAm2i5HViq', '2024-12-11 16:45:36', NULL, NULL, 6, 1, 0, 0, 1, 2, 1, 1, NULL, '2024-12-11 21:13:09', '2024-12-11 17:43:09'),
+(1, '09191964745', 'پرسنل', 'غدیر', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image49351733838074.png', NULL, 1, NULL, NULL, NULL, '$2y$12$MF4toQZLv5.DSupBLZ00FOYJdeg3LFnVPSbuJNMF52UNGY07pCOX2', '2024-12-14 13:22:46', NULL, NULL, 1, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-14 16:52:46', '2024-12-14 13:22:46'),
+(2, '09198111102', 'صادق', 'شیری', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image79261733768422.jpg', NULL, 1, NULL, NULL, NULL, '$2y$12$9l/.qnK2iRrIxvNbRecvguUNI3pV0Abtjxpu6hmjh/PC.ciqzgYf6', '2024-12-14 06:56:32', NULL, NULL, 2, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-14 10:26:32', '2024-12-14 06:56:32'),
+(3, '09189062676', 'مبلغ', 'غدیر', 2, 1, 0, '4032228035', '434', NULL, '5566', NULL, '0132324234', 36, 2, '434', '434', 1, 31, NULL, '434343434', 'avatar.png', 2, 1, '0', '5121', '1733919257', '$2y$12$SbbHP/kZ6s17SKSiYImeJunolUdAuYxsaBvtn2SlAG0nqTAE/ocwi', '2024-12-14 08:46:49', NULL, 'Dt6b7uy86RdbAdD8VIBQEKGOF58QajLAPBftG9P8nIxMInw3EcW3YXNkGfZT', 1, 1, 0, 1, 0, 4, 3, 1, NULL, '2024-12-14 12:19:28', '2024-12-14 08:49:28'),
+(4, '09361022521', 'ابوعلی', 'تستی', 2, 1, 0, '1234567654', '1414', '689', NULL, NULL, '344', 349, 3, 'کوثر', NULL, 2, 122, NULL, NULL, 'avatar.png', 1, -1, '0', '6046', '1733729073', '$2y$12$mpLc206u.H5AHC2hHc85X.V/P8N6wDsngiOJHr3pdg.HysRuX5nJS', '2024-12-09 03:53:10', NULL, NULL, 11, 1, 1, 0, 0, 2, 1, 1, NULL, '2024-12-14 11:41:36', '2024-12-14 08:11:36'),
+(5, '09196660562', 'مقداد', 'براتی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '6411', '1733741246', '$2y$12$cH0xJJ73AZMyJnucgOe11eK4X4Ln2cEkpiF0OB8exrF0DxtU38pn6', '2024-12-14 08:13:35', NULL, NULL, NULL, 0, 0, 0, 0, 2, 3, 1, NULL, '2024-12-14 12:14:32', '2024-12-14 08:44:32'),
+(6, '09198526839', 'مریم', 'عبادی راد', 2, 2, 0, '2134543265', '546457474', NULL, NULL, '4645775757', '126754356', 26, 2, 'پردیس', NULL, 10, 99, 'تهران پردیس فاز 3 بلوک 453 پلاک 436', '65438754', 'image61021733763411.jpg', 4, 1, '0', '9302', '1733744741', '$2y$12$qsApw3I3RCqw5zE0KexRVOoO4BXOGOzmoVke81dOCVdkAm2i5HViq', '2024-12-13 14:36:47', NULL, NULL, 6, 1, 0, 0, 1, 2, 2, 1, NULL, '2024-12-13 18:06:47', '2024-12-13 14:36:47'),
 (7, '09133598905', 'سید اسماعیل', 'طباطبایی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '6044', '1733916805', '$2y$12$tw5A5C92AQdpWmmIxo/9vOcpcEsSDtyC51.JIxEmsOmYcLyxDLQzy', '2024-12-11 08:01:39', NULL, 'UNPgcQmOzJKukSPIlcN1UZ244qeVCA9Hd5EPLw1HXmWN5gqyHxl2ocSZpY5x', NULL, 0, 0, 0, 0, 1, 1, 1, NULL, '2024-12-11 12:26:05', '2024-12-11 08:56:05'),
 (8, '09198555266', 'مجتبی', 'قاسمی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '6143', '1733916830', '$2y$12$LqPCg0eNvxLmb9ZLC5ncwewA8egFnVY0YDxUCH4/pJGxS5ui0sBfm', '2024-12-11 08:02:01', NULL, 'atIjhc3cm7z0msWNihQszdRBer0pCArmcH1pKio1uNY5pzFC7nE1nPPhyB7P', NULL, 0, 0, 0, 0, 1, 1, 1, NULL, '2024-12-11 11:49:40', '2024-12-11 08:19:40'),
 (9, '09196637217', 'داود', 'صانعی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '2708', '1733916901', '$2y$12$RmN2YD8xi.ps6TPN84rrAufHx0w5nrItE.mjJPVxf02vLUidLvkG.', '2024-12-11 08:03:28', NULL, 'HwKn7LFysKcGpe87SLPhE8VrcLJssi0snI5Jx0T1289mAoiYdlYJF4RCsCBS', NULL, 0, 0, 0, 0, 0, 1, 1, NULL, '2024-12-11 11:35:24', '2024-12-11 08:05:24'),
-(10, '09127549713', 'سیدمحمد مهدی', 'فاطمی', 2, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'avatar.png', NULL, -1, NULL, '6743', '1733920001', '$2y$12$iMMNEp/FWxvNZnJRFAeeQO/Cgv2SzYBsvJz9kcN4Ae/W3nAic5xfW', '2024-12-11 08:54:55', NULL, 'O2jgEVfLc8BbZELv6N67wa8yl3hsCOxpOIY7kp8GnaYJyKhXDRI43ZmzZCjU', NULL, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-11 12:24:55', '2024-12-11 12:24:55'),
-(11, '09120000000', 'مسئول امور تبلیغی', 'براتی', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image50141733923687.png', NULL, 1, NULL, NULL, NULL, '$2y$12$Qt8TQiShrE0aKJZx5XQQzewolsxbI3zo5HPQh.eUIy4qAt3DROCw2', '2024-12-11 11:13:18', 1, NULL, 1, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-11 14:43:18', '2024-12-11 11:13:18'),
+(10, '09127549713', 'سیدمحمد مهدی', 'فاطمی', 2, 1, 0, '1111111111', NULL, NULL, NULL, NULL, '111111', 89, 2, NULL, NULL, 3, 38, NULL, NULL, 'avatar.png', 2, 1, '0', '6743', '1733920001', '$2y$12$iMMNEp/FWxvNZnJRFAeeQO/Cgv2SzYBsvJz9kcN4Ae/W3nAic5xfW', '2024-12-11 08:54:55', NULL, 'O2jgEVfLc8BbZELv6N67wa8yl3hsCOxpOIY7kp8GnaYJyKhXDRI43ZmzZCjU', 1, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-14 08:37:58', '2024-12-14 05:07:58'),
+(11, '09120000000', 'مسئول امور تبلیغی', 'براتی', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image50141733923687.png', NULL, 1, NULL, NULL, NULL, '$2y$12$Qt8TQiShrE0aKJZx5XQQzewolsxbI3zo5HPQh.eUIy4qAt3DROCw2', '2024-12-14 08:05:53', 1, NULL, 1, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-14 11:35:53', '2024-12-14 08:05:53'),
 (12, '09130000000', 'معاون امور تبلیغی سید اسماعیل', 'طباطبایی', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'image63221733929800.jpg', NULL, 1, NULL, NULL, NULL, '$2y$12$f/BRSRdwtHpxzf9r4y/koOMUQnCxqY6eoixW.bqrg/UC/hXjEsBb.', NULL, 11, NULL, 11, 0, 0, 0, 0, 0, 0, 1, NULL, '2024-12-11 15:12:31', '2024-12-11 11:42:31');
 
 -- --------------------------------------------------------
@@ -1532,7 +1590,8 @@ CREATE TABLE `user_notif` (
 
 INSERT INTO `user_notif` (`id`, `promoter_id`, `creator_id`, `content`, `status_id`, `display`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (2, 3, 1, 'این اطلاعیه برای تست می باشد', 1, 0, NULL, '2024-12-11 13:25:23', '2024-12-11 09:55:23'),
-(3, 3, 1, 'سنکحدرشنح ستبشضنمبشصمد یحش', 1, 0, NULL, '2024-12-11 13:25:24', '2024-12-11 09:55:24');
+(3, 3, 1, 'سنکحدرشنح ستبشضنمبشصمد یحش', 1, 0, NULL, '2024-12-11 13:25:24', '2024-12-11 09:55:24'),
+(4, 10, 1, 'این یک اطلاعیه است', 1, 1, NULL, '2024-12-14 05:07:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -1561,8 +1620,9 @@ CREATE TABLE `user_promotions` (
 
 INSERT INTO `user_promotions` (`id`, `promoter_id`, `position_id`, `city_id`, `province_id`, `city`, `village`, `place_name`, `status_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (12, 3, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 6, 4, 94, 8, 'پردیس', 'روستای پردیس', 'اهل بیت', NULL, NULL, NULL, NULL),
-(17, 6, 3, 94, 8, 'شمرانات', NULL, 'پردیس', NULL, NULL, NULL, NULL);
+(26, 6, 4, 94, 8, 'پردیس', 'روستای پردیس', 'اهل بیت', NULL, NULL, NULL, NULL),
+(25, 6, 3, 94, 8, 'شمرانات', NULL, 'پردیس', NULL, NULL, NULL, NULL),
+(27, 10, NULL, 89, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1858,7 +1918,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `blog_comments`
 --
 ALTER TABLE `blog_comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `blog_subjects`
@@ -1870,13 +1930,13 @@ ALTER TABLE `blog_subjects`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `cultural_users`
 --
 ALTER TABLE `cultural_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `education`
@@ -1900,19 +1960,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `promotions`
 --
 ALTER TABLE `promotions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `promotion_agree`
 --
 ALTER TABLE `promotion_agree`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `promotion_agree_item`
 --
 ALTER TABLE `promotion_agree_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `promotion_positions`
@@ -1924,13 +1984,13 @@ ALTER TABLE `promotion_positions`
 -- AUTO_INCREMENT for table `promotion_reports`
 --
 ALTER TABLE `promotion_reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `promotion_ritual`
 --
 ALTER TABLE `promotion_ritual`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `rituals`
@@ -1948,7 +2008,7 @@ ALTER TABLE `ritual_reports`
 -- AUTO_INCREMENT for table `supports`
 --
 ALTER TABLE `supports`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `support_types`
@@ -1960,7 +2020,7 @@ ALTER TABLE `support_types`
 -- AUTO_INCREMENT for table `support_users`
 --
 ALTER TABLE `support_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tickets`
@@ -1984,7 +2044,7 @@ ALTER TABLE `ticket_subjects`
 -- AUTO_INCREMENT for table `tribunes`
 --
 ALTER TABLE `tribunes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -2002,13 +2062,13 @@ ALTER TABLE `user_notes`
 -- AUTO_INCREMENT for table `user_notif`
 --
 ALTER TABLE `user_notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_promotions`
 --
 ALTER TABLE `user_promotions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `user_roles`

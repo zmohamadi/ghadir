@@ -33,8 +33,16 @@ export function View({id }) {
     const ritual_reports = component?.state?.info?.ritual_reports?.length
         ? component.state.info.ritual_reports: null;
 
-    let images = (data?.photo)? data?.item?.photo?.split("###") : [];
-    let videos = (data?.video)? data?.item?.video?.split("###") : [];
+    let images = (data?.photos) 
+        ? data.photos.split("###").filter(photo => photo.trim() !== "") 
+        : [];
+    
+    let videos = (data?.videos) 
+        ? data.videos.split("###").filter(video => video.trim() !== "") 
+        : [];
+    
+    // console.log(images);
+    // console.log(videos);
 
     return (
         <>
@@ -224,27 +232,38 @@ export function View({id }) {
                                 ))}
                         </TabPanel>
                         <TabPanel id="tab-media">
-                            <div className="grid grid-cols-2 gap-4">
-                                {images.map((img, index) => (
-                                    <div className="flex" key={`img-${index}`}>
-                                        <Pic
-                                            src={`${mediaPath}/reports/${img}`}
-                                            defaultImg={`${mediaPath}/public/default/avatar.png`}
-                                            className="rounded-md border w-full"
-                                        />
-                                    </div>
-                                ))}
+                        <div className="grid grid-cols-6 gap-4">
+                            {/* تصاویر */}
+                            {images?.map((img, index) => (
+                                <div className="flex col-span-3" key={`img-${index}`}>
+                                    <Pic
+                                        src={`${mediaPath}/reports/${img}`}
+                                        defaultImg={`${mediaPath}/public/default/logo.png`}
+                                        className="rounded-md border w-full"
+                                    />
+                                </div>
+                            ))}
 
-                                {videos.map((video, index) => (
-                                    <div className="flex" key={`video-${index}`}>
-                                        <video
-                                            controls
-                                            className="w-full rounded-md border"
-                                            src={`${mediaPath}/reports/${video}`}
-                                        ></video>
-                                    </div>
-                                ))}
-                            </div>
+                            {/* خط جداکننده */}
+                            {images?.length > 0 && videos?.length > 0 && (
+                                <hr className="col-span-6 border-t border-gray-300 my-4" />
+                            )}
+
+                            {/* ویدئوها */}
+                            {videos?.map((video, index) => (
+                                <div className="flex col-span-3 ml-1" key={`video-${index}`}>
+                                    <video
+                                        controls
+                                        className="w-full rounded-md border min-w-[300px] min-h-[200px]"
+                                        src={`${mediaPath}/reports/${video}`}
+                                        onError={(e) => {
+                                            e.target.onerror = null; // جلوگیری از تکرار
+                                            e.target.poster = `${mediaPath}/public/default/logo.png`; // تصویر پیش‌فرض
+                                        }}
+                                    ></video>
+                                </div>
+                            ))}
+                        </div>
 
                         </TabPanel>
                     </TabBody>
