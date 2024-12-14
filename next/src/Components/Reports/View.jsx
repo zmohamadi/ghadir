@@ -5,6 +5,7 @@ import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
 import { Tab, TabBody, TabHeader, TabList, TabPanel } from "@/Theme/Midone/Forms/Tab";
 import {Frame, Loading, Pic, useData, useFormRefs } from "@/Theme/Midone";
+import Image from "next/image";
 
 export function View({id }) {
     const { Lang } = useLang();
@@ -232,16 +233,27 @@ export function View({id }) {
                                 ))}
                         </TabPanel>
                         <TabPanel id="tab-media">
-                        <div className="grid grid-cols-6 gap-4">
+                        <div className="grid">
                             {/* تصاویر */}
                             {images?.map((img, index) => (
-                                <div className="flex col-span-3" key={`img-${index}`}>
-                                    <Pic
+                                <div className="flex col-span-12 mb-2" key={`img-${index}`}>
+                                    <Image
                                         src={`${mediaPath}/reports/${img}`}
-                                        defaultImg={`${mediaPath}/public/default/logo.png`}
-                                        className="rounded-md border w-full"
+                                        onError={(e) => {
+                                            if (!e.target.dataset.errorHandled) {
+                                                e.target.dataset.errorHandled = true;
+                                                e.target.src = `${mediaPath}/public/default/logo.png`;
+                                            }
+                                        }}
+                                        className="rounded-md border"
+                                        layout="intrinsic"
+                                        width={400} // عرض پیش‌فرض
+                                        height={300} // ارتفاع پیش‌فرض
+                                        objectFit="contain"
+                                        loading="lazy"
+                                        alt="image"
                                     />
-                                </div>
+                            </div>
                             ))}
 
                             {/* خط جداکننده */}

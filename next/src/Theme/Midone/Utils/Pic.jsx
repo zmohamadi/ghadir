@@ -19,7 +19,7 @@ const Pic = ({ src, defaultImg, style = {}, classImg, width = 100, height = 100 
             className={classImg || ""}
             width={width} 
             height={height} 
-            // sizes="(max-width: 100px) 100vw, (max-width: 120px) 50vw, 33vw"
+            sizes="(max-width: 100px) 100vw, (max-width: 120px) 50vw, 33vw"
             loading='lazy'
             onError={handleError}
             alt="image"

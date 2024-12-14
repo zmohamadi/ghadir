@@ -5,6 +5,7 @@ import { config, useConfig } from '@/lib/config';
 import * as Icon from 'react-feather';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { Pic } from '../Utils';
 // import cash from "cash-dom";
 // import "@left4code/tw-starter/dist/js/dropdown";
 // import * as Popper from "@popperjs/core";
@@ -50,12 +51,17 @@ export function TopBar({setMenuType, logout, user, logo = "light-logo.png", side
               
                 <div className='intro-x dropdown w-8 h-8'>
                     <div className={(dir == "rtl" ? "float-left ": "float-right ")+'dropdown-toggle w-12 h-12 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110'} role='button' aria-expanded='false'>
-                        {
+                        {/* {
                             user?.photo ?
                             <img alt='IKVU' src={mediaPath+'/users/'+user?.photo} />
                             :
                             <img alt='IKVU' src={mediaPath+'/users/avatar.png'} />
-                        }
+                        } */}
+                         <Pic
+                            src={`${mediaPath}/users/${user?.photo}`}
+                            defaultImg={`${mediaPath}/public/default/avatar.png`}
+                            classImg="user-avatar rounded-full"
+                        />
                     </div>
                     <div className='dropdown-menu w-56'>
                         <div className='dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white'>
