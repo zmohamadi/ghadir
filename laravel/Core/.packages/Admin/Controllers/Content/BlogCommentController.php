@@ -9,7 +9,7 @@ class BlogCommentController extends BaseAbstract
 {
     protected $model = 'Models\Content\BlogComment';
     protected $request = 'Publics\Requests\Content\BlogCommentRequest';
-    protected $with = ["activeStatus","blog","creator","editor"];
+    protected $with = ["confirmStatus","blog","creator","editor"];
     protected $searchFilter = ['title'];
 
     public function init()

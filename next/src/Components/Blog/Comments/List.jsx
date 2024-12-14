@@ -15,7 +15,7 @@ export function List(){
             {label: "creator_record", jsx: (item)=><span>{item?.creator?.firstname + " " + item?.creator?.lastname} <div className="ltr">{item?.created_at}</div> </span>},
             {label: "editor_record", jsx: (item)=><span>{(item?.editor)? item?.editor?.firstname + " " + item?.editor?.lastname : "---"}</span>},
             {label: "blog",  field:"blog.title"},
-            // {label: "status",  jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.active_status?.color}>{item?.active_status?.["title_"+local]}</span>},
+            {label: "status",  jsx: (item)=><span className={"rounded-full py-1 px-2  text-white bg-"+item?.confirm_status?.color}>{item?.confirm_status?.["title_"+local]}</span>},
             {label: "", sort:false, width:"110px", jsx:(item)=><>
                     <div className='flex justify-center '>
                         <FeatherIcon name="Eye" url={nextAdmin+formUrl+"/"+item.id} tooltip={Lang('public.view')} />
