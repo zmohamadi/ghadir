@@ -143,7 +143,7 @@ export function Form({ id}) {
                                 <Dropzone className="col-span-6"  refItem={[component, "videos"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} />
                             </TabPanel>
                             <TabPanel id="tab-first" >
-                                { access ? <><SelectTail label="promoter" refItem={[component, "promoter_id"]}>
+                                { access && method =="new"  ? <><SelectTail label="promoter" refItem={[component, "promoter_id"]}>
                                     {
                                         needles?.promoter
                                             ?.filter((item) => {
@@ -162,7 +162,7 @@ export function Form({ id}) {
                                     refItem={[component, "promotion_id"]}
                                     defaultValue={promotion?promotion:data?.promotion_id}
                                     data={needles?.promotion?.filter((item) => 
-                                        item.report_status == 1 && (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
+                                        (!promotion || item?.id == promotion) // اجرای دو فیلتر در یک خط
                                     )}
                                 /> </>:<>
                                         <Input type="hidden" defaultValue="-1" refItem={[component, `confirm_id`]} /> 

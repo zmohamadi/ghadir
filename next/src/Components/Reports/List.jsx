@@ -81,9 +81,9 @@ export function List({query}){
                 {label: "", sort:false, 
                     jsx:(item)=><>
                         <div className='flex justify-center '>
-                            <FeatherIcon displayIf={item?.confirm_id != 1} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
+                            <FeatherIcon   displayIf={access == false ? item?.confirm_id != 1 : true} name="Edit" url={formUrl+"/"+item?.id+"/edit"} tooltip={Lang('public.edit')} />
                             <FeatherIcon  name="Eye" url={formUrl+"/"+item?.id} tooltip={Lang('public.view')} />
-                            <FeatherIcon displayIf={item?.confirm_id != 1} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/reports"+"/"+item?.id)} />
+                            <FeatherIcon displayIf={access == false ? item?.confirm_id != 1 : true} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/reports"+"/"+item?.id)} />
                         </div>
                     </>
                 }, 

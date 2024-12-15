@@ -46,7 +46,7 @@ export default function Promotion({promotions}) {
                                     promotion?.has_tribune&& <CheckBox 
                                         name={Lang("public.ready")} 
                                         className="mt-5" 
-                                        label={Lang("public.holding_course")} 
+                                        label={Lang("public.holding_tribune")} 
                                         refItem={[component, "agree_has_tribune"]}
                                         defaultValue={agree?.has_tribune}
                                     />

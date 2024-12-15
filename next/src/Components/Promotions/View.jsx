@@ -170,7 +170,7 @@ export function View({id}) {
                                                 )}
                                             </>
                                         )}
-                                    </div>
+                                </div>
                                     <div className="lg:col-span-2">
                                     {access || (data?.has_tribune && data?.register_status !== 1) ? (
                                             // اگر پنل ادمین باشد یا ثبت‌نام بسته باشد
@@ -187,7 +187,7 @@ export function View({id}) {
                                                     <CheckBox 
                                                         name={Lang("public.ready")} 
                                                         className="mt-5" 
-                                                        label={Lang("public.holding_course")} 
+                                                        label={Lang("public.holding_tribune")} 
                                                         refItem={[component, "agree_has_tribune"]} 
                                                         defaultValue={agree?.has_tribune}
 
