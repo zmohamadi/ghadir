@@ -111,6 +111,11 @@ export function List() {
                 jsx: (item) => (
                     <div className="flex justify-center">
                         <FeatherIcon
+                            name="MessageCircle"
+                            url={`${formUrl}/${item?.id}/notif`}
+                            tooltip={Lang("public.notif")}
+                        />
+                        <FeatherIcon
                             name="Edit"
                             url={`${formUrl}/${item?.id}/edit`}
                             tooltip={Lang("public.edit")}

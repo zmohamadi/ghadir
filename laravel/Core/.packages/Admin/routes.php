@@ -16,6 +16,9 @@ Route::resource("reports", "PromotionReportController");
 Route::get("agree/get-needles", "PromotionAgreeController@getNeedles");
 Route::resource("agree", "PromotionAgreeController");
 
+// Route::get("notif/get-needles", "NotifController@getNeedles");
+Route::resource("notif", "NotifController");
+
 Route::get("courses/get-needles", "CourseController@getNeedles");
 Route::resource("courses", "CourseController");
 

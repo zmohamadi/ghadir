@@ -113,7 +113,7 @@ export function Form({id}){
                                  />
                             {user?.role_id==1 &&<>
                                 <TabList href="tab-fourth" title={Lang('notes')} />
-                                <TabList href="tab-notif" title={Lang('notif')} />
+                                {/* <TabList href="tab-notif" title={Lang('notif')} /> */}
                             </>
                             }
                         </TabHeader>
@@ -228,13 +228,13 @@ export function Form({id}){
                                     </>
                                 }
                             </TabPanel>
-                            <TabPanel id="tab-notif">
+                            {/* <TabPanel id="tab-notif">
                                 {
                                     user?.role_id==1 && <>
                                         <Repeat {...otherProps4} child={Notif} parent={component} />
                                     </>
                                 }
-                            </TabPanel>
+                            </TabPanel> */}
                         </TabBody>
                     </Tab>
                     </>}

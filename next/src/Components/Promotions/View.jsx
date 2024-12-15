@@ -162,7 +162,7 @@ export function View({id}) {
                                                     />
                                                 ) : (
                                                     <>
-                                                        <p className="text-sm text-gray-500">{Lang(["public.has_tribune"])}</p>
+                                                        <p className="text-sm text-gray-500">{Lang(["public.has_course"])}</p>
                                                         <h2 className="text-lg font-medium text-gray-700">
                                                             {data?.has_course ? Lang(["public.yes"]) : Lang(["public.no"])}
                                                         </h2>
