@@ -99,7 +99,7 @@ export function Form({id}){
                     <Loading className="mt-5" />
                 :<>
                 <Frame title={Lang(["promoter"])}>
-    <Tab className="col-span-12 sm:col-span-6 md:col-span-3 w-full">
+    <Tab className="col-span-12">
         <TabHeader>
             <TabList href="tab-first" title={Lang('personal_info')} active={"true"} 
                 items={[component, ['firstname', 'lastname', 'mobile', 'is_not_citizen', 'codemeli', 
