@@ -2,6 +2,7 @@
 
 namespace Admin\Controllers\Content;
 
+use Illuminate\Support\Facades\Validator;
 use Admin\Controllers\Public\BaseAbstract;
 use Admin\Controllers\Public\PublicController;
 
@@ -66,9 +67,11 @@ class BlogCommentController extends BaseAbstract
     {
 		\DB::beginTransaction();
 		try{
-            request()->validate([
+            $validator = Validator::make(request()->all(), [
                 'comment' => 'required',
             ]);
+            if ($validator->fails()) return response()->json(['errors'=>$validator->errors()], 422);
+
             $confirm_user_id = null;
             $confirm_id = 2;
             if($this->role_id == 1)
