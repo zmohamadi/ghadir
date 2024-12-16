@@ -117,7 +117,7 @@ export function Form({ id}) {
             {(data==undefined || needles==null)?
                     <Loading />
                 :<>
-                <Frame title={Lang(["public.promoter"])}>
+                <Frame title={Lang(["public.reports"])}>
                     <Tab className="col-span-12">
                         <TabHeader>
                             

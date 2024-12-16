@@ -81,114 +81,130 @@ export function Filtering({
     };
 
     return (
-        <Box shadow={false} minIcon={true} min={true}>
-            {promoter && (
-                <SelectTail label="promoter"
-                defaultValue={filters.promoter ?? ""}
-                    onChange={(e) => handleFilterChange(e, "promoter")}
-                    className="col-span-5 md:col-span-3"
-                >
-                    {
-                        needles?.promoter?.map((item ,index)=> {
-                            return <option value={item?.id}>{item?.firstname} {item?.lastname} - {item?.mobile}</option>
-                        })
-                    }
-                </SelectTail>
-            )}
+<Box shadow={false} minIcon={true} min={true}>
+    {promoter && (
+        <SelectTail
+            label="promoter"
+            defaultValue={filters.promoter ?? ""}
+            onChange={(e) => handleFilterChange(e, "promoter")}
+            className="col-span-12 sm:col-span-6 lg:col-span-4"
+        >
+            {needles?.promoter?.map((item, index) => (
+                <option value={item?.id} key={index}>
+                    {item?.firstname} {item?.lastname} - {item?.mobile}
+                </option>
+            ))}
+        </SelectTail>
+    )}
 
-            {promotion && (
-                <SelectTail
-                    onChange={(e) => handleFilterChange(e, "promotion")}
-                    defaultValue={filters.promotion ?? ""}
-                    className="col-span-5 md:col-span-3"
-                    label="promotion"
-                    data={needles?.promotion}
-                />
-            )}
+    {promotion && (
+        <SelectTail
+            onChange={(e) => handleFilterChange(e, "promotion")}
+            defaultValue={filters.promotion ?? ""}
+            className="col-span-12 sm:col-span-6 lg:col-span-4"
+            label="promotion"
+            data={needles?.promotion}
+        />
+    )}
 
-            {province && (
-                <SelectTail
-                    onChange={(e) => handleFilterChange(e, "province")}
-                    defaultValue={filters.province ?? ""}
-                    className="col-span-5 md:col-span-3"
-                    label="province"
-                    data={needles?.province}
-                    titleKey={`name_${local}`}
-                />
-            )}
+    {province && (
+        <SelectTail
+            onChange={(e) => handleFilterChange(e, "province")}
+            defaultValue={filters.province ?? ""}
+            className="col-span-12 sm:col-span-6 lg:col-span-4"
+            label="province"
+            data={needles?.province}
+            titleKey={`name_${local}`}
+        />
+    )}
 
-            {province && (
-                <SelectTail
-                    onChange={(e) => handleFilterChange(e, "city")}
-                    defaultValue={filters.city ?? ""}
-                    className="col-span-5 md:col-span-3"
-                    label="city"
-                    data={provinceId
-                            ? needles?.city?.filter((item) => item.province_id === parseInt(provinceId))
-                            : []
-                    }
-                    titleKey={`name_${local}`}
-                />
-            )}
+    {province && (
+        <SelectTail
+            onChange={(e) => handleFilterChange(e, "city")}
+            defaultValue={filters.city ?? ""}
+            className="col-span-12 sm:col-span-6 lg:col-span-4"
+            label="city"
+            data={
+                provinceId
+                    ? needles?.city?.filter(
+                          (item) => item.province_id === parseInt(provinceId)
+                      )
+                    : []
+            }
+            titleKey={`name_${local}`}
+        />
+    )}
 
-            {reportStatus && (
-                <SelectTail
-                defaultValue={filters.reportStatus ?? ""}
-                    onChange={(e) => handleFilterChange(e, "reportStatus")}
-                    className="col-span-5 md:col-span-3"
-                    label="status"
-                    data={needles?.status?.filter(item => item.group_id == 28)}
-                    titleKey={"title_" + local} valueKey="code"
-                />
-            )}
+    {reportStatus && (
+        <SelectTail
+            defaultValue={filters.reportStatus ?? ""}
+            onChange={(e) => handleFilterChange(e, "reportStatus")}
+            className="col-span-12 sm:col-span-6 lg:col-span-4"
+            label="status"
+            data={needles?.status?.filter((item) => item.group_id == 28)}
+            titleKey={"title_" + local}
+            valueKey="code"
+        />
+    )}
 
-            {url=="promoters" && (
-                <>
-                    <SelectTail
-                        defaultValue={filters.acoountPromoter ?? ""}
-                        onChange={(e) => handleFilterChange(e, "acoountPromoter")}
-                        className="col-span-3"
-                        label="acoountPromoter"
-                    >
-                        <option value="1">{Lang(['has_acoount','khadamat_code'])}</option>
-                        <option value="2">{Lang(['has_acoount','tablighat_office_code'])}</option>
-                        <option value="3">{Lang(['has_acoount','tablighat_organization_code'])}</option>
-                        <option value="4">{Lang(['has_acoount','ovghaf_code'])}</option>
-                    </SelectTail>
-                    <SelectTail
-                        defaultValue={filters.promoterStatus ?? ""}
-                        onChange={(e) => handleFilterChange(e, "promoterStatus")}
-                        className="col-span-3"
-                        label="account_status"
-                        data={needles?.status?.filter(item => item.group_id == 1)} 
-                        valueKey="code" titleKey={"title_"+local}  
-                    />
-                    <SelectTail
-                        defaultValue={filters.promoterWorkStatus ?? ""}
-                        onChange={(e) => handleFilterChange(e, "promoterWorkStatus")}
-                        className="col-span-3"
-                        label="work_status"
-                        data={needles?.status?.filter(item => item.group_id == 33)} 
-                        valueKey="code" titleKey={"title_"+local}  
-                    />
-                    <SelectTail
-                        defaultValue={filters.gender ?? ""}
-                        onChange={(e) => handleFilterChange(e, "gender")}
-                        className="col-span-3"
-                        label="gender"
-                        data={needles?.gender}
-                        titleKey={`title_${local}`}
-                    />
-                </>
-            )}
+    {url == "promoters" && (
+        <>
+            <SelectTail
+                defaultValue={filters.acoountPromoter ?? ""}
+                onChange={(e) => handleFilterChange(e, "acoountPromoter")}
+                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                label="acoountPromoter"
+            >
+                <option value="1">
+                    {Lang(["has_acoount", "khadamat_code"])}
+                </option>
+                <option value="2">
+                    {Lang(["has_acoount", "tablighat_office_code"])}
+                </option>
+                <option value="3">
+                    {Lang(["has_acoount", "tablighat_organization_code"])}
+                </option>
+                <option value="4">
+                    {Lang(["has_acoount", "ovghaf_code"])}
+                </option>
+            </SelectTail>
+            <SelectTail
+                defaultValue={filters.promoterStatus ?? ""}
+                onChange={(e) => handleFilterChange(e, "promoterStatus")}
+                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                label="account_status"
+                data={needles?.status?.filter((item) => item.group_id == 1)}
+                valueKey="code"
+                titleKey={"title_" + local}
+            />
+            <SelectTail
+                defaultValue={filters.promoterWorkStatus ?? ""}
+                onChange={(e) => handleFilterChange(e, "promoterWorkStatus")}
+                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                label="work_status"
+                data={needles?.status?.filter((item) => item.group_id == 33)}
+                valueKey="code"
+                titleKey={"title_" + local}
+            />
+            <SelectTail
+                defaultValue={filters.gender ?? ""}
+                onChange={(e) => handleFilterChange(e, "gender")}
+                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                label="gender"
+                data={needles?.gender}
+                titleKey={`title_${local}`}
+            />
+        </>
+    )}
 
-            <ButtonContainer className="">
-                <Button
-                    label="clear_filter"
-                    className="btn btn-secondary mt-2 w-20"
-                    onClick={clearFilter}
-                />
-            </ButtonContainer>
-        </Box>
+    <ButtonContainer className="col-span-12 flex justify-end">
+        <Button
+            label="clear_filter"
+            className="btn btn-secondary mt-2 w-20"
+            onClick={clearFilter}
+        />
+    </ButtonContainer>
+</Box>
+
     );
 }

@@ -95,150 +95,128 @@ export function Form({id}){
     return(
         
             <>
-                <Frame title={Lang(["promoter"])}>
                 {(data==undefined || needles==null)?
                     <Loading className="mt-5" />
                 :<>
-                    <Tab className="col-span-12">
-                        <TabHeader>
-                            <TabList href="tab-first" title={Lang('personal_info')} active={"true"} 
-                                items = {[component, ['firstname', 'lastname', 'mobile', 'is_not_citizen', 'codemeli', 
-                                        'khadamat_code', 'tablighat_office_code', 'tablighat_organization_code',"bank_account_number","education_id"]]}  />
-                            <TabList href="tab-second" title={Lang('promotion_info')}
-                            items = {[component, ['promotion_position_*','place_name_*','pos_province_*','pos_city_id_*', 
-                                'pos_city_*','pos_village_*']]}
-                                 />
-                            <TabList href="tab-third" title={Lang('cultural_users')}
-                             items = {[component, ['c_name_*','c_family_*','c_job_position_*']]}
-                                 />
-                            {user?.role_id==1 &&<>
-                                <TabList href="tab-fourth" title={Lang('notes')} />
-                                {/* <TabList href="tab-notif" title={Lang('notif')} /> */}
-                            </>
-                            }
-                        </TabHeader>
-                        <TabBody>
-                            <TabPanel id="tab-first" active={"true"}>
-                                <Input className="col-span-3"  label="name" refItem={[component, "firstname"]} required="true" />
-                                <Input className="col-span-3"  label="family" refItem={[component, "lastname"]} required="true" />
-                                {
-                                    access && <Input type="mobile" dir="ltr" className="col-span-3" label="mobile" refItem={[component, "mobile"]} required="true" />
-                                }
-                                <SelectTail key={"is_not_citizen"+2} required="true"
-                                    defaultValue={data?.is_not_citizen == true ? 1 : 0} 
-                                className="col-span-3" label="citizen" refItem={[component, "is_not_citizen"]} 
-                                >
-                                    <option value="0">{Lang('im_citizen')}</option>
-                                    <option value="1">{Lang('not_citizen')}</option>
-                                </SelectTail>
-                                <Input dir="ltr" className="col-span-3" type="number" label="codemeli" refItem={[component, "codemeli"]} />
-                               <Input className="col-span-3" dir="ltr" type="number" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
-                                <SelectTail className="col-span-3" label="education" data={needles?.education}  refItem={[component, "education_id"]} required="true" />
-                                <SelectTail required="true"  className="col-span-3"
-                                    defaultValue={data?.native_province_id ? data?.native_province_id: nativeProvinceId} 
-                                    label="native_province" refItem={[component, "native_province_id"]} 
-                                    // key={"nativeprovince"+needles?.province?.length}
-                                    data={needles?.province} titleKey={"name_fa"}
-                                    onChange={(e) => filterCity(e)}
-                                />
-                                <SelectTail required="true"  className="col-span-3" label="native_city" 
-                                refItem={[component, "native_city_id"]} 
-                                    // key={"city" + nativeProvinceId}
-                                    data={nativeProvinceId>0 ?  needles?.city?.filter(item => item.province_id == nativeProvinceId) :  needles?.city} 
-                                    titleKey={"name_fa"}
-                                />
-                                <Input className="col-span-3" dir="ltr" label="postal_code" refItem={[component, "postal_code"]}  />
+                <Frame title={Lang(["promoter"])}>
+    <Tab className="col-span-12 sm:col-span-6 md:col-span-3 w-full">
+        <TabHeader>
+            <TabList href="tab-first" title={Lang('personal_info')} active={"true"} 
+                items={[component, ['firstname', 'lastname', 'mobile', 'is_not_citizen', 'codemeli', 
+                    'khadamat_code', 'tablighat_office_code', 'tablighat_organization_code', "bank_account_number", "education_id"]]} />
+            <TabList href="tab-second" title={Lang('promotion_info')}
+                items={[component, ['promotion_position_*', 'place_name_*', 'pos_province_*', 'pos_city_id_*', 
+                    'pos_city_*', 'pos_village_*']]} />
+            <TabList href="tab-third" title={Lang('cultural_users')}
+                items={[component, ['c_name_*', 'c_family_*', 'c_job_position_*']]} />
+            {user?.role_id==1 && <>
+                <TabList href="tab-fourth" title={Lang('notes')} />
+            </>}
+        </TabHeader>
+        <TabBody>
+            <TabPanel id="tab-first" active={"true"}>
+                <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="name" refItem={[component, "firstname"]} required="true" />
+                <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="family" refItem={[component, "lastname"]} required="true" />
+                {access && <Input type="mobile" dir="ltr" className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="mobile" refItem={[component, "mobile"]} required="true" />}
+                <SelectTail 
+                    key={"is_not_citizen" + 2} 
+                    required="true"
+                    defaultValue={data?.is_not_citizen === true ? 1 : 0} 
+                    className="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    label="citizen" refItem={[component, "is_not_citizen"]}>
+                    <option value="0">{Lang('im_citizen')}</option>
+                    <option value="1">{Lang('not_citizen')}</option>
+                </SelectTail>
+                <Input dir="ltr" className="col-span-12 sm:col-span-6 md:col-span-3 w-full" type="number" label="codemeli" refItem={[component, "codemeli"]} />
+                <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" dir="ltr" type="number" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
+                <SelectTail className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="education" data={needles?.education} refItem={[component, "education_id"]} required="true" />
+                <SelectTail required="true" className="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    defaultValue={data?.native_province_id ? data?.native_province_id : nativeProvinceId} 
+                    label="native_province" refItem={[component, "native_province_id"]} 
+                    data={needles?.province} titleKey={"name_fa"}
+                    onChange={(e) => filterCity(e)}
+                />
+                <SelectTail required="true" className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="native_city" 
+                    refItem={[component, "native_city_id"]} 
+                    data={nativeProvinceId > 0 ? needles?.city?.filter(item => item.province_id == nativeProvinceId) : needles?.city} 
+                    titleKey={"name_fa"}
+                />
+                <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" dir="ltr" label="postal_code" refItem={[component, "postal_code"]} />
+                
+                <SelectLocation 
+                    classNameProvince="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    classNameCitySh="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    classNameCity="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    classNameVillage="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                    lProvince="life_province"
+                    lCitySh="life_city_sh"
+                    lCity="life_city"
+                    lVillage="life_village"
+                    needles={needles} component={component} data={data} 
+                />
+                
+                <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
+                
+                {inputsData.map((input) => (
+                    <>
+                        <CheckBox
+                            onChange={(e) => toggleInput(input.name, e)}
+                            className="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                            label={input.label}
+                            name={Lang("public.has")}
+                            refItem={[component, `has_${input.name}`]}
+                        />
+                        <Input
+                            disabled={data?.["has_" + input.name] == 1 ? false : disabledInputs[input.name]}
+                            dir="ltr"
+                            className="col-span-12 sm:col-span-6 md:col-span-3 w-full"
+                            label={input.label}
+                            refItem={[component, input.name]}
+                        />
+                    </>
+                ))}
+                
+                <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
+                <Textarea label="address" refItem={[component, "address"]} className="col-span-12 sm:col-span-6 w-full" />
+                
+                <Dropzone className="col-span-12 sm:col-span-12 w-full" required="true" refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
+                <Radio className="col-span-12 sm:col-span-6 w-full" defaultValue={data?.gender_id ? data?.gender_id : 1} required="true" type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]} data={needles?.gender} titleKey={"title_" + local} key={"gender_id" + data?.gender_id} />
+                
+                {access && <>
+                    <Radio className="col-span-12 sm:col-span-6 w-full" defaultValue={data?.status_id ? data?.status_id : 1} 
+                        type="col" label="account_status" refItem={[component, `status_id`]}
+                        data={needles?.status?.filter(item => item.group_id == 1)} 
+                        valueKey="code" titleKey={"title_" + local} required="true"
+                        key={"status_id" + data?.status_id}
+                    /> 
+                    <Radio className="col-span-12 sm:col-span-6 w-full" defaultValue={data?.work_status ? data?.work_status : 1} 
+                        type="col" label="work_status" refItem={[component, `work_status`]}
+                        data={needles?.status?.filter(item => item.group_id == 33)} required="true"
+                        valueKey="code" titleKey={"title_" + local}  
+                        key={"work_status" + data?.work_status}
+                    /> 
+                    <SetStars defaultValue={data?.level_id || 0} component={component} />
+                </>}
+            </TabPanel>
 
-                                <SelectLocation 
-                                    classNameProvince="col-span-3" 
-                                    classNameCitySh="col-span-3"
-                                    classNameCity="col-span-3"
-                                    classNameVillage="col-span-3"
-                                    lProvince="life_province"
-                                    lCitySh="life_city_sh"
-                                    lCity="life_city"
-                                    lVillage="life_village"
-                                    needles={needles} component={component} data={data} />
+            <TabPanel id="tab-second">
+                <Repeat needles={needles} {...otherProps3} child={InfoPromotions} parent={component} />
+            </TabPanel>
 
-                                <hr 
-                                className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold"
-                                />
-                                {inputsData.map((input) => (<>
-                                    <CheckBox
-                                        onChange={(e) => toggleInput(input.name, e)}
-                                        className="col-span-2"
-                                        label={input.label}
-                                        name={Lang("public.has")}
-                                        refItem={[component, `has_${input.name}`]}
-                                    />
-                                    <Input
-                                        disabled={data?.["has_"+input.name] == 1 ?  false :  disabledInputs[input.name]}
-                                        dir="ltr"
-                                        className="col-span-4"
-                                        label={input.label}
-                                        refItem={[component, input.name]}
-                                    />
-                                </>
-       
-                                ))}
-                                <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
-                                <Textarea label="address" refItem={[component, "address"]}  />
-                                <Dropzone className="col-span-6 avatar-user"
-                                //  maxFiles= "1"
-                                //  maxFilesize= "2"
-                                //  acceptType='image'
-                                  required="true"
-                                  refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} uploadDir={uploadDir}  />
-                                <Radio className="col-span-3" defaultValue={data?.gender_id ? data?.gender_id: 1} required="true"  type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]}
-                                    data={needles?.gender} titleKey={"title_"+local}  key={"gender_id"+data?.gender_id}
-                                />
-                                
-                                {
-                                     access && <>
-                                        
-                                        <Radio className="col-span-3" defaultValue={data?.status_id ? data?.status_id: 1} 
-                                            type="col" label="account_status" refItem={[component, `status_id`]}
-                                            data={needles?.status?.filter(item => item.group_id == 1)} 
-                                            valueKey="code" titleKey={"title_"+local}  required="true"
-                                            key={"status_id"+data?.status_id}
-                                        /> 
-                                        <Radio className="col-span-3" defaultValue={data?.work_status ? data?.work_status: 1} 
-                                            type="col" label="work_status" refItem={[component, `work_status`]}
-                                            data={needles?.status?.filter(item => item.group_id == 33)} required="true"
-                                            valueKey="code" titleKey={"title_"+local}  
-                                            key={"work_status"+data?.work_status}
-                                        /> 
-                                        <SetStars defaultValue={data?.level_id || 0} component={component} />
-                                        
-                                    </>
-                                }
-                                
-                            </TabPanel>  
-                            <TabPanel id="tab-second">
-                                <Repeat needles={needles} {...otherProps3} child={InfoPromotions} parent={component} />
+            <TabPanel id="tab-third">
+                <Repeat needles={needles} {...otherProps} child={CulturalUsers} parent={component} />
+            </TabPanel>
 
-                            </TabPanel>
-                            <TabPanel id="tab-third">
-                                <Repeat needles={needles} {...otherProps} child={CulturalUsers} parent={component} />
-                            </TabPanel>
-                            <TabPanel id="tab-fourth">
-                                {
-                                    user?.role_id==1 && <>
-                                        <Repeat {...otherProps2} child={Notes} parent={component} />
-                                    </>
-                                }
-                            </TabPanel>
-                            {/* <TabPanel id="tab-notif">
-                                {
-                                    user?.role_id==1 && <>
-                                        <Repeat {...otherProps4} child={Notif} parent={component} />
-                                    </>
-                                }
-                            </TabPanel> */}
-                        </TabBody>
-                    </Tab>
+            <TabPanel id="tab-fourth">
+                {user?.role_id == 1 && <>
+                    <Repeat {...otherProps2} child={Notes} parent={component} />
+                </>}
+            </TabPanel>
+        </TabBody>
+    </Tab>
+</Frame>
+
                     </>}
-                </Frame>
                 <ButtonContainer>
                     <Button label="save" onClick={saveItem} component={component} />
                     <Button label="back" onClick={back} />

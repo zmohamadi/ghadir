@@ -151,9 +151,9 @@ export function List() {
                 {access && (
                     <>
                         <Filtering
-                        province={true}
-                        url="promoters"
-                        onFiltersChange={handleFiltersChange}
+                            province={true}
+                            url="promoters"
+                            onFiltersChange={handleFiltersChange}
                     />
                     </>
                 )}
