@@ -275,6 +275,7 @@ return [
         'has_ovghaf_code'=>'کد اوقاف',
         'promoter_id'=>'مبلغ',
         'level_id'=>'امتیاز',
+        'media'=>'رسانه',
     ],
         collect(range(0, 100))->mapWithKeys(function ($index) {
             return [

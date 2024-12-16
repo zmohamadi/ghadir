@@ -11,14 +11,14 @@ export function FormReply({ keyServer,id,replyStatus,formUrl }) {
     const { laraAdmin } = useConfig();
     let component = useFormRefs();
     const router = useRouter();
-    let { save } = useData();
+    let { save, getRefValue } = useData();
     const laravelUrl = "/ticket-items"; 
     let uploadUrl = laraAdmin+"/upload/.-media-tickets";
     let deleteUrl = laraAdmin+"/deleteFile/.-media-tickets";
 
     let url = laraAdmin+laravelUrl+"/send/"+id, method = "new";
 
-    const saveItem = ()=>save(url, component, method, `/${formUrl}/${id}?`+Math.random(), keyServer(Math.random()));
+    const saveItem = ()=>save(url, component, method, `/${formUrl}/${id}?`+Math.random(), (request, response)=>keyServer(Math.random()));
     const back = ()=>router.back();
     
     return(

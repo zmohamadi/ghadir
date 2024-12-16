@@ -5,7 +5,7 @@ import { useData,useFormRefs,Button,Textarea } from "@/Theme/Midone/Forms";
 export const InfoReply = ({ sendKeyServer,laraAdmin,blogId,parentId=0 }) => {
     let { save } = useData();
     let component = useFormRefs();
-    const saveItem = ()=>save(laraAdmin+`/blog-comments/send?b=${blogId}&p=${parentId}`, component, "save", `/blogs/${blogId}?`+Math.random(), sendKeyServer(Math.random()));
+    const saveItem = ()=>save(laraAdmin+`/blog-comments/send?b=${blogId}&p=${parentId}`, component, "save", `/blogs/${blogId}?`+Math.random(), (request, response)=>sendKeyServer(Math.random()));
 
     return(
         <>

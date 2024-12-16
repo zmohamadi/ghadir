@@ -2,6 +2,7 @@
 
 namespace Admin\Controllers\Ticket;
 
+use Illuminate\Support\Facades\Validator;
 use Admin\Controllers\Public\BaseAbstract;
 use Admin\Controllers\Public\PublicController;
 use Models\Ticket\TicketSubject;
@@ -93,10 +94,12 @@ class TicketController extends BaseAbstract
             $media = request()->media;
             if(request()->reply_status_id == null)
             {
-                request()->validate([
+                $validator = Validator::make(request()->all(), [
                     'text' => 'required_without:media',
                     'media' => 'required_without:text',
                 ]);
+                if ($validator->fails()) return response()->json(['errors'=>$validator->errors()], 422);
+                
                 $reply_status_id = 0;
                 $updateCount->updateCountTicketAwaiting();
                 if($this->role_id==1)
