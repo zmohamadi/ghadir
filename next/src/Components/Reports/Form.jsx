@@ -88,7 +88,7 @@ export function Form({ id}) {
     const back = () => router.back();
     const data = component?.state?.info;
     const oldReport = component?.state?.oldReport;
-    console.log(oldReport);
+    // console.log(oldReport);
 
     const otherProps = component?.state?.info?.courses?.length
         ? { count_data: component.state.info.courses.length }
@@ -166,7 +166,7 @@ export function Form({ id}) {
                                     )}
                                 /> </>:<>
                                         <Input type="hidden" defaultValue="-1" refItem={[component, `confirm_id`]} /> 
-                                        <Input type="hidden" defaultValue={user?.id} refItem={[component, `promoter_id`]} /> 
+                                        <Input type="hidden" defaultValue={access ? data?.promoter_id : user?.id} refItem={[component, `promoter_id`]} /> 
                                         <Input type="hidden" defaultValue={promotion?promotion:0} refItem={[component, `promotion_id`]} /> 
                                 </>}
 

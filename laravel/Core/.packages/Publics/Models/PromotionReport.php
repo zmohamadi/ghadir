@@ -58,7 +58,7 @@ class PromotionReport extends Model
     }
     public function promoter()
     {
-        return $this->belongsTo(\Models\Person\Promoter::class);
+        return $this->belongsTo(\Models\User::class);
     }
     public function confirmRepo()
     {

@@ -47,6 +47,7 @@ export function List() {
                 jsx: (item) => (
                     <Pic
                         src={`${mediaPath}/users/${item?.photo}`}
+                        key={item?.photo}
                         defaultImg={`${mediaPath}/public/default/avatar.png`}
                         classImg="user-avatar rounded-full"
                     />
