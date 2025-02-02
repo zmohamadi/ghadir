@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get("home", "Person\UserController@home");
+
 Route::get("search-promoter/{promoter}/{course}", "SupportController@searchPromoter");
 Route::get("promoters/in-support/{support}", "SupportController@promoterList");
 Route::post("supports/{support}/promoters/new", "SupportController@newPromoter");
