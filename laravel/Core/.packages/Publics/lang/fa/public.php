@@ -137,6 +137,7 @@ $lang = [
    'work_status'=>'وضعیت فعالیت فرهنگی',
    'acoountPromoter'=>'پرونده ها',
    'has_acoount'=>'دارای',
+   'export_excel'=>'خروجی اکسل'
    
 ];
 

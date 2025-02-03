@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get("home", "Person\UserController@home");
+Route::get('/export-promoters', "Person\PromoterController@exportExcel");
+Route::get('/export-agree', "PromotionAgreeController@exportExcel");
+Route::get('/export-reports', "PromotionReportController@exportExcel");
 
 Route::get("search-promoter/{promoter}/{course}", "SupportController@searchPromoter");
 Route::get("promoters/in-support/{support}", "SupportController@promoterList");

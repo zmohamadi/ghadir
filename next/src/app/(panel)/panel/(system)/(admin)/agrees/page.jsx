@@ -70,6 +70,7 @@ export default function page() {
                 {
                     access &&
                     <Filtering
+                    exportExcel={true}
                         promotion={true}
                         promoter={true}
                         url="agree"

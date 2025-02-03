@@ -10,6 +10,8 @@ use Models\Tribune;
 use Models\RitualReport;
 use Models\Promotion;
 use Models\Person\Promoter;
+use Admin\Controllers\PromotionAgreeExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PromotionAgreeController extends BaseAbstract
 {
@@ -18,6 +20,12 @@ class PromotionAgreeController extends BaseAbstract
     protected $with = ["promotion", "promoter"];
     protected $showWith = ["promotion", "promoter","rituals"];
     protected $needles = ["Person\Promoter", "Promotion"];
+
+    public function exportExcel()
+    {
+        return Excel::download(new PromotionAgreeExport, 'registers.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);    }
 
     public function init()
     {

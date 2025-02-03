@@ -100,6 +100,7 @@ export function List({query}){
             <Frame title={Lang(["public.reports"])} >
                 {access&&
                     <Filtering
+                    exportExcel={true}
                         promotion={true}
                         promoter={true}
                         reportStatus={true}

@@ -2,10 +2,12 @@
 namespace Admin\Controllers\Person;
 
 use Admin\Controllers\Public\BaseAbstract;
-use Models\Person\CulturalUser;
+use Models\Person\Promoter;
 use Models\Note;
 use Models\Notif;
 use Models\UserPromotion;
+use Admin\Controllers\Person\PromoterExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PromoterController extends BaseAbstract
 {
@@ -18,6 +20,11 @@ class PromoterController extends BaseAbstract
     protected $searchFilter = ["firstname", "lastname", "mobile", "codemeli"];
     protected $files = ["photo"];
 
+    public function exportExcel()
+    {
+        return Excel::download(new PromoterExport, 'promoters.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);    }
     public function init()
     {
         // Function to handle custom query logic for storing records
@@ -161,4 +168,5 @@ class PromoterController extends BaseAbstract
         };
         
     }
+   
 }

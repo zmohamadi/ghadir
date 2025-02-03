@@ -152,6 +152,7 @@ export function List() {
                 {access && (
                     <>
                         <Filtering
+                            exportExcel={true}
                             province={true}
                             url="promoters"
                             onFiltersChange={handleFiltersChange}

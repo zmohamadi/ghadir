@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Select } from "@/Theme/Midone/Forms/Select";
-import { Box, Button, ButtonContainer, SelectTail, useData, useFormRefs } from "@/Theme/Midone";
+import { Box, Button, ButtonContainer, Loading, SelectTail, useData, useFormRefs } from "@/Theme/Midone";
 import { useConfig, useLang } from "@/lib";
 
 export function Filtering({
@@ -10,12 +10,13 @@ export function Filtering({
     promotion = false,
     province = false,
     reportStatus = false,
+    exportExcel = false,
     url,
     filterList,
     onFiltersChange, // دریافت تابع برای اطلاع‌رسانی تغییرات فیلتر
 }) {
     const { Lang, local } = useLang();
-    const { laraAdmin } = useConfig();
+    const { laraAdmin,host } = useConfig();
     const [filters, setFilters] = useState({
         city: filterList?.city ?? null,          // If filterList.city exists, use it, otherwise set it to null
         province: filterList?.province ?? null,   // Same for province
@@ -31,7 +32,7 @@ export function Filtering({
     
     const [needles, setNeedles] = useState(null);
     const [provinceId, setProvinceId] = useState(null);
-    const { getNeedles } = useData();
+    const { getNeedles,get } = useData();
     const [isNeedlesFetched, setIsNeedlesFetched] = useState(false); // وضعیت دریافت داده
     const component = useFormRefs();
 
@@ -79,6 +80,36 @@ export function Filtering({
         });
         setProvinceId(null); // ریست کردن استان
     };
+    const exportExcelFunc = async () => {
+        
+        let excelRoute = process.env.NEXT_PUBLIC_BACKEND_URL+laraAdmin + "/export-"+url;
+        let excelName = url;
+        try {
+            const response = await fetch(excelRoute, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error("خطایی در دانلود فایل رخ داد!");
+            }
+    
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+    
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = excelName+".xlsx";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error("خطا در دانلود اکسل:", error);
+        }
+    };
+    
 
     return (
 <Box shadow={false} minIcon={true} min={true}>
@@ -152,7 +183,7 @@ export function Filtering({
             <SelectTail
                 defaultValue={filters.acoountPromoter ?? ""}
                 onChange={(e) => handleFilterChange(e, "acoountPromoter")}
-                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                className="col-span-12 sm:col-span-6 lg:col-span-4"
                 label="acoountPromoter"
             >
                 <option value="1">
@@ -171,7 +202,7 @@ export function Filtering({
             <SelectTail
                 defaultValue={filters.promoterStatus ?? ""}
                 onChange={(e) => handleFilterChange(e, "promoterStatus")}
-                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                className="col-span-12 sm:col-span-6 lg:col-span-4"
                 label="account_status"
                 data={needles?.status?.filter((item) => item.group_id == 1)}
                 valueKey="code"
@@ -180,7 +211,7 @@ export function Filtering({
             <SelectTail
                 defaultValue={filters.promoterWorkStatus ?? ""}
                 onChange={(e) => handleFilterChange(e, "promoterWorkStatus")}
-                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                className="col-span-12 sm:col-span-6 lg:col-span-4"
                 label="work_status"
                 data={needles?.status?.filter((item) => item.group_id == 33)}
                 valueKey="code"
@@ -189,7 +220,7 @@ export function Filtering({
             <SelectTail
                 defaultValue={filters.gender ?? ""}
                 onChange={(e) => handleFilterChange(e, "gender")}
-                className="col-span-12 sm:col-span-6 lg:col-span-3"
+                className="col-span-12 sm:col-span-6 lg:col-span-4"
                 label="gender"
                 data={needles?.gender}
                 titleKey={`title_${local}`}
@@ -198,6 +229,13 @@ export function Filtering({
     )}
 
     <ButtonContainer className="col-span-12 flex justify-end">
+        {exportExcel&& 
+            <Button
+                label="export_excel"
+                className="btn btn-primary mt-2 ml-3"
+                onClick={exportExcelFunc}
+            />
+        }
         <Button
             label="clear_filter"
             className="btn btn-secondary mt-2 w-20"

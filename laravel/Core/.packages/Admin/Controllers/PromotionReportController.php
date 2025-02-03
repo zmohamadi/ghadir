@@ -9,6 +9,8 @@ use Models\Person\Promoter;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
+use Admin\Controllers\PromotionReportExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PromotionReportController extends BaseAbstract
 {
@@ -20,6 +22,12 @@ class PromotionReportController extends BaseAbstract
     "courses.audienceType","ritualReports.ritual","confirmRepo"];
     // protected $files = ["photo"];
     protected $needles = ["Person\Promoter",'Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
+
+    public function exportExcel()
+    {
+        return Excel::download(new PromotionReportExport, 'registers.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);    }
 
 
     public function init()
@@ -332,12 +340,29 @@ class PromotionReportController extends BaseAbstract
         }
         
     }
-    public function getReportForLastPromotion(){
-        $role_id = $this->role_id;
+    public function getReportForLastPromotion()
+{
+    try {
         $latestRecord = Promotion::where("report_status", 1)->orderBy('id', 'desc')->first();
-        $userReport = $this->model::where('promotion_id',$latestRecord->id)->where('promoter_id',$this->user_id)->first();
-        return response()->json(
-            $userReport
-        );
+        // dd($latestRecord);
+
+        if (!$latestRecord) {
+            abort(500, "No promotion found with report_status = 1");
+        }
+
+        $userReport = $this->model::where('promotion_id', $latestRecord->id)
+            ->where('promoter_id', $this->user_id)
+            ->first();
+        $data =[
+            'latestRecord'=>$latestRecord,
+            'userReport'=>$userReport,
+        ];
+        return response()->json($data, 200);
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
     }
+}
+
+
 }
