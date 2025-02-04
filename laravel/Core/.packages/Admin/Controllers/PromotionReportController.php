@@ -150,7 +150,7 @@ class PromotionReportController extends BaseAbstract
                 // ************************************ Ritual ************************************
                 try {
                     $ritual = $this->getRepeatValues([
-                        'r_province', 'r_city_id', 'r_city', 'r_village', 'ritual_id', 'r_description', 'r_place_name'
+                        'r_province', 'r_city_id', 'r_city', 'r_village', 'r_ritual_id', 'r_description', 'r_place_name'
                     ]);
         
                     if (!empty($ritual)) {
@@ -163,7 +163,7 @@ class PromotionReportController extends BaseAbstract
                                 'village' => $value['r_village'] ?? null,
                                 'place_name' => $value['r_place_name'] ?? null,
                                 'description' => $value['r_description'] ?? null,
-                                'ritual_id' => $value['ritual_id'] ?? null,
+                                'ritual_id' => $value['r_ritual_id'] ?? null,
                                 'promotion_id' => $promotion,
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,
@@ -341,28 +341,26 @@ class PromotionReportController extends BaseAbstract
         
     }
     public function getReportForLastPromotion()
-{
-    try {
-        $latestRecord = Promotion::where("report_status", 1)->orderBy('id', 'desc')->first();
-        // dd($latestRecord);
+    {
+        try {
+            $latestRecord = Promotion::where("report_status", 1)->orderBy('id', 'desc')->first();
+            // dd($latestRecord);
+            if (!$latestRecord) {
+                abort(500, "No promotion found with report_status = 1");
+            }
 
-        if (!$latestRecord) {
-            abort(500, "No promotion found with report_status = 1");
+            $userReport = $this->model::where('promotion_id', $latestRecord->id)
+                ->where('promoter_id', $this->user_id)
+                ->first();
+
+            $data = [
+                'promotion'=>$latestRecord->id,
+                'oldReport'=>$userReport ?? null,
+            ];
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
         }
-
-        $userReport = $this->model::where('promotion_id', $latestRecord->id)
-            ->where('promoter_id', $this->user_id)
-            ->first();
-        $data =[
-            'latestRecord'=>$latestRecord,
-            'userReport'=>$userReport,
-        ];
-        return response()->json($data, 200);
-
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Internal Server Error', 'message' => $e->getMessage()], 500);
     }
-}
-
 
 }

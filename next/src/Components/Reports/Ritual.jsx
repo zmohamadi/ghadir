@@ -14,7 +14,7 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
                 {closeIcon}
             </div>
                 <SelectTail className="col-span-12" label="ritual" refItem={[parent, `r_ritual_id_${index}`]} 
-                    key={"ritual"+needles?.ritual?.length} 
+                    // key={"ritual"+needles?.ritual?.length} 
                     data={needles?.ritual}  defaultValue={info?.ritual_id}
                 />
                 <Textarea className="col-span-12" label="description" refItem={[parent, `r_description_${index}`]} defaultValue={info?.description}  />
