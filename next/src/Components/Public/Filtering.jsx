@@ -11,6 +11,7 @@ export function Filtering({
     province = false,
     reportStatus = false,
     exportExcel = false,
+    urlExcel=null,
     url,
     filterList,
     onFiltersChange, // دریافت تابع برای اطلاع‌رسانی تغییرات فیلتر
@@ -82,7 +83,7 @@ export function Filtering({
     };
     const exportExcelFunc = async () => {
         
-        let excelRoute = process.env.NEXT_PUBLIC_BACKEND_URL+laraAdmin + "/export-"+url;
+        let excelRoute = process.env.NEXT_PUBLIC_BACKEND_URL+laraAdmin + "/export-"+urlExcel;
         let excelName = url;
         try {
             const response = await fetch(excelRoute, {

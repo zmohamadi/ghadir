@@ -128,7 +128,9 @@ export function Form({id}){
                     <option value="1">{Lang('not_citizen')}</option>
                 </SelectTail>
                 <Input dir="ltr" className="col-span-12 sm:col-span-6 md:col-span-3 w-full" type="number" label="codemeli" refItem={[component, "codemeli"]} />
+                <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" dir="ltr" type="number" label="bank_cart_number" refItem={[component, "bank_cart_number"]} required="true" />
                 <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" dir="ltr" type="number" label="bank_account_number" refItem={[component, "bank_account_number"]} required="true" />
+                {/* <Input className="col-span-12 sm:col-span-6 md:col-span-3 w-full" dir="ltr" type="number" label="bank_sheba_number" refItem={[component, "bank_sheba_number"]} required="true" /> */}
                 <SelectTail className="col-span-12 sm:col-span-6 md:col-span-3 w-full" label="education" data={needles?.education} refItem={[component, "education_id"]} required="true" />
                 <SelectTail required="true" className="col-span-12 sm:col-span-6 md:col-span-3 w-full"
                     defaultValue={data?.native_province_id ? data?.native_province_id : nativeProvinceId} 

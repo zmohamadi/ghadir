@@ -9,9 +9,20 @@ use Carbon\Carbon;
 
 class PromotionAgreeExport implements FromCollection, WithHeadings, WithMapping
 {
+    protected $filters;
+
+    public function __construct($filters)
+    {
+        $this->filters = $filters;
+    }
+
     public function collection()
     {
-        return PromotionAgree::with(['promotion', 'promoter'])->get();
+        $request = $this->filters;
+
+        $data =  PromotionAgree::with(['promotion', 'promoter']);
+        $data = $data->get();
+        return $data;
     }
 
     public function headings(): array

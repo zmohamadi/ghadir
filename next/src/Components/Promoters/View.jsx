@@ -74,9 +74,19 @@ export function View({ id, panel = "admin" }) {
                                         <div className="p-2 border rounded">{data?.bank_account_number}</div>
                                     </div>
                                     <div className="w-1/4">
+                                        <label className="block">{Lang("public.bank_cart_number")}</label>
+                                        <div className="p-2 border rounded">{data?.bank_cart_number}</div>
+                                    </div>
+                                    {/* <div className="w-1/4">
+                                        <label className="block">{Lang("public.bank_sheba_number")}</label>
+                                        <div className="p-2 border rounded">{data?.bank_sheba_number}</div>
+                                    </div> */}
+                                    <div className="w-1/4">
                                         <label className="block">{Lang("public.education")}</label>
                                         <div className="p-2 border rounded">{data?.education?.title}</div>
                                     </div>
+                                    </div>
+                                    <div className="flex gap-4">
                                     <div className="w-1/4">
                                         <label className="block">{Lang("public.province")}</label>
                                         <div className="p-2 border rounded">

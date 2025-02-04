@@ -22,7 +22,9 @@ class PromoterController extends BaseAbstract
 
     public function exportExcel()
     {
-        return Excel::download(new PromoterExport, 'promoters.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+        $filters = request()->all();
+
+        return Excel::download(new PromoterExport($filters), 'promoters.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);    }
     public function init()

@@ -23,7 +23,9 @@ class PromotionAgreeController extends BaseAbstract
 
     public function exportExcel()
     {
-        return Excel::download(new PromotionAgreeExport, 'registers.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+        $filters = request()->all();
+
+        return Excel::download(new PromotionAgreeExport($filters), 'registers.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         ]);    }
 

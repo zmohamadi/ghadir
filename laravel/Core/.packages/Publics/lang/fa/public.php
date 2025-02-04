@@ -8,6 +8,7 @@ $lang = [
    'tablighat_office_code'=>'کد دفتر تبلیغات',
    'tablighat_organization_code'=>'کد سازمان تبلیغات',
    'ovghaf_code'=>'کد اوقاف',
+   'bank_cart_number'=>"شماره کارت (ترجیحا ملی)",
    'bank_account_number'=>"شماره حساب شبا (ترجیحا ملی)",
    'postal_code'=>'کدپستی',
    'province'=>'استان',

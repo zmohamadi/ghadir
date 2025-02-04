@@ -25,10 +25,12 @@ class PromotionReportController extends BaseAbstract
 
     public function exportExcel()
     {
-        return Excel::download(new PromotionReportExport, 'registers.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        ]);    }
+        $filters = request()->all();
 
+        return Excel::download(new PromotionReportExport($filters), 'reports.xlsx', \Maatwebsite\Excel\Excel::XLSX, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
+    }
 
     public function init()
     {
