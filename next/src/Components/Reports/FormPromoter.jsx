@@ -80,7 +80,7 @@ export function FormPromoter({ id,promoter,access }) {
     const data = component?.state?.info;
     const promoterReport = component?.state?.oldReport?.oldReport;
     const defaultPromoterId = promoter;
-    const defaultPromotionId = method == "new" ? component?.state?.oldReport?.promotion : id;
+    const defaultPromotionId = method == "new" ? component?.state?.oldReport?.promotion : data?.promotion_id;
     return (
         <>
             {(promoterReport != undefined && promoterReport?.id != null) ?
