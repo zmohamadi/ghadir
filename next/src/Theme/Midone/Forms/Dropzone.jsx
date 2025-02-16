@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useFormElement} from '@/Theme/Midone';
 import {useConfig} from '@/lib/config';
 import axios from '@/lib/axios';
@@ -8,35 +8,6 @@ import { Toast } from '@/Theme/Midone/Utils/Toast';
 import { useLang } from '@/lib/lang';
 import {default as DropzoneMain} from "dropzone";
 DropzoneMain.autoDiscover = false;
-
-// تعریف تابع processDefaultValue قبل از استفاده
-const processDefaultValue = (defaultValue) => {
-    let vals = '';
-    if (defaultValue != undefined && defaultValue != '') {
-        // For Array type
-        if (typeof defaultValue != 'string') {
-            // Like [file1, file2, ...]
-            if (typeof defaultValue[0] == "string") {
-                vals = defaultValue.join('###');
-                if (vals != '') vals = vals + '###';
-            }
-            // Like [{url, extension}, {url, extension}, ...]
-            else {
-                defaultValue.forEach((item) => {
-                    if (item.url != undefined && item.name == undefined)
-                        vals += item.url + '.' + item.extension + '###';
-                    else
-                        vals += getFileName(item) + '###';
-                });
-            }
-        }
-        // For String type Like file.png
-        else {
-            vals = defaultValue;
-        }
-    }
-    return { vals };
-}
 
 const Dropzone = function(props) {
     let {refItem, className, uploadDir, deleteUrl, uploadUrl} = props;
@@ -47,14 +18,15 @@ const Dropzone = function(props) {
     let {id, label, helpDiv, divError, requiredDiv, defaultValue} = Element.init("Dropzone");
     let [run, setRun] = useState(false)
     let [mockFiles, setMockFiles] = useState([]);
+    let [dropid, setDropid] = useState(id);
     let [myDropzone, setMyDropzone] = useState();
-
-    // اکنون تابع processDefaultValue در دسترس است.
-    let { vals: initialVal } = processDefaultValue(defaultValue);
     let [state, setState] = useState({
-        value: initialVal,
+        value: "",
         key: 0,
     });
+
+    // if(refItem[1] == "pic")
+    //     console.log("defaultValue is: ", defaultValue, myDropzone);
 
     const {laraDomain} = useConfig();
 
@@ -75,12 +47,15 @@ const Dropzone = function(props) {
     }    
 
     const getDropzoneConfig = ()=>{
+        // let langs = getLangVars();
         var djsConfig = {
             autoProcessQueue: true,
             maxFiles: maxFiles,
             maxFilesize: maxFilesize,
+            // addRemoveLinks: true,
             addRemoveLinks: true,
             acceptedFiles: acceptType,
+            // ...langs,
             init: function () {
                 this.on('success', function(file, responseText) {
                     file.previewTemplate.setAttribute('id',responseText);
@@ -123,40 +98,69 @@ const Dropzone = function(props) {
     }
 
     const getfilesize = (url) =>{
-        // پیاده‌سازی تابع در صورت نیاز
+        
     }
 
-    const changeDropzone = function(value, myDropzone){
+    const processDefaultValue = ()=>{
+        let vals = '';
+        if(defaultValue != undefined && defaultValue != ''){
+            // For Array type
+            if(typeof defaultValue != 'string'){
+                // Like [file1, file2, ...]
+                if(typeof defaultValue[0] == "string"){
+                    vals = defaultValue.join('###');
+                    if(vals != '') vals = vals + '###';
+                }
+                // Like [{url, extension}, {url, extension}, ...]
+                else{
+                    defaultValue.forEach((item)=>{
+                        if(item.url != undefined && item.name == undefined)
+                            vals += item.url+'.'+item.extension+'###';
+                        else
+                            vals += getFileName(item)+'###';
+                    });
+                }
+                
+            }
+            // For String type Like file.png
+            else{
+                vals = defaultValue;
+            }
+        }
+        return {vals};
+    }
+
+    let changeDropzone = useCallback(function(value){
         let files = value.split('###');
-        
         files.forEach(element => {
-            if(element != ""){
+            if(element != "") {
                 let name = getFileName(element), path = uploadUrl.split('.')[1].replace(/-/g, "/");
                 path = (laraDomain+"/"+path+"/"+name).replace(/\/\//g, "/").replace(":/", "://");
                 let size = element?.size;
                 if(element?.size == undefined) {
                     size = getfilesize(path);
                 }
-                var mockFile = {name: name, size: size};
-                if(mockFiles.indexOf(mockFile.name) == -1){
+                var mockFile = { name: name, size: size };
+                if(myDropzone != undefined && mockFiles.indexOf(mockFile.name) == -1){
                     mockFiles.push(mockFile.name);
                     myDropzone?.options.addedfile.call(myDropzone, mockFile);
                     myDropzone?.options.thumbnail.call(myDropzone, mockFile, path);
                 }
             }
         });
+
         setTimeout(() => {
             window.$('.dz-remove').attr("href", "#");
         }, 500)
-    }
+    }, [myDropzone]);
 
     const getEventHandler = function(){
         var eventHandlers = {
             success:(file)=>{
-                setState((oldState)=>({
-                    value: oldState.value.indexOf(file.xhr.response) === -1 ? oldState.value + file.xhr.response + "###" : oldState.value, 
+                setState((oldState)=>oldState = {
+                    value: oldState.value.indexOf(file.xhr.response) == -1? oldState.value+= file.xhr.response+"###" :oldState.value, 
                     key: Math.random()
-                }));
+                });
             },
             maxfilesexceeded:(file)=>{
                 this.removeFile(file)
@@ -169,60 +173,58 @@ const Dropzone = function(props) {
                 else{
                     path = file.name;
                 }
+                // console.log("path:", path);
                 window.$(file.previewElement).remove();
-                setState((oldState)=>({
-                    value: oldState.value.replace(path+'###', '').replace(path, ''), 
-                    key: Math.random()
-                }));
+                setState((oldState)=>oldState = {value: oldState.value.replace(path+'###', '', 'g').replace(path, '', 'g'), key: Math.random()});
                 axios({
                     method: 'get',
                     url: laraDomain+deleteUrl+path,
                     responseType: 'stream'
                 })
                     .then(function (response) {
-                        // ...
+                        
                     }).catch(function (error) {
                         let message = Lang('public.file_delete_error');
                         Toast.error(message, Lang('public.dear_user'), 3000);
                     });
+                // await axios.get(laraDomain+deleteUrl+path);
             }
         }
         return eventHandlers;
     }
 
     useEffect(function(){
-        let { vals } = processDefaultValue(defaultValue);
-        if (!run) {
+        let {vals} = processDefaultValue();        
+        if(!run){
             let djsConfig = getDropzoneConfig();
-            djsConfig.url = laraDomain + uploadUrl;
-            setState(oldState => ({ ...oldState, value: vals }));
+            djsConfig.url = laraDomain+uploadUrl;
+            state.vals = vals;
             let eventHandlers = getEventHandler();
-            let dropzoneObj = new DropzoneMain("#dropzone-" + id, { ...djsConfig, ...eventHandlers });
+            let dropzoneObj = new DropzoneMain("#dropzone-"+dropid, {...djsConfig, ...eventHandlers});
             setMyDropzone(dropzoneObj);
             setTimeout(() => {
                 window.$('.dz-remove').attr("href", "#");
-            }, 500);
+            }, 500)
         }
-        setRun(true);
+        run = true;
     }, []);
-    
 
-    useEffect(() => {
-        let { vals } = processDefaultValue(defaultValue);
-        setState({ value: vals, key: Math.random() });
-        changeDropzone(vals, myDropzone);
-    }, [defaultValue, myDropzone]);
-    
+    useEffect(function(){
+        let {vals} = processDefaultValue();
+        changeDropzone(vals);
+        setState({value:vals, key: Math.random()});
+    }, [defaultValue, changeDropzone]);
+
     return (
-        <div className={className ? className : " mb-3 col-span-12 md:col-span-6 "}>
-            <label htmlFor={id} className="form-label font-bold">{label} {requiredDiv}</label>
-                <div className="dropzone dz-clickable" id={"dropzone-"+id}>
+        <div className={className?className:" mb-3 col-span-12 md:col-span-6 "}>
+            <label htmlFor={dropid} className="form-label font-bold">{label} {requiredDiv}</label>
+                <div className="dropzone dz-clickable" id={"dropzone-"+dropid}>
                     <div className="dz-default dz-message" datadzmessage="">
                         <span>Drop files here to upload</span>
                     </div>
                 </div>
                 <input type='hidden' 
-                        id={id}
+                        id={dropid}
                         ref={Element.createRef(refItem)}
                         key={state.key}
                         defaultValue={state?.value}

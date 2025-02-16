@@ -39,6 +39,7 @@ export default function page() {
 
         return {
             url,
+            activeSearch:false,
             columns: [
                 {
                   label: "promotion",

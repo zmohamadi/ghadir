@@ -16,7 +16,7 @@ class PromotionReportController extends BaseAbstract
 {
     protected $model = 'Models\PromotionReport';
     protected $request = 'Publics\Requests\PromotionReportRequest';
-    protected $searchFilter = ['title'];
+    // protected $searchFilter = ['title'];
     protected $with = ["promotion","promoter","confirmRepo","level"];
     protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
     "courses.audienceType","ritualReports.ritual","confirmRepo"];

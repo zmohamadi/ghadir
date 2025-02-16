@@ -3,6 +3,7 @@ namespace Admin\Controllers\Person;
 
 use Admin\Controllers\Public\BaseAbstract;
 use Models\Person\Promoter;
+use Models\Person\CulturalUser;
 use Models\Note;
 use Models\Notif;
 use Models\UserPromotion;

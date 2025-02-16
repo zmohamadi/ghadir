@@ -43,6 +43,7 @@ export function List({query}){
 
         return {
             url,
+            activeSearch:false,
             insertLink:`${formUrl}/new`,
             columns: [
                 // {
