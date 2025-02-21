@@ -10,7 +10,7 @@ use Models\Tribune;
 use Models\RitualReport;
 use Models\Promotion;
 use Models\Person\Promoter;
-use Admin\Controllers\PromotionAgreeExport;
+use Admin\Controllers\Excel\PromotionAgreeExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PromotionAgreeController extends BaseAbstract

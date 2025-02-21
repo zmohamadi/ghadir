@@ -11,6 +11,7 @@ export default function page() {
     const { Lang, local } = useLang();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/rituals";
+    const [filterParams, setFilterParams] = useState(null);
 
     const urlParams = useSearchParams()
     const getFilterFromUrl = () => {
@@ -28,6 +29,7 @@ export default function page() {
             .filter((key) => filters[key] && filters[key] != "null")
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
+        setFilterParams(filterParams);
 
         const url = filterParams
             ? `${laraAdmin}/rituals?${filterParams}`
@@ -100,10 +102,12 @@ export default function page() {
         <>
             <Frame title={Lang(["public.rituals"])} >
                 <Filtering
+                exportExcel={true}
+                urlExcel={`rituals?${filterParams}`}
                     promotion={true}
                     province={true}
                     promoter={true}
-                    url="tribunes"
+                    url="rituals"
                     filterList={filters}
                     onFiltersChange={handleFiltersChange}
                 />

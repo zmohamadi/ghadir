@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Controllers;
+namespace Admin\Controllers\Excel;
 
 use Models\PromotionAgree;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -21,6 +21,16 @@ class PromotionAgreeExport implements FromCollection, WithHeadings, WithMapping
         $request = $this->filters;
 
         $data =  PromotionAgree::with(['promotion', 'promoter']);
+        $data->when(request('promotion') != null, function ($q) {
+            $q->where('promotion_id', request('promotion'));
+        });
+
+        $data->when(request('promoter') != null, function ($q) {
+            $q->where('promoter_id', request('promoter'));
+        });
+
+        $data->whereHas('promotion')->whereHas('promoter');
+
         $data = $data->get();
         return $data;
     }

@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Controllers;
+namespace Admin\Controllers\Excel;
 
 use Models\PromotionReport;
 use Maatwebsite\Excel\Concerns\FromCollection;

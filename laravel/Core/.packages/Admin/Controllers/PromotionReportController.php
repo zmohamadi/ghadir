@@ -9,7 +9,7 @@ use Models\Person\Promoter;
 use Models\Course;
 use Models\Tribune;
 use Models\RitualReport;
-use Admin\Controllers\PromotionReportExport;
+use Admin\Controllers\Excel\PromotionReportExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PromotionReportController extends BaseAbstract
