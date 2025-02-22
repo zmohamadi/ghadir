@@ -45,6 +45,10 @@ class Promotion extends Model
     {
         return $this->belongsTo(\Models\Base\Status::class, 'report_status', 'code')->where('group_id', 8);
     }
+    public function gender()
+    {
+        return $this->belongsTo(\Models\Base\Status::class, 'gender_id', 'code')->where('group_id', 37);
+    }
 
     public function supports()
     {
