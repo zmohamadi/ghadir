@@ -25,19 +25,21 @@ export default function page() {
         };
     };
     const [filters, setFilters] = useState(getFilterFromUrl());
-    
+    const [filterParams, setFilterParams] = useState(null);
+
     let info = useMemo(()=>{
         const filterParams = Object.keys(filters)
             .filter((key) => filters[key] && filters[key] != "null")
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
-
+        setFilterParams(filterParams);
         const url = filterParams
             ? `${laraAdmin}/agree?${filterParams}`
             : `${laraAdmin}/agree`;
 
         return {
             url,
+            activeSearch:false,
             columns: [
                 {
                   label: "promotion",
@@ -70,6 +72,8 @@ export default function page() {
                 {
                     access &&
                     <Filtering
+                        exportExcel={true}
+                        urlExcel={`agree?${filterParams}`}
                         promotion={true}
                         promoter={true}
                         url="agree"

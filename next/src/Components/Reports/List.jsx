@@ -27,13 +27,15 @@ export function List({query}){
         };
     };
     const [filters, setFilters] = useState(getFilterFromUrl());
+    const [filterParams, setFilterParams] = useState(null);
     
     let info = useMemo(()=>{
         const filterParams = Object.keys(filters)
             .filter((key) => filters[key] && filters[key] != "null")
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
-        
+        setFilterParams(filterParams);
+
         const url = access ?
          filterParams
             ? `${laraAdmin}/reports?${filterParams}`
@@ -41,6 +43,7 @@ export function List({query}){
 
         return {
             url,
+            activeSearch:false,
             insertLink:`${formUrl}/new`,
             columns: [
                 // {
@@ -100,6 +103,8 @@ export function List({query}){
             <Frame title={Lang(["public.reports"])} >
                 {access&&
                     <Filtering
+                        exportExcel={true}
+                        urlExcel={`reports?${filterParams}`}
                         promotion={true}
                         promoter={true}
                         reportStatus={true}

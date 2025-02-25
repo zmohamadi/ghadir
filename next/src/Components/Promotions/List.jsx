@@ -74,6 +74,11 @@ export function List({query}) {
                 ),
             },
             { label: "year", field: "year" },
+                { label: "gender", jsx: (item) => (
+                    <span>
+                        {item?.gender?.["title_" + local]}
+                    </span>
+                )},
             ...(access ? [
                 { 
                     label: "register_status", 

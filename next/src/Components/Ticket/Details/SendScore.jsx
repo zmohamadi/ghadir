@@ -1,6 +1,6 @@
 "use client";
 
-// import { SetStars } from '@/Components/Public/SetStars';
+import { SetStars } from '@/Components/Public/SetStars';
 import { useConfig } from '@/lib/config';
 import { useData,useFormRefs,Button,ButtonContainer } from "@/Theme/Midone/Forms";
 import { Tools } from "@/Theme/Midone/Utils";

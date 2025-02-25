@@ -17,6 +17,7 @@ export function List() {
     const { destroy } = useData();
 
     const [filters, setFilters] = useState({});
+    const [filterParams, setFilterParams] = useState(null);
     const [url, setUrl] = useState(`${laraAdmin}/promoters`);
     const formUrl = `${nextAdmin}/promoters`;
 
@@ -25,6 +26,7 @@ export function List() {
             .filter((key) => filters[key])
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
+        setFilterParams(filterParams);
 
         const updatedUrl = filterParams
             ? `${laraAdmin}/promoters?${filterParams}`
@@ -47,6 +49,7 @@ export function List() {
                 jsx: (item) => (
                     <Pic
                         src={`${mediaPath}/users/${item?.photo}`}
+                        key={item?.photo}
                         defaultImg={`${mediaPath}/public/default/avatar.png`}
                         classImg="user-avatar rounded-full"
                     />
@@ -151,6 +154,8 @@ export function List() {
                 {access && (
                     <>
                         <Filtering
+                            exportExcel={true}
+                            urlExcel={`promoters?${filterParams}`}
                             province={true}
                             url="promoters"
                             onFiltersChange={handleFiltersChange}

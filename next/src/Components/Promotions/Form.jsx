@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea, Radio, CheckBox } from "@/Theme/Midone/Forms";
+import { useData,useFormRefs,Input,Button,ButtonContainer,Textarea, Radio, CheckBox, SelectTail } from "@/Theme/Midone/Forms";
 import { Dropzone } from "@/Theme/Midone/Forms/Dropzone";
 import { CheckBoxGroup } from "@/Theme/Midone/Forms/CheckBoxGroup";
 import { Loading } from "@/Theme/Midone";
@@ -57,6 +57,9 @@ export function Form({id}){
                         </div>
                         <div className="col-span-12 lg:col-span-4">
                             <div className="intro-y box p-5">
+                                <SelectTail label="gender" data={needles?.status?.filter(item => item.group_id == 37)} 
+                                refItem={[component, "gender_id"]} required="true" titleKey={"title_"+local} valueKey="code"    />
+
                                 <Radio className="mt-5 border-b-2" 
                                     type="col" label="register_status" 
                                     refItem={[component, `register_status`]}

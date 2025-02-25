@@ -58,4 +58,16 @@ class UserController extends BaseAbstract
 
         return response()->json(['status' => 200]);
     }
+    public function home() {
+        $data = [
+            'promoters' => \Models\Person\Promoter::count(),
+            'reports' => \Models\PromotionReport::count(),
+            'supports' => \Models\Support::count(),
+            'courses' => \Models\Course::count(),
+            'tribunes' => \Models\Tribune::count(),
+        ];
+    
+        return response()->json($data);
+    }
+    
 }

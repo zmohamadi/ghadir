@@ -22,13 +22,14 @@ export default function page() {
         };
     };
     const [filters, setFilters] = useState(getFilterFromUrl());
-    
+    const [filterParams, setFilterParams] = useState(null);
+
     let info = useMemo(()=>{
         const filterParams = Object.keys(filters)
             .filter((key) => filters[key] && filters[key] != "null")
             .map((key) => `${key}=${filters[key]}`)
             .join("&");
-
+    setFilterParams(filterParams);
         const url = filterParams
             ? `${laraAdmin}/tribunes?${filterParams}`
             : `${laraAdmin}/tribunes`;
@@ -101,6 +102,8 @@ export default function page() {
         <>
             <Frame title={Lang(["public.tribunes"])} >
                 <Filtering
+                exportExcel={true}
+                urlExcel={`tribunes?${filterParams}`}
                     promotion={true}
                     province={true}
                     promoter={true}

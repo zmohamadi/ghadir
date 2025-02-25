@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useFormElement} from '@/Theme/Midone';
 import {useConfig} from '@/lib/config';
 import axios from '@/lib/axios';
@@ -18,13 +18,15 @@ const Dropzone = function(props) {
     let {id, label, helpDiv, divError, requiredDiv, defaultValue} = Element.init("Dropzone");
     let [run, setRun] = useState(false)
     let [mockFiles, setMockFiles] = useState([]);
-    let [myDropzone, setMyDropzone] = useState()
+    let [dropid, setDropid] = useState(id);
+    let [myDropzone, setMyDropzone] = useState();
     let [state, setState] = useState({
         value: "",
         key: 0,
     });
 
-    // console.log("defaultValue is: ", defaultValue);
+    // if(refItem[1] == "pic")
+    //     console.log("defaultValue is: ", defaultValue, myDropzone);
 
     const {laraDomain} = useConfig();
 
@@ -128,30 +130,29 @@ const Dropzone = function(props) {
         return {vals};
     }
 
-    const changeDropzone = function(value, myDropzone){
+    let changeDropzone = useCallback(function(value){
         let files = value.split('###');
-        
         files.forEach(element => {
-            if(element != ""){
+            if(element != "") {
                 let name = getFileName(element), path = uploadUrl.split('.')[1].replace(/-/g, "/");
                 path = (laraDomain+"/"+path+"/"+name).replace(/\/\//g, "/").replace(":/", "://");
                 let size = element?.size;
                 if(element?.size == undefined) {
                     size = getfilesize(path);
                 }
-                var mockFile = {name: name, size: size};
-                if(mockFiles.indexOf(mockFile.name) == -1){
-                    //console.log("files:", files, myDropzone);
+                var mockFile = { name: name, size: size };
+                if(myDropzone != undefined && mockFiles.indexOf(mockFile.name) == -1){
                     mockFiles.push(mockFile.name);
                     myDropzone?.options.addedfile.call(myDropzone, mockFile);
                     myDropzone?.options.thumbnail.call(myDropzone, mockFile, path);
                 }
             }
         });
+
         setTimeout(() => {
             window.$('.dz-remove').attr("href", "#");
         }, 500)
-    }
+    }, [myDropzone]);
 
     const getEventHandler = function(){
         var eventHandlers = {
@@ -193,17 +194,15 @@ const Dropzone = function(props) {
     }
 
     useEffect(function(){
-        let {vals} = processDefaultValue();
+        let {vals} = processDefaultValue();        
         if(!run){
             let djsConfig = getDropzoneConfig();
             djsConfig.url = laraDomain+uploadUrl;
             state.vals = vals;
             let eventHandlers = getEventHandler();
-            let dropzoneObj = new DropzoneMain("#dropzone-"+id, {...djsConfig, ...eventHandlers});
-            // console.log("dropzoneObj", dropzoneObj, setMyDropzone);
+            let dropzoneObj = new DropzoneMain("#dropzone-"+dropid, {...djsConfig, ...eventHandlers});
             setMyDropzone(dropzoneObj);
             setTimeout(() => {
-                // window.$('.dz-remove').removeAttr("href");
                 window.$('.dz-remove').attr("href", "#");
             }, 500)
         }
@@ -212,22 +211,20 @@ const Dropzone = function(props) {
 
     useEffect(function(){
         let {vals} = processDefaultValue();
-        //console.log("vals:", vals, myDropzone);
+        changeDropzone(vals);
         setState({value:vals, key: Math.random()});
-        changeDropzone(vals, myDropzone);
-    }, [defaultValue]);
-    // console.log("myDropzone", myDropzone);
+    }, [defaultValue, changeDropzone]);
 
     return (
         <div className={className?className:" mb-3 col-span-12 md:col-span-6 "}>
-            <label htmlFor={id} className="form-label font-bold">{label} {requiredDiv}</label>
-                <div className="dropzone dz-clickable" id={"dropzone-"+id}>
+            <label htmlFor={dropid} className="form-label font-bold">{label} {requiredDiv}</label>
+                <div className="dropzone dz-clickable" id={"dropzone-"+dropid}>
                     <div className="dz-default dz-message" datadzmessage="">
                         <span>Drop files here to upload</span>
                     </div>
                 </div>
                 <input type='hidden' 
-                        id={id}
+                        id={dropid}
                         ref={Element.createRef(refItem)}
                         key={state.key}
                         defaultValue={state?.value}

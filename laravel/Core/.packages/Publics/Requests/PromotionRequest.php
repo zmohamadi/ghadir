@@ -29,8 +29,8 @@ class PromotionRequest extends FormRequest
             'year' => 'required|digits:4|integer',
             'comments' => 'required',
             'photo' => 'required',
-            // 'register_status' => 'required',
-            // 'report_status' => 'required',
+            'register_status' => 'required',
+            'report_status' => 'required',
          ];
      
          return $item;
