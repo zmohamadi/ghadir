@@ -29,7 +29,7 @@ export function FormReply({ keyServer,id,replyStatus,formUrl }) {
                 />
                 <div className="col-span-12">
                     <div className="grid grid-cols-12 gap-4">
-                        <Textarea className="col-span-6" label="ticket_text" refItem={[component, "text"]} />
+                        <Textarea className="col-span-6" label="ticket_reply" refItem={[component, "text"]} />
                         <Dropzone className="col-span-6" label="media" refItem={[component, "media"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl+"/"} maxFiles="50"
                             help = {Lang("public.accept_format")+": png,jpg,tif,gif,jpeg,WebP,AVIF,jfif,pdf,doc,docx,ppt"}
                         />

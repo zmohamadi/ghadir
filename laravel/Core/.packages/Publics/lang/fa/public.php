@@ -110,6 +110,7 @@ $lang = [
    'comment_status' => 'وضعیت پیام',
    'media' => 'آپلود رسانه',
    'ticket_text' => 'متن درخواست',
+   'ticket_reply' => 'جواب درخواست',
    'check_priority' => 'اولویت بررسی',
    'accept_format'=>'فرمت های آپلود',
    'evaluate'=>'امتیاز',
