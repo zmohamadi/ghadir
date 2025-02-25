@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('creator_id')->nullable()->comment('شناسه کاربر ثبت کننده');
             $table->integer('editor_id')->nullable()->comment('شناسه کاربر ویرایش کننده');
             $table->string('thumb')->nullable()->comment('بند انگشتی');
-            $table->string('img')->nullable()->comment('چندین عمس');
+            $table->string('img')->nullable()->comment('چندین عکس');
             $table->string('video')->nullable()->comment('چندین ویدئو');
             $table->string('document')->nullable()->comment('چندین فایل داکیومنت');
             $table->text('summary')->nullable()->comment('متن خلاصه');
