@@ -30,7 +30,7 @@ class Tribune extends Model
     }
     public function citySh()
     {
-        return $this->belongsTo(\Models\Base\City::class,"province_id");
+        return $this->belongsTo(\Models\Base\City::class,"city_id");
     }
     public function getCreatedAtAttribute($date)
     {

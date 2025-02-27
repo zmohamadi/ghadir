@@ -104,6 +104,7 @@ class PromotionReportController extends BaseAbstract
                                 'promoter_id' => $promoter_id,
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,
+                                'created_at'=>now()
                             ];
                             $coursesArray[] = $course;
                         }
@@ -138,6 +139,7 @@ class PromotionReportController extends BaseAbstract
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,
                                 'promoter_id' => $promoter_id,
+                                'created_at'=>now()
                             ];
         
                             $tribuneArray[] = $tribuneData;
@@ -170,6 +172,7 @@ class PromotionReportController extends BaseAbstract
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,
                                 'promoter_id' => $promoter_id,
+                                'created_at'=>now()
                             ];
         
                             $ritualArray[] = $ritualData;
