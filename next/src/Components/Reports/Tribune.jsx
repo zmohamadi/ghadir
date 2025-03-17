@@ -2,10 +2,12 @@
 
 import { Input, SelectTail } from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
+import { useAuth } from "@/lib";
 // import { Select } from "@/Theme/Midone/Forms/Select";
 
 export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
     const info = parent?.state?.info?.tribunes?.[index];
+    const {user} = useAuth();
 
     return (<>
             <div className="col-span-12 flex justify-end items-end">
@@ -25,6 +27,9 @@ export function Tribune({ index, parent, addIcon, closeIcon,needles }) {
                 refCity={`tr_city_${index}`} refVillage={`tr_village_${index}`} 
                 obj={info}
                 />
+                {/* {user?.role_id==1&&
+                    <Input required="true" label="score" refItem={[parent, `r_score_${index}`]} defaultValue={info?.score}  />
+                } */}
             <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>

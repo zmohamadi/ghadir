@@ -70,6 +70,23 @@ export function Form({ id , access=true }) {
     const defaultPromoterId =data?.promoter_id;
     const defaultPromotionId = promotion;
 
+    // // const [totalScore, setTotalScore] = useState(data?.level_id ? data?.level_id :   0);
+    // const [totalScore, setTotalScore] = useState(0);
+    // const [courseScore, setCourseScore] = useState(0);
+    // const [tribuneScore, setTribuneScore] = useState(0);
+    // const [ritualScore, setRitualScore] = useState(0);
+
+    // // تابع برای آپدیت امتیاز کل
+    // const updateTotalScore = () => {
+    //     setTotalScore(courseScore + tribuneScore + ritualScore);
+    // };
+
+    // useEffect(() => {
+    //     updateTotalScore();
+    // }, [courseScore, tribuneScore, ritualScore]);
+
+
+
     return (
         <>
             
@@ -122,6 +139,7 @@ export function Form({ id , access=true }) {
                                             <Input type="hidden" defaultValue={defaultPromotionId} refItem={[component, `promotion_id`]} />
                                         </>
                                     }
+                                    {/* <Input label="score" refItem={[component, `level_id`]} value={totalScore} readOnly /> */}
                                     <Input label="score" refItem={[component, `level_id`]} />
                                     <Radio
                                         type="col"

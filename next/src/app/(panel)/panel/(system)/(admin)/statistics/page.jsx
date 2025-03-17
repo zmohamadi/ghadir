@@ -68,11 +68,28 @@ export default function Page() {
             <>
               {[
                 {
+                  label: "promoters",
+                  href: "promoters",
+                  key: "promoters",
+                  percentKey: "promoters",
+                  color: "#0096C7",
+                  svg:""
+                },
+                {
+                  label: "agrees",
+                  href: "agrees",
+                  key: "agrees",
+                  percentKey: "agrees",
+                  color: "#0096C7",
+                  svg:""
+                },
+                {
                   label: "course",
                   href: "courses",
                   key: "course_count",
                   percentKey: "course_percent",
                   color: "#FF8C00",
+                  svg:""
                 },
                 {
                   label: "people_course",
@@ -80,6 +97,7 @@ export default function Page() {
                   key: "people_course",
                   percentKey: "people_course_percent",
                   color: "#00D1D1",
+                  svg:""
                 },
                 {
                   label: "time_course",
@@ -87,6 +105,7 @@ export default function Page() {
                   key: "time_course",
                   percentKey: "time_course_percent",
                   color: "#800080",
+                  svg:""
                 },
                 {
                   label: "tribune",
@@ -94,6 +113,7 @@ export default function Page() {
                   key: "tribune_count",
                   percentKey: "tribune_percent",
                   color: "#FF8C00",
+                  svg:""
                 },
                 {
                   label: "people_tribune",
@@ -101,13 +121,15 @@ export default function Page() {
                   key: "people_tribune",
                   percentKey: "people_tribune_percent",
                   color: "#00D1D1",
+                  svg:""
                 },
                 {
                   label: "time_tribune",
                   href: "tribunes",
-                  key: "time_tribune_percent",
+                  key: "time_tribune",
                   percentKey: "time_tribune_percent",
                   color: "#800080",
+                  svg:""
                 },
               ].map(({ label, href, key, percentKey, color }, index) => (
                 <div

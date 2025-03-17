@@ -58,20 +58,43 @@ export function View({id }) {
                     </TabHeader>
                     <TabBody>
                         <TabPanel id="tab-first" active={"true"}>
-                            <div className="col-span-12 space-y-4">
-                                
-                                <div className="flex gap-4">
-                                    <div className="w-1/4">
-                                        <label className="block">{Lang("public.promotion")}</label>
-                                        <div className="p-2 border rounded">{promotion?.title}</div>
+                        <div className="col-span-12 space-y-2">
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block">{Lang("public.promotion")}</label>
+                                    <div className="p-2 border rounded">{promotion?.title}</div>
+                                </div>
+                                <div>
+                                    <label className="block">{Lang("public.year")}</label>
+                                    <div className="p-2 border rounded">{promotion?.year}</div>
+                                </div>
+                                <div>
+                                    <label className="block">{Lang("public.creator_record")}</label>
+                                    <div className="p-2 border rounded">
+                                        {data?.creator_id == null ? "-" : `${data?.creator?.firstname} ${data?.creator?.lastname}`}
                                     </div>
-                                    <div className="w-1/4">
-                                        <label className="block">{Lang("public.year")}</label>
-                                        <div className="p-2 border rounded">{promotion?.year}</div>
+                                </div>
+                                <div>
+                                    <label className="block">{Lang("public.editor_record")}</label>
+                                    <div className="p-2 border rounded">
+                                        {data?.editor_id == null ? "-" : `${data?.editor?.firstname} ${data?.editor?.lastname}`}
                                     </div>
-                                    
+                                </div>
+                                <div>
+                                    <label className="block">{Lang("public.confirmer")}</label>
+                                    <div className="p-2 border rounded">
+                                        {data?.confirmer_id == null ? "-" : `${data?.confirmer?.firstname} ${data?.confirmer?.lastname}`}
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="block">{Lang("public.score")}</label>
+                                    <div className="p-2 border rounded">
+                                        {data?.level_id}
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
                         </TabPanel>
 
                         <TabPanel id="tab-second">

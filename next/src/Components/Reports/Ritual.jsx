@@ -1,6 +1,6 @@
 "use client";
 
-import { useLang } from "@/lib";
+import { useAuth, useLang } from "@/lib";
 import { Input, SelectTail, Textarea} from "@/Theme/Midone/Forms";
 import { SelectLocation } from "../Public/SelectLocation";
 // import { Select } from "@/Theme/Midone/Forms/Select";
@@ -8,6 +8,8 @@ import { SelectLocation } from "../Public/SelectLocation";
 export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
     const info = parent?.state?.info?.ritual_reports?.[index];
+    const {user} = useAuth();
+    
 
     return (<>
             <div className="col-span-12 flex justify-end items-end">
@@ -27,6 +29,9 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
 
                 />
                 <Input required="true" className="col-span-4" label="place_name" refItem={[parent, `r_place_name_${index}`]} defaultValue={info?.place_name}  />            
+                {/* {user?.role_id==1&&
+                    <Input required="true" label="score" refItem={[parent, `r_score_${index}`]} defaultValue={info?.score}  />
+                } */}
             <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>

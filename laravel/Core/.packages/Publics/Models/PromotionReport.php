@@ -10,7 +10,7 @@ use Morilog\Jalali\Jalalian;
 
 class PromotionReport extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,Base;
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
 
     /**
@@ -71,5 +71,9 @@ class PromotionReport extends Model
     public function getCreatedAtAttribute($date)
     {
         return $date ? Jalalian::fromCarbon(new \Carbon\Carbon($date))->format('Y/m/d') : null;
+    }
+    public function confirmer()
+    {
+        return $this->belongsTo(\Models\User::class, 'confirmer_id');
     }
 }

@@ -9,6 +9,8 @@ use Models\Promotion;
 use Models\Notif;
 use Models\Content\Blog;
 use Models\RitualReport;
+use Models\Person\Promoter;
+use Models\PromotionAgree;
 
 class HomeController extends Controller
 {
@@ -20,6 +22,15 @@ class HomeController extends Controller
         $promotion = request()->promotion;
         // dd($promotion);
         $promoter = request()->promoter;
+
+        $promoters = Promoter::when($city_id, fn($query) => $query->where('city_id', $city_id))
+        ->when($province_id, fn($query) => $query->where('province_id', $province_id))
+        ->count();
+
+        $promotionAgrees = PromotionAgree::when($promotion, fn($query) => $query->where('promotion_id', $promotion))
+        ->when($promoter, fn($query) => $query->where('promoter_id', $promoter))
+        ->count();
+
 
         // Fetch unique years
         $years = Promotion::select('year')->groupBy('year')->get();
@@ -57,6 +68,8 @@ class HomeController extends Controller
         $totalTime = ($courseStats->total_duration ?? 0) + ($tribuneStats->total_duration ?? 0);
         $totalCount = ($courseStats->count ?? 0) + ($tribuneStats->count ?? 0);
         $totalRitualReport = RitualReport::count();
+
+        // dd($tribuneStats);
 
         // Calculate the statistics
         $collection = [
@@ -109,6 +122,10 @@ class HomeController extends Controller
 
             // Available years
             'years' => $years,
+
+
+            'promoters' => $promoters,
+            'agrees' => $promotionAgrees,
         ];
 
         return response()->json($collection);

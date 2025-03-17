@@ -17,8 +17,8 @@ class PromotionReportController extends BaseAbstract
     protected $model = 'Models\PromotionReport';
     protected $request = 'Publics\Requests\PromotionReportRequest';
     // protected $searchFilter = ['title'];
-    protected $with = ["promotion","promoter","confirmRepo","level"];
-    protected $showWith = ["promotion","promoter","tribunes.audienceType","level",
+    protected $with = ["promotion","promoter","confirmRepo","level",'creator','editor','confirmer'];
+    protected $showWith = ["promotion","promoter","tribunes.audienceType","level",'creator','editor','confirmer',
     "courses.audienceType","ritualReports.ritual","confirmRepo"];
     // protected $files = ["photo"];
     protected $needles = ["Person\Promoter",'Base\Status',"Ritual","Base\City", "Base\Province","Promotion","AudienceType","Level"];
@@ -56,8 +56,11 @@ class PromotionReportController extends BaseAbstract
         };
         $this->storeQuery = function ($query) {
             try {
+                // dd($this->user_id);
                 (request()->_method == "PUT") ? $query->editor_id = $this->user_id : $query->creator_id = $this->user_id;
-        
+                ($this->role_id==1 && $query->confirm_id != -1) ? $query->confirmer_id = $this->user_id : $query->confirmer_id = NULL;
+                // dd($query->confirmer_id);
+
                 $method = request()->_method; // PUT
                 $promoter_id = request()->promoter_id;
                 $promotion_id = request()->promotion_id;

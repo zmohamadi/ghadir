@@ -99,6 +99,7 @@ $lang = [
    'view_info' => 'مشاهده جزییات',
    'creator_record' => 'ثبت کننده',
    'editor_record' => 'ویرایش کننده',
+   'confirmer' => 'تایید کننده',
    'to_answer' => 'پاسخ دادن',
    'text_comments_yes' => 'پیام های شما',
    'text_comments_no' => 'در حال حاضر پیامی ثبت نشده است',
@@ -139,7 +140,7 @@ $lang = [
    'work_status'=>'وضعیت فعالیت فرهنگی',
    'acoountPromoter'=>'پرونده ها',
    'has_acoount'=>'دارای',
-   'export_excel'=>'خروجی اکسل'
+   'export_excel'=>'خروجی اکسل',
    
 ];
 
