@@ -283,14 +283,23 @@ export function View({id}) {
 
                     {/* Tab 4: Supports */}
                     <TabPanel id="tab-fourth">
-                        <div className="col-span-12">
+                    <div className="col-span-12">
                             {data?.supports?.length ? (
                                 <ul className="list-disc list-inside">
                                     {data?.supports.map((support, index) => (
                                         <li key={index}>
-                                            <Link href={`${nextAdmin}/supports/${support.id}`} className="text-blue-600">
-                                            {index + 1}.{support?.type?.title} ({Lang('public.view')} {Lang('public.support')})
+                                                {index + 1}. {support?.type?.title} | {support?.amount} | <Link href={`${nextAdmin}/supports/${support.id}`} className="text-blue-600">
+                                                ({Lang('public.view')} {Lang('public.support')})
                                             </Link>
+                                                {support?.promoters?.map((promoter, i) => (
+                                                    <ul className="pr-7" key={i}>
+                                                        <li> {i + 1}.
+                                                        {/* {i > 0 && ", "} */}
+                                                        {promoter.firstname} {promoter.lastname} - {promoter.mobile}
+                                                        </li>
+                                                    </ul>
+                                                ))}
+                                            
                                         </li>
                                     ))}
                                 </ul>
@@ -298,6 +307,7 @@ export function View({id}) {
                                 ""
                             )}
                         </div>
+
                     </TabPanel>
                 </TabBody>
             </Tab>

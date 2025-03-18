@@ -12,7 +12,7 @@ class PromotionController extends BaseAbstract
     protected $searchFilter = ['title'];
     protected $with = ["activeStatus","creator","editor","activeRegister","activeReport",'gender'];
     protected $showWith = ["activeStatus","creator","editor","activeRegister","activeReport",'gender',
-    "supports.type","rituals"];
+    "supports.type","supports.promoters","rituals"];
     protected $needles = ['Base\Status',"Ritual"];
     protected $files = ["photo"];
 

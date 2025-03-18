@@ -123,6 +123,22 @@ export function List({query}) {
                         </Link>
                     ),
                 },
+                // { 
+                //     label: "creator_record", 
+                //     jsx: (item) => (
+                //         <span>
+                //            {item?.creator_id==null ? "-" : item?.creator?.firstname +" "+item?.creator?.lastname }
+                //         </span>
+                //     )
+                // },
+                // { 
+                //     label: "editor_record", 
+                //     jsx: (item) => (
+                //         <span>
+                //             {item?.editor_id==null ? "-" : item?.editor?.firstname +" "+item?.editor?.lastname }
+                //         </span>
+                //     )
+                // },
             ] : []),
             { label: "created_at", field: "created_at" },
             {
