@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Select } from "@/Theme/Midone/Forms/Select";
 import { Box, Button, ButtonContainer, Loading, SelectTail, useData, useFormRefs } from "@/Theme/Midone";
 import { useConfig, useLang } from "@/lib";
+import Link from "next/link";
 
 export function Filtering({
     promoter_id = false,
@@ -11,13 +12,15 @@ export function Filtering({
     province = false,
     reportStatus = false,
     exportExcel = false,
+    importExcel = false,
+    importExcelUrl = false,
     urlExcel=null,
     url,
     filterList,
     onFiltersChange, // دریافت تابع برای اطلاع‌رسانی تغییرات فیلتر
 }) {
     const { Lang, local } = useLang();
-    const { laraAdmin,host } = useConfig();
+    const { laraAdmin,host,nextAdmin } = useConfig();
     const [filters, setFilters] = useState({
         city: filterList?.city ?? null,          // If filterList.city exists, use it, otherwise set it to null
         province: filterList?.province ?? null,   // Same for province
@@ -236,6 +239,13 @@ export function Filtering({
                 className="btn btn-primary mt-2 ml-3"
                 onClick={exportExcelFunc}
             />
+        }
+        {importExcel&&
+            <Link
+                // label="import_excel"
+                className="btn btn-success mt-2 ml-3"
+                href={`${nextAdmin}/${importExcelUrl}/excel`}
+            >{Lang('public.import_excel')}</Link>
         }
         <Button
             label="clear_filter"

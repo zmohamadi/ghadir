@@ -45,6 +45,7 @@ Route::get("users/change-status/get-needles", "Person\UserController@changeRoleG
 Route::post("users/change-status/{id}", "Person\UserController@changeRole");
 Route::put("users/change-password", "Person\UserController@changePassword");
 
+Route::post("promoters/excel", "Person\PromoterController@importExcel");
 Route::get("promoters/get-needles", "Person\PromoterController@getNeedles");
 Route::resource("promoters", "Person\PromoterController");
 Route::get("personnels/get-needles", "Person\PersonnelController@getNeedles");

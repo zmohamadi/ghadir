@@ -141,6 +141,10 @@ $lang = [
    'acoountPromoter'=>'پرونده ها',
    'has_acoount'=>'دارای',
    'export_excel'=>'خروجی اکسل',
+   'excel_file'=>'فایل اکسل',
+   'excel'=>'اکسل',
+   'example_excel'=>'فایل اکسل نمونه',
+   'import_excel'=>'ورود داده از طریق اکسل',
    
 ];
 

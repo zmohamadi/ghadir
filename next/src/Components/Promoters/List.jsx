@@ -154,6 +154,8 @@ export function List() {
                 {access && (
                     <>
                         <Filtering
+                            importExcel={true}
+                            importExcelUrl={"promoters"}
                             exportExcel={true}
                             urlExcel={`promoters?${filterParams}`}
                             province={true}
