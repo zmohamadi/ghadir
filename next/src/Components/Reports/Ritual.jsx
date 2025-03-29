@@ -9,7 +9,26 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
     const { Lang,local } = useLang();
     const info = parent?.state?.info?.ritual_reports?.[index];
     const {user} = useAuth();
-    
+    const handleScoreChange = (e) => {
+        const newScore = parseInt(e.target.value) || 0;
+        
+        // به‌روزرسانی امتیاز در state والد
+        parent.setState(prev => {
+            const updatedRituals = [...(prev.info?.ritual_reports || [])];
+            updatedRituals[index] = {
+                ...updatedRituals[index],
+                score: newScore
+            };
+            
+            return {
+                ...prev,
+                info: {
+                    ...prev.info,
+                    ritual_reports: updatedRituals
+                }
+            };
+        });
+    };
 
     return (<>
             <div className="col-span-12 flex justify-end items-end">
@@ -29,9 +48,17 @@ export function Ritual({ index, parent, addIcon, closeIcon,needles }) {
 
                 />
                 <Input required="true" className="col-span-4" label="place_name" refItem={[parent, `r_place_name_${index}`]} defaultValue={info?.place_name}  />            
-                {/* {user?.role_id==1&&
-                    <Input required="true" label="score" refItem={[parent, `r_score_${index}`]} defaultValue={info?.score}  />
-                } */}
+                {user?.role_id==1 &&
+                <Input 
+                note="امتیاز را وارد کنید و enter بزنید" 
+                onEnter={handleScoreChange} 
+                required="true" 
+                label="score" 
+                // type="number"
+                refItem={[parent, `r_score_${index}`]} 
+                defaultValue={info?.score || 0} 
+            />
+            }
             <div className="col-span-12 flex justify-start items-start border-b-4 mt-2 mb-2">
                 {addIcon}
             </div>

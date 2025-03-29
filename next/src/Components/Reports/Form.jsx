@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { Loading, Repeat, Toast } from "@/Theme/Midone/Utils";
@@ -69,30 +69,50 @@ export function Form({ id , access=true }) {
     // گرفتن مقادیر پیش‌فرض برای promoter و promotion
     const defaultPromoterId =data?.promoter_id;
     const defaultPromotionId = promotion;
+    
+    const [totalScore, setTotalScore] = useState(data?.level_id || 0);
 
-    // // const [totalScore, setTotalScore] = useState(data?.level_id ? data?.level_id :   0);
-    // const [totalScore, setTotalScore] = useState(0);
-    // const [courseScore, setCourseScore] = useState(0);
-    // const [tribuneScore, setTribuneScore] = useState(0);
-    // const [ritualScore, setRitualScore] = useState(0);
+    // تابع برای محاسبه امتیاز هر بخش
+    const calculateCoursesScore = useCallback(() => {
+        if (!data?.courses) return 0;
+        return data.courses.reduce((sum, course) => sum + (course.score || 0), 0);
+    }, [data?.courses]);
 
-    // // تابع برای آپدیت امتیاز کل
-    // const updateTotalScore = () => {
-    //     setTotalScore(courseScore + tribuneScore + ritualScore);
-    // };
+    const calculateTribunesScore = useCallback(() => {
+        if (!data?.tribunes) return 0;
+        return data.tribunes.reduce((sum, tribune) => sum + (tribune.score || 0), 0);
+    }, [data?.tribunes]);
 
-    // useEffect(() => {
-    //     updateTotalScore();
-    // }, [courseScore, tribuneScore, ritualScore]);
+    const calculateRitualsScore = useCallback(() => {
+        if (!data?.ritual_reports) return 0;
+        return data.ritual_reports.reduce((sum, ritual) => sum + (ritual.score || 0), 0);
+    }, [data?.ritual_reports]);
 
+    // تابع اصلی برای محاسبه مجموع کل امتیازها
+    const calculateTotalScore = useCallback(() => {
+        return calculateCoursesScore() + calculateTribunesScore() + calculateRitualsScore();
+    }, [calculateCoursesScore, calculateTribunesScore, calculateRitualsScore]);
 
+    // اثر برای به‌روزرسانی خودکار امتیاز کل هنگام تغییر هر یک از بخش‌ها
+    useEffect(() => {
+        const newTotal = calculateTotalScore();
+        setTotalScore(newTotal);
+        component.setState(prev => ({
+            ...prev,
+            info: {
+                ...prev.info,
+                level_id: newTotal
+            }
+        }));
+    }, [data?.courses, data?.tribunes, data?.ritual_reports, calculateTotalScore]);
+    console.log(data?.level_id);
 
     return (
         <>
-            
             {(data == undefined || needles == null) ?
                 <Loading />
                 : <>
+                   
                     <Frame title={Lang(["public.reports"])}>
                         <Tab className="col-span-12">
                             <TabHeader>
@@ -139,8 +159,13 @@ export function Form({ id , access=true }) {
                                             <Input type="hidden" defaultValue={defaultPromotionId} refItem={[component, `promotion_id`]} />
                                         </>
                                     }
-                                    {/* <Input label="score" refItem={[component, `level_id`]} value={totalScore} readOnly /> */}
-                                    <Input label="score" refItem={[component, `level_id`]} />
+                                     <Input 
+                                        label="score" 
+                                        refItem={[component, `level_id`]} 
+                                        value={totalScore} 
+                                        disabled={true} 
+                                    />
+                                    {/* <Input label="score" refItem={[component, `level_id`]} /> */}
                                     <Radio
                                         type="col"
                                         label="confirm_status"

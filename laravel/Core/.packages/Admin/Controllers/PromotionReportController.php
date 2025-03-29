@@ -87,7 +87,7 @@ class PromotionReportController extends BaseAbstract
                 try {
                     $courses = $this->getRepeatValues([
                         'c_province', 'c_city_id', 'c_city', 'c_village',
-                        'c_subject', 'c_place_name', 'c_duration', 'c_people_count', 'c_audiencetype_id'
+                        'c_subject', 'c_place_name', 'c_duration', 'c_people_count', 'c_audiencetype_id','c_score'
                     ]);
         
                     if (!empty($courses)) {
@@ -103,6 +103,7 @@ class PromotionReportController extends BaseAbstract
                                 'duration' => $value['c_duration'] ?? null,
                                 'people_count' => $value['c_people_count'] ?? null,
                                 'audiencetype_id' => $value['c_audiencetype_id'] ?? null,
+                                'score' => $value['c_score'] ?? 0,
                                 'promotion_id' => $promotion,
                                 'promoter_id' => $promoter_id,
                                 'promotion_report_id' => $query->id,
@@ -122,7 +123,7 @@ class PromotionReportController extends BaseAbstract
                 try {
                     $tribune = $this->getRepeatValues([
                         'tr_province', 'tr_city_id', 'tr_city', 'tr_village',
-                        'tr_subject', 'tr_place_name', 'tr_duration', 'tr_people_count', 'tr_audiencetype_id'
+                        'tr_subject', 'tr_place_name', 'tr_duration', 'tr_people_count', 'tr_audiencetype_id','tr_score'
                     ]);
         
                     if (!empty($tribune)) {
@@ -138,6 +139,7 @@ class PromotionReportController extends BaseAbstract
                                 'duration' => $value['tr_duration'] ?? null,
                                 'people_count' => $value['tr_people_count'] ?? null,
                                 'audiencetype_id' => $value['tr_audiencetype_id'] ?? null,
+                                'score' => $value['tr_score'] ?? 0,
                                 'promotion_id' => $promotion,
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,
@@ -157,7 +159,7 @@ class PromotionReportController extends BaseAbstract
                 // ************************************ Ritual ************************************
                 try {
                     $ritual = $this->getRepeatValues([
-                        'r_province', 'r_city_id', 'r_city', 'r_village', 'r_ritual_id', 'r_description', 'r_place_name'
+                        'r_province', 'r_city_id', 'r_city', 'r_village', 'r_ritual_id', 'r_description', 'r_place_name','r_score'
                     ]);
         
                     if (!empty($ritual)) {
@@ -171,6 +173,7 @@ class PromotionReportController extends BaseAbstract
                                 'place_name' => $value['r_place_name'] ?? null,
                                 'description' => $value['r_description'] ?? null,
                                 'ritual_id' => $value['r_ritual_id'] ?? null,
+                                'score' => $value['r_score'] ?? 0,
                                 'promotion_id' => $promotion,
                                 'promotion_report_id' => $query->id,
                                 'year' => $promotionRecord->year,

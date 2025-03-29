@@ -175,10 +175,9 @@ class PromoterController extends BaseAbstract
     }
     public function importExcel(Request $request)
     {
-         // اعتبارسنجی برای اطمینان از اینکه فایل اکسل آپلود شده است
-         $request->validate([
+        // اعتبارسنجی
+        $request->validate([
             'excel_file' => 'required',
-            
         ]);
 
         $filename = rtrim($request->input('excel_file'), '###');
@@ -189,80 +188,54 @@ class PromoterController extends BaseAbstract
         }
 
         $data = Excel::toArray([], $filePath);
-        
-        if (empty($data) || empty($data[0])) {
+
+        // dd($data);
+
+        if (empty($data)) {
             return response()->json(['message' => 'فایل اکسل خالی است یا فرمت آن صحیح نیست.'], 400);
         }
 
-        $rows = $data[0];
+        $rows = array_slice($data[0], 1); // حذف ردیف اول (عنوان ستون‌ها)
         $userData = [];
         $skippedCount = 0;
-        $batchSize = 100; // اندازه بچ برای درج
+        $existingMobiles = $this->model::pluck('mobile')->toArray(); // گرفتن شماره‌های موجود در دیتابیس
         $tempUserData = [];
 
-        foreach ($rows as $index => $row) {
-            if ($index == 0) continue;
-
+        foreach ($rows as $row) {
             if (count($row) < 3) {
                 $skippedCount++;
                 continue;
             }
 
-            $mobile = $row[2] ?? null;
-            
-            if (empty($mobile)) {
-                $skippedCount++;
-                continue;
-            }
+            $mobile = trim($row[2] ?? '');
 
-            // بررسی وجود موبایل در دیتابیس (بهینه‌تر)
-            if ($this->model::where('mobile', $mobile)->exists()) {
-                $skippedCount++;
-                continue;
-            }
-
-            // بررسی تکراری بودن در همین فایل
-            if (isset($tempUserData[$mobile])) {
+            if (empty($mobile) || in_array($mobile, $existingMobiles) || isset($tempUserData[$mobile])) {
                 $skippedCount++;
                 continue;
             }
 
             $tempUserData[$mobile] = true;
-            
+
             $userData[] = [
-                'firstname' => $row[0] ?? null,
-                'lastname'  => $row[1] ?? null,
-                'mobile'    => $mobile,
+                'firstname'  => $row[0] ?? null,
+                'lastname'   => $row[1] ?? null,
+                'mobile'     => $mobile,
                 'role_id'    => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
-
-            // درج دسته‌ای (batch insert)
-            if (count($userData) >= $batchSize) {
-                try {
-                    $this->model::insert($userData);
-                    $userData = []; // پاک کردن آرایه برای بچ بعدی
-                } catch (\Exception $e) {
-                    // لاگ خطا
-                }
-            }
         }
 
-        // درج باقی‌مانده‌ها
         if (!empty($userData)) {
-            try {
-                $this->model::insert($userData);
-            } catch (\Exception $e) {
-                // لاگ خطا
-            }
+            $this->model::insert($userData);
         }
 
         return response()->json([
             'message' => 'عملیات وارد کردن داده‌ها تکمیل شد',
-            'inserted_count' => count($tempUserData),
+            'inserted_count' => count($userData),
             'skipped_count' => $skippedCount
         ]);
     }
+
     
 }

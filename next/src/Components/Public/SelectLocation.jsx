@@ -53,6 +53,7 @@ export function SelectLocation({
                 data={needles?.province}
                 titleKey={"name_fa"}
                 onChange={(e) => filterCity(e)}
+                key={"key"+Math.random()}
             />
             <SelectTail
                 required="true"
