@@ -575,31 +575,32 @@ abstract class BaseAbstract extends Controller
             $items = $modelObject->orderBy($sort, $sortType);
         }
 
-
         $search = $request->search;
         if($search != "")
         {
-            $i = 0;
-            foreach ($searchTerm as $field) {
-                $i++;
-                if($this->needJoin($sort)){
-                    if($i==1)
-                        $items->whereJoin($field, 'like', "%$search%");
-                    else
-                        $items->orWhereJoin($field, 'like', "%$search%");
-                }
-                else{
-                    if($i==1){
-                        if($searchCondition) $items->where($field, 'like', "%$search%")->where($searchCondition[0],$searchCondition[1],$searchCondition[2]);
-                        else $items->where($field, 'like', "%$search%");
+            $items->where(function($query) use($searchTerm, $sort, $searchCondition, $search){
+                $i = 0;
+                foreach ($searchTerm as $field) {
+                    $i++;
+                    if($this->needJoin($sort)){
+                        if($i==1)
+                            $query->whereJoin($field, 'like', "%$search%");
+                        else
+                            $query->orWhereJoin($field, 'like', "%$search%");
                     }
                     else{
-                        if($searchCondition) $items->orWhere($field, 'like', "%$search%")->where($searchCondition[0],$searchCondition[1],$searchCondition[2]);
-                        else $items->orWhere($field, 'like', "%$search%");
+                        if($i==1){
+                            if($searchCondition) $query->where($field, 'like', "%$search%")->where($searchCondition[0],$searchCondition[1],$searchCondition[2]);
+                            else $query->where($field, 'like', "%$search%");
+                        }
+                        else{
+                            if($searchCondition) $query->orWhere($field, 'like', "%$search%")->where($searchCondition[0],$searchCondition[1],$searchCondition[2]);
+                            else $query->orWhere($field, 'like', "%$search%");
+                        }
+                            
                     }
-                        
                 }
-            }
+            });
         }
         $result = $items->paginate($number);
 

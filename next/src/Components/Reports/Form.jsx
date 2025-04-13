@@ -105,7 +105,7 @@ export function Form({ id , access=true }) {
             }
         }));
     }, [data?.courses, data?.tribunes, data?.ritual_reports, calculateTotalScore]);
-    console.log(data?.level_id);
+    // console.log(data?.level_id);
 
     return (
         <>

@@ -42,7 +42,7 @@ class AuthenticatedController extends Controller
         return response()->noContent();
     }
 
-    public function loginWithCode(Request $request)
+public function loginWithCode(Request $request)
 {
     $mobile = $request->input('mobile');
     $user = User::where('mobile', $mobile)->first();
