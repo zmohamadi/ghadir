@@ -112,8 +112,12 @@ class PromotionReportController extends BaseAbstract
                             ];
                             $coursesArray[] = $course;
                         }
-                        Course::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
-                        Course::insert($coursesArray);
+                        try {
+                            Course::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+                            Course::insert($coursesArray);
+                            } catch (\Exception $e) {
+                            dd("Insert error: " . $e->getMessage(), $e->getTraceAsString());
+                        }
                     }
                 } catch (\Exception $e) {
                     throw new \Exception("Error processing courses: " . $e->getMessage());
@@ -149,8 +153,12 @@ class PromotionReportController extends BaseAbstract
         
                             $tribuneArray[] = $tribuneData;
                         }
-                        Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
-                        Tribune::insert($tribuneArray);
+                        try {
+                            Tribune::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+                            Tribune::insert($tribuneArray);
+                        } catch (\Exception $e) {
+                            dd("Insert error: " . $e->getMessage(), $e->getTraceAsString());
+                        }
                     }
                 } catch (\Exception $e) {
                     throw new \Exception("Error processing tribune: " . $e->getMessage());
@@ -183,8 +191,12 @@ class PromotionReportController extends BaseAbstract
         
                             $ritualArray[] = $ritualData;
                         }
-                        RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
-                        RitualReport::insert($ritualArray);
+                        try {
+                            RitualReport::where(['promotion_id' => $promotion, 'promoter_id' => $promoter_id])->forceDelete();
+                            RitualReport::insert($ritualArray);
+                        } catch (\Exception $e) {
+                            dd("Insert error: " . $e->getMessage(), $e->getTraceAsString());
+                        }
                     }
                 } catch (\Exception $e) {
                     throw new \Exception("Error processing rituals: " . $e->getMessage());

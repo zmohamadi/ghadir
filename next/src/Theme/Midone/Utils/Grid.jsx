@@ -186,6 +186,13 @@ const GridHeader = ({
             getInfo(1);
         }
     };
+    const goTo = (e) => {
+        if (e.which === 13) {
+            const text = e.target.value;
+            state.page = text;
+            getInfo(text);
+        }
+    };
 
     return (
         <div className={'flex flex-row items-center p-1 pr-0 border-b border-gray-200'} key='header'>
@@ -198,6 +205,13 @@ const GridHeader = ({
                     onKeyUp={search}
                 />
             )}
+            <input
+                className='form-control w-48'
+                type='text'
+                placeholder={Lang('public.go_to_page')}
+                id='search_key'
+                onKeyUp={goTo}
+            />
 
             {activeSort && (
                 <div className='dropdown'>

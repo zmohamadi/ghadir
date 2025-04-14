@@ -97,7 +97,7 @@ return [
     'email' => 'ایمیل',
     'phone' => 'تلفن',
     'mobile' => 'موبایل',
-    'address' => 'آدرس',
+    'address'=>'آدرس دقیق پستی',
     'username' => 'نام کاربری',
     'password' => 'رمز عبور',
     'password_repeat' => 'تأیید رمز عبور',
@@ -159,6 +159,7 @@ return [
     'select_option'=>'انتخاب گزینه',
     'creator'=>'پرسنل',
     'clear_filter'=>'حذف فیلتر',
-    'new_ticket'=>'تیکت جدید',    
+    'new_ticket'=>'تیکت جدید',
+    'go_to_page'=>'برو به صفحه...',
 ];
 ?>
