@@ -26,7 +26,7 @@ const Textarea = (props)=>{
             <textarea
                 id = {id}
                 ref={Element.createRef(refItem)}
-                key={'textarea-'+rand}
+                // key={'textarea-'+rand}
                 placeholder = {placeholder}
                 defaultValue = {state.value}                
                 rows = {row}
