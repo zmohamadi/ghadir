@@ -179,9 +179,9 @@ export function Form({id}){
                 ))}
                 
                 <hr className="col-span-12 my-6 border-t-4 border-gray-300 shadow-lg font-bold" />
-                <Textarea label="address" refItem={[component, "address"]} className="col-span-12 sm:col-span-6 w-full" />
+                <Textarea required="true" label="address" refItem={[component, "address"]} className="col-span-12 sm:col-span-6 w-full" />
                 
-                <Dropzone className="col-span-12 sm:col-span-12 w-full" required="true" refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
+                <Dropzone className="col-span-6" required="true" refItem={[component, "photo"]} uploadUrl={uploadUrl} deleteUrl={deleteUrl + "/"} uploadDir={uploadDir} />
                 <Radio className="col-span-12 sm:col-span-6 w-full" defaultValue={data?.gender_id ? data?.gender_id : 1} required="true" type="col" label="gender" id="gender_id" refItem={[component, `gender_id`]} data={needles?.gender} titleKey={"title_" + local} key={"gender_id" + data?.gender_id} />
                 
                 {access && <>

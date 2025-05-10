@@ -146,7 +146,7 @@ export function Menu({prefix, menus})
                                                         <div className={adminMenuType+'-menu__icon'}>
                                                             <CICN className="px-auto inline" />
                                                         </div>
-                                                        <div className={adminMenuType+'-menu__title'}> {Lang('public.'+child.title)} </div>
+                                                        <div className={adminMenuType+'-menu__title'}> {Lang('public.'+child.title)} {child?.count!=null &&  <span className='text-xs px-1 rounded-full bg-theme-24 text-white ml-1'>{child?.count}</span>}  </div>
                                                     </Link>
                                                 </li>
                                             })}

@@ -36,6 +36,7 @@ class PromoterRequest extends FormRequest
             'bank_account_number' => 'required',
             'bank_cart_number' => 'required',
             'photo' => 'required',
+            'address' => 'required',
             'khadamat_code' => 'required_if:has_khadamat_code,1',
             'tablighat_office_code' => 'required_if:has_tablighat_office_code,1',
             'tablighat_organization_code' => 'required_if:has_tablighat_organization_code,1',

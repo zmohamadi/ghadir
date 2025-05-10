@@ -34,9 +34,15 @@ class PromoterController extends BaseAbstract
     {
         // Function to handle custom query logic for storing records
         $this->storeQuery = function ($query) {
+        
+            // dd(45);
             // Apply operators for filtering or modifying the query
             $query = $this->setOperator($query);
-            if (request()->_method != "PUT") {
+            if (request()->_method == "PUT") {
+                
+                $query->complete_profile = 1;
+            }
+            if (request()->_method != "PUT" && $this->role_id==1) {
                 $query->password = bcrypt(request()->mobile);
             }
             $query->save();

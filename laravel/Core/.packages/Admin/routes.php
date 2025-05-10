@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get("get-count", "Base\HomeController@getCount");
+
 Route::get("home", "Person\UserController@home");
 Route::get('/export-promoters', "Person\PromoterController@exportExcel");
 Route::get('/export-agree', "PromotionAgreeController@exportExcel");

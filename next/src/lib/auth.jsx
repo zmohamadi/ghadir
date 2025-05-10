@@ -11,7 +11,7 @@ import { useLang } from '.';
 
 export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
     const router = useRouter();
-    const { laraAdmin, nextAdmin } = useConfig();
+    const { laraAdmin, nextAdmin ,nextDomain} = useConfig();
     const csrf = () => axios.get('/sanctum/csrf-cookie');
     const { Lang } = useLang();
 
@@ -124,7 +124,8 @@ export function useAuth ({ middleware, redirectIfAuthenticated, guard } = {}) {
 
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user) {
-            router.push(redirectIfAuthenticated);
+            if(user?.complete_profile==0 && user?.role_id==2) router.push(`${nextDomain}${nextAdmin}/profile`);
+            else router.push(redirectIfAuthenticated);
         }
         if (window.location.pathname === '/verify-email' && user?.email_verified_at) {
             router.push(redirectIfAuthenticated);

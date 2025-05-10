@@ -1,6 +1,6 @@
 'use client'
 
-export const getMenus = (user) => {
+export const getMenus = (user,needles) => {
     const access = user?.role_id==1 ? true : false; 
 
     const admin = [
@@ -23,14 +23,14 @@ export const getMenus = (user) => {
             title: "blogs", icon: "Pocket", open: false, 
             childs: [
                 { title: "blogs", icon: "List", href: "/blogs" },
-                { title: "waiting_comments", icon: "BookOpen", href: "/blogComments" },
+                { title: "waiting_comments", icon: "BookOpen", href: "/blogComments" , count:needles?.[2]?.['count'] },
             ]
         },
         {
             title: "tickets", icon: "Tag", open: false, 
             childs: [
-                { title: "tickets", icon: "List", href: "/tickets" },
-                { title: "waiting_tickets", icon: "List", href: "/waitingTickets" },
+                { title: "tickets", icon: "List", href: "/tickets", count:needles?.[0]?.['count'] },
+                { title: "waiting_tickets", icon: "List", href: "/waitingTickets", count:needles?.[1]?.['count'] },
                 { title: "ticket_subjects", icon: "Tag", href: "/ticketSubjects" },
             ]
         },

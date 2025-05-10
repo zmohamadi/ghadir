@@ -11,6 +11,7 @@ use Models\Content\Blog;
 use Models\RitualReport;
 use Models\Person\Promoter;
 use Models\PromotionAgree;
+use Models\Base\TotalCount;
 
 class HomeController extends Controller
 {
@@ -171,6 +172,11 @@ class HomeController extends Controller
         $update = Notif::where('id', $id)->update(['display' => 0]);
 
         return response()->json(['message'=>$update , 'success'=>200]);
+    }
+    public function getCount(){
+        $collection = TotalCount::get();
+        return response()->json($collection);
+
     }
 
 }

@@ -9,11 +9,14 @@ import { getMenus } from "@/lib/menus";
 import { useAuth } from "@/lib/auth";
 import { useRouter } from 'next/navigation'
 import { Loading } from "../../Loading";
+import { useData } from "@/Theme/Midone";
 
 export default function Panel({children}){
     
-    const { adminMenuType, nextAdmin, laraDomain, nextDomain } = useConfig();
+    const { adminMenuType, nextAdmin, laraDomain, nextDomain,laraAdmin } = useConfig();
     const [menuType, setMenuType] = useState(adminMenuType);
+    let [needles, setNeedles] = useState([]);
+    let {getNeedles} = useData();
 
     const { user, logout } = useAuth({ guard: "admin" });
     const router = useRouter();
@@ -26,6 +29,8 @@ export default function Panel({children}){
                 laraDomain + "/admin/Midone-v3/Icewall_v1.0.9_min/dist/js/app.js",
                 // () => loadTheme()
             );
+            getNeedles(laraAdmin+'/get-count', setNeedles);
+
         }
     }, [user]);
 
@@ -39,7 +44,9 @@ export default function Panel({children}){
         return <Loading />;
     }
 
-    const menus = getMenus(user);
+    // console.log(needles);
+
+    const menus = getMenus(user,needles);
 
     return (
         <React.Fragment key={"app_frame"}>
