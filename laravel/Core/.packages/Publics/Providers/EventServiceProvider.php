@@ -22,6 +22,12 @@ use Admin\Listeners\Quiz\AnswerListener as QuizAnswerdListener;
 use Admin\Events\Quiz\Score as QuizScore;
 use Admin\Listeners\Quiz\ScoreListener as QuizScoreListener;
 
+use Admin\Events\CounterMenu\CounterTicket as CounterTicket;
+use Admin\Listeners\CounterMenu\CounterTicketListener as CounterTicketListener;
+
+use Admin\Events\CounterMenu\CounterBlogComment as CounterBlogComment;
+use Admin\Listeners\CounterMenu\CounterBlogCommentListener as CounterBlogCommentListener;
+
 // use Admin\Events\StudentScore;
 // use Admin\Listeners\StudentScoreListener;
 
@@ -53,5 +59,11 @@ class EventServiceProvider extends ServiceProvider
         // CourseScore::class => [
         //     [CourseScoreListener::class, 'handle'],
         // ],
+        CounterTicket::class => [
+            [CounterTicketListener::class, 'handle'],
+        ],
+        CounterBlogComment::class => [
+            [CounterBlogCommentListener::class, 'handle'],
+        ],
     ];
 }

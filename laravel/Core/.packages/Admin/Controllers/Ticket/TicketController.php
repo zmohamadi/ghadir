@@ -9,6 +9,7 @@ use Models\Ticket\TicketSubject;
 use Models\Ticket\TicketItem;
 use Models\Base\Status;
 use Models\User;
+use Admin\Events\CounterMenu\CounterTicket;
 
 class TicketController extends BaseAbstract
 {
@@ -53,6 +54,8 @@ class TicketController extends BaseAbstract
             $updateCount = new PublicController();
             $updateCount->updateCountTicket();
             $updateCount->updateCountTicketAwaiting();
+            // CounterTicket By EVENT
+            event(new CounterTicket());
         };
     }
     /**
@@ -129,6 +132,8 @@ class TicketController extends BaseAbstract
 
             $updateCount = new PublicController();
             $updateCount->updateCountTicket();
+            // CounterTicket By EVENT
+            event(new CounterTicket());
 
             \DB::commit();
 		}

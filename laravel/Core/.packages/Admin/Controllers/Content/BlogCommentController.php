@@ -5,6 +5,7 @@ namespace Admin\Controllers\Content;
 use Illuminate\Support\Facades\Validator;
 use Admin\Controllers\Public\BaseAbstract;
 use Admin\Controllers\Public\PublicController;
+use Admin\Events\CounterMenu\CounterBlogComment;
 
 class BlogCommentController extends BaseAbstract
 {
@@ -43,6 +44,8 @@ class BlogCommentController extends BaseAbstract
             $updateCount->updateCountCommentWaiting();
             $updateCount->updateCountCommentConfirmed();
             $updateCount->updateCountCommentRejected();
+            // CounterBlogComment By EVENT
+            event(new CounterBlogComment());
         };
     }
     /**
@@ -92,6 +95,8 @@ class BlogCommentController extends BaseAbstract
             $updateCount->updateCountCommentWaiting();
             $updateCount->updateCountCommentConfirmed();
             $updateCount->updateCountCommentRejected();
+            // CounterBlogComment By EVENT
+            event(new CounterBlogComment());
             
             \DB::commit();
 		}
@@ -114,6 +119,8 @@ class BlogCommentController extends BaseAbstract
             $updateCount->updateCountCommentWaiting();
             $updateCount->updateCountCommentConfirmed();
             $updateCount->updateCountCommentRejected();
+            // CounterBlogComment By EVENT
+            event(new CounterBlogComment());
 
             \DB::commit();
         }
