@@ -18,31 +18,9 @@ export function Login({Lang}) {
     let [errors, setErrors] = useState({});
     let [status, setStatus] = useState(null);
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let newValue = value;
-        let newErrors = { ...errors }; // کپی ارورها
-    
-        if (name === 'mobile') {
-            // فقط اعداد انگلیسی
-            if (/[^0-9]/.test(value)) {
-                newErrors[name] = "لطفاً فقط اعداد انگلیسی وارد کنید.";
-            } else {
-                delete newErrors[name];
-            }
-            // فیلتر کردن مقدار برای حذف کاراکترهای غیر مجاز
-            newValue = newValue.replace(/[^0-9]/g, '');
-        }
-    
-        setErrors(newErrors);
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: newValue,
-        }));
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const handleSubmit = (e) => {

@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     // اعتبارسنجی داده‌ها
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'firstname' => ['required', 'max:255'],
+    //         'lastname' => ['required', 'max:255'],
+    //         'mobile' => ['required', 'regex:/^(09)[0-9]{9}$/', 'unique:users,mobile,NULL,id,deleted_at,NULL'],
+    //         'password' => ['required', 'string', 'min:6'],
+    //         'is_not_citizen' => [''],
+    //         'codemeli' => [''],
+    //     ]);
+    // }
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -19,8 +30,46 @@ class RegisterController extends Controller
             'lastname' => ['required', 'max:255'],
             'mobile' => ['required', 'regex:/^(09)[0-9]{9}$/', 'unique:users,mobile,NULL,id,deleted_at,NULL'],
             'password' => ['required', 'string', 'min:6'],
+            'is_not_citizen' => ['nullable'],
+            'codemeli' => [
+                'required',
+                'digits:10',
+                function ($attribute, $value, $fail) use ($data) {
+                    if (!empty($data['is_not_citizen'])) {
+                        // اگر اتباع است، فقط بررسی ۱۰ رقمی کافی است (که بالا انجام شده)
+                        return;
+                    }
+
+                    // بررسی کد ملی ایران
+                    if (!preg_match('/^[0-9]{10}$/', $value)) {
+                        return $fail('فرمت کد ملی معتبر نیست.');
+                    }
+
+                    for ($i = 0; $i < 10; $i++) {
+                        if (preg_match('/^' . $i . '{10}$/', $value)) {
+                            return $fail('کد ملی معتبر نیست.');
+                        }
+                    }
+
+                    $sum = 0;
+                    for ($i = 0; $i < 9; $i++) {
+                        $sum += (10 - $i) * intval(substr($value, $i, 1));
+                    }
+
+                    $remainder = $sum % 11;
+                    $parity = intval(substr($value, 9, 1));
+
+                    if (!(
+                        ($remainder < 2 && $parity == $remainder) ||
+                        ($remainder >= 2 && $parity == 11 - $remainder)
+                    )) {
+                        return $fail('کد ملی معتبر نیست.');
+                    }
+                }
+            ],
         ]);
     }
+
 
     public function register(Request $request)
     {
@@ -57,6 +106,8 @@ class RegisterController extends Controller
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'mobile' => $data['mobile'],
+            'is_not_citizen' => $data['is_not_citizen'],
+            'codemeli' => $data['codemeli'],
             'role_id' => 2,
             'status_id' => -1,
             'register_date'=>now(),

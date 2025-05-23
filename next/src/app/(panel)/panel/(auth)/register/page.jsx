@@ -22,47 +22,16 @@ export default function Main() {
         firstname: '',
         lastname: '',
         mobile: '',
+        codemeli: '',
         password: ''
     });
 
     const [errors, setErrors] = useState({});
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let newValue = value;
-        let newErrors = { ...errors }; // کپی ارورها
-    
-        if (name === 'mobile') {
-            // فقط اعداد انگلیسی
-            if (/[^0-9]/.test(value)) {
-                newErrors[name] = "لطفاً فقط اعداد انگلیسی وارد کنید.";
-            } else {
-                delete newErrors[name];
-            }
-            // فیلتر کردن مقدار برای حذف کاراکترهای غیر مجاز
-            newValue = newValue.replace(/[^0-9]/g, '');
-        } else if (name === 'firstname' || name === 'lastname') {
-            // فقط حروف فارسی و فاصله
-            if (/[^آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی\s]/.test(value)) {
-                newErrors[name] = "لطفاً فقط حروف فارسی وارد کنید.";
-            } else {
-                delete newErrors[name];
-            }
-            newValue = newValue.replace(/[^آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی\s]/g, '');
-        }
-    
-        setErrors(newErrors);
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: newValue,
-        }));
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
-    
-    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -107,6 +76,40 @@ export default function Main() {
                 {renderInput("lastname")}
                 {renderInput("mobile")}
                 {renderInput("password", "password")}
+
+                {/* چک‌باکس اتباع */}
+                <div className="flex items-center mt-4">
+                    <input
+                        type="checkbox"
+                        id="is_not_citizen"
+                        name="is_not_citizen"
+                        checked={formData.is_not_citizen || false}
+                        onChange={(e) =>
+                            setFormData({ ...formData, is_not_citizen: e.target.checked })
+                        }
+                        className="form-check-input"
+                    />
+                    <label htmlFor="is_not_citizen" className="mr-2 text-sm">
+                        اتباع هستم
+                    </label>
+                </div>
+
+                {/* ورودی کد ملی */}
+                <input
+                    dir="rtl"
+                    type={"text"}
+                    name="codemeli"
+                    value={formData.codemeli || ""}
+                    onChange={handleChange}
+                    className="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
+                    placeholder={Lang("public.codemeli")}
+                />
+                {errors?.codemeli && (
+                    <div className="pristine-error text-theme-24 mt-2">
+                        {errors.codemeli}
+                    </div>
+                )}
+
                 <div className="intro-x mt-5 xl:mt-8 text-left xl:text-left flex justify-between items-center">
                     <button
                         type="submit"

@@ -35,6 +35,28 @@ class User extends Authenticatable implements MustVerifyEmail
         'register_date' => 'timestamp',
     ];
 
+    public function setFirstnameAttribute($value)
+    {
+        $this->attributes['firstname'] = str_replace(['ي', 'ك'], ['ی', 'ک'], $value);
+    }
+    public function setLastnameAttribute($value)
+    {
+        $this->attributes['lastname'] = str_replace(['ي', 'ك'], ['ی', 'ک'], $value);
+    }
+
+    public function setMobileAttribute($value)
+    {
+        $persian = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
+        $this->attributes['mobile'] = str_replace($persian, $english, $value);
+    }
+    public function setCodemeliAttribute($value)
+    {
+        $persian = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        $english = ['0','1','2','3','4','5','6','7','8','9'];
+        $this->attributes['codemeli'] = str_replace($persian, $english, $value);
+    }
+
     /**
      * Relationships
      */

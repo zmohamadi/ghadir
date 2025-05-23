@@ -578,6 +578,14 @@ abstract class BaseAbstract extends Controller
         $search = $request->search;
         if($search != "")
         {
+            // اصلاح حروف عربی به فارسی
+            $search = str_replace(['ي', 'ك'], ['ی', 'ک'], $search);
+
+            // اصلاح اعداد فارسی به انگلیسی
+            $persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+            $englishDigits = ['0','1','2','3','4','5','6','7','8','9'];
+            $search = str_replace($persianDigits, $englishDigits, $search);
+
             $items->where(function($query) use($searchTerm, $sort, $searchCondition, $search){
                 $i = 0;
                 foreach ($searchTerm as $field) {

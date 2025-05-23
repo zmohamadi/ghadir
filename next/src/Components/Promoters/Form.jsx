@@ -108,7 +108,7 @@ export function Form({id}){
                                 items={[component, ['promotion_position_*', 'place_name_*', 'pos_province_*', 'pos_city_id_*', 
                                     'pos_city_*', 'pos_village_*']]} />
                             <TabList href="tab-third" title={Lang('cultural_users')}
-                                items={[component, ['c_name_*', 'c_family_*', 'c_job_position_*']]} />
+                                items={[component, ['c_name_*', 'c_family_*','c_phone_*', 'c_job_position_*']]} />
                             {user?.role_id==1 && <>
                                 <TabList href="tab-fourth" title={Lang('notes')} />
                             </>}

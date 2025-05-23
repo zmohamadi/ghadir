@@ -179,45 +179,13 @@ const GridHeader = ({
 }) => {
     const { Lang, dir } = useLang();
 
-    // const search = (e) => {
-    //     if (e.which === 13) {
-    //         const text = e.target.value;
-    //         state.search = text;
-    //         getInfo(1);
-    //     }
-    // };
     const search = (e) => {
         if (e.which === 13) {
-            const text = e.target.value.trim();
-    
-            if (!text) return;
-    
-            const isNumber = /^[0-9۰-۹]+$/.test(text);
-            const hasArabicChars = /[يك]/.test(text);
-            const isPersianLetters = /^[آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی\s]+$/.test(text);
-    
-            if (isNumber) {
-                // اعداد فقط انگلیسی باید باشن
-                if (/[۰-۹]/.test(text)) {
-                    alert("لطفاً اعداد را به صورت انگلیسی وارد کنید.");
-                    return;
-                }
-            } else {
-                if (hasArabicChars) {
-                    alert("لطفاً از حروف فارسی استفاده کنید (حروف عربی وارد نشود).");
-                    return;
-                }
-                if (!isPersianLetters) {
-                    alert("لطفاً فقط حروف فارسی یا فقط اعداد انگلیسی وارد کنید.");
-                    return;
-                }
-            }
-    
+            const text = e.target.value;
             state.search = text;
             getInfo(1);
         }
-    };    
-    
+    };
     const goTo = (e) => {
         if (e.which === 13) {
             const text = e.target.value;
