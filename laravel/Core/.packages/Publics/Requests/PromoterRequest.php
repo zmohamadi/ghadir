@@ -27,7 +27,8 @@ class PromoterRequest extends FormRequest
         $id = $url[2] ?? null;
         // dd($url);
         $role_id = auth("admin")->user()->role_id;
-
+        $data = request()->all();
+        
         $rules = [
             'firstname' => 'required',
             'lastname' => 'required',
@@ -41,16 +42,45 @@ class PromoterRequest extends FormRequest
             'tablighat_office_code' => 'required_if:has_tablighat_office_code,1',
             'tablighat_organization_code' => 'required_if:has_tablighat_organization_code,1',
             'ovghaf_code' => 'required_if:has_ovghaf_code,1',
-
+        
             'codemeli' => [
                 'bail',
                 'digits:10',
                 'numeric',
-                'required_if:is_not_citizen,0', // الزامی بودن کدملی برای شهروندان
+                'required_if:is_not_citizen,0',
                 Rule::unique('users', 'codemeli')->ignore($id)->whereNull('deleted_at'),
+                function ($attribute, $value, $fail) use ($data) {
+                    if (!isset($data['is_not_citizen']) || $data['is_not_citizen'] == '0') {
+                        // بررسی کد ملی ایران
+                        if (!preg_match('/^[0-9]{10}$/', $value)) {
+                            return $fail('فرمت کد ملی معتبر نیست.');
+                        }
+        
+                        for ($i = 0; $i < 10; $i++) {
+                            if (preg_match('/^' . $i . '{10}$/', $value)) {
+                                return $fail('کد ملی معتبر نیست.');
+                            }
+                        }
+        
+                        $sum = 0;
+                        for ($i = 0; $i < 9; $i++) {
+                            $sum += (10 - $i) * intval(substr($value, $i, 1));
+                        }
+        
+                        $remainder = $sum % 11;
+                        $parity = intval(substr($value, 9, 1));
+        
+                        if (!(
+                            ($remainder < 2 && $parity == $remainder) ||
+                            ($remainder >= 2 && $parity == 11 - $remainder)
+                        )) {
+                            return $fail('کد ملی معتبر نیست.');
+                        }
+                    }
+                }
             ],
+        
             'is_not_citizen' => 'required_without:codemeli',
-            // 'mobile' => "required|min:11|max:11|unique:users,mobile," . ($id ?? "NULL") . ",id,deleted_at,NULL",
         ];
         if($role_id==1){
 
