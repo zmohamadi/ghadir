@@ -27,10 +27,42 @@ export default function Main() {
 
     const [errors, setErrors] = useState({});
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    // };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
+        let newValue = value;
+        let newErrors = { ...errors }; // کپی ارورها
+    
+        if (name === 'mobile') {
+            // فقط اعداد انگلیسی
+            if (/[^0-9]/.test(value)) {
+                newErrors[name] = "لطفاً فقط اعداد انگلیسی وارد کنید.";
+            } else {
+                delete newErrors[name];
+            }
+            // فیلتر کردن مقدار برای حذف کاراکترهای غیر مجاز
+            newValue = newValue.replace(/[^0-9]/g, '');
+        } else if (name === 'firstname' || name === 'lastname') {
+            // فقط حروف فارسی و فاصله
+            if (/[^آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی\s]/.test(value)) {
+                newErrors[name] = "لطفاً فقط حروف فارسی وارد کنید.";
+            } else {
+                delete newErrors[name];
+            }
+            newValue = newValue.replace(/[^آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی\s]/g, '');
+        }
+    
+        setErrors(newErrors);
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: newValue,
+        }));
     };
+    
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -62,7 +94,7 @@ export default function Main() {
             )}
         </>
     );
-console.log(status);
+// console.log(status);
 
     return (
         <>

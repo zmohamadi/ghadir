@@ -13,6 +13,13 @@ class PromotionAgree extends Model
         'deleted_at' => 'timestamp','created_at' => 'datetime',
 
     ];
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($record) {
+            $record->rituals()->detach();
+        });
+    }
     public function rituals()
     {
         return $this->belongsToMany(\Models\Ritual::class,"promotion_agree_item",'agree_id',"ritual_id");

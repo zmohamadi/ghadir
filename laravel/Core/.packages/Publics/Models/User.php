@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $guarded = ['created_at', 'updated_at', 'deleted_at', 'id'];
     protected $hidden  = ['updated_at', 'deleted_at','password'];
-    protected $dates   = ['deleted_at'];
+    protected $dates   = ['deleted_at','register_date'];
     protected $table   = 'users';
     const PERSONNEL = 1;
     const PROMOTER = 2;
@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'is_not_citizen' => 'boolean',
         'deleted_at' => 'timestamp',
+        'register_date' => 'timestamp',
     ];
 
     /**

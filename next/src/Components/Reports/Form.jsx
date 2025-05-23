@@ -114,7 +114,8 @@ export function Form({ id , access=true }) {
                 : <>
                    
                     <Frame title={Lang(["public.reports"])}>
-                        <Tab className="col-span-12">
+                        {data?.promoter && <div className="col-span-12 alert alert-primary-soft show flex items-center"> {Lang(["public.promoter"])} : {data?.promoter?.firstname} {data?.promoter?.lastname} ({Lang(["public.mobile"])} : {data?.promoter?.mobile} )</div> }
+                        <Tab className="col-span-12 mt-0">
                             <TabHeader>
                                 <TabList href="tab-second" title={Lang("public.courses")} active={"true"} items={[component, ['c_subject_*', 'c_people_count_*', 'c_duration_*', 'c_province_*', 'c_city_id_*', 'c_city_*', 'c_village_*']]} />
                                 <TabList href="tab-third" title={Lang("public.tribunes")} items={[component, ['tr_subject_*', 'tr_people_count_*', 'tr_duration_*', 'tr_province_*', 'tr_city_id_*', 'tr_city_*', 'tr_village_*']]} />

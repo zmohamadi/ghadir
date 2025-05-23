@@ -30,7 +30,9 @@ class PromotionReportRequest extends FormRequest
             $rules["level_id"] = 'required';
             $rules["confirm_id"] = 'required';
             $rules["promotion_id"] = 'required';
-            
+            $rules["c_score_{$key}"] = 'required|integer';
+            $rules["tr_score_{$key}"] = 'required|integer';
+            $rules["r_score_{$key}"] = 'required';
         }
 
         
@@ -54,7 +56,6 @@ class PromotionReportRequest extends FormRequest
                 $rules["c_city_id_{$key}"] = 'required';
                 $rules["c_place_name_{$key}"] = 'required';
                 $rules["c_people_count_{$key}"] = 'required|integer';
-                $rules["c_score_{$key}"] = 'required|integer';
         
                 // شهر یا روستا: یکی باید پر شود
                 $rules["c_city_{$key}"] = "required_without:c_village_{$key}";
@@ -75,7 +76,6 @@ class PromotionReportRequest extends FormRequest
                 $rules["tr_place_name_{$key}"] = 'required';
                 $rules["tr_city_id_{$key}"] = 'required';
                 $rules["tr_people_count_{$key}"] = 'required|integer';
-                $rules["tr_score_{$key}"] = 'required|integer';
         
                 // شهر یا روستا: یکی باید مقداردهی شود
                 $rules["tr_city_{$key}"] = "required_without:tr_village_{$key}";
@@ -94,7 +94,6 @@ class PromotionReportRequest extends FormRequest
                 $rules["r_province_{$key}"] = 'required';
                 $rules["r_city_id_{$key}"] = 'required';
                 $rules["r_place_name_{$key}"] = 'required';
-                $rules["r_score_{$key}"] = 'required';
         
                 // شهر یا روستا: یکی باید مقداردهی شود
                 $rules["r_city_{$key}"] = "required_without:r_village_{$key}";

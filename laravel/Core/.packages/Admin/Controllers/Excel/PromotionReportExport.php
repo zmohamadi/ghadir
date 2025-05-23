@@ -38,7 +38,7 @@ class PromotionReportExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ['ماموریت تبلیغی', 'مبلغ', 'موضوع تریبون‌ها', 'دوره‌ها', 'مراسم‌ها', 'تاریخ'];
+        return ['ماموریت تبلیغی', 'مبلغ', 'موضوع تریبون‌ها', 'دوره‌ها', 'مراسم‌ها', 'تاریخ','امتیاز'];
     }
 
     public function map($record): array
@@ -52,6 +52,7 @@ class PromotionReportExport implements FromCollection, WithHeadings, WithMapping
                 ->map(fn($report) => ($report->ritual->title ?? 'شعائر') . " توضیحات : {$report->description} مکان : {$report->place_name}")
                 ->implode('|'),
             Carbon::parse($record->created_at)->format('Y-m-d H:i'),
+            $record->level_id,
         ];
     }
 }

@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
 import { useRouter } from 'next/navigation';
-import { Box, CheckBox, Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
+import { Box, Button, ButtonContainer, CheckBox, Frame, Loading, useData, useFormRefs } from "@/Theme/Midone";
 
 export default function page({params}){
 
     const id = params?.id;
     const { Lang,local } = useLang();
-    const { laraAdmin } = useConfig();
-    const { get,getNeedles } = useData();
+    const { laraAdmin,nextAdmin } = useConfig();
+    const { get,getNeedles,destroy } = useData();
     let [needles, setNeedles] = useState();
     const router = useRouter();
+
     
     let url = `${laraAdmin}/agree/${id}`;
 
@@ -25,6 +26,15 @@ export default function page({params}){
     const promoter = component?.state?.info?.promoter;
     const promotion = component?.state?.info?.promotion;
     const back = () => router.back();
+    const deleteItem = () => {
+        const customReload = () => {
+            router.push(nextAdmin + "/agrees");
+        };
+    
+        destroy(laraAdmin + "/agree/" + params?.id, customReload, Lang);
+    };
+    
+    
 
     if (!data) return <Loading />;
 
@@ -58,6 +68,10 @@ export default function page({params}){
                 </div>
                 </Box>
             </Frame>
+            <ButtonContainer>
+                {/* <Button className="btn btn-primary mr-1 ml-1 w-24 " label="delete_agree" onClick={deleteItem} component={component} /> */}
+                <Button label="back" onClick={back} />
+            </ButtonContainer>
         </>
     );
 }

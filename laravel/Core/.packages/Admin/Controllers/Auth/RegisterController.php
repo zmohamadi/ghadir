@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'mobile' => $data['mobile'],
             'role_id' => 2,
             'status_id' => -1,
+            'register_date'=>now(),
             'password' => bcrypt($data['password']), // استفاده از موبایل به عنوان پسورد
         ]);
     }

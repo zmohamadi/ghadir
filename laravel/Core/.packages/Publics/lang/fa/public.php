@@ -144,6 +144,7 @@ $lang = [
    'excel'=>'اکسل',
    'example_excel'=>'فایل اکسل نمونه',
    'import_excel'=>'ورود داده از طریق اکسل',
+   'delete_agree'=>'حذف ثبت نام',
    
 ];
 

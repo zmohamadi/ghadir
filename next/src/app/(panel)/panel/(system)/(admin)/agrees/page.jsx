@@ -1,7 +1,7 @@
 "use client";
 import { useLang } from "@/lib/lang";
 import { useConfig } from "@/lib/config";
-import { Grid, Frame, FeatherIcon } from "@/Theme/Midone/Utils";
+import { Grid, Frame, FeatherIcon, useData } from "@/Theme/Midone/Utils";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Filtering } from "@/Components/Public/Filtering";
@@ -10,6 +10,7 @@ import { useAuth } from "@/lib";
 
 export default function page() {
     const { Lang, local } = useLang();
+    const {destroy} = useData();
     const { laraAdmin, nextAdmin } = useConfig();
     const formUrl = nextAdmin + "/agree";
     const {user} = useAuth();
@@ -55,6 +56,8 @@ export default function page() {
                       jsx:(item)=><>
                           <div className='flex justify-center '>
                               <FeatherIcon name="Eye" url={nextAdmin+"/agrees/"+item?.id} tooltip={Lang('public.view')} />
+                              <FeatherIcon access={access} name="XOctagon" tooltip={Lang('public.delete')} color="darkred" onClick={()=>destroy(laraAdmin+"/agree/"+item?.id)} />
+                              
                           </div>
                       </>
                   }, 
